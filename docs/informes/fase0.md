@@ -188,8 +188,9 @@ oficial obligatorio, no adicional):
 4. Iniciar Fase 1: dossiers de investigación por Parte.
 
 **Nota sobre control de versiones:** el directorio del proyecto no era un
-repositorio Git al iniciar Fase 0. Se preparó `.gitignore` y toda la
-estructura queda lista para `git init` + primer commit, pero **no se ha
-ejecutado** — se deja pendiente de confirmación explícita en el checkpoint,
-dado que crear un repositorio y su primer commit es una acción que conviene
-confirmar contigo antes de fijarla como línea base del proyecto.
+repositorio Git al iniciar Fase 0. Se creó el repositorio local
+(`git init`) y se hizo el primer commit con todo el andamiaje de esta fase
+(commit `9ca0f86`). Es un repositorio **solo local** — no tiene remoto
+configurado; el prompt pide remotos por SSH (§12), así que falta que indiques
+dónde vive el remoto (GitHub/GitLab propio, servidor IPN, etc.) antes de
+hacer el primer `git push`.
