@@ -27,9 +27,12 @@ en 5 Partes. Servirá luego de insumo para slides Beamer IPN (no construir aún)
   entorno («failed to attach to MATLAB session»); se usa el fallback de CLI
   `matlab -batch "run('...')"` indicado en §9 del prompt. Reintentar el MCP en
   cada fase por si la sesión de escritorio queda disponible.
-- **biblatex-apa NO está instalado** (`kpsewhich biblatex-apa.sty` vacío).
-  Se usa `natbib` + estilo `apalike` (alternativa indicada en §5.4). Migrar si
-  se instala `tlmgr install biblatex-apa` más adelante.
+- **biblatex-apa SÍ está instalado** (paquete Debian `texlive-bibtex-extra`,
+  parte de `texlive-full`). Se activa con
+  `\usepackage[backend=biber,style=apa,language=spanish]{biblatex}`, no con
+  `\usepackage{biblatex-apa}` (ese nombre de archivo no existe — corregido en
+  Fase 1, D1.1, tras un falso negativo de `kpsewhich` en Fase 0). Citas con
+  `\parencite{}`/`\textcite{}`, nunca `\citep{}` (eso es natbib).
 - Gráficas MATLAB con `Interpreter,'latex'` y texto en español acentuado emiten
   warnings benignos de `SceneNode` en modo `-batch` (sin hardware de
   aceleración gráfica) pero **renderizan correctamente**; no son errores.
@@ -40,6 +43,12 @@ en 5 Partes. Servirá luego de insumo para slides Beamer IPN (no construir aún)
   mismo proceso: cada script de capítulo empieza con `clear`, que borraría las
   variables del propio orquestador si compartieran workspace (hallazgo de
   Fase 0, corregido).
+
+## Paleta institucional
+`config/colores.tex` usa el HEX oficial IPN del skill `beamer-ipn` (guinda
+`#6F1D46` Pantone 222C, dorado `#B8975A` solo como acento/borde, nunca fondo
+de bloque). Misma paleta que usará Beamer en la Fase 5 — reutilizable sin
+retrabajo.
 
 ## Estructura
 Ver §11 del prompt. `main.tex` ensambla `frontmatter/` → `partes/parteN/` →

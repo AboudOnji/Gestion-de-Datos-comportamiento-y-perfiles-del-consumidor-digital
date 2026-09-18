@@ -1,5 +1,5 @@
 %% run_all.m — Ejecuta todos los scripts de laboratorio del libro y registra fallos
-% Prof. D.Sc. Barsekh-Onji Aboud · IPN — ESCA Unidad Santo Tomás
+% Dr. Aboud Barsekh-Onji · IPN — ESCA Unidad Santo Tomás
 % Se ejecuta desde la raíz del proyecto: matlab -batch "run('matlab/run_all.m')"
 % Registra éxito/fallo de cada script en docs/registro-matlab.md.
 %

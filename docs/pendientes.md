@@ -6,8 +6,8 @@ Se actualiza al cerrar cada capítulo/Parte.
 | Ubicación | Tipo | Descripción |
 |---|---|---|
 | `frontmatter/capitulo-prueba.tex` | `\pendiente` | Sustituir el capítulo de prueba por el contenido real del Cap. 1 en la Fase 2. |
-| `config/colores.tex` | TODO (comentario) | Confirmar HEX oficial del guinda IPN en el manual de identidad institucional; la paleta actual (`#6E1E3A`) es una aproximación provisional. |
-| `preamble.tex` | Nota | `biblatex-apa` no está instalado en este entorno; se usa `natbib`+`apalike`. Revisar si se instala `biblatex-apa` vía `tlmgr` antes de la Fase 1. |
+| ~~`config/colores.tex`~~ | ~~TODO~~ | Resuelto en Fase 1 (D1.2): paleta oficial tomada del skill `beamer-ipn` (`#6F1D46` guinda Pantone 222C, `#B8975A` dorado), confirmada por el Dr. Barsekh-Onji. |
+| ~~`preamble.tex`~~ | ~~Nota~~ | Resuelto en Fase 1 (D1.1): `biblatex-apa` sí estaba disponible; el libro ya usa `biblatex`+`biber`+`style=apa`. |
 | `main.tex` | Estructural | Glosario (`glossaries`) configurado pero sin entradas — no genera `main.gls`/`main.acr` hasta que haya términos definidos (Fase 1+). |
 
 ## Pendientes de ejecución MATLAB

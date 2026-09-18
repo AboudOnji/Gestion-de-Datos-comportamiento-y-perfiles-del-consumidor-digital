@@ -73,3 +73,48 @@ orquestador, ese `clear` borraría también las variables internas de
 `run_all.m` (se reprodujo el fallo en Fase 0 y se corrigió).
 **Evidencia:** `docs/registro-matlab.md` (ejecución exitosa tras la corrección).
 **Impacto en horas:** ninguno; es una decisión de implementación del andamiaje.
+
+## Fase 1
+
+### D1.1 — Corrección de D0.5: `biblatex-apa` SÍ está disponible; se usa en vez de `natbib`+`apalike`
+**Qué cambió:** `preamble.tex` usa
+`\usepackage[backend=biber,style=apa,language=spanish]{biblatex}` +
+`\addbibresource{bib/referencias.bib}`, y `main.tex` usa `\printbibliography`.
+Las citas en el texto usan `\parencite{}`/`\textcite{}` (biblatex), no
+`\citep{}` (natbib).
+**Por qué:** la verificación de Fase 0 (`kpsewhich biblatex-apa.sty`) fue
+defectuosa: ese nombre de archivo no existe para ningún paquete de estilo
+biblatex — se activan con `style=<nombre>`, no con `\usepackage{<nombre>}`.
+El Dr. Barsekh-Onji autorizó investigar instalación; al revisar con
+`dpkg -L`/`kpsewhich apa.bbx` se confirmó que el paquete Debian
+`texlive-bibtex-extra` (parte de `texlive-full`, ya instalado) sí trae
+`biblatex-apa` completo (`apa.bbx`, `apa.cbx`, `apa.dbx`, `spanish-apa.lbx`).
+No hizo falta instalar nada nuevo.
+**Evidencia:** recompilación exitosa de `main.tex` con `biber`; bibliografía
+final en la página de prueba renderiza en formato APA 7 real: "Solomon, M. R.
+(2017). *Comportamiento del consumidor* (11.ª ed.). Pearson."
+**Impacto en horas:** ninguno. Acción de seguimiento: al escribir capítulos
+reales, usar `\parencite{}` (cita entre paréntesis) o `\textcite{}` (cita en
+prosa) según corresponda — nunca `\citep{}`/`\citet{}` de natbib.
+
+### D1.2 — Paleta institucional real: HEX del skill `beamer-ipn`, no la aproximación de Fase 0
+**Qué cambió:** `config/colores.tex` reemplaza la aproximación provisional
+(`#6E1E3A`/`#B08D57`) por la paleta oficial que ya usa el skill `beamer-ipn`
+(Manual de Identidad Gráfica del IPN, Pantone 222C): `guindaIPN` `#6F1D46`,
+`guindaIPNOsc` `#45102C`, `guindaIPNClara` `#F4E9EF`, `doradoIPN` `#B8975A`,
+`terracotaIPN` `#9C5B44`, `bronceIPN` `#8C6B3F`, `grisIPN` `#58595B`. Los seis
+recuadros del libro se remapean: Definición=guinda, Ejemplo=bronce,
+Atención=terracota, Frontera=dorado (solo como borde/acento, nunca fondo de
+bloque — regla del propio skill), Ética=guinda oscuro (para distinguirla de
+Atención), Laboratorio=teal técnico (no institucional, fuera de la paleta IPN
+a propósito: el laboratorio MATLAB no debe leerse como un bloque de identidad
+gráfica).
+**Por qué:** el Dr. Barsekh-Onji confirmó (duda #3, `docs/dudas.md`) usar el
+skill `beamer-ipn` ya dado de alta como fuente del HEX oficial, en vez de
+esperar al manual de identidad o seguir con la aproximación. Además reutilizar
+la misma paleta entre libro y Beamer facilita la Fase 5 (§14 del prompt:
+figuras reutilizables sin retrabajo).
+**Evidencia:** recompilación exitosa; verificación visual de los recuadros
+Definición y Ética en el capítulo de prueba (colores institucionales
+correctos y distinguibles entre sí).
+**Impacto en horas:** ninguno.

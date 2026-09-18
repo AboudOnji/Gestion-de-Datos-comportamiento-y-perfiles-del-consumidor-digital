@@ -1,6 +1,6 @@
 %% script_prueba.m — Verificación de andamiaje MATLAB (Fase 0)
 % Título:       Difusión de adopción de un canal digital (modelo de Bass) — prueba
-% Autor:        Prof. D.Sc. Barsekh-Onji Aboud
+% Autor:        Dr. Aboud Barsekh-Onji
 % Institución:  IPN — ESCA Unidad Santo Tomás
 % Fecha:        2026-09-18
 % Descripción:  Script de verificación del flujo de trabajo MATLAB -> figura

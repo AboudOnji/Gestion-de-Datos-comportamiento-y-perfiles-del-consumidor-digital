@@ -1,22 +1,36 @@
 % config/colores.tex — paleta institucional y semántica del libro
-% TODO confirmar HEX oficial en el manual de identidad del IPN
-\usepackage{xcolor}
+% Fase 1 (D1.2): HEX oficial tomado del skill `beamer-ipn` (Manual de Identidad
+% Gráfica del IPN, Pantone 222C), confirmado por el Dr. Barsekh-Onji — sustituye
+% la aproximación provisional de Fase 0.
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
 
-% Guinda institucional IPN (aproximación provisional; ver TODO arriba)
-\definecolor{guindaIPN}{HTML}{6E1E3A}
-\definecolor{doradoIPN}{HTML}{B08D57}
+% --- Paleta institucional IPN (idéntica a beamer-ipn, para reutilizar figuras
+% entre el libro y las presentaciones de la Fase 5, §14 del prompt) ---
+\definecolor{guindaIPN}{HTML}{6F1D46}       % Pantone 222C oficial — color primario
+\definecolor{guindaIPNOsc}{HTML}{45102C}    % sombra / secundario
+\definecolor{guindaIPNClara}{HTML}{F4E9EF}  % fondo de bloques normales
+\definecolor{doradoIPN}{HTML}{B8975A}       % SOLO enlaces y detalles, nunca fondo de bloque
+\definecolor{terracotaIPN}{HTML}{9C5B44}    % bloques de advertencia/atención
+\definecolor{terracotaIPNClara}{HTML}{F6ECE6}
+\definecolor{bronceIPN}{HTML}{8C6B3F}       % bloques de ejemplo
+\definecolor{bronceIPNClaro}{HTML}{F5F0E3}
+\definecolor{grisIPN}{HTML}{58595B}         % texto secundario / notas
 
-% Paleta funcional del libro (recuadros, listados, gráficas)
-\definecolor{colorDefinicion}{HTML}{2A5C8A}
-\definecolor{colorEjemplo}{HTML}{2E7D5B}
-\definecolor{colorAtencion}{HTML}{B54708}
-\definecolor{colorFrontera}{HTML}{6A3FA0}
-\definecolor{colorEtica}{HTML}{8A1F2B}
-\definecolor{colorLaboratorio}{HTML}{1B6E7A}
+% --- Paleta funcional del libro (recuadros, listados, gráficas) ---
+% Mapeo alineado a la convención beamer-ipn (block=guinda, alertblock=terracota,
+% exampleblock=bronce); Frontera y Laboratorio son propios del libro (no existen
+% como bloque en las slides) y usan acentos que no compiten con esos tres.
+\colorlet{colorDefinicion}{guindaIPN}
+\colorlet{colorEjemplo}{bronceIPN}
+\colorlet{colorAtencion}{terracotaIPN}
+\colorlet{colorFrontera}{doradoIPN}   % acento dorado como borde de "novedad" (nunca como fondo de bloque)
+\colorlet{colorEtica}{guindaIPNOsc}   % guinda oscuro: distinto de Atención (terracota) y Frontera (dorado)
+\definecolor{colorLaboratorio}{HTML}{1B6E7A} % teal técnico: distingue el laboratorio MATLAB de la identidad institucional
 
-% Paleta de código (listings)
-\definecolor{codeblue}{HTML}{2A5C8A}
-\definecolor{codegreen}{HTML}{2E7D5B}
-\definecolor{codegray}{HTML}{6B6B6B}
-\definecolor{codepurple}{HTML}{6A3FA0}
+% Paleta de código (listings) — sintaxis ESTÁNDAR del lenguaje, nunca
+% recoloreada al guinda institucional (misma regla que beamer-ipn, §"Código")
+\definecolor{codeblue}{rgb}{0,0,1}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{HTML}{58595B}
+\definecolor{codepurple}{rgb}{0.5,0,0.5}
 \definecolor{codebg}{rgb}{0.97,0.97,0.99}

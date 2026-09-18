@@ -1,5 +1,5 @@
 % preamble.tex — Comportamiento del Consumidor Digital: Datos, Perfiles y Modelos
-% Prof. D.Sc. Barsekh-Onji Aboud · IPN — ESCA Unidad Santo Tomás
+% Dr. Aboud Barsekh-Onji · IPN — ESCA Unidad Santo Tomás
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -25,11 +25,13 @@
 \input{config/macros}
 \input{config/listings-matlab}
 
-% --- Citación: biblatex-apa NO está instalado en este entorno (verificado en Fase 0).
-% Se usa natbib + apalike como alternativa indicada en §5.4 del prompt de proyecto.
-% Migrar a biblatex-apa si se instala más adelante (tlmgr install biblatex-apa).
-\usepackage[longnamesfirst]{natbib}
-\bibliographystyle{apalike}
+% --- Citación: APA 7.ª ed. con biblatex + biber (§5.4 del prompt de proyecto).
+% Corrección de Fase 0/1: biblatex-apa SÍ está instalado (paquete Debian
+% texlive-bibtex-extra); la comprobación inicial con kpsewhich buscó un
+% archivo "biblatex-apa.sty" que no existe con ese nombre — el paquete se
+% activa vía style=apa (apa.bbx/apa.cbx/apa.dbx), no con \usepackage{biblatex-apa}.
+\usepackage[backend=biber,style=apa,language=spanish,uniquename=false]{biblatex}
+\addbibresource{bib/referencias.bib}
 
 % --- Glosario ---
 \usepackage[acronym,toc]{glossaries}
