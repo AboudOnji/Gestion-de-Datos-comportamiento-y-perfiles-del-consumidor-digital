@@ -1,0 +1,20 @@
+% figuras/tikz/cap04-comercio-agentico.tex
+% El comercio agéntico como nueva capa de intermediación entre el
+% consumidor y el comercio electrónico (vigente a septiembre de 2026).
+\begin{tikzpicture}[
+    nodo/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                 minimum width=3cm, minimum height=1.1cm, align=center, font=\small},
+    nodom/.style={rectangle, rounded corners, draw=doradoIPN, very thick, fill=bronceIPNClaro,
+                  minimum width=4.2cm, minimum height=1.3cm, align=center, font=\small},
+    flecha/.style={-{Stealth[length=3mm]}, thick, draw=grisIPN}
+  ]
+  \node[nodo] (consumidor) at (0,0) {Consumidor};
+  \node[nodom] (agente) at (5,0) {\textbf{Agente de IA}\\ (protocolo ACP / UCP)};
+  \node[nodo] (comercio) at (10,0) {Comercio\\ electrónico};
+
+  \draw[flecha] (consumidor) -- node[above, font=\scriptsize] {intención de compra} (agente);
+  \draw[flecha] (agente) -- node[above, font=\scriptsize, align=center] {búsqueda, comparación,\\ transacción} (comercio);
+
+  \node[font=\scriptsize\itshape, text width=4.2cm, align=center] at (5,-1.4)
+    {Pregunta estructural: ¿quién controla esta capa de intermediación?};
+\end{tikzpicture}

@@ -1,0 +1,20 @@
+% figuras/tikz/cap01-doble-naturaleza.tex
+% Diagrama conceptual: el consumidor digital como persona vivida y como dato
+% estructurado — las dos lecturas que el capítulo pide distinguir.
+\begin{tikzpicture}[
+    caja/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                 minimum width=5cm, minimum height=2.6cm, align=center, font=\small},
+    etiqueta/.style={font=\scriptsize\itshape, text width=5cm, align=center},
+    flecha/.style={-{Stealth[length=2.5mm]}, thick, draw=doradoIPN}
+  ]
+  \node[caja] (persona) at (0,0) {\textbf{Consumidor}\\ como persona\\[4pt]
+    necesidad, deseo,\\ contexto, emoción};
+  \node[caja] (dato) at (7,0) {\textbf{Consumidor}\\ como dato\\[4pt]
+    clic, sesión, patrón,\\ variable de un modelo};
+
+  \draw[flecha] (persona) -- node[above, font=\scriptsize] {se registra como} (dato);
+  \draw[flecha] (dato) to[bend left=25] node[below, font=\scriptsize] {predice y moldea} (persona);
+
+  \node[etiqueta] at (0,-1.9) {Unidad de análisis: la experiencia individual};
+  \node[etiqueta] at (7,-1.9) {Unidad de análisis: el agregado estadístico};
+\end{tikzpicture}

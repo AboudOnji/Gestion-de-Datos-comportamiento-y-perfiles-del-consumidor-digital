@@ -1,0 +1,16 @@
+% figuras/tikz/fase0-diagrama-prueba.tex
+% Diagrama de prueba (Fase 0): tres etapas simples del recorrido del consumidor.
+% Compilable solo (standalone) o incluible con \input en el libro/Beamer.
+\begin{tikzpicture}[
+    etapa/.style={rectangle, rounded corners, draw=guindaIPN, thick,
+                  fill=guindaIPN!8, minimum width=3.1cm, minimum height=1.1cm,
+                  align=center, font=\small},
+    flecha/.style={-{Stealth[length=2.5mm]}, thick, draw=doradoIPN}
+  ]
+  \node[etapa] (a) {Reconocimiento\\ de necesidad};
+  \node[etapa, right=1.6cm of a] (b) {Búsqueda de\\ información};
+  \node[etapa, right=1.6cm of b] (c) {Evaluación\\ posterior};
+
+  \draw[flecha] (a) -- (b);
+  \draw[flecha] (b) -- (c);
+\end{tikzpicture}

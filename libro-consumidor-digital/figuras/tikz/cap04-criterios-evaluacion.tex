@@ -1,0 +1,16 @@
+% figuras/tikz/cap04-criterios-evaluacion.tex
+% Matriz de criterios de evaluación de plataformas digitales, diseñada para
+% sobrevivir al cambio de marcas concretas (§5.7 del prompt de proyecto).
+\begin{tikzpicture}[
+    criterio/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                     minimum width=5.6cm, minimum height=1.15cm, align=left, font=\scriptsize},
+  ]
+  \node[criterio] (c1) at (0,3.3)  {\textbf{Modelo de negocio}\\ publicidad / suscripción / comisión transaccional};
+  \node[criterio] (c2) at (0,1.9)  {\textbf{Intermediación de datos}\\ ¿quién controla el dato del consumidor?};
+  \node[criterio] (c3) at (0,0.5)  {\textbf{Interoperabilidad}\\ APIs abiertas vs. cerradas};
+  \node[criterio] (c4) at (0,-0.9) {\textbf{Exposición regulatoria}\\ DSA europea, LFPDPPP mexicana};
+
+  \node[font=\small\bfseries, align=center, text width=3.2cm] at (5.2,1.2)
+    {Evaluar cualquier\\ plataforma o\\ herramienta\\ vigente con estos\\ cuatro criterios};
+  \draw[-{Stealth[length=3mm]}, thick, draw=doradoIPN] (3.0,1.2) -- (3.9,1.2);
+\end{tikzpicture}

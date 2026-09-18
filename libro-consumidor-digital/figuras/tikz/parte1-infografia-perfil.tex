@@ -1,0 +1,31 @@
+% figuras/tikz/parte1-infografia-perfil.tex
+% Infografía-modelo del perfil del consumidor digital (pieza de Parte I, §10).
+% Sintetiza: variables de entrada -> método de construcción -> perfil resultante.
+\begin{tikzpicture}[
+    caja/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                 minimum width=3.3cm, minimum height=1cm, align=center, font=\scriptsize},
+    cajam/.style={rectangle, rounded corners, draw=bronceIPN, thick, fill=bronceIPNClaro,
+                  minimum width=3.6cm, minimum height=1.9cm, align=center, font=\small},
+    cajap/.style={rectangle, rounded corners, draw=guindaIPNOsc, thick, fill=white,
+                  minimum width=3.3cm, minimum height=1.6cm, align=center, font=\small},
+    flecha/.style={-{Stealth[length=3mm]}, thick, draw=doradoIPN}
+  ]
+  % Columna de variables (entrada)
+  \node[caja] (geo) at (0,3) {Geográfica};
+  \node[caja] (demo) at (0,1.7) {Demográfica};
+  \node[caja] (psico) at (0,0.4) {Psicográfica};
+  \node[caja] (cond) at (0,-0.9) {Conductual};
+
+  % Método
+  \node[cajam] (metodo) at (5,1.05) {\textbf{Método}\\ clustering rígido\\ ($k$-means) o difuso\\ (\textit{fuzzy c-means})};
+
+  % Resultado
+  \node[cajap] (perfil) at (10,1.05) {\textbf{Perfil}\\ función del\\ negocio que\\ lo construye};
+
+  \foreach \n in {geo,demo,psico,cond} {
+    \draw[flecha] (\n) -- (metodo);
+  }
+  \draw[flecha] (metodo) -- (perfil);
+
+  \node[font=\scriptsize\itshape, text width=3.3cm, align=center] at (10,-0.4) {No es un atributo\\ fijo de la persona};
+\end{tikzpicture}

@@ -1,0 +1,62 @@
+% preamble.tex — Comportamiento del Consumidor Digital: Datos, Perfiles y Modelos
+% Dr. Aboud Barsekh-Onji · IPN — ESCA Unidad Santo Tomás
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noindentfirst]{babel}
+% El atajo activo " de babel-spanish (usado para guillemets "< "> y otras
+% combinaciones) rompe las comillas rectas normales dentro de una palabra
+% (p. ej. "esto?" seguido de una letra genera basura tipográfica). Se
+% desactiva y se usa \enquote{} de csquotes para comillas en todo el libro.
+\shorthandoff{"}
+\usepackage{csquotes}
+\usepackage[letterpaper,margin=2.5cm,headheight=14pt]{geometry}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{microtype}
+\usepackage{todonotes}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{capt-of} % \captionof{figure}{...} para figuras no flotantes dentro de tcolorbox (recuadros de Laboratorio)
+
+% Paleta y macros (deben cargarse antes que macros.tex por las cajas tcolorbox)
+\input{config/colores}
+\input{config/macros}
+\input{config/listings-matlab}
+
+% --- Citación: APA 7.ª ed. con biblatex + biber (§5.4 del prompt de proyecto).
+% Corrección de Fase 0/1: biblatex-apa SÍ está instalado (paquete Debian
+% texlive-bibtex-extra); la comprobación inicial con kpsewhich buscó un
+% archivo "biblatex-apa.sty" que no existe con ese nombre — el paquete se
+% activa vía style=apa (apa.bbx/apa.cbx/apa.dbx), no con \usepackage{biblatex-apa}.
+\usepackage[backend=biber,style=apa,language=spanish,uniquename=false]{biblatex}
+\addbibresource{bib/referencias.bib}
+
+% --- Glosario ---
+\usepackage[acronym,toc]{glossaries}
+\makeglossaries
+
+% --- Encabezados ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=guindaIPN,
+  citecolor=colorDefinicion,
+  urlcolor=colorDefinicion,
+  pdftitle={Comportamiento del Consumidor Digital: Datos, Perfiles y Modelos},
+  pdfauthor={Aboud Barsekh-Onji}
+}
