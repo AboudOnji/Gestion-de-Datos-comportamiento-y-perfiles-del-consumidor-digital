@@ -4,6 +4,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish,es-noindentfirst]{babel}
+% El atajo activo " de babel-spanish (usado para guillemets "< "> y otras
+% combinaciones) rompe las comillas rectas normales dentro de una palabra
+% (p. ej. "esto?" seguido de una letra genera basura tipográfica). Se
+% desactiva y se usa \enquote{} de csquotes para comillas en todo el libro.
+\shorthandoff{"}
+\usepackage{csquotes}
 \usepackage[letterpaper,margin=2.5cm,headheight=14pt]{geometry}
 
 \usepackage{amsmath,amssymb}
@@ -19,6 +25,7 @@
 \usepackage{todonotes}
 \usepackage{enumitem}
 \usepackage{caption}
+\usepackage{capt-of} % \captionof{figure}{...} para figuras no flotantes dentro de tcolorbox (recuadros de Laboratorio)
 
 % Paleta y macros (deben cargarse antes que macros.tex por las cajas tcolorbox)
 \input{config/colores}

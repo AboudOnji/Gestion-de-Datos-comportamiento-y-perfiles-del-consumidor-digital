@@ -1,0 +1,22 @@
+% figuras/tikz/cap03-omnicanal.tex
+% Experiencias omnicanal: puntos de contacto distintos que deben resolver a
+% una sola identidad de cliente (Verhoef, Kannan & Inman, 2015).
+\begin{tikzpicture}[
+    canal/.style={rectangle, rounded corners, draw=bronceIPN, thick, fill=bronceIPNClaro,
+                  minimum width=2.4cm, minimum height=0.9cm, align=center, font=\scriptsize},
+    centro/.style={circle, draw=guindaIPN, very thick, fill=guindaIPNClara,
+                   minimum size=2.4cm, align=center, font=\small},
+    flecha/.style={-{Stealth[length=2.5mm]}, thick, draw=doradoIPN}
+  ]
+  \node[centro] (id) at (0,0) {Identidad\\ única de\\ cliente};
+
+  \node[canal] (app)    at (-4.2, 2.2) {App móvil};
+  \node[canal] (web)    at (0, 3.2)    {Sitio web};
+  \node[canal] (tienda) at (4.2, 2.2)  {Tienda física};
+  \node[canal] (social) at (-4.2,-2.2) {Redes sociales};
+  \node[canal] (cc)     at (4.2,-2.2)  {Centro de contacto};
+
+  \foreach \n in {app,web,tienda,social,cc} {
+    \draw[flecha] (\n) -- (id);
+  }
+\end{tikzpicture}

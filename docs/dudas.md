@@ -45,6 +45,7 @@ cómo se redacta el contenido. Pido su criterio antes de la Fase 2:
    de redactar estas secciones, o que avance con lenguaje explícitamente
    cauteloso ("la ley establece X según Y fuente; se recomienda verificación
    profesional") y lo ajustemos si surge esa revisión más adelante?
+   Respuesta: No es necesario hacer revisión jurídica.
 6. **Postura editorial ante el NPS (Net Promoter Score) en el Cap. 18.** La
    evidencia revisada por pares que encontró el agente de la Parte V
    (Keiningham 2007, van Doorn 2013, de Haan 2015 — las tres en revistas
@@ -56,6 +57,7 @@ cómo se redacta el contenido. Pido su criterio antes de la Fase 2:
    que contradice la práctica dominante de la industria), o dar un tratamiento
    más equilibrado que reconozca por qué la industria la sigue usando pese a
    la evidencia?
+   Respuesta: dar un tratamiento más equilibrado.
 7. **Ediciones a citar de la bibliografía oficial.** El programa oficial cita
    Solomon (2017), Hoyer/MacInnis/Pieters (2018 vía Cengage) y Kotler (2021).
    La investigación de Fase 1 localizó ediciones más recientes: Solomon &
@@ -67,9 +69,11 @@ cómo se redacta el contenido. Pido su criterio antes de la Fase 2:
    anterior), o mantenerse estrictamente alineado a las ediciones que dice el
    programa oficial para no generar fricción con la lista de compra de libros
    de la unidad de aprendizaje?
+   Respuesta: Tienes libertad para citar lo que resulte mejor para el desarrollo del tema.
 8. **Autorización para iniciar Fase 2 (piloto Parte I).** La investigación de
    las 5 Partes está completa y consolidada (`bib/referencias.bib`,
    `docs/verificacion-datos.md`). Conforme al flujo del prompt (§12), Fase 2
    es "Piloto: Parte I completa" y es un checkpoint — ¿autoriza que empiece a
    redactar el contenido real de los capítulos 1–4 con este material de
    respaldo, o prefiere resolver primero las dudas 5–7?
+   Respuesta: Autorizado.

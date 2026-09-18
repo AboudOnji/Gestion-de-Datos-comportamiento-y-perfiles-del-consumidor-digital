@@ -1,0 +1,20 @@
+% figuras/tikz/cap02-stp.tex
+% Proceso STP (Segmentación - Targeting - Posicionamiento), sistematización
+% posterior construida sobre la base conceptual de Smith (1956).
+\begin{tikzpicture}[
+    etapa/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                  minimum width=3.4cm, minimum height=1.6cm, align=center, font=\small},
+    flecha/.style={-{Stealth[length=3mm]}, thick, draw=doradoIPN},
+    nota/.style={font=\scriptsize, text width=3.4cm, align=center}
+  ]
+  \node[etapa] (s) at (0,0) {\textbf{Segmentación}\\ agrupar por\\ variables comunes};
+  \node[etapa] (t) at (4.6,0) {\textbf{Targeting}\\ elegir el o los\\ segmentos meta};
+  \node[etapa] (p) at (9.2,0) {\textbf{Posicionamiento}\\ definir el lugar\\ en la mente del\\ segmento meta};
+
+  \draw[flecha] (s) -- (t);
+  \draw[flecha] (t) -- (p);
+
+  \node[nota] at (0,-1.4) {Smith (1956): base conceptual};
+  \node[nota] at (4.6,-1.4) {Mercado meta o \textit{target}};
+  \node[nota] at (9.2,-1.6) {Sistematización posterior (manuales de Kotler)};
+\end{tikzpicture}

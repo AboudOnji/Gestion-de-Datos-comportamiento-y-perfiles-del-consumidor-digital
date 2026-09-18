@@ -1,30 +1,34 @@
 # Matriz de cobertura del programa oficial
 
-Generada en Fase 0. Estado inicial: **todo "Pendiente"** (aún no se ha escrito
-contenido de los 18 capítulos; solo existe el capítulo de prueba de andamiaje).
-Se actualiza al cierre de cada capítulo — la columna «Label verificado» se marca
-✅ solo cuando `\label{prog:X.Y.Z}` aparece efectivamente en el `.tex` del capítulo
-correspondiente (verificable con `make cobertura`, ver §7 pendiente de scripting).
+Actualizada al cierre de Fase 2 (Parte I completa). La columna «Label
+verificado» se marca ✅ solo cuando `\progtag{X.Y.Z}` aparece efectivamente
+en el `.tex` del capítulo correspondiente — verificable con `make cobertura`
+(`scripts/verificar_cobertura.sh`, implementado en Fase 2).
 
 Cobertura objetivo: **100 %** de los subtemas oficiales listados abajo (Anexo A,
 contrastado contra el PDF escaneado — ver `docs/informes/fase0.md`).
 
+**Corrección de conteo (Fase 2):** el total de subtemas oficiales es
+**66**, no 69 como se declaró por error en el cierre de Fase 0 — la cuenta
+original no se verificó contra el número real de filas de esta misma tabla.
+Corregido aquí; ver `docs/decisiones-editoriales.md`, D2.1.
+
 | Subtema oficial | Título del subtema | Cap. planeado (§7) | Label `prog:X.Y.Z` | Estado |
 |---|---|---|---|---|
-| 1.1.1 | Evolución del consumidor 1.0 al 5.0 y tendencias a futuro | 1 | — | Pendiente |
-| 1.1.2 | Impacto del consumo digital inteligente y sostenible (PROFECO/ONU) | 1 | — | Pendiente |
-| 1.1.3 | Ventajas del análisis del comportamiento del consumidor digital | 1 | — | Pendiente |
-| 1.2.1 | Segmentación del mercado digital y variables | 2 | — | Pendiente |
-| 1.2.2 | Mercado meta o target digital | 2 | — | Pendiente |
-| 1.2.3 | Tipos de perfil del consumidor digital | 2 | — | Pendiente |
-| 1.2.4 | Radiografía del consumidor digital en México y el mundo | 2 | — | Pendiente |
-| 1.2.5 | Diversidad de perfiles de consumidor digital por modelo de negocios-industria | 2 | — | Pendiente |
-| 1.3.1 | Creación de valor para el consumidor-usuario (CX-UX) | 3 | — | Pendiente |
-| 1.3.2 | Experiencias omnicanal consumidor-usuario (CX-UX) | 3 | — | Pendiente |
-| 1.3.3 | Momentos de escucha a los consumidores digitales | 3 | — | Pendiente |
-| 1.3.4 | Importancia de la recolección y gestión de datos | 3 | — | Pendiente |
-| 1.3.5 | Toma de decisiones basadas en la gestión de datos digitales | 3 | — | Pendiente |
-| 1.4.1 | Temas selectos de buscadores/plataformas/redes/e-commerce | 4 | — | Pendiente |
+| 1.1.1 | Evolución del consumidor 1.0 al 5.0 y tendencias a futuro | 1 | ✅ `prog:1.1.1` | Completo |
+| 1.1.2 | Impacto del consumo digital inteligente y sostenible (PROFECO/ONU) | 1 | ✅ `prog:1.1.2` | Completo |
+| 1.1.3 | Ventajas del análisis del comportamiento del consumidor digital | 1 | ✅ `prog:1.1.3` | Completo |
+| 1.2.1 | Segmentación del mercado digital y variables | 2 | ✅ `prog:1.2.1` | Completo |
+| 1.2.2 | Mercado meta o target digital | 2 | ✅ `prog:1.2.2` | Completo |
+| 1.2.3 | Tipos de perfil del consumidor digital | 2 | ✅ `prog:1.2.3` | Completo |
+| 1.2.4 | Radiografía del consumidor digital en México y el mundo | 2 | ✅ `prog:1.2.4` | Completo |
+| 1.2.5 | Diversidad de perfiles de consumidor digital por modelo de negocios-industria | 2 | ✅ `prog:1.2.5` | Completo |
+| 1.3.1 | Creación de valor para el consumidor-usuario (CX-UX) | 3 | ✅ `prog:1.3.1` | Completo |
+| 1.3.2 | Experiencias omnicanal consumidor-usuario (CX-UX) | 3 | ✅ `prog:1.3.2` | Completo |
+| 1.3.3 | Momentos de escucha a los consumidores digitales | 3 | ✅ `prog:1.3.3` | Completo |
+| 1.3.4 | Importancia de la recolección y gestión de datos | 3 | ✅ `prog:1.3.4` | Completo |
+| 1.3.5 | Toma de decisiones basadas en la gestión de datos digitales | 3 | ✅ `prog:1.3.5` | Completo |
+| 1.4.1 | Temas selectos de buscadores/plataformas/redes/e-commerce | 4 | ✅ `prog:1.4.1` | Completo |
 | 2.1.1 | Reconocimiento de necesidades y/o deseos | 5 | — | Pendiente |
 | 2.1.2 | Búsqueda de información | 5 | — | Pendiente |
 | 2.1.3 | Evaluación de alternativas | 5 | — | Pendiente |
@@ -78,12 +82,11 @@ contrastado contra el PDF escaneado — ver `docs/informes/fase0.md`).
 | 5.1.3 | Experiencia y satisfacción del cliente digital — medición de satisfacción | 18 | — | Pendiente |
 | 5.1.4 | Relación con clientes en medios digitales | 18 | — | Pendiente |
 
-**Total de subtemas oficiales: 69.** Cobertura actual: 0/69 (0 %) — esperado en
-Fase 0, antes de escribir contenido.
+**Total de subtemas oficiales: 66.** Cobertura actual: **14/66 (21.2 %)** —
+Parte I (Cap. 1–4) completa; Partes II–V pendientes.
 
-## Script de verificación (pendiente de implementar)
+## Script de verificación
 
-`make cobertura` deberá: (1) extraer todos los `\label{prog:X.Y.Z}` de `partes/**/*.tex`
-con `grep`, (2) comparar contra la lista de 69 subtemas de esta tabla, (3) reportar
-faltantes. Se implementa al cerrar la Parte I (Fase 2), cuando haya `.tex` real
-sobre el cual correr la comparación.
+`make cobertura` ejecuta `scripts/verificar_cobertura.sh`: extrae todos los
+`\progtag{X.Y.Z}` de `partes/**/*.tex`, los compara contra la lista de 66
+subtemas oficiales y reporta faltantes. Implementado en Fase 2.

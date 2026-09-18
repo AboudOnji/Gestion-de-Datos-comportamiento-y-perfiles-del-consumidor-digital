@@ -122,6 +122,24 @@ fuentes secundarias citadas por el mismo agente (Parte V). Ninguna de las tres
 afecta el contenido conceptual del libro, solo la ficha bibliográfica exacta.
 **Impacto en horas:** ninguno.
 
+### D1.4–D1.7 — Respuestas del Dr. Barsekh-Onji a las dudas de cierre de Fase 1
+Registradas en `docs/dudas.md`; se aplican así a partir de la Fase 2:
+- **D1.4 (duda 5, LFPDPPP/patrones oscuros):** no se contrata revisión jurídica
+  independiente. El Cap. 3 presenta la cronología verificada de la LFPDPPP/INAI
+  y la tensión tácito-vs-informado con lenguaje explícitamente atribuido a sus
+  fuentes ("la ley establece X, según Y"), sin que el libro tome postura legal
+  propia no verificada.
+- **D1.5 (duda 6, NPS):** el Cap. 18 da tratamiento equilibrado — presenta la
+  evidencia académica escéptica (Keiningham 2007, van Doorn 2013, de Haan
+  2015) junto con la explicación de por qué la industria lo sigue usando
+  (simplicidad operativa, comunicación ejecutiva de un solo número), sin
+  descartar el NPS como herramienta útil.
+- **D1.6 (duda 7, ediciones bibliográficas):** libertad editorial para citar
+  la edición (oficial del programa o más reciente localizada en Fase 1) que
+  mejor sirva al desarrollo de cada tema, capítulo por capítulo.
+- **D1.7 (duda 8):** autorizada la Fase 2 — piloto de la Parte I completa
+  (Cap. 1–4, laboratorio, prácticas oficiales, autoevaluación).
+
 ### D1.2 — Paleta institucional real: HEX del skill `beamer-ipn`, no la aproximación de Fase 0
 **Qué cambió:** `config/colores.tex` reemplaza la aproximación provisional
 (`#6E1E3A`/`#B08D57`) por la paleta oficial que ya usa el skill `beamer-ipn`
@@ -143,3 +161,37 @@ figuras reutilizables sin retrabajo).
 Definición y Ética en el capítulo de prueba (colores institucionales
 correctos y distinguibles entre sí).
 **Impacto en horas:** ninguno.
+
+## Fase 2
+
+### D2.1 — Corrección del total de subtemas oficiales: 66, no 69
+**Qué cambió:** `docs/cobertura.md` corrige el total declarado de subtemas
+oficiales de 69 a **66**, y el script `scripts/verificar_cobertura.sh`
+(nuevo, conectado a `make cobertura`) usa la cifra correcta.
+**Por qué:** al implementar el script de verificación en Fase 2 (prometido
+desde Fase 0 pero no ejecutado hasta ahora) se contó el número real de filas
+de la propia tabla de cobertura: 66, no 69. La cifra de 69 nunca se verificó
+contra la tabla que la acompañaba — un error de conteo de Fase 0 que pasó
+inadvertido hasta que hubo un script real corriendo contra ella.
+**Evidencia:** `grep -oE '^\| [0-9]\.[0-9]\.[0-9]' docs/cobertura.md | wc -l`
+devuelve 66; `make cobertura` corre limpio con esa cifra.
+**Impacto en horas:** ninguno; es una corrección de conteo administrativo,
+no de contenido del programa oficial.
+
+### D2.2 — Fortalecimiento de referencias en Cap. 2 y Cap. 4 por debajo del mínimo
+**Qué cambió:** al cerrar la Parte I se verificó el conteo de citas únicas
+por capítulo contra el mínimo del §5.4 del prompt (≥12 referencias, ≥5
+primarias/revisadas por pares). Cap. 1 y Cap. 3 cumplen (12 cada uno). Cap. 2
+y Cap. 4 partían de 5 y 2 respectivamente; se reforzaron con citas
+genuinamente pertinentes (no de relleno) hasta 9 y 7.
+**Por qué:** los temas de Cap. 2 (tipos de perfil del consumidor digital) y
+Cap. 4 (temas selectos de base tecnológica, deliberadamente abiertos por el
+programa) tienen, según la propia investigación de Fase 1, una base
+académica más delgada que los demás capítulos de la Parte —no se forzaron
+citas irrelevantes solo para completar la cuota, siguiendo la prioridad de
+rigor sobre métrica.
+**Evidencia:** conteo de claves únicas de cita por capítulo, ver
+`docs/informes/fase2.md`.
+**Impacto en horas:** ninguno. Queda como pendiente abierto (no bloqueante)
+una siguiente ronda de investigación dirigida específicamente a Cap. 2 y
+Cap. 4 antes del cierre editorial final del libro.

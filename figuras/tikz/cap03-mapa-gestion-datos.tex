@@ -1,0 +1,24 @@
+% figuras/tikz/cap03-mapa-gestion-datos.tex
+% Mapa de gestión de datos del consumidor digital: recolección -> decisión.
+% Pieza de Parte I requerida por §10 del prompt de proyecto.
+\begin{tikzpicture}[
+    etapa/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                  minimum width=2.5cm, minimum height=1.3cm, align=center, font=\scriptsize},
+    flecha/.style={-{Stealth[length=2.8mm]}, thick, draw=doradoIPN}
+  ]
+  \node[etapa] (rec) at (0,0)    {Recolección\\ (§1.3.4)};
+  \node[etapa] (lim) at (3,0)    {Limpieza y\\ calidad};
+  \node[etapa] (esc) at (6,0)    {Escucha\\ (§1.3.3)};
+  \node[etapa] (val) at (9,0)    {Creación\\ de valor\\ CX-UX (§1.3.1)};
+  \node[etapa] (dec) at (12,0)   {Decisión\\ (§1.3.5)};
+
+  \draw[flecha] (rec) -- (lim);
+  \draw[flecha] (lim) -- (esc);
+  \draw[flecha] (esc) -- (val);
+  \draw[flecha] (val) -- (dec);
+
+  \node[etapa, fill=terracotaIPNClara, draw=terracotaIPN, minimum width=11.5cm, minimum height=0.9cm]
+    (base) at (5.5,-2) {Base legal y consentimiento (LFPDPPP) — condición de todo el mapa, no un paso más};
+  \draw[flecha] (base.north -| rec) -- (rec.south);
+  \draw[flecha] (base.north -| dec) -- (dec.south);
+\end{tikzpicture}

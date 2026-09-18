@@ -10,7 +10,7 @@ figuras: matlab
 	@echo "Figuras MATLAB regeneradas en figuras/matlab/."
 
 cobertura:
-	@echo "Cobertura: pendiente de implementar (ver docs/cobertura.md)."
+	@bash scripts/verificar_cobertura.sh
 
 clean:
 	latexmk -c main.tex

@@ -1,0 +1,25 @@
+% figuras/tikz/cap02-rigida-vs-difusa.tex
+% Contraste conceptual: segmentación rígida (pertenencia binaria, k-means)
+% vs. segmentación difusa (pertenencia parcial, fuzzy c-means).
+\begin{tikzpicture}[
+    seg/.style={circle, draw=guindaIPN, thick, fill=guindaIPNClara, minimum size=2.6cm, font=\scriptsize, align=center},
+    segb/.style={circle, draw=bronceIPN, thick, fill=bronceIPNClaro, minimum size=2.6cm, font=\scriptsize, align=center},
+    punto/.style={circle, fill=black, minimum size=3pt, inner sep=0pt},
+    titulo/.style={font=\small\bfseries}
+  ]
+  % Panel izquierdo: segmentación rígida
+  \node[titulo] at (0,2.2) {Rígida ($k$-means)};
+  \node[seg] (A1) at (-1.1,0) {Segmento A};
+  \node[segb] (B1) at (1.5,0) {Segmento B};
+  \node[punto] (p1) at (0.15,0.15) {};
+  \node[font=\tiny, align=center] at (0.15,-0.55) {consumidor $i$\\ pertenece solo a A};
+
+  % Panel derecho: segmentación difusa
+  \begin{scope}[xshift=6.5cm]
+    \node[titulo] at (0,2.2) {Difusa (\textit{fuzzy c-means})};
+    \node[seg, opacity=0.75] (A2) at (-0.9,0) {Segmento A};
+    \node[segb, opacity=0.75] (B2) at (0.9,0) {Segmento B};
+    \node[punto] (p2) at (0,0.1) {};
+    \node[font=\tiny, align=center] at (0,-0.85) {consumidor $i$: $u_{iA}=0.63$,\\ $u_{iB}=0.37$};
+  \end{scope}
+\end{tikzpicture}

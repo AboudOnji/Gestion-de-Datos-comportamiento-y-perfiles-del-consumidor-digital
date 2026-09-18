@@ -14,8 +14,12 @@
 % Los scripts cap01..cap18 se agregan conforme se escriben los capítulos.
 
 raizProyecto = fileparts(mfilename('fullpath'));
-scripts = { fullfile(raizProyecto, 'fase0_prueba', 'script_prueba.m') };
-% TODO (Fase 2+): agregar aquí matlab/capNN/*.m conforme se escriban los capítulos.
+scripts = { fullfile(raizProyecto, 'fase0_prueba', 'script_prueba.m'), ...
+            fullfile(raizProyecto, 'cap01', 'cap01_difusion_bass.m'), ...
+            fullfile(raizProyecto, 'cap02', 'cap02_segmentacion.m'), ...
+            fullfile(raizProyecto, 'cap03', 'cap03_rfm_clv_ab.m'), ...
+            fullfile(raizProyecto, 'cap04', 'cap04_series_texto.m') };
+% TODO (Fase 3+): agregar aquí matlab/capNN/*.m conforme se escriban las Partes II-V.
 
 logPath = fullfile(raizProyecto, '..', 'docs', 'registro-matlab.md');
 fid = fopen(logPath, 'w');

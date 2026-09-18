@@ -5,14 +5,22 @@ Se actualiza al cerrar cada capítulo/Parte.
 
 | Ubicación | Tipo | Descripción |
 |---|---|---|
-| `frontmatter/capitulo-prueba.tex` | `\pendiente` | Sustituir el capítulo de prueba por el contenido real del Cap. 1 en la Fase 2. |
+| ~~`frontmatter/capitulo-prueba.tex`~~ | ~~`\pendiente`~~ | Resuelto en Fase 2: capítulo de prueba retirado de `main.tex`, sustituido por Cap. 1 real. |
 | ~~`config/colores.tex`~~ | ~~TODO~~ | Resuelto en Fase 1 (D1.2): paleta oficial tomada del skill `beamer-ipn` (`#6F1D46` guinda Pantone 222C, `#B8975A` dorado), confirmada por el Dr. Barsekh-Onji. |
 | ~~`preamble.tex`~~ | ~~Nota~~ | Resuelto en Fase 1 (D1.1): `biblatex-apa` sí estaba disponible; el libro ya usa `biblatex`+`biber`+`style=apa`. |
 | `main.tex` | Estructural | Glosario (`glossaries`) configurado pero sin entradas — no genera `main.gls`/`main.acr` hasta que haya términos definidos (Fase 1+). |
 
 ## Pendientes de ejecución MATLAB
-Ninguno: el único script existente (`matlab/fase0_prueba/script_prueba.m`) se
-ejecutó y verificó en Fase 0 (ver `docs/registro-matlab.md`).
+Ninguno: los 5 scripts existentes (`fase0_prueba` + `cap01`–`cap04`) se
+ejecutaron y verificaron en Fase 0/2 vía `matlab/run_all.m` (ver
+`docs/registro-matlab.md`).
+
+## Pendientes de Fase 2
+
+| # | Descripción | Bloqueante |
+|---|---|---|
+| 29 | Cap. 2 (9 referencias) y Cap. 4 (7 referencias) quedan por debajo del mínimo de 12 referencias del §5.4 del prompt (D2.2, `docs/decisiones-editoriales.md`). Se reforzaron con citas genuinamente pertinentes, no de relleno; falta una ronda de investigación dirigida a esos dos capítulos específicamente antes del cierre editorial final. | No — no bloquea el checkpoint de Fase 2, sí el cierre final del libro (§13). |
+| 30 | El glosario global (`glossaries`) sigue sin entradas indexadas con `\newglossaryentry`; los glosarios de capítulo actuales son listas `description` manuales, no conectadas al sistema de glosario de LaTeX. Decidir en Fase 3 si se migra a `\newglossaryentry`/`\gls{}` o se mantiene como lista manual por capítulo. | No. |
 
 ## Pendientes de investigación (Fase 1 — datos NO verificados, no citar en el libro)
 
