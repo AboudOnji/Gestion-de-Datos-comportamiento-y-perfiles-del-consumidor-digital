@@ -97,6 +97,31 @@ final en la página de prueba renderiza en formato APA 7 real: "Solomon, M. R.
 reales, usar `\parencite{}` (cita entre paréntesis) o `\textcite{}` (cita en
 prosa) según corresponda — nunca `\citep{}`/`\citet{}` de natbib.
 
+### D1.3 — Consolidación de `bib/referencias.bib` y `docs/verificacion-datos.md` desde los 5 dossiers de Fase 1
+**Qué cambió:** los 5 agentes de investigación (uno por Parte) entregaron sus
+hallazgos aislados en `docs/investigacion/parteN.md`, sin tocar los archivos
+compartidos (para evitar condiciones de carrera al correr en paralelo). El
+coordinador (este documento) leyó los 5 dossiers completos y fusionó ~65
+entradas BibTeX y 46 filas de datos verificados en los archivos canónicos,
+unificando claves cuando la misma fuente fue encontrada de forma independiente
+por más de un agente (p. ej. `tverskykahneman1974`, `maslow1943`, `ajzen1991`,
+`mathur2019`, `profeco2023influencers`, `inegi2026endutih`, `amvo2026`).
+**Por qué:** evitar entradas BibTeX duplicadas con claves distintas para la
+misma fuente, y mantener `docs/verificacion-datos.md` como fuente única de
+verdad para cifras citables.
+**Evidencia:** `biber --tool --validate-datamodel bib/referencias.bib` sin
+advertencias tras la consolidación; recompilación exitosa de `main.tex`.
+**Discrepancias detectadas entre agentes durante la fusión (no resueltas,
+marcadas con `note` en el `.bib` y en `docs/pendientes.md` #27–28):** (a) el
+orden de autoría de Delgado Soriano et al. (2015, *El Cubo NORISO*) difiere
+entre lo reportado por los agentes de las Partes I y II; (b) el año de la 8.ª
+ed. de Hoyer/MacInnis/Pieters se reportó como 2023 (Parte II) y 2024 (Partes I
+y IV) para el mismo ISBN; (c) el orden de autoría del artículo de HBR 2010
+sobre CES (Dixon/Freeman/Toman vs. Freeman/Toman/Dixon) también difiere entre
+fuentes secundarias citadas por el mismo agente (Parte V). Ninguna de las tres
+afecta el contenido conceptual del libro, solo la ficha bibliográfica exacta.
+**Impacto en horas:** ninguno.
+
 ### D1.2 — Paleta institucional real: HEX del skill `beamer-ipn`, no la aproximación de Fase 0
 **Qué cambió:** `config/colores.tex` reemplaza la aproximación provisional
 (`#6E1E3A`/`#B08D57`) por la paleta oficial que ya usa el skill `beamer-ipn`
