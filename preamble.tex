@@ -1,0 +1,53 @@
+% preamble.tex — Comportamiento del Consumidor Digital: Datos, Perfiles y Modelos
+% Prof. D.Sc. Barsekh-Onji Aboud · IPN — ESCA Unidad Santo Tomás
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noindentfirst]{babel}
+\usepackage[letterpaper,margin=2.5cm,headheight=14pt]{geometry}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{microtype}
+\usepackage{todonotes}
+\usepackage{enumitem}
+\usepackage{caption}
+
+% Paleta y macros (deben cargarse antes que macros.tex por las cajas tcolorbox)
+\input{config/colores}
+\input{config/macros}
+\input{config/listings-matlab}
+
+% --- Citación: biblatex-apa NO está instalado en este entorno (verificado en Fase 0).
+% Se usa natbib + apalike como alternativa indicada en §5.4 del prompt de proyecto.
+% Migrar a biblatex-apa si se instala más adelante (tlmgr install biblatex-apa).
+\usepackage[longnamesfirst]{natbib}
+\bibliographystyle{apalike}
+
+% --- Glosario ---
+\usepackage[acronym,toc]{glossaries}
+\makeglossaries
+
+% --- Encabezados ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=guindaIPN,
+  citecolor=colorDefinicion,
+  urlcolor=colorDefinicion,
+  pdftitle={Comportamiento del Consumidor Digital: Datos, Perfiles y Modelos},
+  pdfauthor={Aboud Barsekh-Onji}
+}

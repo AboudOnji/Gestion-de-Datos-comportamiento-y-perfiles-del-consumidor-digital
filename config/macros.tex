@@ -1,0 +1,52 @@
+% config/macros.tex — macros de trazabilidad y recuadros del libro
+
+% --- Trazabilidad contra el programa oficial (§4) ---
+% Uso: \progtag{1.1.1} coloca una etiqueta \label{prog:1.1.1} invisible en el margen,
+% usada por el script de verificación de cobertura (docs/cobertura.md).
+\newcommand{\progtag}[1]{\label{prog:#1}}
+
+% --- Marcadores de pendientes (§5.2, §9) — visibles en el PDF y listados aparte ---
+\newcommand{\pendiente}[1]{%
+  \textcolor{colorAtencion}{\textbf{[PENDIENTE: #1]}}%
+}
+\newcommand{\datoPendiente}[1]{%
+  \textcolor{colorAtencion}{\textbf{[DATO PENDIENTE DE VERIFICAR: #1]}}%
+}
+
+% --- Recuadros tcolorbox (§11) ---
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaDefinicion}[1][]{%
+  colback=colorDefinicion!5, colframe=colorDefinicion, breakable,
+  fonttitle=\bfseries, title={Definición}, #1}
+
+\newtcolorbox{cajaEjemplo}[1][]{%
+  colback=colorEjemplo!5, colframe=colorEjemplo, breakable,
+  fonttitle=\bfseries, title={Ejemplo}, #1}
+
+\newtcolorbox{cajaAtencion}[1][]{%
+  colback=colorAtencion!5, colframe=colorAtencion, breakable,
+  fonttitle=\bfseries, title={Atención}, #1}
+
+\newtcolorbox{cajaFrontera}[1][]{%
+  colback=colorFrontera!5, colframe=colorFrontera, breakable,
+  fonttitle=\bfseries, title={Frontera}, #1}
+
+\newtcolorbox{cajaEtica}[1][]{%
+  colback=colorEtica!5, colframe=colorEtica, breakable,
+  fonttitle=\bfseries, title={Ética y responsabilidad con los datos}, #1}
+
+\newtcolorbox{cajaLaboratorio}[1][]{%
+  colback=colorLaboratorio!5, colframe=colorLaboratorio, breakable,
+  fonttitle=\bfseries, title={Laboratorio MATLAB}, #1}
+
+% --- Vigencia de temas selectos (§5.7) ---
+\newcommand{\vigente}[1]{\textit{(Vigente a #1)}}
+
+% --- Caso ilustrativo ficticio (§5.6) ---
+\newenvironment{casoFicticio}{%
+  \begin{cajaEjemplo}[title={Caso ilustrativo (ficticio)}]%
+}{%
+  \end{cajaEjemplo}%
+}

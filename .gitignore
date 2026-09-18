@@ -1,0 +1,32 @@
+# Auxiliares de LaTeX
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.glo
+*.gls
+*.glg
+*.ist
+*.acn
+*.acr
+*.alg
+*.xdy
+
+# PDF compilado (se versiona el .tex; el PDF final se entrega aparte, §13)
+main.pdf
+
+# MATLAB
+*.asv
+*.m~
+
+# Sistema
+.DS_Store
