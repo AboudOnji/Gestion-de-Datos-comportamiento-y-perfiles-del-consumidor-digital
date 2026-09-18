@@ -2,7 +2,7 @@
 \chapter{Base tecnológica: buscadores, plataformas, redes y comercio electrónico}
 \label{cap:04}
 
-\section*{Ficha del capítulo}
+\begin{cajaFicha}
 \begin{description}
   \item[Unidad temática] I — Comportamiento, perfil y gestión de datos del consumidor digital.
   \item[Temas del programa] 1.4 Base tecnológica para la gestión de datos de los consumidores digitales: 1.4.1 Temas selectos de buscadores y plataformas de gestión integral, redes sociales y comercio electrónico.
@@ -16,6 +16,7 @@
   \end{enumerate}
   \item[Prerrequisitos] Cap. 1--3.
 \end{description}
+\end{cajaFicha}
 
 \section{Caso de apertura}
 
@@ -185,18 +186,21 @@ documento, cada columna un término del vocabulario, y cada celda la
 frecuencia de ese término en ese documento. Sumar por columna da la
 frecuencia total de cada término en todo el corpus.
 
-\textbf{Script.} \texttt{matlab/cap04/cap04\_series\_texto.m}. Genera una
-serie \textbf{sintética} (\texttt{rng(42)}) de interés de búsqueda semanal a
-dos años, con tendencia creciente y un pico estacional anual, y un corpus de
-20 comentarios de escucha social \textbf{sintéticos} sobre un canal digital
-ficticio.
+\textbf{Script.} \texttt{matlab/cap04/cap04\_series\_texto.m}. Es el
+\textbf{mismo script, sin modificar}, que se usa en la Práctica 2 de esta
+Parte. Corrida tal como está, genera una serie \textbf{sintética}
+(\texttt{rng(42)}) de interés de búsqueda semanal a dos años, con tendencia
+creciente y un pico estacional anual, y un corpus de 20 comentarios de
+escucha social \textbf{sintéticos} sobre un canal digital ficticio (el
+corpus no forma parte del bloque de parámetros: es fijo para que la
+comparación de la §3 se concentre en la serie de tiempo).
 
-\begin{lstlisting}[style=MATLABStyle, caption={Descomposición tendencia-estacionalidad y bolsa de palabras (extracto de \texttt{cap04\_series\_texto.m}).}]
-tendenciaEstimada = movmean(interesBusqueda, [26 25]);
-componenteEstacional = interesBusqueda - tendenciaEstimada;
-documentos = tokenizedDocument(erasePunctuation(comentarios));
-bolsaPalabras = bagOfWords(documentos);
-conteoTotal = full(sum(bolsaPalabras.Counts, 1));
+\begin{lstlisting}[style=MATLABStyle, caption={Bloque de parámetros editable (\texttt{cap04\_series\_texto.m}) — es lo único que cambia entre corridas.}]
+nSemanas = 104;                    % duracion de la serie a simular
+fechaInicio = datetime(2024,9,16); % fecha del primer dato
+crecimientoSemanal = 0.35;         % crecimiento de la tendencia (puntos/semana)
+amplitudEstacional = 12;           % que tan marcado es el pico anual
+desviacionRuido = 4;               % ruido aleatorio semana a semana
 \end{lstlisting}
 
 \textbf{Salida esperada.} Dos figuras: descomposición de la serie
@@ -234,11 +238,33 @@ organizaciones que no separan ambos componentes—. En la nube de palabras
 simple vista indistinguibles por tamaño; el ejercicio propuesto pide separar
 ambas.
 
-\textbf{Ejercicio propuesto.} Clasificar a mano los diez términos más
-frecuentes del corpus en \enquote{asociado a experiencia positiva},
-\enquote{asociado a fricción operativa} o \enquote{neutro/descriptivo}, y
-discutir si la nube de palabras, por sí sola, sin ese trabajo manual de
-clasificación, es una herramienta de análisis o solo de exploración inicial.
+\textbf{Ejercicio propuesto (usen exactamente este script, solo cambien el
+bloque de parámetros).} Corran el script tres veces y completen un cuadro
+con la amplitud estacional estimada y el valor máximo de la serie que
+imprime cada corrida:
+\begin{enumerate}
+  \item \textbf{Caso A — valores por defecto:} los cuatro parámetros tal
+  como están en el script.
+  \item \textbf{Caso B — estacionalidad débil:} cambien
+  \texttt{amplitudEstacional} de 12 a 3, sin tocar nada más.
+  \item \textbf{Caso C — más ruido:} regresen \texttt{amplitudEstacional} a
+  12 y cambien \texttt{desviacionRuido} de 4 a 15.
+\end{enumerate}
+Con el cuadro completo, respondan por escrito: en el Caso B, ¿el componente
+estacional del panel inferior de la figura~\ref{fig:cap04-tendencia} sigue
+siendo visible a simple vista en la serie observada (panel superior)? En el
+Caso C, ¿la tendencia estimada por media móvil sigue viéndose suave, o el
+ruido empieza a distorsionarla? A partir de sus tres corridas, expliquen en
+qué condiciones (poco ruido y estacionalidad marcada, o mucho ruido y
+estacionalidad débil) es más fácil confundir estacionalidad con tendencia en
+un negocio real.
+
+Como segunda parte del ejercicio, clasifiquen a mano los diez términos más
+frecuentes del corpus de escucha social (fijo, no cambia entre corridas) en
+\enquote{asociado a experiencia positiva}, \enquote{asociado a fricción
+operativa} o \enquote{neutro/descriptivo}, y discutan si la nube de palabras,
+por sí sola, sin ese trabajo manual de clasificación, es una herramienta de
+análisis o solo de exploración inicial.
 
 \textbf{Extensión opcional.} Sustituir la media móvil de 52 semanas por la
 función \texttt{trenddecomp} o \texttt{decompose} disponible en el toolbox
@@ -297,10 +323,12 @@ ninguna campaña de influencers en curso en ese momento.
   ignore o se considere ese componente.
   \item[Solución de casos] Resolver el estudio de caso de la marca de
   electrodomésticos (§4) por escrito.
-  \item[Reporte de práctica] Consolidar, junto con los reportes de práctica
-  de los capítulos 1--3, el entregable único de la práctica oficial \enquote{El
-  consumidor digital y su perfil} (ver \enquote{Prácticas oficiales de la
-  unidad} al cierre de esta Parte).
+  \item[Reporte de práctica] Consolidar, junto con el reporte de práctica
+  del Cap.~3, el entregable único de la práctica oficial \enquote{Buscadores
+  y plataformas en la gestión de datos del consumidor digital} (ver
+  \enquote{Prácticas oficiales de la unidad} al cierre de esta Parte),
+  incluyendo el cuadro de los tres casos del ejercicio propuesto del
+  laboratorio (§3).
 \end{description}
 
 \section{Ruta de aprendizaje autónomo}

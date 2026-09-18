@@ -7,24 +7,41 @@ prácticas de la Unidad I. Los insumos de cada práctica ya se desarrollaron
 en las secciones de laboratorio de los capítulos 1--4; aquí se presenta la
 guía formal de entrega.
 
+\textbf{Metodología común a ambas prácticas.} En los cuatro capítulos, el
+laboratorio usa \textbf{el mismo script} que el estudiante entrega en su
+práctica: no hay una versión \enquote{de clase} y otra \enquote{de tarea}
+distintas. El script no se modifica más allá del bloque de parámetros,
+claramente delimitado al inicio de cada archivo (\texttt{matlab/capNN/*.m}).
+La tarea del estudiante es correr ese mismo script para dos o tres casos
+distintos (cambiando solo datos o parámetros), registrar los resultados que
+imprime y grafica cada corrida, compararlos entre sí y redactar una
+conclusión propia. Ningún entregable requiere que el estudiante escriba o
+edite código MATLAB más allá de sustituir valores en el bloque de
+parámetros.
+
 \section*{Práctica 1 — El consumidor digital y su perfil (7 h)}
 
 \begin{description}
   \item[Capítulos que la integran] 1 y 2.
   \item[Lugar de realización] Aula / laboratorio.
   \item[Objetivo] Analizar la evolución y el perfil del consumidor digital
-  aplicando, sobre un caso propio del equipo, el modelo de difusión de Bass
-  (Cap.~1) y una segmentación rígida y difusa (Cap.~2).
-  \item[Entregable] Reporte único que integre: (a) el ejercicio propuesto del
-  laboratorio del Cap.~1 con interpretación de negocio; (b) el ejercicio
-  propuesto del laboratorio del Cap.~2 con interpretación de negocio; (c) una
-  ficha de perfil de consumidor digital construida por el equipo, usando el
-  método de clustering del Cap.~2 sobre datos propios o hipotéticos
-  claramente rotulados como tales.
-  \item[Criterios de evaluación] Ejecución correcta de ambos scripts MATLAB
-  (verificable por reproducibilidad, \texttt{rng(42)}); interpretación de
-  negocio propia, no copiada de este libro; distinción explícita entre datos
-  reales y sintéticos en el reporte.
+  aplicando, sobre distintos casos generados solo cambiando parámetros, el
+  modelo de difusión de Bass (Cap.~1) y una segmentación rígida y difusa
+  (Cap.~2).
+  \item[Entregable] Reporte único que integre: (a) el cuadro de los tres
+  casos del ejercicio propuesto del Cap.~1 (\texttt{cap01\_difusion\_bass.m},
+  Casos A/B/C de innovación vs. imitación) con las dos preguntas de
+  comparación respondidas; (b) el cuadro de los tres casos del ejercicio
+  propuesto del Cap.~2 (\texttt{cap02\_segmentacion.m}, Casos A/B/C de
+  traslape y número de arquetipos) con las tres preguntas de comparación
+  respondidas; (c) una conclusión propia de media página que relacione ambos
+  laboratorios con el concepto de perfil como función del negocio (Cap.~2,
+  §2.5).
+  \item[Criterios de evaluación] Los dos scripts se ejecutan sin modificar
+  nada fuera del bloque de parámetros (verificable por reproducibilidad,
+  \texttt{rng(42)}); los tres casos de cada script están completos, no solo
+  el caso por defecto; interpretación de negocio propia, no copiada de este
+  libro.
 \end{description}
 
 \section*{Práctica 2 — Buscadores y plataformas en la gestión de datos del consumidor digital (8 h)}
@@ -34,18 +51,23 @@ guía formal de entrega.
   \item[Lugar de realización] Aula / laboratorio.
   \item[Objetivo] Aplicar limpieza de datos, segmentación RFM, CLV y prueba
   A/B (Cap.~3) junto con análisis de series de tiempo y frecuencia de
-  términos (Cap.~4) para fundamentar una decisión de negocio digital.
-  \item[Entregable] Reporte único que integre: (a) el ejercicio propuesto del
-  laboratorio del Cap.~3 (cambio de $\alpha$ en la prueba A/B) con la
-  decisión resultante justificada; (b) el ejercicio propuesto del
-  laboratorio del Cap.~4 (clasificación de términos de la nube de palabras)
-  con al menos diez términos clasificados; (c) aplicación de la matriz de
+  términos (Cap.~4) para fundamentar una decisión de negocio digital, en
+  cada caso comparando resultados entre corridas del mismo script.
+  \item[Entregable] Reporte único que integre: (a) el cuadro de los tres
+  casos del ejercicio propuesto del Cap.~3
+  (\texttt{cap03\_rfm\_clv\_ab.m}, Casos A/B/C de tamaño de muestra y nivel
+  de significancia de la prueba A/B) con las tres preguntas de comparación
+  respondidas; (b) el cuadro de los tres casos del ejercicio propuesto del
+  Cap.~4 (\texttt{cap04\_series\_texto.m}, Casos A/B/C de amplitud
+  estacional y ruido) junto con la clasificación de los diez términos más
+  frecuentes del corpus de escucha social; (c) aplicación de la matriz de
   cuatro criterios del Cap.~4 a una plataforma digital real elegida por el
   equipo.
   \item[Criterios de evaluación] Rigor estadístico en la prueba A/B (uso
-  correcto del valor $p$, no solo comparación de porcentajes); aplicación
-  correcta y honesta de la matriz de criterios (sin promoción implícita de
-  ninguna plataforma); todas las cifras de mercado citadas en el entregable
-  deben tener fuente y fecha de consulta, conforme al estándar de
-  \texttt{docs/verificacion-datos.md}.
+  correcto del valor $p$, no solo comparación de porcentajes, y explicación
+  de por qué el mismo par de proporciones puede cambiar de decisión al
+  cambiar el tamaño de muestra); aplicación correcta y honesta de la matriz
+  de criterios (sin promoción implícita de ninguna plataforma); todas las
+  cifras de mercado citadas en el entregable deben tener fuente y fecha de
+  consulta, conforme al estándar de \texttt{docs/verificacion-datos.md}.
 \end{description}

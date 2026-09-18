@@ -2,7 +2,7 @@
 \chapter{El consumidor digital: evolución, impacto y ventajas de su análisis}
 \label{cap:01}
 
-\section*{Ficha del capítulo}
+\begin{cajaFicha}
 \begin{description}
   \item[Unidad temática] I — Comportamiento, perfil y gestión de datos del consumidor digital.
   \item[Temas del programa] 1.1 Comportamiento del consumidor: 1.1.1 Evolución del consumidor 1.0 al 5.0 y tendencias a futuro; 1.1.2 Impacto del consumo digital inteligente y sostenible; 1.1.3 Ventajas del análisis del comportamiento del consumidor digital.
@@ -16,6 +16,7 @@
   \end{enumerate}
   \item[Prerrequisitos] Ninguno formal; se recomienda familiaridad básica con conceptos de mercadotecnia general (mezcla de mercadotecnia, segmentación elemental).
 \end{description}
+\end{cajaFicha}
 
 \section{Caso de apertura}
 
@@ -260,65 +261,74 @@ $t^\ast = \ln(q/p)\,/\,(p+q)$: cuanto mayor es $q$ respecto a $p$, más tarde y
 más abrupto es ese pico, porque la adopción depende más del contagio social
 que de decisiones independientes.
 
-\textbf{Script.} \texttt{matlab/cap01/cap01\_difusion\_bass.m}. Usa
-parámetros \textbf{didácticos} ($p=0.03$, $q=0.38$), no calibrados con
-datos reales de un canal digital mexicano —decisión editorial registrada en
-\texttt{docs/dudas.md}, pregunta 4—, con \texttt{rng(42)} por convención del
-proyecto aunque este script en particular no usa aleatoriedad (la curva es
-determinista; la semilla se fija por consistencia con el resto del libro).
+\textbf{Script.} \texttt{matlab/cap01/cap01\_difusion\_bass.m}. Es el
+\textbf{mismo script, sin modificar}, que se usa en la Práctica 1 de esta
+Parte: toda la lógica de cálculo y graficación está fija; lo único que el
+estudiante edita es el bloque de \textbf{parámetros}, claramente delimitado
+al inicio del archivo. Corrida tal como está, usa parámetros
+\textbf{didácticos} ($p=0.03$, $q=0.38$), no calibrados con datos reales de
+un canal digital mexicano —decisión editorial registrada en
+\texttt{docs/dudas.md}, pregunta 4.
 
-\begin{lstlisting}[style=MATLABStyle, caption={Núcleo del modelo de Bass (extracto de \texttt{cap01\_difusion\_bass.m}).}]
-p = 0.03; q = 0.38; m = 1;
-t = (0:0.05:20)';
-F = (1 - exp(-(p+q).*t)) ./ (1 + (q/p).*exp(-(p+q).*t));
-adopcionAcumulada = m .* F;
-tPico = log(q/p) / (p+q);
+\begin{lstlisting}[style=MATLABStyle, caption={Bloque de parámetros editable (\texttt{cap01\_difusion\_bass.m}) — es lo único que cambia entre corridas.}]
+p = 0.03;      % coeficiente de innovacion
+q = 0.38;      % coeficiente de imitacion
+m = 1;         % mercado potencial (normalizado)
+tFinal = 20;   % periodos a simular
 \end{lstlisting}
 
-\textbf{Salida esperada.} Dos figuras: la curva base de adopción acumulada y
-tasa de adopción (figura~\ref{fig:cap01-bass-base}), y una comparación de
-tres escenarios de sensibilidad —innovación dominante, balance, imitación
-dominante— (figura~\ref{fig:cap01-bass-sens}).
+\textbf{Salida esperada.} Al correr el script (\texttt{Run}, sin editar nada
+más que el bloque de parámetros) se imprimen en la ventana de comandos el
+periodo del pico de adopción y el porcentaje de mercado adoptado al final del
+periodo simulado, y se generan dos figuras: adopción acumulada
+(figura~\ref{fig:cap01-bass-acum}) y tasa de adopción
+(figura~\ref{fig:cap01-bass-tasa}), ambas con los valores de $p$ y $q$
+usados en el título, para poder identificar de qué corrida viene cada una.
 
 \begin{center}
-  \includegraphics[width=0.95\textwidth]{figuras/matlab/cap01_bass_base.pdf}
-  \captionof{figure}{Curva de adopción del modelo de Bass, parámetros didácticos.
-  Fuente: elaboración propia con datos sintéticos, \texttt{rng(42)}.}
-  \label{fig:cap01-bass-base}
+  \includegraphics[width=0.75\textwidth]{figuras/matlab/cap01_bass_acumulada.pdf}
+  \captionof{figure}{Adopción acumulada del modelo de Bass, parámetros
+  didácticos ($p=0.03$, $q=0.38$). Fuente: elaboración propia con datos
+  sintéticos, \texttt{rng(42)}.}
+  \label{fig:cap01-bass-acum}
 \end{center}
 
 \begin{center}
-  \includegraphics[width=0.85\textwidth]{figuras/matlab/cap01_bass_sensibilidad.pdf}
-  \captionof{figure}{Sensibilidad de la curva de adopción a la proporción
-  innovación/imitación. Fuente: elaboración propia con datos sintéticos.}
-  \label{fig:cap01-bass-sens}
+  \includegraphics[width=0.75\textwidth]{figuras/matlab/cap01_bass_tasa.pdf}
+  \captionof{figure}{Tasa de adopción del modelo de Bass, misma corrida.
+  Fuente: elaboración propia con datos sintéticos.}
+  \label{fig:cap01-bass-tasa}
 \end{center}
 
-\textbf{Interpretación de negocio.} Un canal digital cuya adopción depende
-sobre todo de $p$ (innovación) crece de forma predecible pero lenta: es el
-caso de herramientas que el consumidor adopta por necesidad propia, sin
-depender de ver a otros usarla primero. Un canal que depende sobre todo de
-$q$ (imitación) tiene una fase inicial casi plana —el \enquote{valle} antes del
-despegue en la curva verde de la figura~\ref{fig:cap01-bass-sens}— seguida de
-una adopción explosiva: es el patrón típico de plataformas sociales o de
-pago entre pares, donde el valor para cada usuario nuevo depende de cuántos
-otros ya la usan (efecto de red). La implicación estratégica es directa: si
-un canal nuevo depende de imitación, invertir en visibilidad temprana durante
-el \enquote{valle} —cuando las métricas de adopción todavía se ven planas— es lo que
-permite alcanzar el punto de inflexión; abandonar el canal en ese momento por
-parecer estancado es el error más común de quien no entendió la forma de la
-curva.
+\textbf{Interpretación de negocio.} El pico de esta corrida ($p=0.03$,
+$q=0.38$) ocurre en $t^\ast \approx 6.2$ periodos, con 46\,\% del mercado ya
+adoptado en ese momento. Cuanto mayor es $q$ respecto a $p$, más tarde y más
+abrupto es ese pico —porque la adopción depende más del contagio social que
+de decisiones independientes—, lo que en la figura se traduce en una fase
+inicial más plana seguida de un despegue más pronunciado. El ejercicio
+propuesto pide comprobar esto de primera mano, no como afirmación del libro.
 
-\textbf{Ejercicio propuesto.} Sustituir los parámetros didácticos por dos
-escenarios propios (uno de innovación dominante, uno de imitación dominante)
-para un canal digital real que el equipo conozca —una app, una red social, un
-método de pago— y justificar por qué esperarían que $p$ o $q$ dominen en ese
-caso, sin necesidad de calibrar contra datos reales.
+\textbf{Ejercicio propuesto (usen exactamente este script, solo cambien el
+bloque de parámetros).} Corran el script tres veces, una por caso, y
+completen un cuadro con los resultados que imprime cada corrida:
+\begin{enumerate}
+  \item \textbf{Caso A — innovación dominante:} $p=0.08$, $q=0.10$.
+  \item \textbf{Caso B — balance:} $p=0.03$, $q=0.38$ (los valores por defecto del script).
+  \item \textbf{Caso C — imitación dominante:} $p=0.01$, $q=0.55$.
+\end{enumerate}
+Para cada caso, registren: el periodo del pico ($t^\ast$), el porcentaje de
+mercado adoptado en ese pico, y el porcentaje de mercado adoptado al periodo
+20. Con el cuadro completo, respondan por escrito: ¿en qué caso el pico
+ocurre más tarde? ¿En qué caso la curva de adopción acumulada tiene una fase
+inicial más plana? A partir de sus tres corridas —no de este libro—,
+propongan un canal digital real (una app, una red social, un método de
+pago) y justifiquen a cuál de los tres casos se parece más su patrón de
+adopción esperado.
 
-\textbf{Extensión opcional.} Investigar y programar el modelo de Bass
-generalizado (con coeficiente de presión de precio o de publicidad variable
-en el tiempo) y comparar la forma de la curva resultante contra la versión
-básica de este script.
+\textbf{Extensión opcional.} Investigar el modelo de Bass generalizado (con
+coeficiente de presión de precio o de publicidad variable en el tiempo) y
+describir, sin necesariamente programarlo, qué cambiaría en la forma de la
+curva de este script.
 \end{cajaLaboratorio}
 
 \section{Estudio de caso}
@@ -370,6 +380,10 @@ portafolio de evidencias de la Unidad I:
   consumo digital inteligente y el consumo sostenible son objetivos
   compatibles o están en tensión?}, con al menos una postura respaldada en la
   brecha actitud-conducta (recuadro de Frontera, \S 2.2).
+  \item[Reporte de práctica] Entregar el cuadro de los tres casos del
+  ejercicio propuesto del laboratorio (\S 3) —sin modificar el script, solo
+  el bloque de parámetros— con las dos preguntas de comparación respondidas
+  y la propuesta de canal digital real justificada.
 \end{description}
 
 \section{Ruta de aprendizaje autónomo}
@@ -443,7 +457,7 @@ están bien sustentadas; la anticipación de tendencias, la menos.
   \end{enumerate}
   \textit{Justificación:} cuando la imitación domina, la adopción depende del
   contagio social, que requiere una base inicial de adoptantes antes de
-  acelerar (\S 3, figura~\ref{fig:cap01-bass-sens}).
+  acelerar — comprobado en el ejercicio propuesto del \S 3 (Caso C).
 
   \item La brecha actitud-conducta en consumo sostenible se refiere a:
   \begin{enumerate}

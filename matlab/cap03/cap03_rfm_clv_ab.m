@@ -8,20 +8,33 @@
 %               atípicos; (2) segmentación RFM (Recencia, Frecuencia,
 %               Monto) y cálculo de CLV (valor de vida del cliente) simple;
 %               (3) prueba A/B con test de dos proporciones para decidir
-%               entre dos versiones de una página de checkout. Datos
-%               SINTÉTICOS, rng(42) — no representan a ningún negocio real
-%               (§5.8 del prompt de proyecto).
+%               entre dos versiones de una página de checkout. Este MISMO
+%               script es el que se usa en el libro y en la Práctica 2 de
+%               la Unidad I: el estudiante solo modifica la sección de
+%               parámetros, corre el script para cada caso que le pidan, y
+%               compara los resultados impresos y las figuras entre
+%               corridas. Datos SINTÉTICOS, rng(42) — no representan a
+%               ningún negocio real (§5.8 del prompt de proyecto).
 % Toolboxes requeridas: Statistics and Machine Learning Toolbox (tabulate,
 %               prctile ya está en base; se usa normcdf).
 % Tiempo de ejecución esperado: < 10 s.
 
 clc; clear; close all; rng(42);
 
-%% Parámetros
-nClientes = 300;
-hoy = datetime(2026,9,18);
+%% ===================================================================
+%  PARÁMETROS — ESTA ES LA ÚNICA SECCIÓN QUE EL ESTUDIANTE DEBE EDITAR
+%  ===================================================================
+nClientes = 300;          % tamaño de la base de clientes sintética (Bloques 1-2)
+horizonteAnios = 3;        % horizonte de vida esperado para el CLV simple
+alfa = 0.05;                % nivel de significancia de la prueba A/B (Bloque 3)
 
-%% Datos: transacciones SINTÉTICAS con valores faltantes y atípicos deliberados
+% Prueba A/B: cambien estos cuatro valores para simular otro experimento
+% (otro tamaño de muestra, otra diferencia de conversión observada).
+nA = 1200; conversionesA = 132;   % versión A (control)
+nB = 1180; conversionesB = 159;   % versión B (variante)
+% ===================================================================
+
+%% Datos: transacciones SINTÉTICAS con valores faltantes y atípicos deliberados (no editar)
 recenciaDias  = round(exprnd(60, nClientes, 1));            % días desde última compra
 frecuencia    = poissrnd(4, nClientes, 1) + 1;               % compras en el periodo
 montoPromedio = normrnd(450, 150, nClientes, 1);             % ticket promedio (MXN)
@@ -34,6 +47,8 @@ idxAtipico = randperm(nClientes, round(0.02*nClientes));
 montoPromedio(idxAtipico) = montoPromedio(idxAtipico) * 8;  % gasto "atípico" implausible
 
 %% Procesamiento — Bloque 1: limpieza y calidad de datos
+fprintf('=== Resultados con nClientes=%d, horizonte=%d años, alfa=%.2f ===\n', ...
+    nClientes, horizonteAnios, alfa);
 fprintf('--- Bloque 1: calidad de datos ---\n');
 fprintf('Valores faltantes en monto promedio: %d de %d (%.1f%%)\n', ...
     sum(isnan(montoPromedio)), nClientes, 100*mean(isnan(montoPromedio)));
@@ -79,8 +94,7 @@ disp('Distribución de segmentos RFM:');
 disp(tablaSegmentos);
 
 % CLV simple: valor promedio de transacción x frecuencia anualizada x
-% horizonte de vida esperado (supuesto didáctico de 3 años).
-horizonteAnios = 3;
+% horizonte de vida esperado (parámetro "horizonteAnios" arriba).
 clv = montoLimpio .* frecuencia .* horizonteAnios;
 fprintf('CLV simple promedio por segmento (horizonte %d años, supuesto didáctico):\n', horizonteAnios);
 for s = ["Campeón", "Leal", "En riesgo", "Perdido"]
@@ -103,7 +117,7 @@ clvPromedio = arrayfun(@(s) mean(clv(segmento == s)), ordenSegmentos);
 bar(categorical(ordenSegmentos, ordenSegmentos), clvPromedio, 'FaceColor', [0.16 0.49 0.51]);
 grid on;
 ylabel('CLV simple promedio (MXN)');
-title('CLV por segmento (horizonte de 3 años)');
+title(sprintf('CLV por segmento (horizonte de %d años)', horizonteAnios));
 
 sgtitle('Segmentación RFM y CLV -- datos sintéticos');
 
@@ -116,10 +130,8 @@ exportgraphics(gcf, '../../figuras/matlab/cap03_rfm_clv.png', 'Resolution', 300)
 %% Procesamiento — Bloque 3: prueba A/B (dos proporciones) para decidir
 fprintf('\n--- Bloque 3: prueba A/B ---\n');
 
-% Escenario didáctico: dos versiones de checkout, conversión SINTÉTICA.
-nA = 1200; conversionesA = 132;   % versión A (control): 11.0%
-nB = 1180; conversionesB = 159;   % versión B (variante): 13.5%
-
+% Escenario didáctico: dos versiones de checkout (parámetros nA, nB,
+% conversionesA, conversionesB definidos arriba).
 pA = conversionesA / nA;
 pB = conversionesB / nB;
 pConjunta = (conversionesA + conversionesB) / (nA + nB);
@@ -127,7 +139,6 @@ errorEstandar = sqrt(pConjunta * (1-pConjunta) * (1/nA + 1/nB));
 z = (pB - pA) / errorEstandar;
 valorP = 2 * (1 - normcdf(abs(z)));  % prueba de dos colas
 
-alfa = 0.05;
 fprintf('Conversión A = %.2f%% (n=%d), Conversión B = %.2f%% (n=%d)\n', ...
     100*pA, nA, 100*pB, nB);
 fprintf('Estadístico z = %.3f, valor p = %.4f (alfa = %.2f)\n', z, valorP, alfa);

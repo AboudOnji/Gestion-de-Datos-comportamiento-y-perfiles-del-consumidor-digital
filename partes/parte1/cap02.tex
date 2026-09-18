@@ -2,7 +2,7 @@
 \chapter{Perfil, segmentación y mercado meta digital}
 \label{cap:02}
 
-\section*{Ficha del capítulo}
+\begin{cajaFicha}
 \begin{description}
   \item[Unidad temática] I — Comportamiento, perfil y gestión de datos del consumidor digital.
   \item[Temas del programa] 1.2 Perfil del consumidor digital: 1.2.1 Segmentación del mercado digital y variables; 1.2.2 Mercado meta o target digital; 1.2.3 Tipos de perfil del consumidor digital; 1.2.4 Radiografía del consumidor digital en México y el mundo; 1.2.5 Diversidad de perfiles de consumidor digital por modelo de negocios-industria.
@@ -16,6 +16,7 @@
   \end{enumerate}
   \item[Prerrequisitos] Cap. 1 (evolución del consumidor digital).
 \end{description}
+\end{cajaFicha}
 
 \section{Caso de apertura}
 
@@ -243,42 +244,49 @@ proporción de consumidores cuya pertenencia máxima no supera 0.6 —una forma
 directa de cuantificar cuántos casos la segmentación rígida está forzando a
 una casilla que no les queda bien.
 
-\textbf{Script.} \texttt{matlab/cap02/cap02\_segmentacion.m}. Genera 240
-consumidores \textbf{sintéticos} (\texttt{rng(42)}) con tres variables de
-comportamiento (frecuencia de compra mensual, ticket promedio, engagement
-digital) a partir de tres arquetipos con traslape deliberado entre
-\enquote{ocasional} e \enquote{intermedio}, para que la pertenencia difusa sea
-informativa y no trivial.
+\textbf{Script.} \texttt{matlab/cap02/cap02\_segmentacion.m}. Es el
+\textbf{mismo script, sin modificar}, que se usa en la Práctica 1 de esta
+Parte. Genera consumidores \textbf{sintéticos} (\texttt{rng(42)}) con tres
+variables de comportamiento (frecuencia de compra mensual, ticket promedio,
+engagement digital) a partir de los arquetipos que el estudiante defina en
+el bloque de parámetros —tantas filas como arquetipos quiera simular—; el
+resto del script (estandarización, k-means, fuzzy c-means, figuras) se
+ajusta automáticamente al número de filas que haya.
 
-\begin{lstlisting}[style=MATLABStyle, caption={Segmentación rígida y difusa (extracto de \texttt{cap02\_segmentacion.m}).}]
-[etiquetaKmeans, centrosKmeans] = kmeans(datosEstandar, kSegmentos, ...
-    'Replicates', 20, 'Distance', 'sqeuclidean');
-[centrosFCM, matrizPertenencia] = fcm(datosEstandar, kSegmentos, opcionesFCM);
-pertenenciaMaxima = max(matrizPertenencia, [], 1);
-proporcionAmbiguos = mean(pertenenciaMaxima < 0.6);
+\begin{lstlisting}[style=MATLABStyle, caption={Bloque de parámetros editable (\texttt{cap02\_segmentacion.m}) — cada fila es un arquetipo.}]
+centrosTipicos = [
+    1.5,  350,  25    % arquetipo 1: "ocasional"
+    4.0,  900,  78    % arquetipo 2: "leal"
+    2.6,  600,  52 ]; % arquetipo 3: "intermedio" (traslape deliberado)
+dispersionTipica = [ ... ];   % dispersion de cada arquetipo (misma forma)
+nClientesPorSegmento = 80;    % tamano de muestra sintetica por arquetipo
 \end{lstlisting}
 
-\textbf{Salida esperada.} Dos figuras: comparación de dispersión k-means vs.
-fuzzy c-means (figura~\ref{fig:cap02-comparacion}), y perfil de los tres
-segmentos en radar (figura~\ref{fig:cap02-radar}).
+\textbf{Salida esperada.} Al correr el script se imprime la silueta promedio
+de k-means y el porcentaje de consumidores con pertenencia difusa ambigua, y
+se generan dos figuras: comparación de dispersión k-means vs. fuzzy c-means
+(figura~\ref{fig:cap02-comparacion}) y perfil de los segmentos en radar
+(figura~\ref{fig:cap02-radar}), ambas con el número de arquetipos usado en
+el título.
 
 \begin{center}
   \includegraphics[width=0.98\textwidth]{figuras/matlab/cap02_segmentacion_comparacion.pdf}
   \captionof{figure}{Segmentación rígida (silueta promedio 0.58) vs. difusa
-  (13\,\% de consumidores sin pertenencia dominante). Fuente: elaboración
-  propia con datos sintéticos, \texttt{rng(42)}.}
+  (15\,\% de consumidores sin pertenencia dominante), con los tres arquetipos
+  por defecto del script. Fuente: elaboración propia con datos sintéticos,
+  \texttt{rng(42)}.}
   \label{fig:cap02-comparacion}
 \end{center}
 
 \begin{center}
   \includegraphics[width=0.62\textwidth]{figuras/matlab/cap02_perfiles_radar.pdf}
   \captionof{figure}{Perfil de los tres segmentos identificados por fuzzy
-  c-means, centros normalizados. Fuente: elaboración propia con datos
-  sintéticos.}
+  c-means, centros normalizados, misma corrida. Fuente: elaboración propia
+  con datos sintéticos.}
   \label{fig:cap02-radar}
 \end{center}
 
-\textbf{Interpretación de negocio.} El 13\,\% de los consumidores sintéticos
+\textbf{Interpretación de negocio.} El 15\,\% de los consumidores sintéticos
 sin pertenencia dominante (figura~\ref{fig:cap02-comparacion}, panel
 derecho, puntos de color intermedio y mayor tamaño) son, en términos de
 negocio, los casos donde una campaña dirigida \enquote{solo al segmento leal} o
@@ -291,12 +299,27 @@ alto valor, y su combinación de alta frecuencia, alto ticket y alto
 engagement lo hace, en cualquier negocio real, el segmento prioritario de
 retención.
 
-\textbf{Ejercicio propuesto.} Repetir el laboratorio con $k=4$ segmentos y
-comparar la silueta promedio resultante contra la de $k=3$: ¿mejora o empeora
-la calidad de la segmentación rígida al añadir un segmento? Relacionar la
-respuesta con el criterio del codo (\textit{elbow method}) para elegir $k$.
+\textbf{Ejercicio propuesto (usen exactamente este script, solo cambien el
+bloque de parámetros).} Corran el script tres veces y completen un cuadro
+con la silueta promedio y el \% de pertenencia ambigua de cada corrida:
+\begin{enumerate}
+  \item \textbf{Caso A — arquetipos por defecto:} los tres del script
+  (\enquote{ocasional}, \enquote{leal}, \enquote{intermedio}).
+  \item \textbf{Caso B — más traslape:} acerquen los tres centros entre sí
+  (por ejemplo, reduzcan a la mitad la distancia entre las filas de
+  \texttt{centrosTipicos}) sin cambiar las dispersiones.
+  \item \textbf{Caso C — cuatro arquetipos:} agreguen una cuarta fila a
+  \texttt{centrosTipicos} y a \texttt{dispersionTipica} con un arquetipo
+  propio, y corran de nuevo.
+\end{enumerate}
+Con el cuadro completo, respondan por escrito: ¿qué le pasa a la silueta
+promedio de k-means cuando los segmentos se acercan (Caso B)? ¿Qué le pasa
+al \% de pertenencia ambigua? ¿Mejora o empeora la segmentación rígida al
+añadir un cuarto segmento (Caso C)? Relacionen sus respuestas con el
+criterio del codo (\textit{elbow method}) para elegir el número de
+segmentos.
 
-\textbf{Extensión opcional.} Sustituir las variables sintéticas por datos
+\textbf{Extensión opcional.} Sustituir los arquetipos sintéticos por datos
 propios de un negocio digital al que el equipo tenga acceso legítimo
 (exportación agregada y anonimizada de una tienda en línea propia, por
 ejemplo) y repetir el análisis, documentando el consentimiento y anonimización
@@ -362,14 +385,18 @@ mismo tiempo.
   \item[Reporte de debate] Debatir: ¿debería una organización pequeña, sin
   capacidad técnica para correr fuzzy c-means, renunciar a la segmentación
   difusa, o hay alternativas de menor costo para aproximarla?
+  \item[Reporte de práctica] Entregar el cuadro de los tres casos del
+  ejercicio propuesto del laboratorio (\S 3) —sin modificar el script, solo
+  el bloque de parámetros— con las tres preguntas de comparación respondidas.
 \end{description}
 
 \section{Ruta de aprendizaje autónomo}
 
 Dos horas de aprendizaje autónomo. Tareas concretas:
 \begin{enumerate}
-  \item Ejecutar \texttt{cap02\_segmentacion.m} con $k=4$ (ejercicio
-  propuesto, §3) y registrar la silueta promedio resultante.
+  \item Completar el Caso C del ejercicio propuesto (§3): agregar un cuarto
+  arquetipo al bloque de parámetros de \texttt{cap02\_segmentacion.m} y
+  registrar la silueta promedio resultante.
   \item Leer la ficha editorial de \textit{El Cubo NORISO}
   \parencite{delgado2015noriso} y resumir en un párrafo los ocho perfiles que
   propone.

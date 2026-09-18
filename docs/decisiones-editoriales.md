@@ -195,3 +195,77 @@ rigor sobre métrica.
 **Impacto en horas:** ninguno. Queda como pendiente abierto (no bloqueante)
 una siguiente ronda de investigación dirigida específicamente a Cap. 2 y
 Cap. 4 antes del cierre editorial final del libro.
+
+### D2.3 — Recuadro `cajaFicha` para la ficha del capítulo
+**Qué cambió:** la ficha del capítulo (unidad temática, temas, horas,
+competencia, resultados de aprendizaje, prerrequisitos) se envuelve en un
+nuevo recuadro `cajaFicha` (gris neutro, `config/macros.tex`) en vez de un
+`\section*{}` seguido de una lista `description` suelta. Aplicado a los 4
+capítulos de la Parte I.
+**Por qué:** el Dr. Barsekh-Onji pidió que la ficha se vea visualmente
+separada del texto normal, como los demás recuadros del libro. Se usó gris
+neutro (no guinda/bronce/terracota/dorado/teal) a propósito: la ficha es
+información administrativa del capítulo, no contenido de un tipo específico,
+y no debía competir visualmente con los recuadros de Definición, Frontera,
+Ética o Laboratorio.
+**Evidencia:** recompilación exitosa; verificación visual del recuadro en el
+Cap. 1.
+**Impacto en horas:** ninguno. **Aplica a todos los capítulos futuros
+(Partes II–V).**
+
+### D2.4 — Un solo script por capítulo, mismo instrumento en libro y práctica
+**Qué cambió:** rediseño de los 4 scripts MATLAB de la Parte I y de la
+sección "Laboratorio MATLAB" de cada capítulo, bajo una regla nueva: el
+script que aparece en el libro es exactamente el mismo que el estudiante usa
+en su práctica, con todos los valores editables consolidados en un único
+bloque de \textbf{parámetros} claramente delimitado al inicio del archivo
+(comentario "ESTA ES LA ÚNICA SECCIÓN QUE EL ESTUDIANTE DEBE EDITAR"). El
+resto del script (procesamiento, figuras) no se toca. El "Ejercicio
+propuesto" de cada capítulo se reformuló como una tabla de 3 casos: correr
+el mismo script con distintos parámetros, registrar los resultados que
+imprime cada corrida, comparar y concluir por escrito — nunca pidiendo
+modificar lógica del script. Se retiró, en el Cap. 1, una figura que
+mostraba de antemano la comparación entre tres escenarios (innovación vs.
+imitación): esa comparación ahora es el trabajo que el propio estudiante
+produce corriendo el script tres veces, no algo que el libro le entrega ya
+resuelto. En el Cap. 2, la generación de datos sintéticos se reescribió para
+que el número de arquetipos/segmentos sea automático a partir del número de
+filas que el estudiante defina (antes, cambiar $k$ rompía el script).
+**Por qué:** el Dr. Barsekh-Onji señaló que los estudiantes de la unidad no
+tienen una base sólida de programación; pidió que el mismo script de clase
+sea el de la tarea, que ellos solo cambien datos/parámetros sin tocar
+lógica, y que la actividad sea aplicar el script a distintos casos, comparar
+y sacar conclusiones — no programar.
+**Evidencia:** los 4 scripts se corrieron de nuevo (`matlab/run_all.m`,
+`[OK]` en los 5); se probó manualmente que `cap02_segmentacion.m` no se
+rompe con 4 arquetipos en vez de 3 (robustez verificada, ver
+`docs/informes/fase2.md` si se documenta ahí). `practicas-oficiales.tex` se
+reescribió para explicitar esta metodología común a ambas prácticas de la
+Parte I.
+**Impacto en horas:** ninguno. **Norma de diseño para todos los laboratorios
+futuros (Partes II–V):** un solo script por capítulo, bloque de parámetros
+al inicio, ejercicio propuesto = correr con 2–3 casos y comparar. Nota
+técnica adicional descubierta al implementar esto: dentro de un entorno
+`lstlisting` (extractos de código en el libro), **no usar acentos ni
+caracteres UTF-8 multibyte en el cuerpo del listado** — rompe la compilación
+con "Invalid UTF-8 byte sequence"; los comentarios en código de los extractos
+del libro deben ir sin acentos (el archivo `.m` real, fuera de
+`lstlisting`, sí puede llevar acentos sin problema).
+
+### D2.5 — Datos de Fase 1 verificados directamente por el Dr. Barsekh-Onji
+**Qué cambió:** los 28 ítems listados como "datos pendientes de verificar"
+al cierre de Fase 1 (`docs/pendientes.md`) fueron confirmados directamente
+por el Dr. Barsekh-Onji. Se actualizaron las notas de las entradas
+correspondientes en `bib/referencias.bib` (Bezdek 1981, Delgado Soriano et
+al. 2015 — orden de autoría confirmado con Delgado Soriano primero, DOF
+simplificación orgánica 2024, Hoyer et al. 2024 — 8.ª ed. confirmada como
+2024, AIMX 2026, Zhuo et al. 2022/AUT University, Dichter 1960, Assael 1987,
+Dixon/Freeman/Toman 2010 — orden de autoría confirmado) y se archivó la
+lista en `docs/pendientes.md` como "verificados", no eliminada, para
+trazabilidad editorial.
+**Por qué:** verificación directa del Dr. Barsekh-Onji, quien indicó
+explícitamente que ya revisó todos los pendientes de la lista.
+**Evidencia:** `bib/referencias.bib` sin entradas `\datoPendiente{}`
+restantes (`grep -c datoPendiente` = 0); recompilación exitosa.
+**Impacto en horas:** ninguno. Estos datos y atribuciones ya se pueden citar
+sin cobertura adicional en las Partes II–V cuando corresponda.

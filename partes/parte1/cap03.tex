@@ -2,7 +2,7 @@
 \chapter{Gestión de datos del consumidor: valor, omnicanalidad, escucha y decisión}
 \label{cap:03}
 
-\section*{Ficha del capítulo}
+\begin{cajaFicha}
 \begin{description}
   \item[Unidad temática] I — Comportamiento, perfil y gestión de datos del consumidor digital.
   \item[Temas del programa] 1.3 Gestión de datos de los consumidores digitales: 1.3.1 Creación de valor para el consumidor-usuario (CX-UX); 1.3.2 Experiencias omnicanal consumidor-usuario (CX-UX); 1.3.3 Momentos de escucha a los consumidores digitales; 1.3.4 Importancia de la recolección y gestión de datos; 1.3.5 Toma de decisiones basadas en la gestión de datos digitales.
@@ -16,6 +16,7 @@
   \end{enumerate}
   \item[Prerrequisitos] Cap. 1--2.
 \end{description}
+\end{cajaFicha}
 
 \section{Caso de apertura}
 
@@ -245,16 +246,19 @@ un test $z$ de dos proporciones:
 donde $\hat{p}$ es la proporción conjunta bajo la hipótesis nula de que
 ambas versiones convierten igual.
 
-\textbf{Script.} \texttt{matlab/cap03/cap03\_rfm\_clv\_ab.m}. Datos
-\textbf{sintéticos} (\texttt{rng(42)}) de 300 clientes, con 5\,\% de valores
-faltantes y 2\,\% de atípicos introducidos a propósito para que el bloque de
-limpieza tenga un problema real que resolver.
+\textbf{Script.} \texttt{matlab/cap03/cap03\_rfm\_clv\_ab.m}. Es el
+\textbf{mismo script, sin modificar}, que se usa en la Práctica 2 de esta
+Parte. Corrida tal como está, usa 300 clientes \textbf{sintéticos}
+(\texttt{rng(42)}), con 5\,\% de valores faltantes y 2\,\% de atípicos
+introducidos a propósito para que el bloque de limpieza tenga un problema
+real que resolver.
 
-\begin{lstlisting}[style=MATLABStyle, caption={Prueba A/B de dos proporciones (extracto de \texttt{cap03\_rfm\_clv\_ab.m}).}]
-pConjunta = (conversionesA + conversionesB) / (nA + nB);
-errorEstandar = sqrt(pConjunta*(1-pConjunta)*(1/nA + 1/nB));
-z = (pB - pA) / errorEstandar;
-valorP = 2 * (1 - normcdf(abs(z)));
+\begin{lstlisting}[style=MATLABStyle, caption={Bloque de parámetros editable (\texttt{cap03\_rfm\_clv\_ab.m}) — es lo único que cambia entre corridas.}]
+nClientes = 300;    % tamano de la base sintetica (Bloques 1-2)
+horizonteAnios = 3; % horizonte del CLV simple
+alfa = 0.05;         % significancia de la prueba A/B (Bloque 3)
+nA = 1200; conversionesA = 132;   % version A (control)
+nB = 1180; conversionesB = 159;   % version B (variante)
 \end{lstlisting}
 
 \textbf{Salida esperada.} Dos figuras: distribución de segmentos RFM y CLV
@@ -296,10 +300,24 @@ correr la prueba más tiempo o con más tráfico antes de decidir —exactamente
 el tipo de paciencia que la presión de negocio, en la práctica, más cuesta
 sostener.
 
-\textbf{Ejercicio propuesto.} Cambiar $\alpha$ (nivel de significancia) de
-0.05 a 0.10 y observar si la decisión cambia. Discutir en equipo: ¿qué tipo
-de error se vuelve más probable al relajar $\alpha$, y en qué escenarios de
-negocio sería aceptable correr ese riesgo?
+\textbf{Ejercicio propuesto (usen exactamente este script, solo cambien el
+bloque de parámetros).} Corran el script tres veces y completen un cuadro
+con la conversión de cada versión, el estadístico $z$, el valor $p$ y la
+decisión que imprime cada corrida:
+\begin{enumerate}
+  \item \textbf{Caso A — valores por defecto:} $n_A=1200$, conversiones$_A=132$;
+  $n_B=1180$, conversiones$_B=159$; $\alpha=0.05$.
+  \item \textbf{Caso B — mismas tasas, más muestra:} multipliquen por 5 los
+  cuatro valores de la prueba A/B ($n_A=6000$, conversiones$_A=660$;
+  $n_B=5900$, conversiones$_B=795$), sin cambiar $\alpha$.
+  \item \textbf{Caso C — mismos datos del Caso A, umbral más laxo:}
+  regresen a los valores del Caso A y cambien solo $\alpha$ a 0.10.
+\end{enumerate}
+Con el cuadro completo, respondan por escrito: ¿cambia la decisión entre el
+Caso A y el Caso B, aunque las proporciones observadas sean idénticas? ¿A
+qué se debe? ¿Cambia la decisión entre el Caso A y el Caso C? ¿Qué tipo de
+error (falso positivo o falso negativo) se vuelve más probable al relajar
+$\alpha$, y en qué escenarios de negocio sería aceptable correr ese riesgo?
 
 \textbf{Extensión opcional.} Incorporar una tasa de descuento al cálculo de
 CLV (CLV descontado a valor presente) y comparar el orden resultante de los
@@ -366,8 +384,9 @@ puntos porcentuales, hay que lanzarlo a todos los usuarios}.
 
 Dos horas de aprendizaje autónomo. Tareas concretas:
 \begin{enumerate}
-  \item Ejecutar el ejercicio propuesto (§5, cambio de $\alpha$ a 0.10) y
-  registrar si la decisión de la prueba A/B cambia.
+  \item Completar el Caso B del ejercicio propuesto (§5, multiplicar por 5
+  la muestra de la prueba A/B) y registrar si la decisión cambia respecto al
+  Caso A.
   \item Investigar si, a la fecha en que se realice esta tarea, hay una
   reforma o disposición nueva a la LFPDPPP posterior a noviembre de 2025, y
   documentarla con fuente oficial.

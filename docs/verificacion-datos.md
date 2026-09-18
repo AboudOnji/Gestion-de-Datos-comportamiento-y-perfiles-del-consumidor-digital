@@ -3,10 +3,16 @@
 Registro obligatorio (§5.2 del prompt) de toda cifra empírica que aparezca en
 el libro. Ningún dato entra al texto sin una fila aquí, o lleva
 `\datoPendiente{}`. Consolidado en Fase 1 a partir de los 5 dossiers de
-investigación (`docs/investigacion/parte1.md` … `parte5.md`); las cifras que
-los agentes no pudieron verificar en fuente primaria **no** están aquí — están
-listadas en `docs/pendientes.md` y en la sección "Datos pendientes" de cada
-dossier, y no deben citarse en el libro hasta confirmarse.
+investigación (`docs/investigacion/parte1.md` … `parte5.md`).
+
+**Actualización (2026-09-18):** los 28 ítems que en el cierre de Fase 1
+quedaron como "datos pendientes de verificar" fueron revisados y confirmados
+por el Dr. Barsekh-Onji — ver el archivo de trazabilidad en
+`docs/pendientes.md`, sección "Datos de Fase 1 — verificados". Ya se pueden
+citar en capítulos futuros (Partes II–V) con el valor y la fuente que reporta
+el dossier de la Parte correspondiente (`docs/investigacion/parteN.md`); al
+usarlos, añadir su fila aquí siguiendo el mismo formato que las tablas de
+abajo (dato · cifra · año · fuente · URL/DOI · fecha de consulta · capítulo).
 
 ## Parte I — Comportamiento, perfil y gestión de datos (Cap. 1–4)
 

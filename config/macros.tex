@@ -41,6 +41,13 @@
   colback=colorLaboratorio!5, colframe=colorLaboratorio, breakable,
   fonttitle=\bfseries, title={Laboratorio MATLAB}, #1}
 
+% Ficha del capítulo (§8.1): recuadro neutro, administrativo — no compite
+% visualmente con los recuadros de contenido (Definición, Frontera, Ética...).
+\newtcolorbox{cajaFicha}[1][]{%
+  colback=grisIPN!6, colframe=grisIPN, breakable, sharp corners,
+  boxrule=0.6pt, left=8pt, right=8pt, top=4pt, bottom=4pt,
+  fonttitle=\bfseries, title={Ficha del capítulo}, #1}
+
 % --- Vigencia de temas selectos (§5.7) ---
 \newcommand{\vigente}[1]{\textit{(Vigente a #1)}}
 

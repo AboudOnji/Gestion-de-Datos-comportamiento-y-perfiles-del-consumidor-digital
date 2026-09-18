@@ -10,22 +10,34 @@
 %               (2) frecuencia de términos en un corpus SINTÉTICO de
 %               comentarios de escucha social, con nube de palabras.
 %               Datos sintéticos, rng(42) — no representan a ninguna marca,
-%               canal o campaña real (§5.8 del prompt de proyecto).
+%               canal o campaña real (§5.8 del prompt de proyecto). Este
+%               MISMO script es el que se usa en el libro y en la Práctica 2
+%               de la Unidad I: el estudiante solo modifica la sección de
+%               parámetros, corre el script para cada caso que le pidan, y
+%               compara los resultados entre corridas.
 % Toolboxes requeridas: Text Analytics Toolbox (tokenizedDocument,
 %               bagOfWords, wordcloud).
 % Tiempo de ejecución esperado: < 10 s.
 
 clc; clear; close all; rng(42);
 
-%% Datos — Bloque 1: serie SINTÉTICA de interés de búsqueda (semanal, 2 años)
-nSemanas = 104;
+%% ===================================================================
+%  PARÁMETROS — ESTA ES LA ÚNICA SECCIÓN QUE EL ESTUDIANTE DEBE EDITAR
+%  ===================================================================
+nSemanas = 104;                    % duración de la serie a simular (semanas)
+fechaInicio = datetime(2024,9,16); % fecha del primer dato
+crecimientoSemanal = 0.35;         % puntos de índice que crece la tendencia cada semana
+amplitudEstacional = 12;           % qué tan marcado es el pico anual (puntos de índice)
+desviacionRuido = 4;               % ruido aleatorio semana a semana (puntos de índice)
+% ===================================================================
+
+%% Datos — Bloque 1: serie SINTÉTICA de interés de búsqueda (no editar)
 semana = (1:nSemanas)';
-fechaInicio = datetime(2024,9,16);
 fechas = fechaInicio + calweeks(0:nSemanas-1)';
 
-tendencia = 30 + 0.35*semana;                                   % crecimiento sostenido
-estacionalidad = 12*sin(2*pi*semana/52 - pi/2) + 6;              % pico anual (p. ej., Buen Fin/fin de año)
-ruido = normrnd(0, 4, nSemanas, 1);
+tendencia = 30 + crecimientoSemanal*semana;                                   % crecimiento sostenido
+estacionalidad = amplitudEstacional*sin(2*pi*semana/52 - pi/2) + 6;           % pico anual (p. ej., Buen Fin/fin de año)
+ruido = normrnd(0, desviacionRuido, nSemanas, 1);
 interesBusqueda = max(tendencia + estacionalidad + ruido, 0);   % el índice no puede ser negativo
 
 %% Procesamiento — Bloque 1: descomposición tendencia + estacionalidad
@@ -34,6 +46,8 @@ interesBusqueda = max(tendencia + estacionalidad + ruido, 0);   % el índice no 
 tendenciaEstimada = movmean(interesBusqueda, [26 25]);
 componenteEstacional = interesBusqueda - tendenciaEstimada;
 
+fprintf('=== Resultados con crecimiento=%.2f/semana, amplitud estacional=%.0f, ruido=%.0f ===\n', ...
+    crecimientoSemanal, amplitudEstacional, desviacionRuido);
 fprintf('Interés de búsqueda: mínimo=%.1f, máximo=%.1f, promedio=%.1f\n', ...
     min(interesBusqueda), max(interesBusqueda), mean(interesBusqueda));
 fprintf('Amplitud estimada del componente estacional: %.1f puntos\n', ...
