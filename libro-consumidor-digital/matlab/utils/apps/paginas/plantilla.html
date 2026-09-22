@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITULO_CORTO}}</title>
+<meta name="description" content="{{TITULO}} — Instituto Politécnico Nacional - Dr. Aboud Barsekh Onji">
+<meta name="author" content="Dr. Aboud Barsekh Onji">
+<style>
+{{CSS}}
+</style>
+</head>
+<body>
+<header class="barra">
+  <div class="fila">
+    <div>
+      <div class="institucion">Instituto Politécnico Nacional - Dr. Aboud Barsekh Onji</div>
+      <h1>{{TITULO}}</h1>
+      <div class="sub">{{SUBTITULO}} · versión interactiva de <code>{{SCRIPT}}</code></div>
+    </div>
+    <div class="acciones-barra">
+      <span class="insignia">Datos sintéticos</span>
+      <button class="btn-tema" id="btnTema" type="button">Tema claro / oscuro</button>
+    </div>
+  </div>
+</header>
+
+<main class="grid">
+  <aside class="panel" aria-label="Parámetros">
+    <h2>Parámetros</h2>
+    <p class="nota">Son los mismos valores del bloque <em>«ESTA ES LA ÚNICA SECCIÓN QUE EL ESTUDIANTE DEBE EDITAR»</em>
+      del script. Al cambiar cualquier valor, los resultados y las figuras se recalculan solos.</p>
+    <div id="campos"></div>
+    {{PARAMETROS_EXTRA}}
+    <div id="erroresParam"></div>
+    <div class="botones">
+      <button id="btnEjecutar" class="btn" type="button">▶ Ejecutar</button>
+      <button id="btnRestablecer" class="btn sec" type="button">Valores del script</button>
+    </div>
+    <div id="presets"></div>
+  </aside>
+
+  <div class="columna">
+    <section class="panel">
+      <h2>Resultados</h2>
+      <p class="nota">El mismo texto que imprime MATLAB en la ventana de comandos (anótenlo o guárdenlo como caso para comparar).</p>
+      <pre class="consola" id="consola"></pre>
+      <div id="avisos"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Figuras</h2>
+      <p class="nota no-imprimir">Pasen el cursor sobre las curvas para leer valores exactos. Para descargar una figura en PNG usen el ícono de cámara 📷 de su esquina superior derecha.</p>
+      <div class="figuras">
+{{FIGURAS}}
+      </div>
+    </section>
+
+    <section class="panel" id="panelComparar">
+      <h2>Comparar corridas (ejercicio propuesto)</h2>
+      <p class="nota">{{NOTA_COMPARAR}}</p>
+      <div class="botones no-imprimir">
+        <input id="etiquetaCaso" type="text" aria-label="Nombre del caso" style="max-width:170px">
+        <button id="btnGuardarCaso" class="btn" type="button">＋ Guardar corrida como caso</button>
+        <button id="btnCSVCasos" class="btn sec" type="button">Descargar cuadro (CSV/Excel)</button>
+        <button id="btnImprimir" class="btn sec" type="button">Imprimir / guardar PDF</button>
+        <button id="btnLimpiarCasos" class="btn sec" type="button">Borrar casos</button>
+      </div>
+      <div id="tablaCasos" style="margin-top:10px"></div>
+      <div class="figuras" style="margin-top:12px">
+{{FIGURAS_COMPARACION}}
+      </div>
+    </section>
+{{SECCIONES_EXTRA}}
+  </div>
+</main>
+
+<footer>
+  <strong>Instituto Politécnico Nacional - Dr. Aboud Barsekh Onji</strong> · ESCA Unidad Santo Tomás ·
+  <em>Comportamiento del Consumidor Digital: Datos, Perfiles y Modelos</em>.<br>
+  Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Replica el cálculo de
+  <code>{{SCRIPT}}</code> con los mismos datos sintéticos (rng(42)); sus resultados fueron verificados
+  contra la ejecución real del script en MATLAB. Las corridas guardadas se conservan solo en este navegador.
+</footer>
+
+<script>
+{{PLOTLY}}
+</script>
+<script>
+{{DATOS}}
+</script>
+<script>
+{{NUMERICO}}
+</script>
+<script>
+{{INTERFAZ}}
+</script>
+<script>
+{{MODELO}}
+</script>
+<script>
+{{APP}}
+</script>
+</body>
+</html>

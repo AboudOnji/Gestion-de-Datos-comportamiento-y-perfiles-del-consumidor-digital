@@ -1,0 +1,32 @@
+<!-- BLOQUE:FIGURAS -->
+        <div class="figura ancha"><div class="grafica" id="fig1a" style="height:340px"></div><div class="pie">Figura 1 (arriba) — Serie observada y tendencia (media móvil centrada de 52 semanas).</div></div>
+        <div class="figura ancha"><div class="grafica" id="fig1b" style="height:300px"></div><div class="pie">Figura 1 (abajo) — Componente estacional (serie menos tendencia).</div></div>
+        <div class="figura">
+          <div class="grafica" style="position:relative"><canvas id="nube" style="width:100%;height:100%;display:block" aria-label="Nube de palabras"></canvas></div>
+          <div class="pie">Figura 2 — Nube de palabras: frecuencia de términos en comentarios de escucha social (sintético).
+            <button class="btn sec peq no-imprimir" id="btnNubePNG" type="button">Descargar PNG</button></div>
+        </div>
+        <div class="figura"><div class="grafica" id="fig3"></div><div class="pie"><b>Complemento de la app</b>: los 10 términos más frecuentes (los mismos que imprime el script).</div></div>
+<!-- BLOQUE:NOTA_COMPARAR -->
+El ejercicio pide tres corridas: <b>Caso A</b> (valores del script), <b>Caso B</b> (amplitudEstacional = 3) y <b>Caso C</b>
+(amplitudEstacional = 12 y desviacionRuido = 15). Registren la amplitud estacional estimada y el valor máximo de la serie.
+Las gráficas de abajo superponen la serie observada, la tendencia y el componente estacional de cada caso guardado.
+<!-- BLOQUE:FIGURAS_COMPARACION -->
+        <div class="figura ancha"><div class="grafica" id="comp1" style="height:360px"></div><div class="pie">Serie observada (línea delgada) y tendencia estimada (línea gruesa) de cada caso.</div></div>
+        <div class="figura ancha"><div class="grafica" id="comp2" style="height:320px"></div><div class="pie">Componente estacional de cada caso.</div></div>
+<!-- BLOQUE:SECCIONES_EXTRA -->
+    <section class="panel" id="panelClasificar">
+      <h2>Segunda parte del ejercicio: clasificar los 10 términos</h2>
+      <p class="nota">Clasifiquen a mano cada término más frecuente del corpus (fijo, no cambia entre corridas). La clasificación
+        se guarda en este navegador y se puede descargar como cuadro. La discusión —¿la nube de palabras es herramienta de
+        análisis o solo de exploración?— es suya.</p>
+      <div id="tablaClasificar" class="tabla-scroll"></div>
+      <div class="botones no-imprimir">
+        <button id="btnCSVClasif" class="btn sec" type="button">Descargar clasificación (CSV/Excel)</button>
+      </div>
+      <details style="margin-top:12px">
+        <summary>Ver el corpus sintético de 20 comentarios y las palabras vacías eliminadas</summary>
+        <ol id="listaCorpus" class="nota" style="margin-top:8px"></ol>
+        <p class="nota" id="listaVacias"></p>
+      </details>
+    </section>

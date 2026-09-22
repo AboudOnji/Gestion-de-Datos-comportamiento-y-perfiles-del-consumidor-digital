@@ -85,6 +85,17 @@ en cada capítulo:
   propia. El libro **no** muestra de antemano una comparación ya resuelta
   entre esos casos (eso es lo que el estudiante debe producir corriendo el
   script varias veces).
+- **App interactiva sin MATLAB** (pedido del Dr. Barsekh-Onji, 2026-09-22):
+  junto a cada script va `capNN_*_interactivo.html`, un único HTML
+  autocontenido (funciona sin conexión) con los mismos parámetros, salidas
+  impresas y figuras, botones de los casos del ejercicio y cuadro de
+  comparación. Encabezado obligatorio en todas las ventanas: «Instituto
+  Politécnico Nacional - Dr. Aboud Barsekh Onji». Fuente, construcción y
+  verificación contra MATLAB en `matlab/utils/apps/README.md`; nunca editar
+  el HTML generado a mano. Todo script nuevo debe tener su app y sus casos en
+  `pruebas/referencias_matlab.m` (verificación N de N antes de entregar).
+- La carpeta real del proyecto termina en un **espacio**
+  (`…consumidor digital /`); las rutas absolutas deben incluirlo.
 
 ## Estructura
 Ver §11 del prompt. `main.tex` ensambla `frontmatter/` → `partes/parteN/` →

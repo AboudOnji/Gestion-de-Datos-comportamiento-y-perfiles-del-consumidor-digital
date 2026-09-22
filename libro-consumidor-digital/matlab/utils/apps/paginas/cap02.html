@@ -1,0 +1,29 @@
+<!-- BLOQUE:PARAMETROS_EXTRA -->
+    <label class="campo"><span class="nombre">centrosTipicos</span>
+      <span class="ayuda">Cada fila es un arquetipo de consumidor: [frecuencia mensual, ticket promedio (MXN),
+        engagement digital (0–100)]. Acerquen o alejen las filas para simular más o menos traslape;
+        agreguen o quiten filas para cambiar el número de segmentos (k ≥ 2).</span>
+    </label>
+    <div id="matrizCentros" class="tabla-scroll"></div>
+    <label class="campo"><span class="nombre">dispersionTipica</span>
+      <span class="ayuda">Dispersión (desviación estándar) de cada variable en cada arquetipo; una fila por arquetipo.</span>
+    </label>
+    <div id="matrizDispersion" class="tabla-scroll"></div>
+    <div class="botones">
+      <button id="btnAgregarFila" class="btn sec peq" type="button">＋ Agregar arquetipo</button>
+      <button id="btnAcercar" class="btn sec peq" type="button"
+        title="Mueve cada centro a la mitad de su distancia al promedio de todos los centros (Caso B del libro)">Acercar centros al 50 %</button>
+    </div>
+<!-- BLOQUE:FIGURAS -->
+        <div class="figura"><div class="grafica" id="fig1a"></div><div class="pie">Figura 1 (izq.) — Segmentación rígida con k-means (× = centros).</div></div>
+        <div class="figura"><div class="grafica" id="fig1b"></div><div class="pie">Figura 1 (der.) — Fuzzy c-means: color y tamaño según la pertenencia máxima u<sub>max</sub> (puntos grandes = pertenencia ambigua).</div></div>
+        <div class="figura"><div class="grafica" id="fig2" style="height:460px"></div><div class="pie">Figura 2 — Perfil de los segmentos (centros de fuzzy c-means, normalizados 0–1).</div></div>
+        <div class="figura"><div class="grafica" id="fig3" style="height:460px"></div><div class="pie"><b>Complemento de la app</b> (no está en el .m): criterio del codo — suma de distancias intra-segmento de k-means para k = 1…8 con los mismos datos. La línea punteada marca el número de arquetipos actual.</div></div>
+<!-- BLOQUE:NOTA_COMPARAR -->
+El ejercicio pide tres corridas: <b>Caso A</b> (arquetipos del script), <b>Caso B</b> (centros más cercanos entre sí, mismas
+dispersiones) y <b>Caso C</b> (una cuarta fila con un arquetipo propio). Registren la silueta promedio y el % de pertenencia
+ambigua de cada una. El botón «Caso C» agrega un arquetipo de <em>ejemplo</em>: cámbienlo por el suyo antes de guardar.
+<!-- BLOQUE:FIGURAS_COMPARACION -->
+        <div class="figura"><div class="grafica" id="comp1"></div><div class="pie">Silueta promedio de k-means por caso (más alta = segmentos rígidos mejor separados).</div></div>
+        <div class="figura"><div class="grafica" id="comp2"></div><div class="pie">% de consumidores con pertenencia ambigua (u<sub>max</sub> &lt; 0.6) por caso.</div></div>
+        <div class="figura ancha"><div class="grafica" id="comp3"></div><div class="pie">Curvas del codo de todos los casos guardados (● = k usado en ese caso).</div></div>

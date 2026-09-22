@@ -1,0 +1,416 @@
+[
+  {
+    "params": {
+      "p": 0.08,
+      "q": 0.1,
+      "m": 1,
+      "tFinal": 20
+    },
+    "esperado": {
+      "tPico": 1.2396863961900544,
+      "pctPico": 10.000000262932192,
+      "pctFinal": 94.055204864712437,
+      "tasaMax": 0.080999721799534533
+    },
+    "cap": "cap01",
+    "caso": "A"
+  },
+  {
+    "params": {
+      "p": 0.03,
+      "q": 0.38,
+      "m": 1,
+      "tFinal": 20
+    },
+    "esperado": {
+      "tPico": 6.1926191977031122,
+      "pctPico": 46.052633296151413,
+      "pctFinal": 99.625941450241626,
+      "tasaMax": 0.11058969428622428
+    },
+    "cap": "cap01",
+    "caso": "B"
+  },
+  {
+    "params": {
+      "p": 0.01,
+      "q": 0.55,
+      "m": 1,
+      "tFinal": 20
+    },
+    "esperado": {
+      "tPico": 7.1559521164865547,
+      "pctPico": 49.090905370467731,
+      "pctFinal": 99.923482049712192,
+      "tasaMax": 0.14253907195158783
+    },
+    "cap": "cap01",
+    "caso": "C"
+  },
+  {
+    "params": {
+      "p": 0.02,
+      "q": 0.38,
+      "m": 1,
+      "tFinal": 40
+    },
+    "esperado": {
+      "tPico": 7.3610974479161007,
+      "pctPico": 47.36841936790475,
+      "pctFinal": 99.999774930131792,
+      "tasaMax": 0.10526146692730369
+    },
+    "cap": "cap01",
+    "caso": "extra tFinal=40"
+  },
+  {
+    "params": {
+      "centrosTipicos": [
+        [
+          1.5,
+          350,
+          25
+        ],
+        [
+          4,
+          900,
+          78
+        ],
+        [
+          2.6,
+          600,
+          52
+        ]
+      ],
+      "dispersionTipica": [
+        [
+          0.6,
+          90,
+          10
+        ],
+        [
+          0.9,
+          150,
+          12
+        ],
+        [
+          0.8,
+          120,
+          14
+        ]
+      ],
+      "nClientesPorSegmento": 80
+    },
+    "esperado": {
+      "silProm": 0.58174785242230709,
+      "pctAmbiguos": 14.583333333333334
+    },
+    "cap": "cap02",
+    "caso": "A"
+  },
+  {
+    "params": {
+      "centrosTipicos": [
+        [
+          2.0999999999999996,
+          483.33333333333331,
+          38.333333333333329
+        ],
+        [
+          3.3499999999999996,
+          758.33333333333326,
+          64.833333333333329
+        ],
+        [
+          2.65,
+          608.33333333333326,
+          51.833333333333329
+        ]
+      ],
+      "dispersionTipica": [
+        [
+          0.6,
+          90,
+          10
+        ],
+        [
+          0.9,
+          150,
+          12
+        ],
+        [
+          0.8,
+          120,
+          14
+        ]
+      ],
+      "nClientesPorSegmento": 80
+    },
+    "esperado": {
+      "silProm": 0.40925720077679106,
+      "pctAmbiguos": 36.666666666666664
+    },
+    "cap": "cap02",
+    "caso": "B"
+  },
+  {
+    "params": {
+      "centrosTipicos": [
+        [
+          1.5,
+          350,
+          25
+        ],
+        [
+          4,
+          900,
+          78
+        ],
+        [
+          2.6,
+          600,
+          52
+        ],
+        [
+          5.5,
+          1300,
+          90
+        ]
+      ],
+      "dispersionTipica": [
+        [
+          0.6,
+          90,
+          10
+        ],
+        [
+          0.9,
+          150,
+          12
+        ],
+        [
+          0.8,
+          120,
+          14
+        ],
+        [
+          0.7,
+          180,
+          8
+        ]
+      ],
+      "nClientesPorSegmento": 80
+    },
+    "esperado": {
+      "silProm": 0.576892814070818,
+      "pctAmbiguos": 21.5625
+    },
+    "cap": "cap02",
+    "caso": "C"
+  },
+  {
+    "params": {
+      "centrosTipicos": [
+        [
+          1.5,
+          350,
+          25
+        ],
+        [
+          4,
+          900,
+          78
+        ],
+        [
+          2.6,
+          600,
+          52
+        ]
+      ],
+      "dispersionTipica": [
+        [
+          0.6,
+          90,
+          10
+        ],
+        [
+          0.9,
+          150,
+          12
+        ],
+        [
+          0.8,
+          120,
+          14
+        ]
+      ],
+      "nClientesPorSegmento": 150
+    },
+    "esperado": {
+      "silProm": 0.58073841108734758,
+      "pctAmbiguos": 17.777777777777779
+    },
+    "cap": "cap02",
+    "caso": "extra n=150"
+  },
+  {
+    "params": {
+      "nClientes": 300,
+      "horizonteAnios": 3,
+      "alfa": 0.05,
+      "nA": 1200,
+      "conversionesA": 132,
+      "nB": 1180,
+      "conversionesB": 159
+    },
+    "esperado": {
+      "convA": 11,
+      "convB": 13.474576271186441,
+      "z": 1.8424904048742223,
+      "valorP": 0.065403448759950411,
+      "clvCampeon": 10630.915084658751,
+      "clvLeal": 8015.3181765229992,
+      "clvRiesgo": 4674.5709274769142,
+      "clvPerdido": 2957.3173950804576,
+      "decision": "No se rechaza H0"
+    },
+    "cap": "cap03",
+    "caso": "A"
+  },
+  {
+    "params": {
+      "nClientes": 300,
+      "horizonteAnios": 3,
+      "alfa": 0.05,
+      "nA": 6000,
+      "conversionesA": 660,
+      "nB": 5900,
+      "conversionesB": 795
+    },
+    "esperado": {
+      "convA": 11,
+      "convB": 13.474576271186441,
+      "z": 4.1199337931898707,
+      "valorP": 3.7898128144808751E-5,
+      "clvCampeon": 10630.915084658751,
+      "clvLeal": 8015.3181765229992,
+      "clvRiesgo": 4674.5709274769142,
+      "clvPerdido": 2957.3173950804576,
+      "decision": "Se rechaza H0"
+    },
+    "cap": "cap03",
+    "caso": "B"
+  },
+  {
+    "params": {
+      "nClientes": 300,
+      "horizonteAnios": 3,
+      "alfa": 0.1,
+      "nA": 1200,
+      "conversionesA": 132,
+      "nB": 1180,
+      "conversionesB": 159
+    },
+    "esperado": {
+      "convA": 11,
+      "convB": 13.474576271186441,
+      "z": 1.8424904048742223,
+      "valorP": 0.065403448759950411,
+      "clvCampeon": 10630.915084658751,
+      "clvLeal": 8015.3181765229992,
+      "clvRiesgo": 4674.5709274769142,
+      "clvPerdido": 2957.3173950804576,
+      "decision": "Se rechaza H0"
+    },
+    "cap": "cap03",
+    "caso": "C"
+  },
+  {
+    "params": {
+      "nClientes": 650,
+      "horizonteAnios": 5,
+      "alfa": 0.05,
+      "nA": 1200,
+      "conversionesA": 132,
+      "nB": 1180,
+      "conversionesB": 159
+    },
+    "esperado": {
+      "convA": 11,
+      "convB": 13.474576271186441,
+      "z": 1.8424904048742223,
+      "valorP": 0.065403448759950411,
+      "clvCampeon": 19331.293532767893,
+      "clvLeal": 12545.508769364282,
+      "clvRiesgo": 7374.4931295720808,
+      "clvPerdido": 4699.0807896111046,
+      "decision": "No se rechaza H0"
+    },
+    "cap": "cap03",
+    "caso": "extra n=650, h=5"
+  },
+  {
+    "params": {
+      "nSemanas": 104,
+      "crecimientoSemanal": 0.35,
+      "amplitudEstacional": 12,
+      "desviacionRuido": 4
+    },
+    "esperado": {
+      "minimo": 22.284517935906273,
+      "maximo": 82.012731428789081,
+      "promedio": 54.192892613644851,
+      "ampEst": 38.922477376769727
+    },
+    "cap": "cap04",
+    "caso": "A"
+  },
+  {
+    "params": {
+      "nSemanas": 104,
+      "crecimientoSemanal": 0.35,
+      "amplitudEstacional": 3,
+      "desviacionRuido": 4
+    },
+    "esperado": {
+      "minimo": 31.21889780278876,
+      "maximo": 73.012731428789081,
+      "promedio": 54.192892613644844,
+      "ampEst": 24.708308149948607
+    },
+    "cap": "cap04",
+    "caso": "B"
+  },
+  {
+    "params": {
+      "nSemanas": 104,
+      "crecimientoSemanal": 0.35,
+      "amplitudEstacional": 12,
+      "desviacionRuido": 15
+    },
+    "esperado": {
+      "minimo": 7.2837716273371811,
+      "maximo": 100.47274285795906,
+      "promedio": 53.692097301168175,
+      "ampEst": 93.7148806171162
+    },
+    "cap": "cap04",
+    "caso": "C"
+  },
+  {
+    "params": {
+      "nSemanas": 156,
+      "crecimientoSemanal": 0.1,
+      "amplitudEstacional": 12,
+      "desviacionRuido": 4
+    },
+    "esperado": {
+      "minimo": 22.034517935906273,
+      "maximo": 64.330535629619163,
+      "promedio": 43.640534642610909,
+      "ampEst": 38.922477376769727
+    },
+    "cap": "cap04",
+    "caso": "extra 156 semanas"
+  }
+]
