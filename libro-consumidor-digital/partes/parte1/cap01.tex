@@ -228,8 +228,7 @@ de datos.
 Toda cifra de este capítulo proviene de fuente primaria verificable (INEGI,
 AMVO) o está explícitamente marcada como estimación provisional. Ninguna
 cifra de crecimiento o de tamaño de mercado citada en este libro se presenta
-sin su fuente, año y fecha de consulta —criterio documentado en
-\texttt{docs/verificacion-datos.md}. Esto no es solo una norma editorial:
+sin su fuente, año y fecha de consulta. Esto no es solo una norma editorial:
 es el mismo estándar que el capítulo pide exigirle a cualquier proveedor de
 analítica de consumidor que presente una cifra sin metodología pública.
 Desconfiar de un dato no verificable es, en sí mismo, una competencia
@@ -267,8 +266,9 @@ Parte: toda la lógica de cálculo y graficación está fija; lo único que el
 estudiante edita es el bloque de \textbf{parámetros}, claramente delimitado
 al inicio del archivo. Corrida tal como está, usa parámetros
 \textbf{didácticos} ($p=0.03$, $q=0.38$), no calibrados con datos reales de
-un canal digital mexicano —decisión editorial registrada en
-\texttt{docs/dudas.md}, pregunta 4.
+un canal digital mexicano —decisión editorial deliberada, para mantener el
+ejercicio enfocado en la forma de la curva y no en la calibración
+estadística.
 
 \begin{lstlisting}[style=MATLABStyle, caption={Bloque de parámetros editable (\texttt{cap01\_difusion\_bass.m}) — es lo único que cambia entre corridas.}]
 p = 0.03;      % coeficiente de innovacion
@@ -366,8 +366,7 @@ portafolio de evidencias de la Unidad I:
   en profundidad en el texto (p.\ ej., el marco de los cuatro niveles de la
   brecha digital, o el estado más reciente del comercio electrónico
   fronterizo). Criterio de evaluación: cada afirmación con cifra debe llevar
-  fuente, año y fecha de consulta, siguiendo el formato de
-  \texttt{docs/verificacion-datos.md}.
+  fuente, año y fecha de consulta.
   \item[Exposición] Presentar en 8 minutos la comparación entre la
   \enquote{narrativa de versiones} (Marketing X.0) y la evolución verificable del
   consumidor digital mexicano, con al menos un dato de INEGI o AMVO no citado
@@ -424,8 +423,16 @@ están bien sustentadas; la anticipación de tendencias, la menos.
   datos y comparación en entornos digitales.
   \item[Coeficiente de imitación ($q$)] En el modelo de Bass, parámetro que
   mide cuánto depende la adopción del contagio social entre adoptantes.
+  Rango matemático válido: $q \geq 0$ (sin cota superior estricta); en los
+  casos didácticos de este libro se usan valores entre 0.10 y 0.55.
   \item[Coeficiente de innovación ($p$)] En el modelo de Bass, parámetro que
   mide la propensión a adoptar de forma independiente, sin influencia social.
+  Rango matemático válido: $p > 0$ (si $p=0$, nadie inicia la adopción); en
+  los casos didácticos de este libro se usan valores entre 0.01 y 0.08.
+  \item[Mercado potencial ($m$)] En el modelo de Bass, tamaño del mercado
+  objetivo, normalizado a 1 en este libro (equivale al 100\,\% del mercado).
+  Rango: $m > 0$; con $m=1$, la adopción acumulada $F(t)$ queda expresada
+  directamente como fracción del mercado.
   \item[\textit{Greenwashing}] Comunicación de atributos ambientales de un
   producto que no se pueden verificar o que exageran su impacto real.
 \end{description}

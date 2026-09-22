@@ -431,16 +431,31 @@ persona: es una función de qué negocio la está observando y qué variable de
 
 \subsection*{Glosario del capítulo}
 \begin{description}
+  \item[Exponente difuso ($m$)] En FCM, controla qué tan \enquote{suave} es la
+  frontera entre segmentos. Rango matemático válido: $m > 1$ ($m=1$
+  degenera en una partición rígida; valores muy altos aproximan pertenencias
+  uniformes de $1/k$ para todas las observaciones). El script de este
+  capítulo usa el valor estándar $m=2$, no editable en el bloque de
+  parámetros.
   \item[Fuzzy c-means (FCM)] Algoritmo de segmentación que asigna a cada
   observación un grado de pertenencia parcial a cada segmento, en vez de una
   asignación única.
   \item[Grado de pertenencia ($u_{ik}$)] En FCM, valor entre 0 y 1 que
-  cuantifica cuánto pertenece la observación $i$ al segmento $k$.
+  cuantifica cuánto pertenece la observación $i$ al segmento $k$. Rango:
+  $u_{ik} \in [0,1]$, con la restricción de que la suma de las pertenencias
+  de una misma observación a todos los segmentos sea siempre 1.
   \item[Mercado meta (\textit{target})] Segmento o segmentos hacia los que
   una organización dirige su oferta y comunicación.
+  \item[Número de arquetipos/segmentos ($k$)] Parámetro editable del script
+  de este capítulo (número de filas de \texttt{centrosTipicos}). Rango
+  práctico: entero $k \geq 2$ (con $k=1$ no hay segmentación que comparar) y,
+  como límite superior razonable, $k$ bastante menor que el número de
+  clientes simulados, para que cada segmento tenga suficientes observaciones.
   \item[Silueta (coeficiente de)] Medida de calidad de un agrupamiento
   rígido, que compara la cohesión interna de cada segmento contra su
-  separación de los demás.
+  separación de los demás. Rango: $[-1, 1]$, donde valores cercanos a 1
+  indican segmentos bien separados y valores cercanos a 0 o negativos
+  indican segmentos traslapados o mal definidos.
   \item[STP] Proceso de Segmentación, Targeting y Posicionamiento.
 \end{description}
 

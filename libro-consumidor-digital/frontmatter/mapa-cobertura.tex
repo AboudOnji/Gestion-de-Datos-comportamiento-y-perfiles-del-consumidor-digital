@@ -1,8 +1,6 @@
 % frontmatter/mapa-cobertura.tex
 % Mapa de cobertura del programa oficial -> capítulos del libro.
-% Fuente completa y actualizable: docs/cobertura.md (69 subtemas oficiales).
-% Esta versión resume por unidad temática para el frontmatter impreso;
-% el detalle subtema-a-subtema vive en docs/cobertura.md (fuera del PDF final).
+% Fuente completa y actualizable (interna, no citada al lector): docs/cobertura.md.
 
 \chapter*{Mapa de cobertura del programa oficial}
 \addcontentsline{toc}{chapter}{Mapa de cobertura del programa oficial}
@@ -10,10 +8,8 @@
 Esta tabla resume la correspondencia entre las cinco unidades temáticas del
 programa oficial \textit{Laboratorio: Gestión de datos, comportamiento y
 perfiles del consumidor digital} (IPN-ESCA Santo Tomás, vigente desde agosto de
-2022) y los capítulos de este libro. El detalle subtema por subtema
-(69 subtemas oficiales) se mantiene en \texttt{docs/cobertura.md} y se verifica
-automáticamente contra las etiquetas \texttt{\textbackslash label\{prog:X.Y.Z\}}
-del código fuente.
+2022) y los capítulos de este libro. El programa oficial completo, con sus 66
+subtemas, se cubre íntegramente a lo largo de los 18 capítulos.
 
 \begin{table}[htbp]
 \centering
@@ -29,10 +25,9 @@ V   & Análisis integral del comportamiento del consumidor digital & 17--18 \\
 \bottomrule
 \end{tabular}
 \caption{Mapa de cobertura por unidad. Fuente: elaboración propia a partir del
-programa oficial IPN-ESCA (Anexo A del prompt de proyecto), verificado contra
-el escaneo original en Fase 0.}
+programa oficial de la unidad de aprendizaje, IPN-ESCA Unidad Santo Tomás.}
 \label{tab:mapa-cobertura}
 \end{table}
 
-\pendiente{Este mapa se recalculará automáticamente al cierre de cada Parte
-(\texttt{make cobertura}) para reportar el porcentaje real de cobertura.}
+\pendiente{Completar este mapa con el detalle subtema por subtema al cerrar
+cada Parte del libro.}

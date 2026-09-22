@@ -136,15 +136,15 @@ Caída del volumen de búsqueda tradicional (Gartner, 2024) & $-$25\,\% para 202
 \caption{Dos predicciones recientes sobre la base tecnológica del
 consumidor digital, contrastadas contra lo verificable a la fecha de este
 libro. Fuente: elaboración propia con base en
-\parencite{eprs2025darkpatterns} y la investigación de Fase 1 del proyecto
-(\texttt{docs/investigacion/parte1.md}).}
+\parencite{eprs2025darkpatterns} y en la investigación documental realizada
+para este libro.}
 \label{tab:cap04-predicciones}
 \end{table}
 
 El cuadro~\ref{tab:cap04-predicciones} no es un ejercicio de crítica a
 Gartner ni a la industria de cookies: es una demostración metodológica. Ambas
 predicciones fueron razonables en su momento, emitidas por fuentes de
-jerarquía comparable (analistas de industria, §5.1 del prompt de proyecto), y
+jerarquía comparable (analistas de industria), y
 ninguna se cumplió tal como se anunció. Un estudiante que memorice la
 predicción en vez del criterio que la generó queda, en ambos casos, con
 información desactualizada antes de graduarse.
@@ -155,9 +155,9 @@ agéntico) que se investigó para este capítulo resultó provenir de blogs de
 industria o predicciones de analistas, no de fuentes primarias verificables
 con la solidez que exige este libro —incluida la propia predicción de
 Gartner del caso de apertura, contradicha por otras fuentes de la misma
-jerarquía—. Siguiendo la regla de verificación de datos del proyecto
-(\texttt{docs/verificacion-datos.md}), este capítulo no reporta esas cifras
-como dato duro. Es, en sí mismo, la evidencia más honesta que el capítulo
+jerarquía—. Siguiendo el criterio de verificación de datos de este libro,
+este capítulo no reporta esas cifras como dato duro. Es, en sí mismo, la
+evidencia más honesta que el capítulo
 puede ofrecer: la base tecnológica cambia más rápido de lo que la
 investigación académica y periodística puede verificar con rigor, razón de
 más para dominar los criterios de la §2.1 en vez de las cifras del momento.
@@ -358,6 +358,10 @@ datos.
 
 \subsection*{Glosario del capítulo}
 \begin{description}
+  \item[Amplitud estacional] Parámetro editable del script de este capítulo
+  que controla qué tan marcado es el pico anual de la serie simulada. Rango:
+  valor real $\geq 0$ (con 0, no hay componente estacional); los casos
+  didácticos de este libro usan valores entre 3 y 12.
   \item[Bolsa de palabras (\textit{bag of words})] Representación de un
   corpus de texto como matriz de frecuencias de términos por documento.
   \item[Comercio agéntico] Comercio mediado por asistentes de compra basados
@@ -365,6 +369,15 @@ datos.
   transacciones en nombre del consumidor.
   \item[Componente estacional] Patrón que se repite con periodicidad fija en
   una serie de tiempo (p.\,ej., anual).
+  \item[Crecimiento semanal] Parámetro editable que controla la pendiente de
+  la tendencia de la serie simulada (puntos de índice que suma cada semana).
+  Rango: cualquier valor real; positivo para tendencia creciente, negativo
+  para decreciente, cero para tendencia plana. El caso por defecto de este
+  libro usa 0.35.
+  \item[Desviación del ruido] Parámetro editable que controla la dispersión
+  aleatoria semana a semana de la serie simulada. Rango: valor real $\geq 0$
+  (con 0, la serie es perfectamente determinista); los casos didácticos de
+  este libro usan valores entre 4 y 15.
   \item[Tendencia] Componente de cambio de largo plazo de una serie de
   tiempo, aislado del ruido de corto plazo y del patrón estacional.
 \end{description}
@@ -402,9 +415,9 @@ datos.
   de buscadores ni de tamaño del comercio agéntico como datos verificados.
   \textit{Clave:} la respuesta debe señalar que las fuentes disponibles
   (blogs de industria, analistas) son de jerarquía baja y con frecuencia se
-  contradicen entre sí, y que la regla de verificación de datos del proyecto
-  exige no reportar como dato duro lo que no se puede confirmar en fuente
-  primaria (§3 de este capítulo, \texttt{docs/verificacion-datos.md}).
+  contradicen entre sí, y que el criterio de verificación de datos de este
+  libro exige no reportar como dato duro lo que no se puede confirmar en
+  fuente primaria (§3 de este capítulo).
   \item Con base en el caso de apertura y el estudio de caso del capítulo,
   explique en sus propias palabras el riesgo de tomar decisiones de negocio
   a partir de una serie de tiempo sin separar tendencia, estacionalidad y
