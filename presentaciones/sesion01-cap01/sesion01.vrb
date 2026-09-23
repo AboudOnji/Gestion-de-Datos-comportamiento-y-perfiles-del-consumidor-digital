@@ -1,0 +1,26 @@
+\frametitle{El script: \texttt {cap01\_difusion\_bass.m}}
+\begin{columns}[T]
+  \column{0.56\textwidth}
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+%% ==================================
+%  PARAMETROS: UNICA SECCION QUE
+%  EL ESTUDIANTE DEBE EDITAR
+%  ==================================
+p = 0.03;     % innovacion
+q = 0.38;     % imitacion
+m = 1;        % mercado potencial
+tFinal = 20;  % periodos a simular
+\end{lstlisting}
+  \column{0.40\textwidth}
+  \begin{block}{Reglas del laboratorio}
+    \scriptsize
+    \begin{itemize}
+      \item Es el \textbf{mismo script} del libro y de la Práctica 1.
+      \item Solo se edita el bloque de parámetros, luego \texttt{Run}.
+      \item Parámetros \textbf{didácticos}, no calibrados con un canal real.
+    \end{itemize}
+  \end{block}
+  \begin{exampleblock}{Sin MATLAB}
+    \scriptsize App interactiva en HTML (\texttt{cap01\_difusion\_bass\_\allowbreak interactivo.html}): mismos parámetros, salidas y figuras; funciona sin conexión.
+  \end{exampleblock}
+\end{columns}
