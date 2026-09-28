@@ -1,0 +1,95 @@
+<!-- BLOQUE:PARAMETROS_EXTRA -->
+    <div id="zonaArchivo">
+      <h3 style="margin-top:4px">1. Datos de sus clientes (Excel)</h3>
+      <label class="subir" for="archivo">
+        <input type="file" id="archivo" accept=".xlsx,.xls,.ods,.csv">
+        <span class="subir-caja"><b>Subir archivo</b><br><span class="nota">Excel (.xlsx, .xls), .ods o .csv — o arrástrenlo aquí</span></span>
+      </label>
+      <div class="botones">
+        <button id="btnEjemplo" class="btn sec peq" type="button">Usar datos de ejemplo</button>
+        <button id="btnDescargarEjemplo" class="btn sec peq" type="button">Descargar Excel de ejemplo</button>
+        <a class="btn sec peq" href="#panelFormato" style="text-decoration:none">¿Cómo ordenar mis datos?</a>
+      </div>
+      <div id="estadoArchivo" class="nota-caja" style="margin-top:10px"></div>
+
+      <h3>2. Arquetipos (se definen aquí, no en el Excel)</h3>
+      <p class="nota" style="margin:0 0 6px">Cada tarjeta es un arquetipo de consumidor con sus valores <b>típicos</b>:
+        frecuencia mensual (compras al mes), ticket promedio (MXN por compra) y engagement digital (0–100).
+        El número de arquetipos es el número de segmentos k (de 2 a 8). Pueden cambiarles el nombre.</p>
+      <div id="matrizArquetipos" class="tabla-scroll"></div>
+      <div class="botones">
+        <button id="btnAgregarArquetipo" class="btn sec peq" type="button">＋ Agregar arquetipo</button>
+        <button id="btnArquetiposLibro" class="btn sec peq" type="button">Arquetipos del libro</button>
+      </div>
+
+      <h3>3. Ejes de las figuras de dispersión</h3>
+      <label class="campo"><span class="ayuda">Eje horizontal</span><select id="ejeX"></select></label>
+      <label class="campo"><span class="ayuda">Eje vertical</span><select id="ejeY"></select></label>
+    </div>
+<!-- BLOQUE:FIGURAS -->
+        <div class="figura"><div class="grafica" id="fig1a"></div><div class="pie">Figura 1 (izq.) — <b>Arquetipos fijos</b>: cada cliente se asigna al arquetipo más cercano, tal como ustedes lo definieron (★).</div></div>
+        <div class="figura"><div class="grafica" id="fig1b"></div><div class="pie">Figura 1 (der.) — <b>Ajustados a los datos</b>: k-means parte de sus arquetipos (☆) y los mueve al centro real de cada grupo (✕). La flecha muestra cuánto se movió cada uno.</div></div>
+        <div class="figura"><div class="grafica" id="fig2" style="height:460px"></div><div class="pie">Figura 2 — Perfil de cada arquetipo: como lo definieron (línea punteada) y como quedó al ajustarse a los datos (línea continua, centros de fuzzy c-means). Escala 0–1 con el mínimo y máximo de sus datos.</div></div>
+        <div class="figura"><div class="grafica" id="fig3" style="height:460px"></div><div class="pie">Figura 3 — Clientes por arquetipo: asignación fija contra asignación ajustada.</div></div>
+        <div class="figura ancha"><div class="grafica" id="fig4" style="height:340px"></div><div class="pie">Figura 4 — Distribución de la pertenencia máxima u<sub>max</sub> de cada cliente. A la izquierda de la línea (u<sub>max</sub> &lt; 0.6) están los clientes ambiguos: no pertenecen claramente a ningún arquetipo.</div></div>
+<!-- BLOQUE:NOTA_COMPARAR -->
+Guarden una corrida por cada propuesta de arquetipos que quieran comparar (por ejemplo, los del libro contra los suyos,
+o 3 contra 4 arquetipos), o por cada archivo de datos. El cuadro registra, para los arquetipos fijos y para los ajustados,
+la silueta y el % de pertenencia ambigua, además del % de clientes que cambian de segmento al ajustar.
+<!-- BLOQUE:FIGURAS_COMPARACION -->
+        <div class="figura"><div class="grafica" id="comp1"></div><div class="pie">Silueta promedio por caso: arquetipos fijos contra ajustados (más alta = segmentos mejor separados).</div></div>
+        <div class="figura"><div class="grafica" id="comp2"></div><div class="pie">% de pertenencia ambigua por caso: arquetipos fijos contra ajustados.</div></div>
+<!-- BLOQUE:SECCIONES_EXTRA -->
+    <section class="panel" id="panelPerfiles">
+      <h2>Arquetipos: definidos contra ajustados</h2>
+      <p class="nota">Para cada arquetipo: cuántos clientes quedan en él y sus valores típicos como ustedes los definieron → como
+        quedaron al ajustarse a los datos reales (centros de fuzzy c-means). El <b>desplazamiento</b> mide cuánto se movió el
+        arquetipo en unidades estandarizadas (desviaciones estándar): cerca de 0 = su arquetipo describe bien a esos clientes;
+        mayor que 1 = los datos contradicen su propuesta.</p>
+      <div id="tablaPerfiles" class="tabla-scroll"></div>
+      <div class="botones no-imprimir">
+        <button id="btnDescargarResultados" class="btn" type="button">Descargar resultados por cliente (Excel)</button>
+      </div>
+      <p class="nota">El Excel de resultados incluye, para cada cliente: su arquetipo fijo y su pertenencia a cada arquetipo tal como
+        se definió, su segmento ajustado y su pertenencia ajustada, y si cambió de segmento; más hojas con los arquetipos y el resumen.</p>
+    </section>
+
+    <section class="panel" id="panelDatos">
+      <h2>Datos cargados</h2>
+      <div id="resumenDatos" class="nota"></div>
+      <div id="vistaDatos" class="tabla-scroll" style="margin-top:8px"></div>
+    </section>
+
+    <section class="panel" id="panelFormato">
+      <h2>¿Cómo deben venir sus datos?</h2>
+      <p class="nota">El Excel lleva <b>solo los datos de los clientes</b>; los arquetipos se escriben en esta página. Lo más fácil:
+        descarguen el <b>Excel de ejemplo</b> (botón del panel izquierdo o archivo <code>cap02_datos_ejemplo.xlsx</code>), borren
+        las filas 2 en adelante de la hoja «Datos» y peguen sus datos debajo de los mismos encabezados. Así debe verse la hoja:</p>
+      <div class="tabla-scroll">
+        <table class="tabla ejemplo-formato">
+          <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+          <tbody>
+            <tr class="cab"><td>1</td><td>ID_cliente</td><td>Frecuencia_mensual</td><td>Ticket_promedio_MXN</td><td>Engagement_digital</td></tr>
+            <tr><td>2</td><td>C0001</td><td>4.2</td><td>915.50</td><td>81</td></tr>
+            <tr><td>3</td><td>C0002</td><td>1.3</td><td>342.10</td><td>22</td></tr>
+            <tr><td>4</td><td>C0003</td><td>2.8</td><td>590.00</td><td>49</td></tr>
+            <tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="reglas">
+        <li><b>Hoja:</b> los datos van en una hoja llamada «Datos» (si no existe, se usa la primera hoja).</li>
+        <li><b>Encabezados en la fila 1</b>, con estos nombres: <code>ID_cliente</code> (opcional), <code>Frecuencia_mensual</code>,
+          <code>Ticket_promedio_MXN</code> y <code>Engagement_digital</code>. Los datos empiezan en la fila 2, desde la columna A.
+          Sin títulos ni filas vacías arriba.</li>
+        <li><b>Una fila = un cliente.</b> Sin filas de totales o promedios al final.</li>
+        <li><b>Frecuencia_mensual:</b> compras al mes (p. ej. 2.5). <b>Ticket_promedio_MXN:</b> gasto promedio por compra en pesos
+          (p. ej. 915.50). <b>Engagement_digital:</b> índice de 0 a 100.</li>
+        <li><b>Solo números</b> con punto decimal: 915.5, no «$915.50 MXN» ni «15%».</li>
+        <li><b>No incluyan los arquetipos en el Excel</b>: se definen en el panel izquierdo de esta página.</li>
+        <li><b>Otras columnas</b> (p. ej. «Canal») se ignoran. <b>Celdas vacías:</b> la fila de ese cliente se descarta y la app avisa cuántas.</li>
+        <li><b>Tamaño:</b> entre 20 y 5,000 clientes, y al menos 10 clientes por arquetipo.</li>
+        <li><b>Privacidad:</b> nunca incluyan nombres, correos, teléfonos ni direcciones; usen un ID anónimo. Sus datos no salen de esta computadora: la app no los envía a ningún lado.</li>
+        <li><b>Formatos:</b> .xlsx, .xls, .ods o .csv (en CSV: primera fila con encabezados, separado por comas).</li>
+      </ol>
+    </section>

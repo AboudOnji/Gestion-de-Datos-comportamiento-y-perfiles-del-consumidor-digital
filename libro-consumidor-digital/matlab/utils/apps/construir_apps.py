@@ -9,7 +9,7 @@ Descripción: Genera, junto a cada script de laboratorio, un único archivo HTML
 
 Uso (conda env research):
     conda run -n research python matlab/utils/apps/construir_apps.py
-    # opcionales: --solo cap01 cap03   (construir solo esos capítulos)
+    # opcionales: --solo cap01 cap02_datos   (construir solo esas apps)
     #             --plotly /ruta/plotly.min.js (si no se encuentra el del paquete plotly)
 
 Para agregar un capítulo nuevo: crear modelos/capNN.js, paginas/capNN.html,
@@ -40,6 +40,25 @@ CAPITULOS = [
         "datos": [("RANDN42", "randn42.json")],
     },
     {
+        # App para segmentar datos propios (Excel/CSV) con el análisis del Cap. 2
+        "id": "cap02_datos",
+        "modelos": ["cap02", "cap02_datos"],
+        "script": "cap02/cap02_segmentacion.m",
+        "salida": "cap02_segmentacion_datos_propios.html",
+        "titulo": "Segmentación con datos propios y arquetipos definidos",
+        "titulo_corto": "Datos propios · Cap. 2",
+        "subtitulo": "Extensión del laboratorio del Capítulo 2 · k-means vs. fuzzy c-means",
+        "insignia": "Datos propios",
+        "pie": ("Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Aplica a sus datos el mismo "
+                "análisis de <code>cap02_segmentacion.m</code> (z-score, k-means y fuzzy c-means con m = 2), partiendo de los arquetipos que ustedes definen. "
+                "<b>Sus datos no salen de esta computadora</b>: se procesan en el navegador y no se envían a ningún lado. "
+                "Lectura de Excel con SheetJS (Apache-2.0)."),
+        "nota_parametros": ("Suban el Excel con los datos de sus clientes y definan aquí sus arquetipos. "
+                            "Al cambiar cualquier valor, los resultados se recalculan solos."),
+        "vendor": ["xlsx.full.min.js"],
+        "datos": [("EJEMPLO_CAP02", "cap02_ejemplo.json")],
+    },
+    {
         "id": "cap03",
         "script": "cap03/cap03_rfm_clv_ab.m",
         "titulo": "Calidad de datos, RFM, CLV y prueba A/B",
@@ -56,6 +75,17 @@ CAPITULOS = [
         "datos": [("RANDN42", "randn42.json")],
     },
 ]
+
+NOTA_PARAMETROS_POR_DEFECTO = (
+    "Son los mismos valores del bloque <em>«ESTA ES LA ÚNICA SECCIÓN QUE EL ESTUDIANTE DEBE EDITAR»</em> "
+    "del script. Al cambiar cualquier valor, los resultados y las figuras se recalculan solos."
+)
+
+PIE_POR_DEFECTO = (
+    "Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Replica el cálculo de "
+    "<code>{script}</code> con los mismos datos sintéticos (rng(42)); sus resultados fueron verificados "
+    "contra la ejecución real del script en MATLAB. Las corridas guardadas se conservan solo en este navegador."
+)
 
 BLOQUES = ["PARAMETROS_EXTRA", "FIGURAS", "NOTA_COMPARAR", "FIGURAS_COMPARACION", "SECCIONES_EXTRA"]
 
@@ -110,18 +140,27 @@ def main():
         )
         valores = dict(comunes)
         valores.update(bloques)
+        vendor = "\n".join(
+            (APPS / "vendor" / archivo).read_text(encoding="utf-8").replace("</script>", "<\\/script>")
+            for archivo in cap.get("vendor", [])
+        )
         valores.update({
+            "INSIGNIA": cap.get("insignia", "Datos sintéticos"),
+            "NOTA_PARAMETROS": cap.get("nota_parametros", NOTA_PARAMETROS_POR_DEFECTO),
+            "PIE": cap.get("pie", PIE_POR_DEFECTO.format(script=script.name)),
+            "VENDOR": vendor,
             "TITULO": cap["titulo"],
             "TITULO_CORTO": cap["titulo_corto"],
             "SUBTITULO": cap["subtitulo"],
             "SCRIPT": script.name,
             "DATOS": datos,
-            "MODELO": (APPS / "modelos" / f"{cap['id']}.js").read_text(encoding="utf-8"),
+            "MODELO": "\n".join((APPS / "modelos" / f"{m}.js").read_text(encoding="utf-8")
+                                for m in cap.get("modelos", [cap["id"]])),
             "APP": (APPS / "paginas" / f"{cap['id']}_app.js").read_text(encoding="utf-8"),
         })
         # reemplazo en una sola pasada: el contenido insertado no se vuelve a procesar
         html = re.sub(r"\{\{([A-Z_]+)\}\}", lambda m: valores[m.group(1)], plantilla)
-        destino = script.with_name(script.stem + "_interactivo.html")
+        destino = script.with_name(cap.get("salida", script.stem + "_interactivo.html"))
         destino.write_text(html, encoding="utf-8")
         print(f"[OK] {destino.relative_to(MATLAB.parent)}  ({destino.stat().st_size / 1e6:.1f} MB)")
 

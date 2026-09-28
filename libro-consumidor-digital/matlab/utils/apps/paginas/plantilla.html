@@ -19,7 +19,7 @@
       <div class="sub">{{SUBTITULO}} · versión interactiva de <code>{{SCRIPT}}</code></div>
     </div>
     <div class="acciones-barra">
-      <span class="insignia">Datos sintéticos</span>
+      <span class="insignia">{{INSIGNIA}}</span>
       <button class="btn-tema" id="btnTema" type="button">Tema claro / oscuro</button>
     </div>
   </div>
@@ -28,8 +28,7 @@
 <main class="grid">
   <aside class="panel" aria-label="Parámetros">
     <h2>Parámetros</h2>
-    <p class="nota">Son los mismos valores del bloque <em>«ESTA ES LA ÚNICA SECCIÓN QUE EL ESTUDIANTE DEBE EDITAR»</em>
-      del script. Al cambiar cualquier valor, los resultados y las figuras se recalculan solos.</p>
+    <p class="nota">{{NOTA_PARAMETROS}}</p>
     <div id="campos"></div>
     {{PARAMETROS_EXTRA}}
     <div id="erroresParam"></div>
@@ -78,13 +77,14 @@
 <footer>
   <strong>Instituto Politécnico Nacional - Dr. Aboud Barsekh Onji</strong> · ESCA Unidad Santo Tomás ·
   <em>Comportamiento del Consumidor Digital: Datos, Perfiles y Modelos</em>.<br>
-  Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Replica el cálculo de
-  <code>{{SCRIPT}}</code> con los mismos datos sintéticos (rng(42)); sus resultados fueron verificados
-  contra la ejecución real del script en MATLAB. Las corridas guardadas se conservan solo en este navegador.
+  {{PIE}}
 </footer>
 
 <script>
 {{PLOTLY}}
+</script>
+<script>
+{{VENDOR}}
 </script>
 <script>
 {{DATOS}}

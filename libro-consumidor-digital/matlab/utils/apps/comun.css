@@ -126,3 +126,24 @@ footer { max-width: 1400px; margin: 0 auto; padding: 4px 16px 24px; font-size: .
 header.barra .institucion { font-size: .8rem; font-weight: 700; letter-spacing: .02em; color: #E9D9B4; margin-bottom: 3px; }
 header.barra .acciones-barra { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 @media print { header.barra .institucion { color: #6F1D46; } }
+/* app de datos propios (Cap. 2) */
+label.subir { display: block; position: relative; cursor: pointer; }
+label.subir input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+label.subir .subir-caja { display: block; text-align: center; padding: 14px 10px; border: 2px dashed var(--dorado); border-radius: 8px; background: var(--acento-suave); color: var(--guinda); }
+label.subir:hover .subir-caja, label.subir.encima .subir-caja { border-color: var(--guinda); filter: brightness(0.97); }
+label.subir input[type=file]:focus-visible + .subir-caja { outline: 2px solid var(--guinda); outline-offset: 2px; }
+table.ejemplo-formato td, table.ejemplo-formato th { text-align: left; border: 1px solid var(--borde); }
+table.ejemplo-formato td:first-child, table.ejemplo-formato th { color: var(--texto-suave); font-size: .75rem; text-align: center; background: var(--consola-bg); }
+table.ejemplo-formato tr.cab td:not(:first-child) { background: #6F1D46; color: #fff; font-weight: 600; }
+ol.reglas { font-size: .88rem; padding-left: 20px; margin: 10px 0 0; }
+ol.reglas li { margin: 4px 0; }
+.matriz.arquetipos th:nth-child(2) { width: 30%; }
+.matriz.arquetipos input[type=text] { text-align: left; font-size: .8rem; padding: 4px 4px; width: 100%; }
+.arq { border: 1px solid var(--borde); border-left: 4px solid var(--guinda); border-radius: 6px; padding: 6px 8px; margin: 6px 0; }
+.arq-cab { display: flex; gap: 6px; align-items: center; }
+.arq-cab input { font-weight: 600; }
+.arq-vals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 6px; }
+.arq-vals label { font-size: .72rem; color: var(--texto-suave); display: block; }
+.arq-vals label span { display: block; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.arq-vals label i { font-style: normal; opacity: .8; }
+.arq-vals input { text-align: right; padding: 4px 5px; }

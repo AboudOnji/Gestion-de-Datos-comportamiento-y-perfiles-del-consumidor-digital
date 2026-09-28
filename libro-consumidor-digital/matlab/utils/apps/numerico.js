@@ -142,13 +142,16 @@
   // kmeans(X, k, 'Replicates', r) con inicio k-means++ ('plus', el de MATLAB)
   // y distancia euclidiana al cuadrado. Devuelve la réplica de menor suma de
   // distancias. Las etiquetas se renumeran por orden de primera aparición.
-  N.kmeans = function (X, k, replicas, semilla) {
+  // Con «inicio» (matriz k x d) equivale a kmeans(X, k, 'Start', inicio): una
+  // sola corrida desde esos centros y las etiquetas conservan su orden.
+  N.kmeans = function (X, k, replicas, semilla, inicio) {
     const rng = N.crearRng(semilla || 42);
     const n = X.length, d = X[0].length;
+    if (inicio) replicas = 1;
     let mejor = null;
     for (let r = 0; r < replicas; r++) {
-      // k-means++
-      const C = [X[Math.floor(rng() * n)].slice()];
+      // k-means++ (o los centros dados)
+      const C = inicio ? inicio.map(c => c.slice()) : [X[Math.floor(rng() * n)].slice()];
       const dmin = X.map(x => dist2(x, C[0]));
       while (C.length < k) {
         const tot = N.suma(dmin);
@@ -176,6 +179,7 @@
       for (let i = 0; i < n; i++) total += dist2(X[i], C[etiqueta[i]]);
       if (!mejor || total < mejor.total - 1e-12) mejor = { etiqueta, C, total };
     }
+    if (inicio) return { etiqueta: mejor.etiqueta.map(e => e + 1), centros: mejor.C, sumaDistancias: mejor.total };
     // renumerar por orden de primera aparición (1..k)
     const mapa = new Map();
     mejor.etiqueta.forEach(e => { if (!mapa.has(e)) mapa.set(e, mapa.size); });
@@ -206,17 +210,43 @@
     return s;
   };
 
+  // Pertenencia difusa de cada observación a centros FIJOS (fórmula de FCM):
+  // u_ki = 1 / sum_j (d_ki / d_ji)^(2/(m-1)). Devuelve U (c x n).
+  N.pertenencia = function (X, C, m) {
+    const expo = -2 / (m - 1);
+    const U = C.map(cc => X.map(x => Math.pow(Math.max(Math.sqrt(dist2(x, cc)), 1e-12), expo)));
+    for (let i = 0; i < X.length; i++) {
+      let s = 0; for (let k = 0; k < C.length; k++) s += U[k][i];
+      for (let k = 0; k < C.length; k++) U[k][i] /= s;
+    }
+    return U;
+  };
+
+  // Índice del centro más cercano (distancia euclidiana al cuadrado), base 1.
+  N.masCercano = function (X, C) {
+    return X.map(function (x) {
+      let b = 0, bd = Infinity;
+      C.forEach((c, k) => { const dd = dist2(x, c); if (dd < bd) { bd = dd; b = k; } });
+      return b + 1;
+    });
+  };
+
   // fcm(X, c, [m, maxIter, tol, 0]) de Fuzzy Logic Toolbox: pertenencia
   // inicial aleatoria normalizada, criterio de paro |J(t)-J(t-1)| < tol.
-  // Devuelve centros (c x d) y U (c x n).
-  N.fcm = function (X, c, m, maxIter, tol, semilla) {
+  // Devuelve centros (c x d) y U (c x n). Con «inicio» (centros c x d) la
+  // pertenencia inicial se calcula desde esos centros y los grupos conservan
+  // su orden (identidad de cada arquetipo).
+  N.fcm = function (X, c, m, maxIter, tol, semilla, inicio) {
     const rng = N.crearRng(semilla || 42);
     const n = X.length, d = X[0].length;
     let U = [];
-    for (let k = 0; k < c; k++) U.push(Array.from({ length: n }, () => rng()));
-    for (let i = 0; i < n; i++) {
-      let s = 0; for (let k = 0; k < c; k++) s += U[k][i];
-      for (let k = 0; k < c; k++) U[k][i] /= s;
+    if (inicio) U = N.pertenencia(X, inicio, m);
+    else {
+      for (let k = 0; k < c; k++) U.push(Array.from({ length: n }, () => rng()));
+      for (let i = 0; i < n; i++) {
+        let s = 0; for (let k = 0; k < c; k++) s += U[k][i];
+        for (let k = 0; k < c; k++) U[k][i] /= s;
+      }
     }
     let Jprev = null, C = null;
     for (let it = 0; it < maxIter; it++) {
@@ -239,6 +269,7 @@
       if (Jprev !== null && Math.abs(J - Jprev) < tol) break;
       Jprev = J;
     }
+    if (inicio) return { centros: C, U };
     // ordenar clusters por primera aparición de su pertenencia máxima
     const maxIdx = [];
     for (let i = 0; i < n; i++) { let b = 0; for (let k = 1; k < c; k++) if (U[k][i] > U[b][i]) b = k; maxIdx.push(b); }

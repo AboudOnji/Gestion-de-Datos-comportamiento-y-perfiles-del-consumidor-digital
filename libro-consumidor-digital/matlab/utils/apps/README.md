@@ -20,6 +20,31 @@ conexión, sin instalar nada y sin MATLAB.
   el ejercicio y superpone las curvas de todos los casos. Se puede descargar el
   cuadro (CSV que abre Excel) o imprimir/guardar la página como PDF.
 
+## App con datos propios (Cap. 2)
+`matlab/cap02/cap02_segmentacion_datos_propios.html` aplica el análisis de
+`cap02_segmentacion.m` a un Excel/CSV del estudiante (extensión opcional del
+laboratorio). El Excel trae **solo los clientes** (ID_cliente opcional,
+Frecuencia_mensual, Ticket_promedio_MXN, Engagement_digital); los
+**arquetipos se definen en la app**. La app compara (1) arquetipos fijos
+(cliente al arquetipo más cercano + pertenencia difusa a los arquetipos tal
+como se definieron) contra (2) segmentos ajustados (k-means y fuzzy c-means que
+parten de los arquetipos) y muestra cuánto se movió cada arquetipo. El Excel de ejemplo `matlab/cap02/cap02_datos_ejemplo.xlsx` tiene una sola hoja
+(«Datos»); las reglas de formato están en la app (sección «¿Cómo deben venir
+sus datos?»), que también puede descargar ese Excel. Lectura/escritura de Excel con SheetJS 0.18.5
+(`vendor/`, Apache-2.0), incluido dentro del HTML. Los datos no salen del
+navegador.
+
+```bash
+conda run -n research python matlab/utils/apps/datos/crear_excel_ejemplo_cap02.py  # Excel + JSON de ejemplo
+matlab -batch "run('pruebas/referencias_datos_propios.m')"                        # referencia MATLAB
+node pruebas/verificar_datos_propios.js                                            # 48 comprobaciones
+```
+Arquetipos fijos y k-means ajustado coinciden exactamente con MATLAB
+(`kmeans(...,'Start',C)`). En R2026a, `fcm` con `fcmOptions(ClusterCenters=C)`
+devuelve C sin moverlo, así que el FCM ajustado se compara contra `fcm`
+estándar emparejando centros (diferencia < 0.05 desv. est.; % de ambiguos
+±0.5 pp, un cliente de frontera en el juego de 4 arquetipos).
+
 ## Fidelidad con MATLAB
 Los datos sintéticos son **los mismos** que genera MATLAB con `rng(42)`: los
 números aleatorios se exportan desde MATLAB (`datos/exportar_datos_matlab.m`)

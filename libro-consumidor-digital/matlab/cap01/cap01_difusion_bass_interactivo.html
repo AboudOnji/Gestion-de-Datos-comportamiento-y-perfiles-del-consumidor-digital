@@ -135,6 +135,27 @@ footer { max-width: 1400px; margin: 0 auto; padding: 4px 16px 24px; font-size: .
 header.barra .institucion { font-size: .8rem; font-weight: 700; letter-spacing: .02em; color: #E9D9B4; margin-bottom: 3px; }
 header.barra .acciones-barra { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 @media print { header.barra .institucion { color: #6F1D46; } }
+/* app de datos propios (Cap. 2) */
+label.subir { display: block; position: relative; cursor: pointer; }
+label.subir input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+label.subir .subir-caja { display: block; text-align: center; padding: 14px 10px; border: 2px dashed var(--dorado); border-radius: 8px; background: var(--acento-suave); color: var(--guinda); }
+label.subir:hover .subir-caja, label.subir.encima .subir-caja { border-color: var(--guinda); filter: brightness(0.97); }
+label.subir input[type=file]:focus-visible + .subir-caja { outline: 2px solid var(--guinda); outline-offset: 2px; }
+table.ejemplo-formato td, table.ejemplo-formato th { text-align: left; border: 1px solid var(--borde); }
+table.ejemplo-formato td:first-child, table.ejemplo-formato th { color: var(--texto-suave); font-size: .75rem; text-align: center; background: var(--consola-bg); }
+table.ejemplo-formato tr.cab td:not(:first-child) { background: #6F1D46; color: #fff; font-weight: 600; }
+ol.reglas { font-size: .88rem; padding-left: 20px; margin: 10px 0 0; }
+ol.reglas li { margin: 4px 0; }
+.matriz.arquetipos th:nth-child(2) { width: 30%; }
+.matriz.arquetipos input[type=text] { text-align: left; font-size: .8rem; padding: 4px 4px; width: 100%; }
+.arq { border: 1px solid var(--borde); border-left: 4px solid var(--guinda); border-radius: 6px; padding: 6px 8px; margin: 6px 0; }
+.arq-cab { display: flex; gap: 6px; align-items: center; }
+.arq-cab input { font-weight: 600; }
+.arq-vals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 6px; }
+.arq-vals label { font-size: .72rem; color: var(--texto-suave); display: block; }
+.arq-vals label span { display: block; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.arq-vals label i { font-style: normal; opacity: .8; }
+.arq-vals input { text-align: right; padding: 4px 5px; }
 
 </style>
 </head>
@@ -156,8 +177,7 @@ header.barra .acciones-barra { display: flex; gap: 8px; align-items: center; fle
 <main class="grid">
   <aside class="panel" aria-label="Parámetros">
     <h2>Parámetros</h2>
-    <p class="nota">Son los mismos valores del bloque <em>«ESTA ES LA ÚNICA SECCIÓN QUE EL ESTUDIANTE DEBE EDITAR»</em>
-      del script. Al cambiar cualquier valor, los resultados y las figuras se recalculan solos.</p>
+    <p class="nota">Son los mismos valores del bloque <em>«ESTA ES LA ÚNICA SECCIÓN QUE EL ESTUDIANTE DEBE EDITAR»</em> del script. Al cambiar cualquier valor, los resultados y las figuras se recalculan solos.</p>
     <div id="campos"></div>
     
     <div id="erroresParam"></div>
@@ -211,9 +231,7 @@ gráficas de abajo superponen las curvas de todos los casos guardados. Las respu
 <footer>
   <strong>Instituto Politécnico Nacional - Dr. Aboud Barsekh Onji</strong> · ESCA Unidad Santo Tomás ·
   <em>Comportamiento del Consumidor Digital: Datos, Perfiles y Modelos</em>.<br>
-  Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Replica el cálculo de
-  <code>cap01_difusion_bass.m</code> con los mismos datos sintéticos (rng(42)); sus resultados fueron verificados
-  contra la ejecución real del script en MATLAB. Las corridas guardadas se conservan solo en este navegador.
+  Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Replica el cálculo de <code>cap01_difusion_bass.m</code> con los mismos datos sintéticos (rng(42)); sus resultados fueron verificados contra la ejecución real del script en MATLAB. Las corridas guardadas se conservan solo en este navegador.
 </footer>
 
 <script>
@@ -4104,6 +4122,9 @@ return Plotly;
 
 </script>
 <script>
+
+</script>
+<script>
 /* numerico.js — funciones numéricas equivalentes a las de MATLAB que usan los
    scripts del libro. Cada función documenta a qué función de MATLAB replica y
    con qué convención (p. ej. prctile, discretize, movmean, silhouette).
@@ -4248,13 +4269,16 @@ return Plotly;
   // kmeans(X, k, 'Replicates', r) con inicio k-means++ ('plus', el de MATLAB)
   // y distancia euclidiana al cuadrado. Devuelve la réplica de menor suma de
   // distancias. Las etiquetas se renumeran por orden de primera aparición.
-  N.kmeans = function (X, k, replicas, semilla) {
+  // Con «inicio» (matriz k x d) equivale a kmeans(X, k, 'Start', inicio): una
+  // sola corrida desde esos centros y las etiquetas conservan su orden.
+  N.kmeans = function (X, k, replicas, semilla, inicio) {
     const rng = N.crearRng(semilla || 42);
     const n = X.length, d = X[0].length;
+    if (inicio) replicas = 1;
     let mejor = null;
     for (let r = 0; r < replicas; r++) {
-      // k-means++
-      const C = [X[Math.floor(rng() * n)].slice()];
+      // k-means++ (o los centros dados)
+      const C = inicio ? inicio.map(c => c.slice()) : [X[Math.floor(rng() * n)].slice()];
       const dmin = X.map(x => dist2(x, C[0]));
       while (C.length < k) {
         const tot = N.suma(dmin);
@@ -4282,6 +4306,7 @@ return Plotly;
       for (let i = 0; i < n; i++) total += dist2(X[i], C[etiqueta[i]]);
       if (!mejor || total < mejor.total - 1e-12) mejor = { etiqueta, C, total };
     }
+    if (inicio) return { etiqueta: mejor.etiqueta.map(e => e + 1), centros: mejor.C, sumaDistancias: mejor.total };
     // renumerar por orden de primera aparición (1..k)
     const mapa = new Map();
     mejor.etiqueta.forEach(e => { if (!mapa.has(e)) mapa.set(e, mapa.size); });
@@ -4312,17 +4337,43 @@ return Plotly;
     return s;
   };
 
+  // Pertenencia difusa de cada observación a centros FIJOS (fórmula de FCM):
+  // u_ki = 1 / sum_j (d_ki / d_ji)^(2/(m-1)). Devuelve U (c x n).
+  N.pertenencia = function (X, C, m) {
+    const expo = -2 / (m - 1);
+    const U = C.map(cc => X.map(x => Math.pow(Math.max(Math.sqrt(dist2(x, cc)), 1e-12), expo)));
+    for (let i = 0; i < X.length; i++) {
+      let s = 0; for (let k = 0; k < C.length; k++) s += U[k][i];
+      for (let k = 0; k < C.length; k++) U[k][i] /= s;
+    }
+    return U;
+  };
+
+  // Índice del centro más cercano (distancia euclidiana al cuadrado), base 1.
+  N.masCercano = function (X, C) {
+    return X.map(function (x) {
+      let b = 0, bd = Infinity;
+      C.forEach((c, k) => { const dd = dist2(x, c); if (dd < bd) { bd = dd; b = k; } });
+      return b + 1;
+    });
+  };
+
   // fcm(X, c, [m, maxIter, tol, 0]) de Fuzzy Logic Toolbox: pertenencia
   // inicial aleatoria normalizada, criterio de paro |J(t)-J(t-1)| < tol.
-  // Devuelve centros (c x d) y U (c x n).
-  N.fcm = function (X, c, m, maxIter, tol, semilla) {
+  // Devuelve centros (c x d) y U (c x n). Con «inicio» (centros c x d) la
+  // pertenencia inicial se calcula desde esos centros y los grupos conservan
+  // su orden (identidad de cada arquetipo).
+  N.fcm = function (X, c, m, maxIter, tol, semilla, inicio) {
     const rng = N.crearRng(semilla || 42);
     const n = X.length, d = X[0].length;
     let U = [];
-    for (let k = 0; k < c; k++) U.push(Array.from({ length: n }, () => rng()));
-    for (let i = 0; i < n; i++) {
-      let s = 0; for (let k = 0; k < c; k++) s += U[k][i];
-      for (let k = 0; k < c; k++) U[k][i] /= s;
+    if (inicio) U = N.pertenencia(X, inicio, m);
+    else {
+      for (let k = 0; k < c; k++) U.push(Array.from({ length: n }, () => rng()));
+      for (let i = 0; i < n; i++) {
+        let s = 0; for (let k = 0; k < c; k++) s += U[k][i];
+        for (let k = 0; k < c; k++) U[k][i] /= s;
+      }
     }
     let Jprev = null, C = null;
     for (let it = 0; it < maxIter; it++) {
@@ -4345,6 +4396,7 @@ return Plotly;
       if (Jprev !== null && Math.abs(J - Jprev) < tol) break;
       Jprev = J;
     }
+    if (inicio) return { centros: C, U };
     // ordenar clusters por primera aparición de su pertenencia máxima
     const maxIdx = [];
     for (let i = 0; i < n; i++) { let b = 0; for (let k = 1; k < c; k++) if (U[k][i] > U[b][i]) b = k; maxIdx.push(b); }
