@@ -126,6 +126,49 @@
     };
   }
 
+  // Interpretación de la silueta promedio según Kaufman y Rousseeuw (1990),
+  // Finding Groups in Data (Wiley): <=0.25 sin estructura sustancial,
+  // (0.25, 0.50] débil, (0.50, 0.70] razonable, > 0.70 fuerte.
+  function nivelSilueta(s) {
+    if (!Number.isFinite(s)) return { nivel: '—', frase: 'no se puede calcular' };
+    if (s > 0.70) return { nivel: 'fuerte', frase: 'los segmentos están muy bien separados' };
+    if (s > 0.50) return { nivel: 'razonable', frase: 'los segmentos se distinguen bien, con algo de frontera compartida' };
+    if (s > 0.25) return { nivel: 'débil', frase: 'los segmentos se traslapan bastante; podrían ser artificiales' };
+    return { nivel: 'sin estructura clara', frase: 'los datos casi no forman grupos separados' };
+  }
+
+  // Compara la segmentación rígida (etiquetas k-means 1..k) con la difusa
+  // (U de fuzzy c-means, k x n). Empareja cada segmento k-means con el
+  // segmento difuso con el que más clientes comparte (tabla de contingencia,
+  // emparejamiento voraz) y cuenta, dentro de cada segmento rígido, cuántos
+  // clientes son «seguros» (u_max >= 0.6) y cuántos «ambiguos».
+  function compararRigidoDifuso(etiqueta, U) {
+    const k = U.length, n = etiqueta.length;
+    const principal = etiqueta.map((_, i) => { let b = 0; for (let s = 1; s < k; s++) if (U[s][i] > U[b][i]) b = s; return b; });
+    const umax = etiqueta.map((_, i) => U[principal[i]][i]);
+    const tabla = Array.from({ length: k }, () => new Array(k).fill(0));
+    etiqueta.forEach((e, i) => { tabla[e - 1][principal[i]]++; });
+    const mapa = new Array(k).fill(-1), usados = new Set();
+    const pares = [];
+    for (let a = 0; a < k; a++) for (let c = 0; c < k; c++) pares.push([tabla[a][c], a, c]);
+    pares.sort((x, y) => y[0] - x[0]);
+    pares.forEach(([, a, c]) => { if (mapa[a] < 0 && !usados.has(c)) { mapa[a] = c; usados.add(c); } });
+    const coinciden = etiqueta.filter((e, i) => mapa[e - 1] === principal[i]).length;
+    const porSegmento = Array.from({ length: k }, (_, a) => {
+      const miembros = etiqueta.map((e, i) => e === a + 1 ? i : -1).filter(i => i >= 0);
+      const ambiguos = miembros.filter(i => umax[i] < 0.6).length;
+      return {
+        tam: miembros.length, seguros: miembros.length - ambiguos, ambiguos,
+        // «clientes efectivos» del segmento difuso emparejado: suma de pertenencias
+        tamDifuso: U[mapa[a]].reduce((t, u) => t + u, 0)
+      };
+    });
+    return {
+      mapa, principal, umax, coinciden, pctCoinciden: 100 * coinciden / n,
+      ambiguos: umax.filter(u => u < 0.6).length, porSegmento
+    };
+  }
+
   // Complemento de la app (no está en el .m): suma de distancias intra-cluster
   // de k-means para k = 1..kMax, para discutir el criterio del codo. Con
   // conSilueta, agrega la silueta promedio de cada k >= 2 (costo O(n^2)).
@@ -140,7 +183,7 @@
     return salida;
   }
 
-  const M = { DEFECTO, NOMBRES_VARIABLES, analizar, analizarConArquetipos, ejecutar, codo };
+  const M = { DEFECTO, NOMBRES_VARIABLES, analizar, analizarConArquetipos, ejecutar, codo, nivelSilueta, compararRigidoDifuso };
   if (typeof module === 'object' && module.exports) module.exports = M;
   else raiz.Cap02 = M;
 })(this);

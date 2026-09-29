@@ -147,3 +147,36 @@ ol.reglas li { margin: 4px 0; }
 .arq-vals label span { display: block; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .arq-vals label i { font-style: normal; opacity: .8; }
 .arq-vals input { text-align: right; padding: 4px 5px; }
+/* recorrido didáctico del Cap. 2 */
+.paso { grid-column: 1 / -1; border-top: 2px solid var(--borde); padding-top: 12px; margin-top: 4px; }
+.paso:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.paso h3.paso-titulo { text-transform: none; letter-spacing: 0; font-size: 1.02rem; color: var(--guinda); margin: 0 0 4px; }
+.paso h3.paso-titulo .num { display: inline-block; background: var(--guinda); color: #fff; border-radius: 999px; width: 1.6em; height: 1.6em; line-height: 1.6em; text-align: center; font-size: .85rem; margin-right: 6px; }
+.explica { font-size: .88rem; background: var(--acento-suave); border-left: 3px solid var(--dorado); border-radius: 4px; padding: 8px 12px; margin: 6px 0 10px; }
+.explica p { margin: 4px 0; }
+.paso-graficas { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 16px; }
+@media (max-width: 500px) { .paso-graficas { grid-template-columns: 1fr; } }
+.medidor { margin: 8px 0 4px; max-width: 620px; }
+.medidor-barra { position: relative; height: 30px; border-radius: 6px; overflow: visible; }
+.medidor-zona { position: absolute; top: 0; height: 100%; display: flex; align-items: center; justify-content: center; font-size: .72rem; color: #2b2326; }
+.medidor-zona:first-child { border-radius: 6px 0 0 6px; } .medidor-zona:nth-child(4) { border-radius: 0 6px 6px 0; }
+.medidor-zona span { white-space: nowrap; overflow: hidden; }
+.medidor-aguja { position: absolute; top: -6px; height: 42px; border-left: 3px solid var(--guinda); }
+.medidor-aguja b { position: absolute; top: -18px; left: -14px; font-size: .8rem; color: var(--guinda); }
+.medidor-escala { position: relative; height: 16px; font-size: .7rem; color: var(--texto-suave); }
+.medidor-escala span { position: absolute; transform: translateX(-50%); }
+.medidor-escala span:nth-child(1) { left: 0; transform: none; } .medidor-escala span:nth-child(2) { left: 50%; }
+.medidor-escala span:nth-child(3) { left: 62.5%; } .medidor-escala span:nth-child(4) { left: 75%; }
+.medidor-escala span:nth-child(5) { left: 85%; } .medidor-escala span:nth-child(6) { right: 0; left: auto; transform: none; }
+.veredicto { font-size: .92rem; margin: 6px 0; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 8px 0; }
+.kpi { border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; background: var(--panel); }
+.kpi .v { font-size: 1.5rem; font-weight: 700; color: var(--guinda); line-height: 1.2; }
+.kpi .t { font-size: .78rem; color: var(--texto-suave); }
+ul.conclusion { margin: 6px 0; padding-left: 20px; font-size: .9rem; }
+ul.conclusion li { margin: 4px 0; }
+.conceptos { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-top: 6px; }
+.concepto { border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; font-size: .85rem; }
+.concepto b { color: var(--guinda); display: block; margin-bottom: 2px; }
+.veredicto-arq { font-weight: 600; }
+.veredicto-arq.igual { color: var(--ok); } .veredicto-arq.algo { color: #B07A1F; } .veredicto-arq.mucho { color: var(--alerta); }

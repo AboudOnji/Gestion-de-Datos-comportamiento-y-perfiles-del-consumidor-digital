@@ -156,6 +156,39 @@ ol.reglas li { margin: 4px 0; }
 .arq-vals label span { display: block; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .arq-vals label i { font-style: normal; opacity: .8; }
 .arq-vals input { text-align: right; padding: 4px 5px; }
+/* recorrido didáctico del Cap. 2 */
+.paso { grid-column: 1 / -1; border-top: 2px solid var(--borde); padding-top: 12px; margin-top: 4px; }
+.paso:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.paso h3.paso-titulo { text-transform: none; letter-spacing: 0; font-size: 1.02rem; color: var(--guinda); margin: 0 0 4px; }
+.paso h3.paso-titulo .num { display: inline-block; background: var(--guinda); color: #fff; border-radius: 999px; width: 1.6em; height: 1.6em; line-height: 1.6em; text-align: center; font-size: .85rem; margin-right: 6px; }
+.explica { font-size: .88rem; background: var(--acento-suave); border-left: 3px solid var(--dorado); border-radius: 4px; padding: 8px 12px; margin: 6px 0 10px; }
+.explica p { margin: 4px 0; }
+.paso-graficas { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 16px; }
+@media (max-width: 500px) { .paso-graficas { grid-template-columns: 1fr; } }
+.medidor { margin: 8px 0 4px; max-width: 620px; }
+.medidor-barra { position: relative; height: 30px; border-radius: 6px; overflow: visible; }
+.medidor-zona { position: absolute; top: 0; height: 100%; display: flex; align-items: center; justify-content: center; font-size: .72rem; color: #2b2326; }
+.medidor-zona:first-child { border-radius: 6px 0 0 6px; } .medidor-zona:nth-child(4) { border-radius: 0 6px 6px 0; }
+.medidor-zona span { white-space: nowrap; overflow: hidden; }
+.medidor-aguja { position: absolute; top: -6px; height: 42px; border-left: 3px solid var(--guinda); }
+.medidor-aguja b { position: absolute; top: -18px; left: -14px; font-size: .8rem; color: var(--guinda); }
+.medidor-escala { position: relative; height: 16px; font-size: .7rem; color: var(--texto-suave); }
+.medidor-escala span { position: absolute; transform: translateX(-50%); }
+.medidor-escala span:nth-child(1) { left: 0; transform: none; } .medidor-escala span:nth-child(2) { left: 50%; }
+.medidor-escala span:nth-child(3) { left: 62.5%; } .medidor-escala span:nth-child(4) { left: 75%; }
+.medidor-escala span:nth-child(5) { left: 85%; } .medidor-escala span:nth-child(6) { right: 0; left: auto; transform: none; }
+.veredicto { font-size: .92rem; margin: 6px 0; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 8px 0; }
+.kpi { border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; background: var(--panel); }
+.kpi .v { font-size: 1.5rem; font-weight: 700; color: var(--guinda); line-height: 1.2; }
+.kpi .t { font-size: .78rem; color: var(--texto-suave); }
+ul.conclusion { margin: 6px 0; padding-left: 20px; font-size: .9rem; }
+ul.conclusion li { margin: 4px 0; }
+.conceptos { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-top: 6px; }
+.concepto { border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; font-size: .85rem; }
+.concepto b { color: var(--guinda); display: block; margin-bottom: 2px; }
+.veredicto-arq { font-weight: 600; }
+.veredicto-arq.igual { color: var(--ok); } .veredicto-arq.algo { color: #B07A1F; } .veredicto-arq.mucho { color: var(--alerta); }
 
 </style>
 </head>
@@ -240,7 +273,32 @@ ambigua de cada una. El botón «Caso C» agrega un arquetipo de <em>ejemplo</em
         <div class="figura ancha"><div class="grafica" id="comp3"></div><div class="pie">Curvas del codo de todos los casos guardados (● = k usado en ese caso).</div></div>
       </div>
     </section>
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>Arquetipo</b>Un tipo de cliente «típico» (cada fila de centrosTipicos): de él se simulan clientes parecidos.</div>
+        <div class="concepto"><b>Segmentación rígida (k-means)</b>Cada cliente va a un solo segmento. Respuesta de sí o no, sin matices.</div>
+        <div class="concepto"><b>Segmentación difusa (fuzzy c-means)</b>Cada cliente tiene un % de pertenencia a cada segmento (suman 100 %).</div>
+        <div class="concepto"><b>Silueta</b>De −1 a 1: qué tan bien ubicado está un cliente en su segmento rígido. El promedio mide la calidad de toda la segmentación.</div>
+        <div class="concepto"><b>Pertenencia ambigua</b>Ningún segmento llega a 60 %: el cliente es una mezcla. El rígido lo esconde; el difuso lo muestra.</div>
+      </div>
+    </section>
 
+    <section class="panel" id="panelRigidoDifuso">
+      <h2>Rígido contra difuso: ¿qué ve cada uno?</h2>
+      <div class="explica"><p><b>¿Qué es la silueta?</b> Para cada cliente compara qué tan cerca está de los clientes de <i>su</i> segmento y
+        qué tan cerca está del segmento vecino. Va de −1 a 1: <b>cerca de 1</b> = claramente en su lugar; <b>cerca de 0</b> = en la frontera;
+        <b>negativa</b> = se parece más al vecino. La silueta promedio resume la calidad de la segmentación rígida (zonas de Kaufman y
+        Rousseeuw, 1990):</p><div id="medidorSilueta"></div></div>
+      <div id="kpisComparacion" class="kpis"></div>
+      <div class="explica" id="conclusionComparacion"></div>
+      <div class="paso-graficas">
+        <div class="figura"><div class="grafica" id="figSilueta" style="height:440px"></div><div class="pie">Una barra por cliente. Barras cortas o negativas = clientes en la frontera que el rígido asigna sin avisar.</div></div>
+        <div class="figura"><div class="grafica" id="figEjemplos" style="height:440px"></div><div class="pie">El cliente más típico de cada segmento y los 3 más ambiguos, con su % de pertenencia a cada segmento (difuso); debajo de cada uno, dónde lo puso el rígido.</div></div>
+        <div class="figura"><div class="grafica" id="figSeguros"></div><div class="pie">Cada barra es un segmento según k-means; la parte dorada son los clientes que el difuso considera ambiguos.</div></div>
+      </div>
+      <p class="nota">Complemento de la app (no está en el .m): usa los mismos resultados de k-means y fuzzy c-means que imprime el script.</p>
+    </section>
   </div>
 </main>
 
@@ -4913,6 +4971,49 @@ window.RANDN42 = [-0.538243894,0.867232158,0.975986463,0.337390252,-0.996094097,
     };
   }
 
+  // Interpretación de la silueta promedio según Kaufman y Rousseeuw (1990),
+  // Finding Groups in Data (Wiley): <=0.25 sin estructura sustancial,
+  // (0.25, 0.50] débil, (0.50, 0.70] razonable, > 0.70 fuerte.
+  function nivelSilueta(s) {
+    if (!Number.isFinite(s)) return { nivel: '—', frase: 'no se puede calcular' };
+    if (s > 0.70) return { nivel: 'fuerte', frase: 'los segmentos están muy bien separados' };
+    if (s > 0.50) return { nivel: 'razonable', frase: 'los segmentos se distinguen bien, con algo de frontera compartida' };
+    if (s > 0.25) return { nivel: 'débil', frase: 'los segmentos se traslapan bastante; podrían ser artificiales' };
+    return { nivel: 'sin estructura clara', frase: 'los datos casi no forman grupos separados' };
+  }
+
+  // Compara la segmentación rígida (etiquetas k-means 1..k) con la difusa
+  // (U de fuzzy c-means, k x n). Empareja cada segmento k-means con el
+  // segmento difuso con el que más clientes comparte (tabla de contingencia,
+  // emparejamiento voraz) y cuenta, dentro de cada segmento rígido, cuántos
+  // clientes son «seguros» (u_max >= 0.6) y cuántos «ambiguos».
+  function compararRigidoDifuso(etiqueta, U) {
+    const k = U.length, n = etiqueta.length;
+    const principal = etiqueta.map((_, i) => { let b = 0; for (let s = 1; s < k; s++) if (U[s][i] > U[b][i]) b = s; return b; });
+    const umax = etiqueta.map((_, i) => U[principal[i]][i]);
+    const tabla = Array.from({ length: k }, () => new Array(k).fill(0));
+    etiqueta.forEach((e, i) => { tabla[e - 1][principal[i]]++; });
+    const mapa = new Array(k).fill(-1), usados = new Set();
+    const pares = [];
+    for (let a = 0; a < k; a++) for (let c = 0; c < k; c++) pares.push([tabla[a][c], a, c]);
+    pares.sort((x, y) => y[0] - x[0]);
+    pares.forEach(([, a, c]) => { if (mapa[a] < 0 && !usados.has(c)) { mapa[a] = c; usados.add(c); } });
+    const coinciden = etiqueta.filter((e, i) => mapa[e - 1] === principal[i]).length;
+    const porSegmento = Array.from({ length: k }, (_, a) => {
+      const miembros = etiqueta.map((e, i) => e === a + 1 ? i : -1).filter(i => i >= 0);
+      const ambiguos = miembros.filter(i => umax[i] < 0.6).length;
+      return {
+        tam: miembros.length, seguros: miembros.length - ambiguos, ambiguos,
+        // «clientes efectivos» del segmento difuso emparejado: suma de pertenencias
+        tamDifuso: U[mapa[a]].reduce((t, u) => t + u, 0)
+      };
+    });
+    return {
+      mapa, principal, umax, coinciden, pctCoinciden: 100 * coinciden / n,
+      ambiguos: umax.filter(u => u < 0.6).length, porSegmento
+    };
+  }
+
   // Complemento de la app (no está en el .m): suma de distancias intra-cluster
   // de k-means para k = 1..kMax, para discutir el criterio del codo. Con
   // conSilueta, agrega la silueta promedio de cada k >= 2 (costo O(n^2)).
@@ -4927,13 +5028,143 @@ window.RANDN42 = [-0.538243894,0.867232158,0.975986463,0.337390252,-0.996094097,
     return salida;
   }
 
-  const M = { DEFECTO, NOMBRES_VARIABLES, analizar, analizarConArquetipos, ejecutar, codo };
+  const M = { DEFECTO, NOMBRES_VARIABLES, analizar, analizarConArquetipos, ejecutar, codo, nivelSilueta, compararRigidoDifuso };
   if (typeof module === 'object' && module.exports) module.exports = M;
   else raiz.Cap02 = M;
 })(this);
 
 </script>
 <script>
+/* cap02_didactico.js — piezas visuales para EXPLICAR la segmentación rígida
+   (k-means) contra la difusa (fuzzy c-means) en las dos apps del Cap. 2:
+   medidor de silueta, gráfica de silueta cliente por cliente, clientes de
+   ejemplo con su % de pertenencia, seguros/ambiguos por segmento y una
+   conclusión en palabras. Usa Cap02.nivelSilueta y Cap02.compararRigidoDifuso. */
+(function (raiz) {
+  'use strict';
+  const S = Numerico.sprintf;
+  const D = {};
+  const color = s => UI.lineas[s % UI.lineas.length];
+
+  /* Medidor horizontal de -1 a 1 con las zonas de Kaufman y Rousseeuw (1990). */
+  D.medidorSilueta = function (contenedor, s) {
+    const niv = Cap02.nivelSilueta(s);
+    const pos = v => (100 * (v + 1) / 2).toFixed(2) + '%';
+    const zonas = [
+      { a: -1, b: 0.25, c: '#C9C2C5', t: 'sin estructura' },
+      { a: 0.25, b: 0.50, c: '#E3B26B', t: 'débil' },
+      { a: 0.50, b: 0.70, c: '#9CC59A', t: 'razonable' },
+      { a: 0.70, b: 1, c: '#4E9F62', t: 'fuerte' }
+    ];
+    let h = '<div class="medidor"><div class="medidor-barra">';
+    zonas.forEach(z => { h += '<div class="medidor-zona" style="left:' + pos(z.a) + ';width:' + (100 * (z.b - z.a) / 2) + '%;background:' + z.c + '"><span>' + z.t + '</span></div>'; });
+    if (Number.isFinite(s)) h += '<div class="medidor-aguja" style="left:' + pos(Math.max(-1, Math.min(1, s))) + '"><b>' + s.toFixed(2) + '</b></div>';
+    h += '</div><div class="medidor-escala"><span>−1</span><span>0</span><span>0.25</span><span>0.5</span><span>0.7</span><span>1</span></div></div>';
+    h += '<p class="veredicto">Silueta promedio = <b>' + (Number.isFinite(s) ? s.toFixed(3) : '—') + '</b> → estructura <b>' + niv.nivel + '</b>: ' + niv.frase + '.</p>';
+    contenedor.innerHTML = h;
+  };
+
+  /* Gráfica de silueta: una barra por cliente, agrupadas por segmento y
+     ordenadas de mayor a menor. Barra larga = bien ubicado; cerca de 0 = en
+     la frontera; negativa = se parece más a otro segmento. */
+  D.graficaSilueta = function (id, sil, etiqueta, nombres, archivo) {
+    const k = nombres.length;
+    const trazas = [];
+    let pos = 0;
+    const marcas = [];
+    for (let s = 1; s <= k; s++) {
+      const vals = sil.filter((_, i) => etiqueta[i] === s).sort((a, b) => b - a);
+      if (!vals.length) continue;
+      const ys = vals.map((_, j) => pos + j);
+      marcas.push({ y: pos + vals.length / 2, t: nombres[s - 1] });
+      trazas.push({ x: vals, y: ys, type: 'bar', orientation: 'h', name: nombres[s - 1], marker: { color: color(s - 1) },
+        width: 1, hovertemplate: 'silueta = %{x:.2f}<extra>' + UI.esc(nombres[s - 1]) + '</extra>' });
+      pos += vals.length + Math.max(3, Math.round(sil.length / 40));
+    }
+    const prom = Numerico.media(sil);
+    UI.graficar(id, trazas, {
+      title: 'Silueta de cada cliente', bargap: 0, showlegend: false,
+      xaxis: { title: { text: 'Silueta (−1 a 1): ¿qué tan bien ubicado está cada cliente?' }, range: [Math.min(-0.2, Math.min.apply(null, sil) - 0.05), 1] },
+      yaxis: { showticklabels: false, showgrid: false, zeroline: false, title: { text: 'Clientes (una barra = un cliente)' } },
+      shapes: [{ type: 'line', x0: prom, x1: prom, yref: 'paper', y0: 0, y1: 1, line: { dash: 'dot', color: UI.color.dorado, width: 2 } },
+        { type: 'line', x0: 0, x1: 0, yref: 'paper', y0: 0, y1: 1, line: { color: UI.esOscuro() ? '#aaa' : '#555', width: 1 } }],
+      annotations: [{ x: prom, yref: 'paper', y: 1.02, text: 'promedio ' + prom.toFixed(2), showarrow: false, font: { color: UI.color.dorado } }]
+        .concat(marcas.map(m => ({ x: 0.98, y: m.y, text: '<b>' + UI.esc(m.t) + '</b>', showarrow: false, xanchor: 'right', font: { size: 12 } })))
+    }, { archivo: archivo || 'silueta_por_cliente' });
+  };
+
+  /* Clientes de ejemplo: el más típico de cada segmento y los más ambiguos,
+     con su % de pertenencia a cada segmento (barra apilada al 100 %). */
+  D.graficaEjemplos = function (id, U, etiqueta, ids, nombres, comp, archivo) {
+    const k = nombres.length, n = etiqueta.length;
+    const filas = [];
+    for (let s = 0; s < k; s++) {
+      const c = comp.mapa.indexOf(s); // segmento difuso s ↔ segmento rígido c
+      let mejor = -1;
+      for (let i = 0; i < n; i++) if (comp.principal[i] === s && (mejor < 0 || U[s][i] > U[s][mejor])) mejor = i;
+      if (mejor >= 0) filas.push({ i: mejor, tipo: 'típico de ' + nombres[c >= 0 ? c : s] });
+    }
+    const orden = Array.from({ length: n }, (_, i) => i).sort((a, b) => comp.umax[a] - comp.umax[b]);
+    orden.slice(0, 3).forEach(i => filas.push({ i, tipo: 'ambiguo' }));
+    // dos renglones: quién es y dónde lo puso el método rígido
+    const etiquetasY = filas.map(f => '<b>' + UI.esc(ids[f.i]) + '</b> (' + UI.esc(f.tipo) + ')<br>rígido: ' + UI.esc(nombres[etiqueta[f.i] - 1]));
+    // nombre de cada segmento difuso = nombre del segmento rígido emparejado
+    const nombreDifuso = s => { const c = comp.mapa.indexOf(s); return nombres[c >= 0 ? c : s]; };
+    const colorDifuso = s => { const c = comp.mapa.indexOf(s); return color(c >= 0 ? c : s); };
+    const trazas = [];
+    for (let s = 0; s < k; s++) {
+      trazas.push({ y: etiquetasY, x: filas.map(f => 100 * U[s][f.i]), type: 'bar', orientation: 'h', name: nombreDifuso(s),
+        marker: { color: colorDifuso(s) }, text: filas.map(f => (100 * U[s][f.i] >= 8 ? (100 * U[s][f.i]).toFixed(0) + '%' : '')),
+        textposition: 'inside', insidetextanchor: 'middle', hovertemplate: '%{y}<br>' + UI.esc(nombreDifuso(s)) + ': %{x:.1f}%<extra></extra>' });
+    }
+    UI.graficar(id, trazas, {
+      title: 'Ejemplos: ¿a qué segmento pertenece cada cliente?', barmode: 'stack',
+      xaxis: { title: { text: '% de pertenencia a cada segmento (difuso)' }, range: [0, 100], ticksuffix: '%' },
+      yaxis: { autorange: 'reversed', automargin: true },
+      shapes: [{ type: 'line', x0: 60, x1: 60, yref: 'paper', y0: 0, y1: 1, line: { dash: 'dot', color: UI.esOscuro() ? '#fff' : '#000', width: 1.5 } }],
+      annotations: [{ x: 60, yref: 'paper', y: 1, yanchor: 'bottom', text: 'umbral 60 %', showarrow: false, font: { size: 11 } }],
+      legend: { orientation: 'h', y: -0.22 }, margin: { r: 20, b: 90 }
+    }, { archivo: archivo || 'pertenencia_ejemplos' });
+  };
+
+  /* Dentro de cada segmento rígido: cuántos clientes son seguros y cuántos ambiguos. */
+  D.graficaSegurosAmbiguos = function (id, comp, nombres, archivo) {
+    const P = comp.porSegmento;
+    UI.graficar(id, [
+      { x: nombres, y: P.map(p => p.seguros), type: 'bar', name: 'Seguros (pertenencia ≥ 60 %)', marker: { color: UI.color.teal },
+        text: P.map(p => String(p.seguros)), textposition: 'inside' },
+      { x: nombres, y: P.map(p => p.ambiguos), type: 'bar', name: 'Ambiguos (ningún segmento llega a 60 %)', marker: { color: UI.color.dorado },
+        text: P.map(p => p.ambiguos ? String(p.ambiguos) : ''), textposition: 'inside' }
+    ], {
+      title: 'Lo que el rígido no dice: ¿qué tan seguros son sus segmentos?', barmode: 'stack',
+      yaxis: { title: { text: 'Clientes (según k-means)' } }, legend: { orientation: 'h', y: -0.2 },
+      annotations: P.map((p, s) => ({ x: nombres[s], y: p.tam, yanchor: 'bottom', showarrow: false,
+        text: p.tam ? (100 * p.ambiguos / p.tam).toFixed(0) + '% ambiguos' : '', font: { size: 11 } }))
+    }, { archivo: archivo || 'seguros_ambiguos' });
+  };
+
+  /* Conclusión en palabras a partir de los números de la corrida. */
+  D.conclusion = function (comp, silProm, nombres) {
+    const n = comp.principal.length;
+    const niv = Cap02.nivelSilueta(silProm);
+    let peor = 0;
+    comp.porSegmento.forEach((p, s) => { if (p.tam && p.ambiguos / p.tam > (comp.porSegmento[peor].ambiguos / (comp.porSegmento[peor].tam || 1))) peor = s; });
+    const P = comp.porSegmento[peor];
+    return '<ul class="conclusion">' +
+      '<li><b>Rígido (k-means):</b> reparte a los ' + n + ' clientes en ' + nombres.length + ' segmentos, cada cliente en uno solo. ' +
+        'Su silueta de ' + silProm.toFixed(2) + ' indica una estructura <b>' + niv.nivel + '</b>.</li>' +
+      '<li><b>Difuso (fuzzy c-means):</b> coincide con el rígido en el segmento principal del <b>' + comp.pctCoinciden.toFixed(1) + '%</b> de los clientes, ' +
+        'pero revela que <b>' + comp.ambiguos + ' clientes (' + (100 * comp.ambiguos / n).toFixed(1) + '%)</b> no pertenecen claramente a ninguno: ' +
+        'el rígido los obliga a elegir un solo segmento.</li>' +
+      (P.ambiguos ? '<li>El segmento con más dudas es <b>' + UI.esc(nombres[peor]) + '</b>: ' + P.ambiguos + ' de sus ' + P.tam +
+        ' clientes (' + (100 * P.ambiguos / P.tam).toFixed(0) + '%) están a medio camino con otro segmento. Una campaña dirigida solo a «' +
+        UI.esc(nombres[peor]) + '» los trataría como si fueran típicos, y no lo son.</li>' : '') +
+      '</ul>';
+  };
+
+  raiz.Didactico = D;
+})(this);
+
 /* cap02_app.js — interfaz de la app del Capítulo 2 (k-means vs. fuzzy c-means). */
 (function () {
   'use strict';
@@ -5075,6 +5306,24 @@ window.RANDN42 = [-0.538243894,0.867232158,0.975986463,0.337390252,-0.996094097,
       xaxis: { title: { text: 'Número de segmentos k' }, dtick: 1 }, yaxis: { title: { text: 'Suma de distancias intra-segmento' } },
       shapes: [{ type: 'line', x0: k, x1: k, yref: 'paper', y0: 0, y1: 1, line: { dash: 'dot', color: UI.color.dorado, width: 2 } }] },
     { archivo: 'cap02_codo' });
+
+    dibujarRigidoDifuso(r);
+  }
+
+  // Sección «Rígido contra difuso» (piezas de cap02_didactico.js)
+  function dibujarRigidoDifuso(r) {
+    const nombres = Array.from({ length: r.k }, (_, s) => 'Segmento ' + (s + 1));
+    const ids = r.X.map((_, i) => 'Cliente ' + (i + 1));
+    const comp = Cap02.compararRigidoDifuso(r.km.etiqueta, r.fc.U);
+    Didactico.medidorSilueta(UI.$('#medidorSilueta'), r.silProm);
+    UI.$('#kpisComparacion').innerHTML =
+      '<div class="kpi"><div class="v">' + r.silProm.toFixed(2) + '</div><div class="t">Silueta del rígido (' + Cap02.nivelSilueta(r.silProm).nivel + ')</div></div>' +
+      '<div class="kpi"><div class="v">' + comp.pctCoinciden.toFixed(1) + '%</div><div class="t">Clientes en el mismo segmento principal con ambos métodos</div></div>' +
+      '<div class="kpi"><div class="v">' + comp.ambiguos + '</div><div class="t">Clientes ambiguos (' + (100 * comp.ambiguos / ids.length).toFixed(1) + '%) que el rígido asigna sin avisar</div></div>';
+    UI.$('#conclusionComparacion').innerHTML = '<p><b>¿Qué dice esta corrida?</b></p>' + Didactico.conclusion(comp, r.silProm, nombres);
+    Didactico.graficaSilueta('figSilueta', r.sil, r.km.etiqueta, nombres, 'cap02_silueta_por_cliente');
+    Didactico.graficaEjemplos('figEjemplos', r.fc.U, r.km.etiqueta, ids, nombres, comp, 'cap02_pertenencia_ejemplos');
+    Didactico.graficaSegurosAmbiguos('figSeguros', comp, nombres, 'cap02_seguros_ambiguos');
   }
 
   function caso(r) {
@@ -5114,6 +5363,10 @@ window.RANDN42 = [-0.538243894,0.867232158,0.975986463,0.337390252,-0.996094097,
     dibujar, caso, dibujarComparacion, leerExtra, fijarExtra,
     alIniciar: function (diferido) {
       recalcular = diferido;
+      // «Conceptos clave» arriba y «Rígido contra difuso» justo después de las figuras del script
+      const col = document.querySelector('.columna');
+      col.insertBefore(UI.$('#panelConceptos'), col.firstChild);
+      col.insertBefore(UI.$('#panelRigidoDifuso'), UI.$('#panelComparar'));
       UI.$('#btnAgregarFila').addEventListener('click', function () {
         const u = centros[centros.length - 1] || [2, 500, 50];
         centros.push(u.slice());

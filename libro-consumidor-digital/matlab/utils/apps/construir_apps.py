@@ -38,6 +38,7 @@ CAPITULOS = [
         "titulo_corto": "Segmentación · Cap. 2",
         "subtitulo": "Laboratorio del Capítulo 2 · k-means vs. fuzzy c-means",
         "datos": [("RANDN42", "randn42.json")],
+        "ui": ["cap02_didactico"],
     },
     {
         # App para segmentar datos propios (Excel/CSV) con el análisis del Cap. 2
@@ -57,6 +58,7 @@ CAPITULOS = [
                             "Al cambiar cualquier valor, los resultados se recalculan solos."),
         "vendor": ["xlsx.full.min.js"],
         "datos": [("EJEMPLO_CAP02", "cap02_ejemplo.json")],
+        "ui": ["cap02_didactico"],
     },
     {
         "id": "cap03",
@@ -156,7 +158,9 @@ def main():
             "DATOS": datos,
             "MODELO": "\n".join((APPS / "modelos" / f"{m}.js").read_text(encoding="utf-8")
                                 for m in cap.get("modelos", [cap["id"]])),
-            "APP": (APPS / "paginas" / f"{cap['id']}_app.js").read_text(encoding="utf-8"),
+            # módulos de interfaz compartidos (p. ej. cap02_didactico) + la interfaz de la app
+            "APP": "\n".join((APPS / "paginas" / f"{m}.js").read_text(encoding="utf-8")
+                             for m in cap.get("ui", []) + [f"{cap['id']}_app"]),
         })
         # reemplazo en una sola pasada: el contenido insertado no se vuelve a procesar
         html = re.sub(r"\{\{([A-Z_]+)\}\}", lambda m: valores[m.group(1)], plantilla)

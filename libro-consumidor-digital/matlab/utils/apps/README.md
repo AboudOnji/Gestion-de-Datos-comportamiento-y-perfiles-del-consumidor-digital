@@ -28,7 +28,13 @@ Frecuencia_mensual, Ticket_promedio_MXN, Engagement_digital); los
 **arquetipos se definen en la app**. La app compara (1) arquetipos fijos
 (cliente al arquetipo más cercano + pertenencia difusa a los arquetipos tal
 como se definieron) contra (2) segmentos ajustados (k-means y fuzzy c-means que
-parten de los arquetipos) y muestra cuánto se movió cada arquetipo. El Excel de ejemplo `matlab/cap02/cap02_datos_ejemplo.xlsx` tiene una sola hoja
+parten de los arquetipos) y muestra cuánto se movió cada arquetipo. Está
+organizada como recorrido guiado en 5 pasos (punto de partida → rígido con
+silueta → difuso con pertenencias → rígido contra difuso → qué tanto corrigieron
+los datos a los arquetipos). Las piezas explicativas (medidor de silueta con las
+zonas de Kaufman y Rousseeuw, 1990; silueta por cliente; clientes de ejemplo;
+seguros/ambiguos por segmento; conclusión en palabras) están en
+`paginas/cap02_didactico.js` y también se usan en la app principal del Cap. 2. El Excel de ejemplo `matlab/cap02/cap02_datos_ejemplo.xlsx` tiene una sola hoja
 («Datos»); las reglas de formato están en la app (sección «¿Cómo deben venir
 sus datos?»), que también puede descargar ese Excel. Lectura/escritura de Excel con SheetJS 0.18.5
 (`vendor/`, Apache-2.0), incluido dentro del HTML. Los datos no salen del

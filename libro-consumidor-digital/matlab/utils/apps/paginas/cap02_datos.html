@@ -13,9 +13,9 @@
       <div id="estadoArchivo" class="nota-caja" style="margin-top:10px"></div>
 
       <h3>2. Arquetipos (se definen aquí, no en el Excel)</h3>
-      <p class="nota" style="margin:0 0 6px">Cada tarjeta es un arquetipo de consumidor con sus valores <b>típicos</b>:
-        frecuencia mensual (compras al mes), ticket promedio (MXN por compra) y engagement digital (0–100).
-        El número de arquetipos es el número de segmentos k (de 2 a 8). Pueden cambiarles el nombre.</p>
+      <p class="nota" style="margin:0 0 6px">Cada tarjeta es un arquetipo: su <b>hipótesis</b> de un tipo de cliente, con sus valores
+        típicos de frecuencia (compras al mes), ticket (MXN por compra) y engagement (0–100). El número de arquetipos es el número de
+        segmentos (de 2 a 8). Los algoritmos parten de ellos y los corrigen con los datos reales (paso 5).</p>
       <div id="matrizArquetipos" class="tabla-scroll"></div>
       <div class="botones">
         <button id="btnAgregarArquetipo" class="btn sec peq" type="button">＋ Agregar arquetipo</button>
@@ -27,31 +27,85 @@
       <label class="campo"><span class="ayuda">Eje vertical</span><select id="ejeY"></select></label>
     </div>
 <!-- BLOQUE:FIGURAS -->
-        <div class="figura"><div class="grafica" id="fig1a"></div><div class="pie">Figura 1 (izq.) — <b>Arquetipos fijos</b>: cada cliente se asigna al arquetipo más cercano, tal como ustedes lo definieron (★).</div></div>
-        <div class="figura"><div class="grafica" id="fig1b"></div><div class="pie">Figura 1 (der.) — <b>Ajustados a los datos</b>: k-means parte de sus arquetipos (☆) y los mueve al centro real de cada grupo (✕). La flecha muestra cuánto se movió cada uno.</div></div>
-        <div class="figura"><div class="grafica" id="fig2" style="height:460px"></div><div class="pie">Figura 2 — Perfil de cada arquetipo: como lo definieron (línea punteada) y como quedó al ajustarse a los datos (línea continua, centros de fuzzy c-means). Escala 0–1 con el mínimo y máximo de sus datos.</div></div>
-        <div class="figura"><div class="grafica" id="fig3" style="height:460px"></div><div class="pie">Figura 3 — Clientes por arquetipo: asignación fija contra asignación ajustada.</div></div>
-        <div class="figura ancha"><div class="grafica" id="fig4" style="height:340px"></div><div class="pie">Figura 4 — Distribución de la pertenencia máxima u<sub>max</sub> de cada cliente. A la izquierda de la línea (u<sub>max</sub> &lt; 0.6) están los clientes ambiguos: no pertenecen claramente a ningún arquetipo.</div></div>
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">1</span>Punto de partida: sus clientes y sus arquetipos</h3>
+          <div class="explica"><p>Cada círculo es un cliente de su archivo; cada ★ es un arquetipo que ustedes propusieron. Las variables
+            están <b>estandarizadas</b> (0 = promedio de sus clientes; ±1 = una desviación estándar arriba o abajo) para que pesos,
+            compras al mes y puntos de engagement se puedan comparar en la misma escala.</p></div>
+          <div class="paso-graficas"><div class="figura"><div class="grafica" id="figInicio"></div></div></div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">2</span>Segmentación RÍGIDA (k-means): cada cliente en un solo segmento</h3>
+          <div class="explica"><p>k-means asigna cada cliente al segmento más cercano y recalcula el centro de cada segmento hasta que ya no
+            cambia nada. El resultado es un «sí o no»: el cliente es Leal o no lo es, sin matices.</p>
+            <p><b>¿Qué es la silueta?</b> Para cada cliente compara dos distancias: qué tan cerca está de los clientes de <i>su</i> segmento y qué
+            tan cerca está del segmento vecino. Va de −1 a 1: <b>cerca de 1</b> = está claramente en su lugar; <b>cerca de 0</b> = está en la
+            frontera entre dos segmentos; <b>negativa</b> = se parece más al segmento vecino. La <b>silueta promedio</b> resume qué tan bien
+            separados quedaron los segmentos (zonas de Kaufman y Rousseeuw, 1990):</p>
+            <div id="medidorSilueta"></div></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figRigido"></div><div class="pie">Cada cliente con el color de su único segmento; ✕ = centro final de cada segmento.</div></div>
+            <div class="figura"><div class="grafica" id="figSilueta" style="height:460px"></div><div class="pie">Barras largas = clientes bien ubicados. Barras cortas o negativas = clientes en la frontera: el rígido los asigna igual, sin avisar.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">3</span>Segmentación DIFUSA (fuzzy c-means): cada cliente pertenece «un poco» a cada segmento</h3>
+          <div class="explica"><p>Fuzzy c-means no obliga a elegir: le da a cada cliente un <b>% de pertenencia</b> a cada segmento, y esos % suman
+            100. Un cliente con 90 % Leal es claramente Leal; uno con 50 % Leal y 45 % Intermedio es una mezcla. Si ningún segmento llega al
+            <b>60 %</b>, decimos que su pertenencia es <b>ambigua</b>.</p></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figDifuso"></div><div class="pie">Color y tamaño = pertenencia máxima: puntos grandes y oscuros = clientes ambiguos.</div></div>
+            <div class="figura"><div class="grafica" id="figEjemplos" style="height:460px"></div><div class="pie">Clientes reales de su archivo: el más típico de cada segmento y los 3 más ambiguos. Debajo de cada cliente, dónde lo puso el método rígido.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">4</span>Rígido contra difuso: ¿qué ve cada uno?</h3>
+          <div id="kpisComparacion" class="kpis"></div>
+          <div class="explica" id="conclusionComparacion"></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figSeguros"></div><div class="pie">Cada barra es un segmento según k-means. La parte dorada son los clientes que el difuso considera ambiguos.</div></div>
+            <div class="figura"><div class="grafica" id="figLadoALado"></div><div class="pie">Los mismos clientes: rellenos = seguros; con borde dorado = ambiguos (el rígido les asignó un segmento de todos modos).</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">5</span>¿Sus arquetipos describían bien a sus clientes?</h3>
+          <div class="explica"><p><b>«Ajustar»</b> significa que el algoritmo mueve cada arquetipo al lugar donde de verdad están los clientes que
+            se le parecen (el promedio de su segmento). Si el arquetipo casi no se mueve, su hipótesis era buena; si se mueve mucho, los
+            datos la corrigen. El cambio se mide en desviaciones estándar: <b>menos de 0.25 = casi igual</b>, 0.25 a 0.75 = cambió algo,
+            <b>más de 0.75 = cambió mucho</b>.</p></div>
+          <div id="tablaPerfiles" class="tabla-scroll"></div>
+          <div class="paso-graficas" style="margin-top:10px">
+            <div class="figura"><div class="grafica" id="figRadar" style="height:460px"></div><div class="pie">Línea punteada = como lo propusieron; línea continua = como es en sus datos. Escala 0–1 entre el mínimo y el máximo de cada variable.</div></div>
+            <div class="figura"><div class="grafica" id="figMovimiento"></div><div class="pie">☆ = arquetipo propuesto; ✕ = dónde quedó; la flecha es la corrección que hicieron los datos.</div></div>
+          </div>
+          <div class="botones no-imprimir">
+            <button id="btnDescargarResultados" class="btn" type="button">Descargar resultados por cliente (Excel)</button>
+          </div>
+          <p class="nota">El Excel incluye, para cada cliente: su segmento rígido, su % de pertenencia a cada segmento difuso, si es ambiguo, su
+            silueta y el arquetipo propuesto más cercano; más hojas con los arquetipos (propuestos y ajustados) y el resumen.</p>
+        </div>
 <!-- BLOQUE:NOTA_COMPARAR -->
-Guarden una corrida por cada propuesta de arquetipos que quieran comparar (por ejemplo, los del libro contra los suyos,
-o 3 contra 4 arquetipos), o por cada archivo de datos. El cuadro registra, para los arquetipos fijos y para los ajustados,
-la silueta y el % de pertenencia ambigua, además del % de clientes que cambian de segmento al ajustar.
+Guarden una corrida por cada propuesta que quieran comparar: otros arquetipos (los del libro contra los suyos), 3 contra 4 segmentos,
+u otro archivo de clientes. El cuadro registra la silueta del rígido, el % de ambiguos del difuso y cuánto corrigieron los datos a sus
+arquetipos.
 <!-- BLOQUE:FIGURAS_COMPARACION -->
-        <div class="figura"><div class="grafica" id="comp1"></div><div class="pie">Silueta promedio por caso: arquetipos fijos contra ajustados (más alta = segmentos mejor separados).</div></div>
-        <div class="figura"><div class="grafica" id="comp2"></div><div class="pie">% de pertenencia ambigua por caso: arquetipos fijos contra ajustados.</div></div>
+        <div class="figura"><div class="grafica" id="comp1"></div><div class="pie">Silueta promedio del rígido por caso, sobre las zonas de interpretación.</div></div>
+        <div class="figura"><div class="grafica" id="comp2"></div><div class="pie">% de clientes ambiguos según el difuso, por caso.</div></div>
 <!-- BLOQUE:SECCIONES_EXTRA -->
-    <section class="panel" id="panelPerfiles">
-      <h2>Arquetipos: definidos contra ajustados</h2>
-      <p class="nota">Para cada arquetipo: cuántos clientes quedan en él y sus valores típicos como ustedes los definieron → como
-        quedaron al ajustarse a los datos reales (centros de fuzzy c-means). El <b>desplazamiento</b> mide cuánto se movió el
-        arquetipo en unidades estandarizadas (desviaciones estándar): cerca de 0 = su arquetipo describe bien a esos clientes;
-        mayor que 1 = los datos contradicen su propuesta.</p>
-      <div id="tablaPerfiles" class="tabla-scroll"></div>
-      <div class="botones no-imprimir">
-        <button id="btnDescargarResultados" class="btn" type="button">Descargar resultados por cliente (Excel)</button>
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>Arquetipo</b>Un cliente «típico» que ustedes proponen (p. ej. Leal: compra 4 veces al mes, gasta $900). Es una hipótesis.</div>
+        <div class="concepto"><b>Segmentación rígida (k-means)</b>Cada cliente va a un solo segmento. Respuesta de sí o no, sin matices.</div>
+        <div class="concepto"><b>Segmentación difusa (fuzzy c-means)</b>Cada cliente tiene un % de pertenencia a cada segmento (suman 100 %).</div>
+        <div class="concepto"><b>Silueta</b>De −1 a 1: qué tan bien ubicado está un cliente en su segmento rígido. El promedio mide la calidad de toda la segmentación.</div>
+        <div class="concepto"><b>Pertenencia ambigua</b>Ningún segmento llega a 60 %: el cliente es una mezcla. El rígido lo esconde; el difuso lo muestra.</div>
+        <div class="concepto"><b>Ajustar</b>Mover cada arquetipo al promedio real de los clientes que se le parecen. Mide qué tan buena era su hipótesis.</div>
       </div>
-      <p class="nota">El Excel de resultados incluye, para cada cliente: su arquetipo fijo y su pertenencia a cada arquetipo tal como
-        se definió, su segmento ajustado y su pertenencia ajustada, y si cambió de segmento; más hojas con los arquetipos y el resumen.</p>
     </section>
 
     <section class="panel" id="panelDatos">

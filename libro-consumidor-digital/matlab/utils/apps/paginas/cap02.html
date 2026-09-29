@@ -27,3 +27,31 @@ ambigua de cada una. El botón «Caso C» agrega un arquetipo de <em>ejemplo</em
         <div class="figura"><div class="grafica" id="comp1"></div><div class="pie">Silueta promedio de k-means por caso (más alta = segmentos rígidos mejor separados).</div></div>
         <div class="figura"><div class="grafica" id="comp2"></div><div class="pie">% de consumidores con pertenencia ambigua (u<sub>max</sub> &lt; 0.6) por caso.</div></div>
         <div class="figura ancha"><div class="grafica" id="comp3"></div><div class="pie">Curvas del codo de todos los casos guardados (● = k usado en ese caso).</div></div>
+<!-- BLOQUE:SECCIONES_EXTRA -->
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>Arquetipo</b>Un tipo de cliente «típico» (cada fila de centrosTipicos): de él se simulan clientes parecidos.</div>
+        <div class="concepto"><b>Segmentación rígida (k-means)</b>Cada cliente va a un solo segmento. Respuesta de sí o no, sin matices.</div>
+        <div class="concepto"><b>Segmentación difusa (fuzzy c-means)</b>Cada cliente tiene un % de pertenencia a cada segmento (suman 100 %).</div>
+        <div class="concepto"><b>Silueta</b>De −1 a 1: qué tan bien ubicado está un cliente en su segmento rígido. El promedio mide la calidad de toda la segmentación.</div>
+        <div class="concepto"><b>Pertenencia ambigua</b>Ningún segmento llega a 60 %: el cliente es una mezcla. El rígido lo esconde; el difuso lo muestra.</div>
+      </div>
+    </section>
+
+    <section class="panel" id="panelRigidoDifuso">
+      <h2>Rígido contra difuso: ¿qué ve cada uno?</h2>
+      <div class="explica"><p><b>¿Qué es la silueta?</b> Para cada cliente compara qué tan cerca está de los clientes de <i>su</i> segmento y
+        qué tan cerca está del segmento vecino. Va de −1 a 1: <b>cerca de 1</b> = claramente en su lugar; <b>cerca de 0</b> = en la frontera;
+        <b>negativa</b> = se parece más al vecino. La silueta promedio resume la calidad de la segmentación rígida (zonas de Kaufman y
+        Rousseeuw, 1990):</p><div id="medidorSilueta"></div></div>
+      <div id="kpisComparacion" class="kpis"></div>
+      <div class="explica" id="conclusionComparacion"></div>
+      <div class="paso-graficas">
+        <div class="figura"><div class="grafica" id="figSilueta" style="height:440px"></div><div class="pie">Una barra por cliente. Barras cortas o negativas = clientes en la frontera que el rígido asigna sin avisar.</div></div>
+        <div class="figura"><div class="grafica" id="figEjemplos" style="height:440px"></div><div class="pie">El cliente más típico de cada segmento y los 3 más ambiguos, con su % de pertenencia a cada segmento (difuso); debajo de cada uno, dónde lo puso el rígido.</div></div>
+        <div class="figura"><div class="grafica" id="figSeguros"></div><div class="pie">Cada barra es un segmento según k-means; la parte dorada son los clientes que el difuso considera ambiguos.</div></div>
+      </div>
+      <p class="nota">Complemento de la app (no está en el .m): usa los mismos resultados de k-means y fuzzy c-means que imprime el script.</p>
+    </section>
+

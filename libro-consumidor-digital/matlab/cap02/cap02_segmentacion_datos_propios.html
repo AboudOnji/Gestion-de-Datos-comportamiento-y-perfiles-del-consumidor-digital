@@ -156,6 +156,39 @@ ol.reglas li { margin: 4px 0; }
 .arq-vals label span { display: block; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .arq-vals label i { font-style: normal; opacity: .8; }
 .arq-vals input { text-align: right; padding: 4px 5px; }
+/* recorrido didáctico del Cap. 2 */
+.paso { grid-column: 1 / -1; border-top: 2px solid var(--borde); padding-top: 12px; margin-top: 4px; }
+.paso:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.paso h3.paso-titulo { text-transform: none; letter-spacing: 0; font-size: 1.02rem; color: var(--guinda); margin: 0 0 4px; }
+.paso h3.paso-titulo .num { display: inline-block; background: var(--guinda); color: #fff; border-radius: 999px; width: 1.6em; height: 1.6em; line-height: 1.6em; text-align: center; font-size: .85rem; margin-right: 6px; }
+.explica { font-size: .88rem; background: var(--acento-suave); border-left: 3px solid var(--dorado); border-radius: 4px; padding: 8px 12px; margin: 6px 0 10px; }
+.explica p { margin: 4px 0; }
+.paso-graficas { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 16px; }
+@media (max-width: 500px) { .paso-graficas { grid-template-columns: 1fr; } }
+.medidor { margin: 8px 0 4px; max-width: 620px; }
+.medidor-barra { position: relative; height: 30px; border-radius: 6px; overflow: visible; }
+.medidor-zona { position: absolute; top: 0; height: 100%; display: flex; align-items: center; justify-content: center; font-size: .72rem; color: #2b2326; }
+.medidor-zona:first-child { border-radius: 6px 0 0 6px; } .medidor-zona:nth-child(4) { border-radius: 0 6px 6px 0; }
+.medidor-zona span { white-space: nowrap; overflow: hidden; }
+.medidor-aguja { position: absolute; top: -6px; height: 42px; border-left: 3px solid var(--guinda); }
+.medidor-aguja b { position: absolute; top: -18px; left: -14px; font-size: .8rem; color: var(--guinda); }
+.medidor-escala { position: relative; height: 16px; font-size: .7rem; color: var(--texto-suave); }
+.medidor-escala span { position: absolute; transform: translateX(-50%); }
+.medidor-escala span:nth-child(1) { left: 0; transform: none; } .medidor-escala span:nth-child(2) { left: 50%; }
+.medidor-escala span:nth-child(3) { left: 62.5%; } .medidor-escala span:nth-child(4) { left: 75%; }
+.medidor-escala span:nth-child(5) { left: 85%; } .medidor-escala span:nth-child(6) { right: 0; left: auto; transform: none; }
+.veredicto { font-size: .92rem; margin: 6px 0; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 8px 0; }
+.kpi { border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; background: var(--panel); }
+.kpi .v { font-size: 1.5rem; font-weight: 700; color: var(--guinda); line-height: 1.2; }
+.kpi .t { font-size: .78rem; color: var(--texto-suave); }
+ul.conclusion { margin: 6px 0; padding-left: 20px; font-size: .9rem; }
+ul.conclusion li { margin: 4px 0; }
+.conceptos { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-top: 6px; }
+.concepto { border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; font-size: .85rem; }
+.concepto b { color: var(--guinda); display: block; margin-bottom: 2px; }
+.veredicto-arq { font-weight: 600; }
+.veredicto-arq.igual { color: var(--ok); } .veredicto-arq.algo { color: #B07A1F; } .veredicto-arq.mucho { color: var(--alerta); }
 
 </style>
 </head>
@@ -193,9 +226,9 @@ ol.reglas li { margin: 4px 0; }
       <div id="estadoArchivo" class="nota-caja" style="margin-top:10px"></div>
 
       <h3>2. Arquetipos (se definen aquí, no en el Excel)</h3>
-      <p class="nota" style="margin:0 0 6px">Cada tarjeta es un arquetipo de consumidor con sus valores <b>típicos</b>:
-        frecuencia mensual (compras al mes), ticket promedio (MXN por compra) y engagement digital (0–100).
-        El número de arquetipos es el número de segmentos k (de 2 a 8). Pueden cambiarles el nombre.</p>
+      <p class="nota" style="margin:0 0 6px">Cada tarjeta es un arquetipo: su <b>hipótesis</b> de un tipo de cliente, con sus valores
+        típicos de frecuencia (compras al mes), ticket (MXN por compra) y engagement (0–100). El número de arquetipos es el número de
+        segmentos (de 2 a 8). Los algoritmos parten de ellos y los corrigen con los datos reales (paso 5).</p>
       <div id="matrizArquetipos" class="tabla-scroll"></div>
       <div class="botones">
         <button id="btnAgregarArquetipo" class="btn sec peq" type="button">＋ Agregar arquetipo</button>
@@ -226,19 +259,75 @@ ol.reglas li { margin: 4px 0; }
       <h2>Figuras</h2>
       <p class="nota no-imprimir">Pasen el cursor sobre las curvas para leer valores exactos. Para descargar una figura en PNG usen el ícono de cámara 📷 de su esquina superior derecha.</p>
       <div class="figuras">
-        <div class="figura"><div class="grafica" id="fig1a"></div><div class="pie">Figura 1 (izq.) — <b>Arquetipos fijos</b>: cada cliente se asigna al arquetipo más cercano, tal como ustedes lo definieron (★).</div></div>
-        <div class="figura"><div class="grafica" id="fig1b"></div><div class="pie">Figura 1 (der.) — <b>Ajustados a los datos</b>: k-means parte de sus arquetipos (☆) y los mueve al centro real de cada grupo (✕). La flecha muestra cuánto se movió cada uno.</div></div>
-        <div class="figura"><div class="grafica" id="fig2" style="height:460px"></div><div class="pie">Figura 2 — Perfil de cada arquetipo: como lo definieron (línea punteada) y como quedó al ajustarse a los datos (línea continua, centros de fuzzy c-means). Escala 0–1 con el mínimo y máximo de sus datos.</div></div>
-        <div class="figura"><div class="grafica" id="fig3" style="height:460px"></div><div class="pie">Figura 3 — Clientes por arquetipo: asignación fija contra asignación ajustada.</div></div>
-        <div class="figura ancha"><div class="grafica" id="fig4" style="height:340px"></div><div class="pie">Figura 4 — Distribución de la pertenencia máxima u<sub>max</sub> de cada cliente. A la izquierda de la línea (u<sub>max</sub> &lt; 0.6) están los clientes ambiguos: no pertenecen claramente a ningún arquetipo.</div></div>
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">1</span>Punto de partida: sus clientes y sus arquetipos</h3>
+          <div class="explica"><p>Cada círculo es un cliente de su archivo; cada ★ es un arquetipo que ustedes propusieron. Las variables
+            están <b>estandarizadas</b> (0 = promedio de sus clientes; ±1 = una desviación estándar arriba o abajo) para que pesos,
+            compras al mes y puntos de engagement se puedan comparar en la misma escala.</p></div>
+          <div class="paso-graficas"><div class="figura"><div class="grafica" id="figInicio"></div></div></div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">2</span>Segmentación RÍGIDA (k-means): cada cliente en un solo segmento</h3>
+          <div class="explica"><p>k-means asigna cada cliente al segmento más cercano y recalcula el centro de cada segmento hasta que ya no
+            cambia nada. El resultado es un «sí o no»: el cliente es Leal o no lo es, sin matices.</p>
+            <p><b>¿Qué es la silueta?</b> Para cada cliente compara dos distancias: qué tan cerca está de los clientes de <i>su</i> segmento y qué
+            tan cerca está del segmento vecino. Va de −1 a 1: <b>cerca de 1</b> = está claramente en su lugar; <b>cerca de 0</b> = está en la
+            frontera entre dos segmentos; <b>negativa</b> = se parece más al segmento vecino. La <b>silueta promedio</b> resume qué tan bien
+            separados quedaron los segmentos (zonas de Kaufman y Rousseeuw, 1990):</p>
+            <div id="medidorSilueta"></div></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figRigido"></div><div class="pie">Cada cliente con el color de su único segmento; ✕ = centro final de cada segmento.</div></div>
+            <div class="figura"><div class="grafica" id="figSilueta" style="height:460px"></div><div class="pie">Barras largas = clientes bien ubicados. Barras cortas o negativas = clientes en la frontera: el rígido los asigna igual, sin avisar.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">3</span>Segmentación DIFUSA (fuzzy c-means): cada cliente pertenece «un poco» a cada segmento</h3>
+          <div class="explica"><p>Fuzzy c-means no obliga a elegir: le da a cada cliente un <b>% de pertenencia</b> a cada segmento, y esos % suman
+            100. Un cliente con 90 % Leal es claramente Leal; uno con 50 % Leal y 45 % Intermedio es una mezcla. Si ningún segmento llega al
+            <b>60 %</b>, decimos que su pertenencia es <b>ambigua</b>.</p></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figDifuso"></div><div class="pie">Color y tamaño = pertenencia máxima: puntos grandes y oscuros = clientes ambiguos.</div></div>
+            <div class="figura"><div class="grafica" id="figEjemplos" style="height:460px"></div><div class="pie">Clientes reales de su archivo: el más típico de cada segmento y los 3 más ambiguos. Debajo de cada cliente, dónde lo puso el método rígido.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">4</span>Rígido contra difuso: ¿qué ve cada uno?</h3>
+          <div id="kpisComparacion" class="kpis"></div>
+          <div class="explica" id="conclusionComparacion"></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figSeguros"></div><div class="pie">Cada barra es un segmento según k-means. La parte dorada son los clientes que el difuso considera ambiguos.</div></div>
+            <div class="figura"><div class="grafica" id="figLadoALado"></div><div class="pie">Los mismos clientes: rellenos = seguros; con borde dorado = ambiguos (el rígido les asignó un segmento de todos modos).</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">5</span>¿Sus arquetipos describían bien a sus clientes?</h3>
+          <div class="explica"><p><b>«Ajustar»</b> significa que el algoritmo mueve cada arquetipo al lugar donde de verdad están los clientes que
+            se le parecen (el promedio de su segmento). Si el arquetipo casi no se mueve, su hipótesis era buena; si se mueve mucho, los
+            datos la corrigen. El cambio se mide en desviaciones estándar: <b>menos de 0.25 = casi igual</b>, 0.25 a 0.75 = cambió algo,
+            <b>más de 0.75 = cambió mucho</b>.</p></div>
+          <div id="tablaPerfiles" class="tabla-scroll"></div>
+          <div class="paso-graficas" style="margin-top:10px">
+            <div class="figura"><div class="grafica" id="figRadar" style="height:460px"></div><div class="pie">Línea punteada = como lo propusieron; línea continua = como es en sus datos. Escala 0–1 entre el mínimo y el máximo de cada variable.</div></div>
+            <div class="figura"><div class="grafica" id="figMovimiento"></div><div class="pie">☆ = arquetipo propuesto; ✕ = dónde quedó; la flecha es la corrección que hicieron los datos.</div></div>
+          </div>
+          <div class="botones no-imprimir">
+            <button id="btnDescargarResultados" class="btn" type="button">Descargar resultados por cliente (Excel)</button>
+          </div>
+          <p class="nota">El Excel incluye, para cada cliente: su segmento rígido, su % de pertenencia a cada segmento difuso, si es ambiguo, su
+            silueta y el arquetipo propuesto más cercano; más hojas con los arquetipos (propuestos y ajustados) y el resumen.</p>
+        </div>
       </div>
     </section>
 
     <section class="panel" id="panelComparar">
       <h2>Comparar corridas (ejercicio propuesto)</h2>
-      <p class="nota">Guarden una corrida por cada propuesta de arquetipos que quieran comparar (por ejemplo, los del libro contra los suyos,
-o 3 contra 4 arquetipos), o por cada archivo de datos. El cuadro registra, para los arquetipos fijos y para los ajustados,
-la silueta y el % de pertenencia ambigua, además del % de clientes que cambian de segmento al ajustar.</p>
+      <p class="nota">Guarden una corrida por cada propuesta que quieran comparar: otros arquetipos (los del libro contra los suyos), 3 contra 4 segmentos,
+u otro archivo de clientes. El cuadro registra la silueta del rígido, el % de ambiguos del difuso y cuánto corrigieron los datos a sus
+arquetipos.</p>
       <div class="botones no-imprimir">
         <input id="etiquetaCaso" type="text" aria-label="Nombre del caso" style="max-width:170px">
         <button id="btnGuardarCaso" class="btn" type="button">＋ Guardar corrida como caso</button>
@@ -248,22 +337,20 @@ la silueta y el % de pertenencia ambigua, además del % de clientes que cambian 
       </div>
       <div id="tablaCasos" style="margin-top:10px"></div>
       <div class="figuras" style="margin-top:12px">
-        <div class="figura"><div class="grafica" id="comp1"></div><div class="pie">Silueta promedio por caso: arquetipos fijos contra ajustados (más alta = segmentos mejor separados).</div></div>
-        <div class="figura"><div class="grafica" id="comp2"></div><div class="pie">% de pertenencia ambigua por caso: arquetipos fijos contra ajustados.</div></div>
+        <div class="figura"><div class="grafica" id="comp1"></div><div class="pie">Silueta promedio del rígido por caso, sobre las zonas de interpretación.</div></div>
+        <div class="figura"><div class="grafica" id="comp2"></div><div class="pie">% de clientes ambiguos según el difuso, por caso.</div></div>
       </div>
     </section>
-    <section class="panel" id="panelPerfiles">
-      <h2>Arquetipos: definidos contra ajustados</h2>
-      <p class="nota">Para cada arquetipo: cuántos clientes quedan en él y sus valores típicos como ustedes los definieron → como
-        quedaron al ajustarse a los datos reales (centros de fuzzy c-means). El <b>desplazamiento</b> mide cuánto se movió el
-        arquetipo en unidades estandarizadas (desviaciones estándar): cerca de 0 = su arquetipo describe bien a esos clientes;
-        mayor que 1 = los datos contradicen su propuesta.</p>
-      <div id="tablaPerfiles" class="tabla-scroll"></div>
-      <div class="botones no-imprimir">
-        <button id="btnDescargarResultados" class="btn" type="button">Descargar resultados por cliente (Excel)</button>
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>Arquetipo</b>Un cliente «típico» que ustedes proponen (p. ej. Leal: compra 4 veces al mes, gasta $900). Es una hipótesis.</div>
+        <div class="concepto"><b>Segmentación rígida (k-means)</b>Cada cliente va a un solo segmento. Respuesta de sí o no, sin matices.</div>
+        <div class="concepto"><b>Segmentación difusa (fuzzy c-means)</b>Cada cliente tiene un % de pertenencia a cada segmento (suman 100 %).</div>
+        <div class="concepto"><b>Silueta</b>De −1 a 1: qué tan bien ubicado está un cliente en su segmento rígido. El promedio mide la calidad de toda la segmentación.</div>
+        <div class="concepto"><b>Pertenencia ambigua</b>Ningún segmento llega a 60 %: el cliente es una mezcla. El rígido lo esconde; el difuso lo muestra.</div>
+        <div class="concepto"><b>Ajustar</b>Mover cada arquetipo al promedio real de los clientes que se le parecen. Mide qué tan buena era su hipótesis.</div>
       </div>
-      <p class="nota">El Excel de resultados incluye, para cada cliente: su arquetipo fijo y su pertenencia a cada arquetipo tal como
-        se definió, su segmento ajustado y su pertenencia ajustada, y si cambió de segmento; más hojas con los arquetipos y el resumen.</p>
     </section>
 
     <section class="panel" id="panelDatos">
@@ -4999,6 +5086,49 @@ window.EJEMPLO_CAP02 = {"encabezados": ["ID_cliente", "Frecuencia_mensual", "Tic
     };
   }
 
+  // Interpretación de la silueta promedio según Kaufman y Rousseeuw (1990),
+  // Finding Groups in Data (Wiley): <=0.25 sin estructura sustancial,
+  // (0.25, 0.50] débil, (0.50, 0.70] razonable, > 0.70 fuerte.
+  function nivelSilueta(s) {
+    if (!Number.isFinite(s)) return { nivel: '—', frase: 'no se puede calcular' };
+    if (s > 0.70) return { nivel: 'fuerte', frase: 'los segmentos están muy bien separados' };
+    if (s > 0.50) return { nivel: 'razonable', frase: 'los segmentos se distinguen bien, con algo de frontera compartida' };
+    if (s > 0.25) return { nivel: 'débil', frase: 'los segmentos se traslapan bastante; podrían ser artificiales' };
+    return { nivel: 'sin estructura clara', frase: 'los datos casi no forman grupos separados' };
+  }
+
+  // Compara la segmentación rígida (etiquetas k-means 1..k) con la difusa
+  // (U de fuzzy c-means, k x n). Empareja cada segmento k-means con el
+  // segmento difuso con el que más clientes comparte (tabla de contingencia,
+  // emparejamiento voraz) y cuenta, dentro de cada segmento rígido, cuántos
+  // clientes son «seguros» (u_max >= 0.6) y cuántos «ambiguos».
+  function compararRigidoDifuso(etiqueta, U) {
+    const k = U.length, n = etiqueta.length;
+    const principal = etiqueta.map((_, i) => { let b = 0; for (let s = 1; s < k; s++) if (U[s][i] > U[b][i]) b = s; return b; });
+    const umax = etiqueta.map((_, i) => U[principal[i]][i]);
+    const tabla = Array.from({ length: k }, () => new Array(k).fill(0));
+    etiqueta.forEach((e, i) => { tabla[e - 1][principal[i]]++; });
+    const mapa = new Array(k).fill(-1), usados = new Set();
+    const pares = [];
+    for (let a = 0; a < k; a++) for (let c = 0; c < k; c++) pares.push([tabla[a][c], a, c]);
+    pares.sort((x, y) => y[0] - x[0]);
+    pares.forEach(([, a, c]) => { if (mapa[a] < 0 && !usados.has(c)) { mapa[a] = c; usados.add(c); } });
+    const coinciden = etiqueta.filter((e, i) => mapa[e - 1] === principal[i]).length;
+    const porSegmento = Array.from({ length: k }, (_, a) => {
+      const miembros = etiqueta.map((e, i) => e === a + 1 ? i : -1).filter(i => i >= 0);
+      const ambiguos = miembros.filter(i => umax[i] < 0.6).length;
+      return {
+        tam: miembros.length, seguros: miembros.length - ambiguos, ambiguos,
+        // «clientes efectivos» del segmento difuso emparejado: suma de pertenencias
+        tamDifuso: U[mapa[a]].reduce((t, u) => t + u, 0)
+      };
+    });
+    return {
+      mapa, principal, umax, coinciden, pctCoinciden: 100 * coinciden / n,
+      ambiguos: umax.filter(u => u < 0.6).length, porSegmento
+    };
+  }
+
   // Complemento de la app (no está en el .m): suma de distancias intra-cluster
   // de k-means para k = 1..kMax, para discutir el criterio del codo. Con
   // conSilueta, agrega la silueta promedio de cada k >= 2 (costo O(n^2)).
@@ -5013,7 +5143,7 @@ window.EJEMPLO_CAP02 = {"encabezados": ["ID_cliente", "Frecuencia_mensual", "Tic
     return salida;
   }
 
-  const M = { DEFECTO, NOMBRES_VARIABLES, analizar, analizarConArquetipos, ejecutar, codo };
+  const M = { DEFECTO, NOMBRES_VARIABLES, analizar, analizarConArquetipos, ejecutar, codo, nivelSilueta, compararRigidoDifuso };
   if (typeof module === 'object' && module.exports) module.exports = M;
   else raiz.Cap02 = M;
 })(this);
@@ -5174,9 +5304,142 @@ window.EJEMPLO_CAP02 = {"encabezados": ["ID_cliente", "Frecuencia_mensual", "Tic
 
 </script>
 <script>
+/* cap02_didactico.js — piezas visuales para EXPLICAR la segmentación rígida
+   (k-means) contra la difusa (fuzzy c-means) en las dos apps del Cap. 2:
+   medidor de silueta, gráfica de silueta cliente por cliente, clientes de
+   ejemplo con su % de pertenencia, seguros/ambiguos por segmento y una
+   conclusión en palabras. Usa Cap02.nivelSilueta y Cap02.compararRigidoDifuso. */
+(function (raiz) {
+  'use strict';
+  const S = Numerico.sprintf;
+  const D = {};
+  const color = s => UI.lineas[s % UI.lineas.length];
+
+  /* Medidor horizontal de -1 a 1 con las zonas de Kaufman y Rousseeuw (1990). */
+  D.medidorSilueta = function (contenedor, s) {
+    const niv = Cap02.nivelSilueta(s);
+    const pos = v => (100 * (v + 1) / 2).toFixed(2) + '%';
+    const zonas = [
+      { a: -1, b: 0.25, c: '#C9C2C5', t: 'sin estructura' },
+      { a: 0.25, b: 0.50, c: '#E3B26B', t: 'débil' },
+      { a: 0.50, b: 0.70, c: '#9CC59A', t: 'razonable' },
+      { a: 0.70, b: 1, c: '#4E9F62', t: 'fuerte' }
+    ];
+    let h = '<div class="medidor"><div class="medidor-barra">';
+    zonas.forEach(z => { h += '<div class="medidor-zona" style="left:' + pos(z.a) + ';width:' + (100 * (z.b - z.a) / 2) + '%;background:' + z.c + '"><span>' + z.t + '</span></div>'; });
+    if (Number.isFinite(s)) h += '<div class="medidor-aguja" style="left:' + pos(Math.max(-1, Math.min(1, s))) + '"><b>' + s.toFixed(2) + '</b></div>';
+    h += '</div><div class="medidor-escala"><span>−1</span><span>0</span><span>0.25</span><span>0.5</span><span>0.7</span><span>1</span></div></div>';
+    h += '<p class="veredicto">Silueta promedio = <b>' + (Number.isFinite(s) ? s.toFixed(3) : '—') + '</b> → estructura <b>' + niv.nivel + '</b>: ' + niv.frase + '.</p>';
+    contenedor.innerHTML = h;
+  };
+
+  /* Gráfica de silueta: una barra por cliente, agrupadas por segmento y
+     ordenadas de mayor a menor. Barra larga = bien ubicado; cerca de 0 = en
+     la frontera; negativa = se parece más a otro segmento. */
+  D.graficaSilueta = function (id, sil, etiqueta, nombres, archivo) {
+    const k = nombres.length;
+    const trazas = [];
+    let pos = 0;
+    const marcas = [];
+    for (let s = 1; s <= k; s++) {
+      const vals = sil.filter((_, i) => etiqueta[i] === s).sort((a, b) => b - a);
+      if (!vals.length) continue;
+      const ys = vals.map((_, j) => pos + j);
+      marcas.push({ y: pos + vals.length / 2, t: nombres[s - 1] });
+      trazas.push({ x: vals, y: ys, type: 'bar', orientation: 'h', name: nombres[s - 1], marker: { color: color(s - 1) },
+        width: 1, hovertemplate: 'silueta = %{x:.2f}<extra>' + UI.esc(nombres[s - 1]) + '</extra>' });
+      pos += vals.length + Math.max(3, Math.round(sil.length / 40));
+    }
+    const prom = Numerico.media(sil);
+    UI.graficar(id, trazas, {
+      title: 'Silueta de cada cliente', bargap: 0, showlegend: false,
+      xaxis: { title: { text: 'Silueta (−1 a 1): ¿qué tan bien ubicado está cada cliente?' }, range: [Math.min(-0.2, Math.min.apply(null, sil) - 0.05), 1] },
+      yaxis: { showticklabels: false, showgrid: false, zeroline: false, title: { text: 'Clientes (una barra = un cliente)' } },
+      shapes: [{ type: 'line', x0: prom, x1: prom, yref: 'paper', y0: 0, y1: 1, line: { dash: 'dot', color: UI.color.dorado, width: 2 } },
+        { type: 'line', x0: 0, x1: 0, yref: 'paper', y0: 0, y1: 1, line: { color: UI.esOscuro() ? '#aaa' : '#555', width: 1 } }],
+      annotations: [{ x: prom, yref: 'paper', y: 1.02, text: 'promedio ' + prom.toFixed(2), showarrow: false, font: { color: UI.color.dorado } }]
+        .concat(marcas.map(m => ({ x: 0.98, y: m.y, text: '<b>' + UI.esc(m.t) + '</b>', showarrow: false, xanchor: 'right', font: { size: 12 } })))
+    }, { archivo: archivo || 'silueta_por_cliente' });
+  };
+
+  /* Clientes de ejemplo: el más típico de cada segmento y los más ambiguos,
+     con su % de pertenencia a cada segmento (barra apilada al 100 %). */
+  D.graficaEjemplos = function (id, U, etiqueta, ids, nombres, comp, archivo) {
+    const k = nombres.length, n = etiqueta.length;
+    const filas = [];
+    for (let s = 0; s < k; s++) {
+      const c = comp.mapa.indexOf(s); // segmento difuso s ↔ segmento rígido c
+      let mejor = -1;
+      for (let i = 0; i < n; i++) if (comp.principal[i] === s && (mejor < 0 || U[s][i] > U[s][mejor])) mejor = i;
+      if (mejor >= 0) filas.push({ i: mejor, tipo: 'típico de ' + nombres[c >= 0 ? c : s] });
+    }
+    const orden = Array.from({ length: n }, (_, i) => i).sort((a, b) => comp.umax[a] - comp.umax[b]);
+    orden.slice(0, 3).forEach(i => filas.push({ i, tipo: 'ambiguo' }));
+    // dos renglones: quién es y dónde lo puso el método rígido
+    const etiquetasY = filas.map(f => '<b>' + UI.esc(ids[f.i]) + '</b> (' + UI.esc(f.tipo) + ')<br>rígido: ' + UI.esc(nombres[etiqueta[f.i] - 1]));
+    // nombre de cada segmento difuso = nombre del segmento rígido emparejado
+    const nombreDifuso = s => { const c = comp.mapa.indexOf(s); return nombres[c >= 0 ? c : s]; };
+    const colorDifuso = s => { const c = comp.mapa.indexOf(s); return color(c >= 0 ? c : s); };
+    const trazas = [];
+    for (let s = 0; s < k; s++) {
+      trazas.push({ y: etiquetasY, x: filas.map(f => 100 * U[s][f.i]), type: 'bar', orientation: 'h', name: nombreDifuso(s),
+        marker: { color: colorDifuso(s) }, text: filas.map(f => (100 * U[s][f.i] >= 8 ? (100 * U[s][f.i]).toFixed(0) + '%' : '')),
+        textposition: 'inside', insidetextanchor: 'middle', hovertemplate: '%{y}<br>' + UI.esc(nombreDifuso(s)) + ': %{x:.1f}%<extra></extra>' });
+    }
+    UI.graficar(id, trazas, {
+      title: 'Ejemplos: ¿a qué segmento pertenece cada cliente?', barmode: 'stack',
+      xaxis: { title: { text: '% de pertenencia a cada segmento (difuso)' }, range: [0, 100], ticksuffix: '%' },
+      yaxis: { autorange: 'reversed', automargin: true },
+      shapes: [{ type: 'line', x0: 60, x1: 60, yref: 'paper', y0: 0, y1: 1, line: { dash: 'dot', color: UI.esOscuro() ? '#fff' : '#000', width: 1.5 } }],
+      annotations: [{ x: 60, yref: 'paper', y: 1, yanchor: 'bottom', text: 'umbral 60 %', showarrow: false, font: { size: 11 } }],
+      legend: { orientation: 'h', y: -0.22 }, margin: { r: 20, b: 90 }
+    }, { archivo: archivo || 'pertenencia_ejemplos' });
+  };
+
+  /* Dentro de cada segmento rígido: cuántos clientes son seguros y cuántos ambiguos. */
+  D.graficaSegurosAmbiguos = function (id, comp, nombres, archivo) {
+    const P = comp.porSegmento;
+    UI.graficar(id, [
+      { x: nombres, y: P.map(p => p.seguros), type: 'bar', name: 'Seguros (pertenencia ≥ 60 %)', marker: { color: UI.color.teal },
+        text: P.map(p => String(p.seguros)), textposition: 'inside' },
+      { x: nombres, y: P.map(p => p.ambiguos), type: 'bar', name: 'Ambiguos (ningún segmento llega a 60 %)', marker: { color: UI.color.dorado },
+        text: P.map(p => p.ambiguos ? String(p.ambiguos) : ''), textposition: 'inside' }
+    ], {
+      title: 'Lo que el rígido no dice: ¿qué tan seguros son sus segmentos?', barmode: 'stack',
+      yaxis: { title: { text: 'Clientes (según k-means)' } }, legend: { orientation: 'h', y: -0.2 },
+      annotations: P.map((p, s) => ({ x: nombres[s], y: p.tam, yanchor: 'bottom', showarrow: false,
+        text: p.tam ? (100 * p.ambiguos / p.tam).toFixed(0) + '% ambiguos' : '', font: { size: 11 } }))
+    }, { archivo: archivo || 'seguros_ambiguos' });
+  };
+
+  /* Conclusión en palabras a partir de los números de la corrida. */
+  D.conclusion = function (comp, silProm, nombres) {
+    const n = comp.principal.length;
+    const niv = Cap02.nivelSilueta(silProm);
+    let peor = 0;
+    comp.porSegmento.forEach((p, s) => { if (p.tam && p.ambiguos / p.tam > (comp.porSegmento[peor].ambiguos / (comp.porSegmento[peor].tam || 1))) peor = s; });
+    const P = comp.porSegmento[peor];
+    return '<ul class="conclusion">' +
+      '<li><b>Rígido (k-means):</b> reparte a los ' + n + ' clientes en ' + nombres.length + ' segmentos, cada cliente en uno solo. ' +
+        'Su silueta de ' + silProm.toFixed(2) + ' indica una estructura <b>' + niv.nivel + '</b>.</li>' +
+      '<li><b>Difuso (fuzzy c-means):</b> coincide con el rígido en el segmento principal del <b>' + comp.pctCoinciden.toFixed(1) + '%</b> de los clientes, ' +
+        'pero revela que <b>' + comp.ambiguos + ' clientes (' + (100 * comp.ambiguos / n).toFixed(1) + '%)</b> no pertenecen claramente a ninguno: ' +
+        'el rígido los obliga a elegir un solo segmento.</li>' +
+      (P.ambiguos ? '<li>El segmento con más dudas es <b>' + UI.esc(nombres[peor]) + '</b>: ' + P.ambiguos + ' de sus ' + P.tam +
+        ' clientes (' + (100 * P.ambiguos / P.tam).toFixed(0) + '%) están a medio camino con otro segmento. Una campaña dirigida solo a «' +
+        UI.esc(nombres[peor]) + '» los trataría como si fueran típicos, y no lo son.</li>' : '') +
+      '</ul>';
+  };
+
+  raiz.Didactico = D;
+})(this);
+
 /* cap02_datos_app.js — segmentación con datos propios (Excel/CSV) y
-   arquetipos definidos en la página. Compara arquetipos FIJOS contra
-   segmentos AJUSTADOS a los datos (Cap02.analizarConArquetipos). */
+   arquetipos definidos en la página, como recorrido guiado en 5 pasos:
+   punto de partida, rígido (k-means + silueta), difuso (fuzzy c-means +
+   pertenencia), rígido contra difuso, y qué tanto corrigieron los datos a
+   los arquetipos. Cálculo: Cap02.analizarConArquetipos; piezas visuales:
+   Didactico (cap02_didactico.js). */
 (function () {
   'use strict';
   const S = Numerico.sprintf;
@@ -5305,40 +5568,51 @@ window.EJEMPLO_CAP02 = {"encabezados": ["ID_cliente", "Frecuencia_mensual", "Tic
     const R = Cap02.analizarConArquetipos(M.datos, arq.map(a => a.valores));
     const n = M.datos.length;
     const nom = arq.map(a => a.nombre.trim());
+    const sil = Numerico.silhouette(R.X, R.ajustado.etiqueta);
+    const comp = Cap02.compararRigidoDifuso(R.ajustado.etiqueta, R.ajustado.U);
+    const niv = Cap02.nivelSilueta(R.ajustado.silProm);
+    const cambioMedio = Numerico.media(R.desplazamiento);
     const L = [];
-    L.push(S('=== Resultados con %d arquetipos, n=%d clientes ===', k, n));
+    L.push(S('=== Resultados: %d segmentos, %d clientes ===', k, n));
     L.push('Datos: ' + origen + (hoja ? ' (hoja «' + hoja + '»)' : ''));
-    L.push('Arquetipos: ' + nom.join(', '));
+    L.push('Arquetipos de partida: ' + nom.join(', '));
     if (M.descartadas.length) L.push(S('Filas descartadas por datos faltantes o no numéricos: %d', M.descartadas.length));
     L.push('');
-    L.push('--- (1) Arquetipos FIJOS (tal como ustedes los definieron) ---');
-    L.push(S('Asignación al arquetipo más cercano: silueta promedio = %.3f', R.fijo.silProm));
-    L.push(S('Pertenencia difusa: %.1f%% de los clientes no pertenece claramente (<60%%) a ningún arquetipo', 100 * R.fijo.ambiguos));
-    L.push('Clientes por arquetipo: ' + nom.map((x, s) => x + '=' + R.fijo.tam[s]).join(', '));
+    L.push('RÍGIDA (k-means) — cada cliente en UN solo segmento');
+    L.push(S('  Silueta promedio = %.3f  → estructura %s', R.ajustado.silProm, niv.nivel));
+    L.push('  Clientes por segmento: ' + nom.map((x, s) => x + '=' + R.ajustado.tam[s]).join(', '));
     L.push('');
-    L.push('--- (2) Segmentos AJUSTADOS a los datos (k-means y fuzzy c-means que parten de sus arquetipos) ---');
-    L.push(S('k-means: silueta promedio = %.3f', R.ajustado.silProm));
-    L.push(S('Fuzzy c-means: %.1f%% de los consumidores no tiene pertenencia dominante (<60%%) a ningún segmento', 100 * R.ajustado.ambiguos));
-    L.push('Clientes por segmento: ' + nom.map((x, s) => x + '=' + R.ajustado.tam[s]).join(', '));
-    L.push(S('Clientes que cambian de segmento al ajustar: %d (%.1f%%)', R.cambian, 100 * R.cambian / n));
-    L.push('Desplazamiento de cada arquetipo (desv. estándar): ' + nom.map((x, s) => x + '=' + R.desplazamiento[s].toFixed(2)).join(', '));
+    L.push('DIFUSA (fuzzy c-means) — cada cliente con un % de pertenencia a cada segmento');
+    L.push(S('  %.1f%% de los clientes tiene pertenencia ambigua (ningún segmento llega a 60%%)', 100 * comp.ambiguos / n));
+    L.push('');
+    L.push('RÍGIDA contra DIFUSA');
+    L.push(S('  Coinciden en el segmento principal de %.1f%% de los clientes.', comp.pctCoinciden));
+    L.push(S('  %d clientes que el rígido asigna a un solo segmento son, en realidad, una mezcla.', comp.ambiguos));
+    L.push('');
+    L.push('ARQUETIPOS: cuánto los corrigieron los datos (desv. estándar)');
+    L.push('  ' + nom.map((x, s) => x + '=' + R.desplazamiento[s].toFixed(2) + ' (' + veredictoCambio(R.desplazamiento[s]).t + ')').join(', '));
 
     const avisos = M.avisos.slice();
-    R.fijo.tam.forEach((t, s) => { if (t === 0) avisos.push('Ningún cliente tiene a «' + nom[s] + '» como su arquetipo más cercano: a todos se les parece más otro arquetipo.'); });
-    R.ajustado.tam.forEach((t, s) => { if (t === 0) avisos.push('Al ajustar, el segmento «' + nom[s] + '» quedó vacío: otro arquetipo describe mejor a esos clientes. Consideren quitarlo o cambiar sus valores.'); });
-    arq.forEach(function (a, s) {
+    R.ajustado.tam.forEach((t, s) => { if (t === 0) avisos.push('El segmento «' + nom[s] + '» quedó vacío: otro arquetipo describe mejor a esos clientes. Consideren quitarlo o cambiar sus valores.'); });
+    arq.forEach(function (a) {
       const fuera = a.valores.map((x, j) => (x < R.mu[j] - 3 * R.sd[j] || x > R.mu[j] + 3 * R.sd[j]) ? ETIQ[j] : null).filter(Boolean);
       if (fuera.length) avisos.push('El arquetipo «' + a.nombre + '» está muy lejos de sus datos en ' + fuera.join(' y ') + ' (más de 3 desviaciones estándar del promedio).');
     });
-    ultimo = { R, M, nom, k, n, arq };
+    ultimo = { R, M, nom, k, n, arq, sil, comp };
     return {
-      consola: L.join('\n'), avisos, R, M, nom, k, n, arq,
+      consola: L.join('\n'), avisos, R, M, nom, k, n, arq, sil, comp,
       metricas: {
         origen, arquetipos: nom.join(', '), n, k,
-        silFijo: R.fijo.silProm, ambFijo: 100 * R.fijo.ambiguos,
-        silAj: R.ajustado.silProm, ambAj: 100 * R.ajustado.ambiguos, pctCambian: 100 * R.cambian / n
+        silAj: R.ajustado.silProm, nivel: niv.nivel, ambAj: 100 * comp.ambiguos / n,
+        coinciden: comp.pctCoinciden, cambioMedio
       }
     };
+  }
+
+  function veredictoCambio(d) {
+    if (d < 0.25) return { t: 'casi igual', c: 'igual' };
+    if (d <= 0.75) return { t: 'cambió algo', c: 'algo' };
+    return { t: 'cambió mucho', c: 'mucho' };
   }
 
   /* ---------- figuras ---------- */
@@ -5348,91 +5622,101 @@ window.EJEMPLO_CAP02 = {"encabezados": ["ID_cliente", "Frecuencia_mensual", "Tic
     const R = r.R, k = r.k, nom = r.nom;
     const jx = Math.max(0, VARS.indexOf(UI.$('#ejeX').value)), jy = Math.max(0, VARS.indexOf(UI.$('#ejeY').value));
     const x = R.X.map(f => f[jx]), y = R.X.map(f => f[jy]);
-    const oscuro = UI.esOscuro(), tinta = oscuro ? '#fff' : '#000';
+    const tinta = UI.esOscuro() ? '#fff' : '#000';
     const ejes = {
       xaxis: { title: { text: VARS[jx] + ' (estandarizada)' } },
       yaxis: { title: { text: VARS[jy] + ' (estandarizada)' } },
-      legend: { orientation: 'h', y: -0.34 }, margin: { b: 110 }
+      legend: { orientation: 'h', y: -0.3 }, margin: { b: 110 }
     };
-    const puntos = function (etiqueta) {
+    const estrellas = (C, abiertas, nombre) => ({ x: C.map(c => c[jx]), y: C.map(c => c[jy]), type: 'scatter', mode: 'markers+text', name: nombre,
+      text: nom, textposition: 'top center', textfont: { color: tinta, size: 12 },
+      marker: { symbol: abiertas ? 'star-open' : 'star', size: 18, color: abiertas ? tinta : nom.map((_, s) => UI.lineas[s % UI.lineas.length]), line: { color: tinta, width: 1.5 } } });
+    const porSegmento = function (etiqueta, estilo) {
       const t = [];
       for (let s = 1; s <= k; s++) {
         const idx = etiqueta.map((e, i) => e === s ? i : -1).filter(i => i >= 0);
-        t.push({ x: idx.map(i => x[i]), y: idx.map(i => y[i]), type: 'scatter', mode: 'markers', name: nom[s - 1],
-          text: idx.map(i => r.M.ids[i]), hovertemplate: '%{text}<extra>' + UI.esc(nom[s - 1]) + '</extra>',
-          marker: { color: UI.lineas[(s - 1) % UI.lineas.length], size: 6, symbol: 'circle-open', line: { width: 1.5 } } });
+        t.push(Object.assign({ x: idx.map(i => x[i]), y: idx.map(i => y[i]), type: 'scatter', mode: 'markers', name: nom[s - 1],
+          text: idx.map(i => r.M.ids[i]), hovertemplate: '%{text}<extra>' + UI.esc(nom[s - 1]) + '</extra>' }, estilo(s - 1, idx)));
       }
       return t;
     };
-    // (1) fijos
-    const t1 = puntos(R.fijo.etiqueta);
-    t1.push({ x: R.Cz.map(c => c[jx]), y: R.Cz.map(c => c[jy]), type: 'scatter', mode: 'markers+text', name: 'arquetipos definidos',
-      text: nom, textposition: 'top center', textfont: { color: tinta, size: 12 },
-      marker: { symbol: 'star', size: 18, color: nom.map((_, s) => UI.lineas[s % UI.lineas.length]), line: { color: tinta, width: 1.5 } } });
-    UI.graficar('fig1a', t1, Object.assign({ title: S('Arquetipos fijos (silueta = %.2f, %.0f%% ambiguos)', R.fijo.silProm, 100 * R.fijo.ambiguos) }, ejes),
-      { archivo: 'arquetipos_fijos' });
 
-    // (2) ajustados, con flechas definido -> ajustado (centros k-means)
-    const t2 = puntos(R.ajustado.etiqueta);
+    // Paso 1: datos + arquetipos (sin colores de segmento todavía)
+    UI.graficar('figInicio', [
+      { x, y, type: 'scatter', mode: 'markers', name: 'clientes', text: r.M.ids, hovertemplate: '%{text}<extra></extra>',
+        marker: { color: UI.esOscuro() ? '#888' : '#9A9A9A', size: 6, symbol: 'circle-open', line: { width: 1.2 } } },
+      estrellas(R.Cz, false, 'arquetipos propuestos')
+    ], Object.assign({ title: S('%d clientes y %d arquetipos propuestos', r.n, k) }, ejes), { archivo: 'paso1_punto_de_partida' });
+
+    // Paso 2: rígido + silueta
+    Didactico.medidorSilueta(UI.$('#medidorSilueta'), R.ajustado.silProm);
     const Ckz = R.ajustado.centrosKmeans.map(c => c.map((v, j) => (v - R.mu[j]) / R.sd[j]));
-    t2.push({ x: R.Cz.map(c => c[jx]), y: R.Cz.map(c => c[jy]), type: 'scatter', mode: 'markers', name: 'definidos',
-      marker: { symbol: 'star-open', size: 16, color: tinta, line: { width: 1.5 } }, hoverinfo: 'skip' });
-    t2.push({ x: Ckz.map(c => c[jx]), y: Ckz.map(c => c[jy]), type: 'scatter', mode: 'markers+text', name: 'ajustados',
-      text: nom, textposition: 'top center', textfont: { color: tinta, size: 12 },
+    const t2 = porSegmento(R.ajustado.etiqueta, s => ({ marker: { color: UI.lineas[s % UI.lineas.length], size: 6, symbol: 'circle' } }));
+    t2.push({ x: Ckz.map(c => c[jx]), y: Ckz.map(c => c[jy]), type: 'scatter', mode: 'markers', name: 'centros',
       marker: { symbol: 'x-thin', size: 14, line: { width: 3, color: tinta } } });
-    const flechas = R.Cz.map((c, s) => ({ x: Ckz[s][jx], y: Ckz[s][jy], ax: c[jx], ay: c[jy], xref: 'x', yref: 'y', axref: 'x', ayref: 'y',
-      showarrow: true, arrowhead: 3, arrowsize: 1.2, arrowwidth: 2, arrowcolor: UI.lineas[s % UI.lineas.length], text: '' }));
-    UI.graficar('fig1b', t2, Object.assign({ title: S('Ajustados a los datos (silueta = %.2f, %.0f%% ambiguos)', R.ajustado.silProm, 100 * R.ajustado.ambiguos),
-      annotations: flechas }, ejes), { archivo: 'arquetipos_ajustados' });
+    UI.graficar('figRigido', t2, Object.assign({ title: S('Rígido: k-means (silueta = %.2f)', R.ajustado.silProm) }, ejes), { archivo: 'paso2_rigido' });
+    Didactico.graficaSilueta('figSilueta', r.sil, R.ajustado.etiqueta, nom, 'paso2_silueta');
 
-    // radar definido vs ajustado
+    // Paso 3: difuso
+    UI.graficar('figDifuso', [{
+      x, y, type: 'scatter', mode: 'markers', text: r.M.ids,
+      marker: { size: r.comp.umax.map(u => Math.sqrt(60 * (1 - u) + 15) * 1.6), color: r.comp.umax, colorscale: 'Viridis',
+        cmin: 1 / k, cmax: 1, colorbar: { title: { text: '% de su<br>segmento<br>principal', side: 'right' }, thickness: 14, tickformat: '.0%' } },
+      hovertemplate: '%{text}<br>pertenencia máxima = %{marker.color:.0%}<extra></extra>'
+    }], Object.assign({ title: S('Difuso: fuzzy c-means (%.0f%% ambiguos)', 100 * r.comp.ambiguos / r.n), showlegend: false }, ejes),
+    { archivo: 'paso3_difuso' });
+    Didactico.graficaEjemplos('figEjemplos', R.ajustado.U, R.ajustado.etiqueta, r.M.ids, nom, r.comp, 'paso3_ejemplos');
+
+    // Paso 4: rígido contra difuso
+    UI.$('#kpisComparacion').innerHTML =
+      '<div class="kpi"><div class="v">' + R.ajustado.silProm.toFixed(2) + '</div><div class="t">Silueta del rígido (' + Cap02.nivelSilueta(R.ajustado.silProm).nivel + ')</div></div>' +
+      '<div class="kpi"><div class="v">' + r.comp.pctCoinciden.toFixed(1) + '%</div><div class="t">Clientes en el mismo segmento principal con ambos métodos</div></div>' +
+      '<div class="kpi"><div class="v">' + r.comp.ambiguos + '</div><div class="t">Clientes ambiguos (' + (100 * r.comp.ambiguos / r.n).toFixed(1) + '%) que el rígido asigna sin avisar</div></div>';
+    UI.$('#conclusionComparacion').innerHTML = '<p><b>¿Qué dicen sus datos?</b></p>' + Didactico.conclusion(r.comp, R.ajustado.silProm, nom);
+    Didactico.graficaSegurosAmbiguos('figSeguros', r.comp, nom, 'paso4_seguros_ambiguos');
+    const t4 = porSegmento(R.ajustado.etiqueta, (s, idx) => ({
+      marker: { color: idx.map(i => r.comp.umax[i] < 0.6 ? 'rgba(0,0,0,0)' : UI.lineas[s % UI.lineas.length]), size: idx.map(i => r.comp.umax[i] < 0.6 ? 9 : 6),
+        line: { color: idx.map(i => r.comp.umax[i] < 0.6 ? UI.color.dorado : UI.lineas[s % UI.lineas.length]), width: idx.map(i => r.comp.umax[i] < 0.6 ? 2.5 : 1) } }
+    }));
+    UI.graficar('figLadoALado', t4, Object.assign({ title: 'Segmento rígido de cada cliente, marcando los ambiguos' }, ejes), { archivo: 'paso4_ambiguos' });
+
+    // Paso 5: arquetipos propuestos contra ajustados
+    dibujarTablaArquetipos(r);
     const cats = VARS.concat([VARS[0]]);
-    const t3 = [];
+    const t5 = [];
     nom.forEach(function (n, s) {
       const col = UI.lineas[s % UI.lineas.length];
       const pd = R.perfilesDefinidos[s], pa = R.perfilesAjustados[s];
-      t3.push({ type: 'scatterpolar', r: pd.concat([pd[0]]), theta: cats, mode: 'lines', name: n + ' (definido)', legendgroup: 'a' + s,
-        line: { color: col, width: 2, dash: 'dot' }, hovertemplate: '%{theta}: %{r:.2f}<extra>' + UI.esc(n) + ' definido</extra>' });
-      t3.push({ type: 'scatterpolar', r: pa.concat([pa[0]]), theta: cats, mode: 'lines+markers', name: n + ' (ajustado)', legendgroup: 'a' + s,
-        line: { color: col, width: 2.5 }, marker: { size: 6 }, hovertemplate: '%{theta}: %{r:.2f}<extra>' + UI.esc(n) + ' ajustado</extra>' });
+      t5.push({ type: 'scatterpolar', r: pd.concat([pd[0]]), theta: cats, mode: 'lines', name: n + ' (propuesto)', legendgroup: 'a' + s,
+        line: { color: col, width: 2, dash: 'dot' }, hovertemplate: '%{theta}: %{r:.2f}<extra>' + UI.esc(n) + ' propuesto</extra>' });
+      t5.push({ type: 'scatterpolar', r: pa.concat([pa[0]]), theta: cats, mode: 'lines+markers', name: n + ' (en sus datos)', legendgroup: 'a' + s,
+        line: { color: col, width: 2.5 }, marker: { size: 6 }, hovertemplate: '%{theta}: %{r:.2f}<extra>' + UI.esc(n) + ' en sus datos</extra>' });
     });
-    UI.graficar('fig2', t3, { title: 'Perfil definido (···) contra ajustado (—)', polar: { radialaxis: { range: [0, 1.05] } },
-      legend: { orientation: 'h', y: -0.12, font: { size: 10 } }, margin: { l: 110, r: 110, b: 90 } }, { archivo: 'arquetipos_radar' });
-
-    // clientes por arquetipo
-    UI.graficar('fig3', [
-      { x: nom, y: R.fijo.tam, type: 'bar', name: 'Fijos', marker: { color: UI.color.gris }, text: R.fijo.tam.map(String), textposition: 'outside', cliponaxis: false },
-      { x: nom, y: R.ajustado.tam, type: 'bar', name: 'Ajustados', marker: { color: UI.color.guinda }, text: R.ajustado.tam.map(String), textposition: 'outside', cliponaxis: false }
-    ], { title: 'Clientes por arquetipo', barmode: 'group', yaxis: { title: { text: 'Número de clientes' }, rangemode: 'tozero' },
-      legend: { orientation: 'h', y: -0.15 } }, { archivo: 'arquetipos_clientes' });
-
-    // distribución de u_max
-    const bins = { start: 1 / k - 1e-9, end: 1.0001, size: (1 - 1 / k) / 20 };
-    UI.graficar('fig4', [
-      { x: R.fijo.umax, type: 'histogram', name: 'Fijos', xbins: bins, marker: { color: UI.color.gris }, opacity: 0.75 },
-      { x: R.ajustado.umax, type: 'histogram', name: 'Ajustados', xbins: bins, marker: { color: UI.color.guinda }, opacity: 0.65 }
-    ], { title: 'Pertenencia máxima de cada cliente', barmode: 'overlay',
-      xaxis: { title: { text: 'u_max (1 = pertenece por completo a un arquetipo)' }, range: [1 / k, 1] },
-      yaxis: { title: { text: 'Clientes' } },
-      shapes: [{ type: 'line', x0: 0.6, x1: 0.6, yref: 'paper', y0: 0, y1: 1, line: { dash: 'dot', color: UI.color.dorado, width: 2 } }],
-      annotations: [{ x: 0.6, yref: 'paper', y: 1, text: 'ambiguos ←', showarrow: false, xanchor: 'right', yanchor: 'top' }] },
-    { archivo: 'arquetipos_pertenencia' });
-
-    dibujarTablaArquetipos(r);
+    UI.graficar('figRadar', t5, { title: 'Perfil propuesto (···) contra perfil real (—)', polar: { radialaxis: { range: [0, 1.05] } },
+      legend: { orientation: 'h', y: -0.12, font: { size: 10 } }, margin: { l: 110, r: 110, b: 90 } }, { archivo: 'paso5_radar' });
+    const flechas = R.Cz.map((c, s) => ({ x: Ckz[s][jx], y: Ckz[s][jy], ax: c[jx], ay: c[jy], xref: 'x', yref: 'y', axref: 'x', ayref: 'y',
+      showarrow: true, arrowhead: 3, arrowsize: 1.2, arrowwidth: 2.5, arrowcolor: UI.lineas[s % UI.lineas.length], text: '' }));
+    const t6 = porSegmento(R.ajustado.etiqueta, s => ({ marker: { color: UI.lineas[s % UI.lineas.length], size: 5, opacity: 0.35 }, hoverinfo: 'skip' }));
+    t6.push(estrellas(R.Cz, true, 'propuestos'));
+    t6.push({ x: Ckz.map(c => c[jx]), y: Ckz.map(c => c[jy]), type: 'scatter', mode: 'markers', name: 'ajustados',
+      marker: { symbol: 'x-thin', size: 14, line: { width: 3, color: tinta } } });
+    UI.graficar('figMovimiento', t6, Object.assign({ title: 'Cómo corrigieron los datos a sus arquetipos', annotations: flechas }, ejes),
+      { archivo: 'paso5_movimiento' });
   }
 
   function dibujarTablaArquetipos(r) {
     const R = r.R;
-    let h = '<table class="tabla"><thead><tr><th>Arquetipo</th><th>Clientes (fijo)</th><th>Clientes (ajustado)</th>' +
-      VARS.map(n => '<th>' + UI.esc(n) + '<br><span style="text-transform:none">definido → ajustado</span></th>').join('') +
-      '<th>Desplazamiento</th></tr></thead><tbody>';
+    let h = '<table class="tabla"><thead><tr><th>Arquetipo</th><th>Clientes</th>' +
+      VARS.map(n => '<th>' + UI.esc(n) + '<br><span style="text-transform:none">propuesto → real</span></th>').join('') +
+      '<th>Cambio</th><th>Veredicto</th></tr></thead><tbody>';
     r.nom.forEach(function (n, s) {
+      const v = veredictoCambio(R.desplazamiento[s]);
       h += '<tr><td><span class="chip-color" style="background:' + UI.lineas[s % UI.lineas.length] + '"></span>' + UI.esc(n) + '</td><td>' +
-        R.fijo.tam[s] + '</td><td>' + R.ajustado.tam[s] + '</td>' +
-        r.arq[s].valores.map((v, j) => '<td>' + fmt(v) + ' → <b>' + fmt(R.ajustado.centrosFCM[s][j]) + '</b></td>').join('') +
-        '<td>' + R.desplazamiento[s].toFixed(2) + '</td></tr>';
+        R.ajustado.tam[s] + '</td>' +
+        r.arq[s].valores.map((x, j) => '<td>' + fmt(x) + ' → <b>' + fmt(R.ajustado.centrosFCM[s][j]) + '</b></td>').join('') +
+        '<td>' + R.desplazamiento[s].toFixed(2) + '</td><td class="izq"><span class="veredicto-arq ' + v.c + '">' + v.t + '</span></td></tr>';
     });
-    h += '<tr><td><i>Promedio de sus datos</i></td><td>' + r.n + '</td><td>' + r.n + '</td>' + R.mu.map(v => '<td><i>' + fmt(v) + '</i></td>').join('') + '<td></td></tr>';
+    h += '<tr><td><i>Promedio de sus clientes</i></td><td>' + r.n + '</td>' + R.mu.map(x => '<td><i>' + fmt(x) + '</i></td>').join('') + '<td></td><td></td></tr>';
     h += '</tbody></table>';
     UI.$('#tablaPerfiles').innerHTML = h;
   }
@@ -5440,50 +5724,51 @@ window.EJEMPLO_CAP02 = {"encabezados": ["ID_cliente", "Frecuencia_mensual", "Tic
   /* ---------- descargas ---------- */
   function descargarResultados() {
     if (!ultimo) { alert('Primero carguen datos y definan sus arquetipos.'); return; }
-    const { R, M, nom, k, n, arq } = ultimo;
+    const { R, M, nom, k, n, sil, comp } = ultimo;
     const idNombre = tabla.idCol || 'Fila';
+    const nombreDifuso = s => { const c = comp.mapa.indexOf(s); return nom[c >= 0 ? c : s]; };
     const filas = M.datos.map(function (d, i) {
       const f = {};
       f[idNombre] = M.ids[i];
       VARS.forEach((nm, j) => { f[nm] = d[j]; });
-      f.Arquetipo_fijo = nom[R.fijo.etiqueta[i] - 1];
-      nom.forEach((a, s) => { f['Pertenencia_fija_' + a] = +R.fijo.U[s][i].toFixed(4); });
-      f.Ambiguo_fijo = R.fijo.umax[i] < 0.6 ? 'Sí' : 'No';
-      f.Segmento_ajustado = nom[R.ajustado.etiqueta[i] - 1];
-      nom.forEach((a, s) => { f['Pertenencia_ajustada_' + a] = +R.ajustado.U[s][i].toFixed(4); });
-      f.Ambiguo_ajustado = R.ajustado.umax[i] < 0.6 ? 'Sí' : 'No';
-      f.Cambio_de_segmento = R.fijo.etiqueta[i] !== R.ajustado.etiqueta[i] ? 'Sí' : 'No';
+      f.Segmento_rigido = nom[R.ajustado.etiqueta[i] - 1];
+      f.Silueta = +sil[i].toFixed(4);
+      for (let s = 0; s < k; s++) f['Pertenencia_' + nombreDifuso(s)] = +R.ajustado.U[s][i].toFixed(4);
+      f.Segmento_difuso_principal = nombreDifuso(comp.principal[i]);
+      f.Pertenencia_maxima = +comp.umax[i].toFixed(4);
+      f.Ambiguo = comp.umax[i] < 0.6 ? 'Sí' : 'No';
+      f.Arquetipo_propuesto_mas_cercano = nom[R.fijo.etiqueta[i] - 1];
       return f;
     });
     const arquetiposHoja = nom.map(function (a, s) {
-      const f = { Arquetipo: a, Clientes_fijo: R.fijo.tam[s], Clientes_ajustado: R.ajustado.tam[s] };
-      VARS.forEach((nm, j) => { f[nm + '_definido'] = arq[s].valores[j]; f[nm + '_ajustado'] = +R.ajustado.centrosFCM[s][j].toFixed(4); });
-      f.Desplazamiento_desv_est = +R.desplazamiento[s].toFixed(4);
+      const f = { Arquetipo: a, Clientes_rigido: R.ajustado.tam[s] };
+      VARS.forEach((nm, j) => { f[nm + '_propuesto'] = ultimo.arq[s].valores[j]; f[nm + '_real'] = +R.ajustado.centrosFCM[s][j].toFixed(4); });
+      f.Cambio_desv_est = +R.desplazamiento[s].toFixed(4);
+      f.Veredicto = veredictoCambio(R.desplazamiento[s]).t;
       return f;
     });
     const resumen = [
       ['Instituto Politécnico Nacional - Dr. Aboud Barsekh Onji'],
-      ['Segmentación con datos propios y arquetipos definidos (Cap. 2)'],
+      ['Segmentación rígida contra difusa con datos propios (Cap. 2)'],
       [],
       ['Datos', origen + (hoja ? ' (hoja ' + hoja + ')' : '')],
       ['Fecha del análisis', new Date().toLocaleString('es-MX')],
       ['Clientes analizados', n],
       ['Filas descartadas', M.descartadas.length],
-      ['Arquetipos (k)', k + ': ' + nom.join(', ')],
+      ['Segmentos (arquetipos)', k + ': ' + nom.join(', ')],
       [],
-      ['', 'Arquetipos fijos', 'Ajustados a los datos'],
-      ['Silueta promedio', +R.fijo.silProm.toFixed(4), +R.ajustado.silProm.toFixed(4)],
-      ['% pertenencia ambigua (u_max < 0.6)', +(100 * R.fijo.ambiguos).toFixed(2), +(100 * R.ajustado.ambiguos).toFixed(2)],
-      ['Clientes que cambian de segmento al ajustar', R.cambian],
+      ['Silueta promedio (rígido, k-means)', +R.ajustado.silProm.toFixed(4), 'estructura ' + Cap02.nivelSilueta(R.ajustado.silProm).nivel + ' (Kaufman y Rousseeuw, 1990)'],
+      ['% clientes ambiguos (difuso, pertenencia máxima < 60 %)', +(100 * comp.ambiguos / n).toFixed(2)],
+      ['% clientes en el mismo segmento con ambos métodos', +comp.pctCoinciden.toFixed(2)],
       [],
-      ['Método', 'Variables estandarizadas (z-score con la media y desviación de los datos). Fijos: arquetipo más cercano y pertenencia difusa (m = 2) a los arquetipos definidos. Ajustados: k-means y fuzzy c-means (m = 2, 100 iteraciones, tolerancia 1e-5) que parten de los arquetipos definidos.']
+      ['Método', 'Variables estandarizadas (z-score). k-means y fuzzy c-means (m = 2, 100 iteraciones, tolerancia 1e-5) que parten de los arquetipos propuestos.']
     ];
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(filas), 'Resultados');
     XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(arquetiposHoja), 'Arquetipos');
     XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(resumen), 'Resumen');
     if (M.descartadas.length) XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(M.descartadas.map(d => ({ Fila_Excel: d.fila, Motivo: d.motivo }))), 'Filas_descartadas');
-    XLSX.writeFile(wb, 'segmentacion_arquetipos_resultados.xlsx');
+    XLSX.writeFile(wb, 'segmentacion_rigida_vs_difusa_resultados.xlsx');
   }
 
   function descargarEjemplo() {
@@ -5495,29 +5780,31 @@ window.EJEMPLO_CAP02 = {"encabezados": ["ID_cliente", "Frecuencia_mensual", "Tic
     XLSX.writeFile(wb, 'cap02_datos_ejemplo.xlsx');
   }
 
-  /* ---------- comparación ---------- */
+  /* ---------- comparación de corridas ---------- */
   const columnas = [
     { id: 'origen', titulo: 'Datos', izq: true }, { id: 'arquetipos', titulo: 'Arquetipos', izq: true },
     { id: 'n', titulo: 'Clientes', dec: 0 }, { id: 'k', titulo: 'k', dec: 0 },
-    { id: 'silFijo', titulo: 'Silueta fijos', dec: 3 }, { id: 'ambFijo', titulo: '% ambiguos fijos', dec: 1 },
-    { id: 'silAj', titulo: 'Silueta ajustados', dec: 3 }, { id: 'ambAj', titulo: '% ambiguos ajustados', dec: 1 },
-    { id: 'pctCambian', titulo: '% cambian de segmento', dec: 1 }
+    { id: 'silAj', titulo: 'Silueta (rígido)', dec: 3 }, { id: 'nivel', titulo: 'Estructura' },
+    { id: 'ambAj', titulo: '% ambiguos (difuso)', dec: 1 },
+    { id: 'coinciden', titulo: '% coinciden rígido/difuso', dec: 1 },
+    { id: 'cambioMedio', titulo: 'Cambio medio de arquetipos', dec: 2 }
   ];
   function dibujarComparacion(lista) {
-    const nombres = lista.map(c => c.etiqueta);
-    const par = (a, b, titulo, eje, archivo, dec, suf) => UI.graficar(archivo, [
-      { x: nombres, y: lista.map(c => c.valores[a]), type: 'bar', name: 'Fijos', marker: { color: UI.color.gris },
-        text: lista.map(c => c.valores[a].toFixed(dec) + suf), textposition: 'outside', cliponaxis: false },
-      { x: nombres, y: lista.map(c => c.valores[b]), type: 'bar', name: 'Ajustados', marker: { color: UI.color.guinda },
-        text: lista.map(c => c.valores[b].toFixed(dec) + suf), textposition: 'outside', cliponaxis: false }
-    ], { title: titulo, barmode: 'group', yaxis: { title: { text: eje }, rangemode: 'tozero' }, legend: { orientation: 'h', y: -0.2 } },
-    { archivo: 'comparacion_' + archivo });
-    par('silFijo', 'silAj', 'Silueta promedio por caso', 'Silueta (−1 a 1)', 'comp1', 3, '');
-    par('ambFijo', 'ambAj', '% de pertenencia ambigua por caso', '% de clientes', 'comp2', 1, ' %');
+    const nombres = lista.map(c => c.etiqueta), colores = lista.map((_, i) => UI.colorCaso(i));
+    const zonas = [[-1, 0.25, 'rgba(201,194,197,0.35)'], [0.25, 0.5, 'rgba(227,178,107,0.30)'], [0.5, 0.7, 'rgba(156,197,154,0.30)'], [0.7, 1, 'rgba(78,159,98,0.30)']];
+    UI.graficar('comp1', [{ x: nombres, y: lista.map(c => c.valores.silAj), type: 'bar', marker: { color: colores },
+      text: lista.map(c => c.valores.silAj.toFixed(2) + ' (' + c.valores.nivel + ')'), textposition: 'outside', cliponaxis: false }],
+    { title: 'Silueta del rígido por caso', yaxis: { title: { text: 'Silueta promedio' }, range: [0, 1] }, showlegend: false,
+      shapes: zonas.map(z => ({ type: 'rect', xref: 'paper', x0: 0, x1: 1, y0: Math.max(0, z[0]), y1: z[1], fillcolor: z[2], line: { width: 0 }, layer: 'below' })) },
+    { archivo: 'comparacion_silueta' });
+    UI.graficar('comp2', [{ x: nombres, y: lista.map(c => c.valores.ambAj), type: 'bar', marker: { color: colores },
+      text: lista.map(c => c.valores.ambAj.toFixed(1) + ' %'), textposition: 'outside', cliponaxis: false }],
+    { title: '% de clientes ambiguos (difuso) por caso', yaxis: { title: { text: '% de clientes' }, rangemode: 'tozero' }, showlegend: false },
+    { archivo: 'comparacion_ambiguos' });
   }
 
   UI.iniciarApp({
-    clave: 'cap02_datos_arquetipos', specs: [], defecto: { arquetipos: ARQUETIPOS_LIBRO }, presets: [], columnas,
+    clave: 'cap02_datos_rigido_difuso', specs: [], defecto: { arquetipos: ARQUETIPOS_LIBRO }, presets: [], columnas,
     ejecutar, dibujar, leerExtra, dibujarComparacion,
     fijarExtra: function (v) { arquetipos = copiaArq(v.arquetipos); dibujarArquetipos(); },
     caso: r => ({ valores: r.metricas }),
@@ -5525,6 +5812,9 @@ window.EJEMPLO_CAP02 = {"encabezados": ["ID_cliente", "Frecuencia_mensual", "Tic
       recalcular = diferido;
       const zona = UI.$('#zonaArchivo'), campos = UI.$('#campos');
       campos.parentNode.insertBefore(zona, campos);
+      // «Conceptos clave» va hasta arriba de la columna de resultados
+      const col = document.querySelector('.columna');
+      col.insertBefore(UI.$('#panelConceptos'), col.firstChild);
       UI.$('#btnRestablecer').textContent = 'Arquetipos del libro';
       UI.$('#btnRestablecer').style.display = 'none'; // ya hay un botón igual junto a la tabla
       ['#ejeX', '#ejeY'].forEach((id, i) => {

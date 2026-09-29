@@ -139,6 +139,24 @@
       xaxis: { title: { text: 'Número de segmentos k' }, dtick: 1 }, yaxis: { title: { text: 'Suma de distancias intra-segmento' } },
       shapes: [{ type: 'line', x0: k, x1: k, yref: 'paper', y0: 0, y1: 1, line: { dash: 'dot', color: UI.color.dorado, width: 2 } }] },
     { archivo: 'cap02_codo' });
+
+    dibujarRigidoDifuso(r);
+  }
+
+  // Sección «Rígido contra difuso» (piezas de cap02_didactico.js)
+  function dibujarRigidoDifuso(r) {
+    const nombres = Array.from({ length: r.k }, (_, s) => 'Segmento ' + (s + 1));
+    const ids = r.X.map((_, i) => 'Cliente ' + (i + 1));
+    const comp = Cap02.compararRigidoDifuso(r.km.etiqueta, r.fc.U);
+    Didactico.medidorSilueta(UI.$('#medidorSilueta'), r.silProm);
+    UI.$('#kpisComparacion').innerHTML =
+      '<div class="kpi"><div class="v">' + r.silProm.toFixed(2) + '</div><div class="t">Silueta del rígido (' + Cap02.nivelSilueta(r.silProm).nivel + ')</div></div>' +
+      '<div class="kpi"><div class="v">' + comp.pctCoinciden.toFixed(1) + '%</div><div class="t">Clientes en el mismo segmento principal con ambos métodos</div></div>' +
+      '<div class="kpi"><div class="v">' + comp.ambiguos + '</div><div class="t">Clientes ambiguos (' + (100 * comp.ambiguos / ids.length).toFixed(1) + '%) que el rígido asigna sin avisar</div></div>';
+    UI.$('#conclusionComparacion').innerHTML = '<p><b>¿Qué dice esta corrida?</b></p>' + Didactico.conclusion(comp, r.silProm, nombres);
+    Didactico.graficaSilueta('figSilueta', r.sil, r.km.etiqueta, nombres, 'cap02_silueta_por_cliente');
+    Didactico.graficaEjemplos('figEjemplos', r.fc.U, r.km.etiqueta, ids, nombres, comp, 'cap02_pertenencia_ejemplos');
+    Didactico.graficaSegurosAmbiguos('figSeguros', comp, nombres, 'cap02_seguros_ambiguos');
   }
 
   function caso(r) {
@@ -178,6 +196,10 @@
     dibujar, caso, dibujarComparacion, leerExtra, fijarExtra,
     alIniciar: function (diferido) {
       recalcular = diferido;
+      // «Conceptos clave» arriba y «Rígido contra difuso» justo después de las figuras del script
+      const col = document.querySelector('.columna');
+      col.insertBefore(UI.$('#panelConceptos'), col.firstChild);
+      col.insertBefore(UI.$('#panelRigidoDifuso'), UI.$('#panelComparar'));
       UI.$('#btnAgregarFila').addEventListener('click', function () {
         const u = centros[centros.length - 1] || [2, 500, 50];
         centros.push(u.slice());

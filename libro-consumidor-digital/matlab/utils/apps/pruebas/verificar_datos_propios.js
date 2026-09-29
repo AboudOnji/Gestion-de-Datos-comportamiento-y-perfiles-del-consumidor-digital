@@ -51,6 +51,19 @@ refs.forEach(function (r) {
   comprobar(nom + ' · ajustados FCM: % ambiguos (±0.5 pp = 1 cliente)', cerca(100 * R.ajustado.ambiguos, r.ambAj, 0.5), (100 * R.ajustado.ambiguos).toFixed(2) + ' vs MATLAB ' + r.ambAj.toFixed(2));
 });
 
+/* (1b) Comparación rígido/difuso e interpretación de la silueta */
+{
+  const M = DP.construirMatriz(tabla, mapa.nombres, 3);
+  const R = Cap02.analizarConArquetipos(M.datos, refs[0].arquetipos);
+  const c = Cap02.compararRigidoDifuso(R.ajustado.etiqueta, R.ajustado.U);
+  comprobar('Rígido/difuso: ambiguos = los del FCM ajustado', c.ambiguos === Math.round(R.ajustado.ambiguos * M.datos.length), c.ambiguos + ' clientes');
+  comprobar('Rígido/difuso: seguros + ambiguos = tamaño de cada segmento', c.porSegmento.every(p => p.seguros + p.ambiguos === p.tam));
+  comprobar('Rígido/difuso: los segmentos se emparejan con su arquetipo', c.mapa.join() === '0,1,2', c.mapa.join());
+  comprobar('Rígido/difuso: % de coincidencia', c.pctCoinciden > 95 && c.pctCoinciden <= 100, c.pctCoinciden.toFixed(1) + ' %');
+  comprobar('Silueta: zonas de Kaufman y Rousseeuw', [0.2, 0.25, 0.3, 0.5, 0.6, 0.7, 0.8].map(v => Cap02.nivelSilueta(v).nivel).join('|') ===
+    'sin estructura clara|sin estructura clara|débil|débil|razonable|razonable|fuerte');
+}
+
 /* (2) Reglas de formato con archivos «de alumno» */
 const cab = ['ID_cliente', 'Frecuencia_mensual', 'Ticket_promedio_MXN', 'Engagement_digital', 'Canal'];
 const base = Array.from({ length: 30 }, (_, i) => ['C' + i, 1 + (i % 5), 300 + 20 * i, 10 + 3 * i, i % 2 ? 'web' : 'app']);
