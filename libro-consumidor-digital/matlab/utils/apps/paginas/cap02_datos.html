@@ -12,17 +12,24 @@
       </div>
       <div id="estadoArchivo" class="nota-caja" style="margin-top:10px"></div>
 
-      <h3>2. Arquetipos (se definen aquí, no en el Excel)</h3>
-      <p class="nota" style="margin:0 0 6px">Cada tarjeta es un arquetipo: su <b>hipótesis</b> de un tipo de cliente, con sus valores
-        típicos de frecuencia (compras al mes), ticket (MXN por compra) y engagement (0–100). El número de arquetipos es el número de
-        segmentos (de 2 a 8). Los algoritmos parten de ellos y los corrigen con los datos reales (paso 5).</p>
+      <h3>2. Variables (columnas de su Excel)</h3>
+      <p class="nota" style="margin:0 0 4px">Se detectan solas las columnas numéricas de su archivo, con el nombre que tengan.
+        Marquen las que quieran usar para segmentar (de 2 a 10).</p>
+      <div id="listaVariables" class="nota"></div>
+
+      <h3>3. Arquetipos (se definen aquí, no en el Excel)</h3>
+      <p class="nota" style="margin:0 0 6px">Cada tarjeta es un arquetipo: su <b>hipótesis</b> de un tipo de cliente, con su valor típico
+        en cada variable elegida. El número de arquetipos es el número de segmentos (de 2 a 8). Si sus columnas no son las del libro,
+        la app propone arquetipos «bajo / medio / alto» a partir de sus datos: cámbienles nombre y valores. Los algoritmos parten de
+        ellos y los corrigen con los datos reales (paso 5).</p>
       <div id="matrizArquetipos" class="tabla-scroll"></div>
       <div class="botones">
         <button id="btnAgregarArquetipo" class="btn sec peq" type="button">＋ Agregar arquetipo</button>
+        <button id="btnProponer" class="btn sec peq" type="button" title="Valores bajo / medio / alto calculados con percentiles de sus datos">Proponer desde mis datos</button>
         <button id="btnArquetiposLibro" class="btn sec peq" type="button">Arquetipos del libro</button>
       </div>
 
-      <h3>3. Ejes de las figuras de dispersión</h3>
+      <h3>4. Ejes de las figuras de dispersión</h3>
       <label class="campo"><span class="ayuda">Eje horizontal</span><select id="ejeX"></select></label>
       <label class="campo"><span class="ayuda">Eje vertical</span><select id="ejeY"></select></label>
     </div>
@@ -30,7 +37,7 @@
         <div class="paso">
           <h3 class="paso-titulo"><span class="num">1</span>Punto de partida: sus clientes y sus arquetipos</h3>
           <div class="explica"><p>Cada círculo es un cliente de su archivo; cada ★ es un arquetipo que ustedes propusieron. Las variables
-            están <b>estandarizadas</b> (0 = promedio de sus clientes; ±1 = una desviación estándar arriba o abajo) para que pesos,
+            están <b>estandarizadas</b> (0 = promedio de sus clientes; ±1 = una desviación estándar arriba o abajo) para que variables con unidades distintas (pesos,
             compras al mes y puntos de engagement se puedan comparar en la misma escala.</p></div>
           <div class="paso-graficas"><div class="figura"><div class="grafica" id="figInicio"></div></div></div>
         </div>
@@ -118,7 +125,8 @@ arquetipos.
       <h2>¿Cómo deben venir sus datos?</h2>
       <p class="nota">El Excel lleva <b>solo los datos de los clientes</b>; los arquetipos se escriben en esta página. Lo más fácil:
         descarguen el <b>Excel de ejemplo</b> (botón del panel izquierdo o archivo <code>cap02_datos_ejemplo.xlsx</code>), borren
-        las filas 2 en adelante de la hoja «Datos» y peguen sus datos debajo de los mismos encabezados. Así debe verse la hoja:</p>
+        las filas 2 en adelante de la hoja «Datos», escriban en la fila 1 los nombres de sus variables y peguen sus datos. Así se ve la
+        hoja del ejemplo:</p>
       <div class="tabla-scroll">
         <table class="tabla ejemplo-formato">
           <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
@@ -133,15 +141,18 @@ arquetipos.
       </div>
       <ol class="reglas">
         <li><b>Hoja:</b> los datos van en una hoja llamada «Datos» (si no existe, se usa la primera hoja).</li>
-        <li><b>Encabezados en la fila 1</b>, con estos nombres: <code>ID_cliente</code> (opcional), <code>Frecuencia_mensual</code>,
-          <code>Ticket_promedio_MXN</code> y <code>Engagement_digital</code>. Los datos empiezan en la fila 2, desde la columna A.
-          Sin títulos ni filas vacías arriba.</li>
+        <li><b>Encabezados en la fila 1:</b> el nombre de cada columna, el que ustedes quieran (p. ej. <code>Visitas_web</code>,
+          <code>Gasto_promedio</code>, <code>Antigüedad_meses</code>), sin repetir y sin celdas combinadas. Los datos empiezan en la fila 2,
+          desde la columna A. Sin títulos ni filas vacías arriba.</li>
         <li><b>Una fila = un cliente.</b> Sin filas de totales o promedios al final.</li>
-        <li><b>Frecuencia_mensual:</b> compras al mes (p. ej. 2.5). <b>Ticket_promedio_MXN:</b> gasto promedio por compra en pesos
-          (p. ej. 915.50). <b>Engagement_digital:</b> índice de 0 a 100.</li>
+        <li><b>Variables:</b> al menos 2 columnas numéricas (en la app eligen cuáles usar, hasta 10). Pueden tener unidades distintas
+          (pesos, veces al mes, puntos 0–100): la app las estandariza. El ejemplo usa las variables del libro: frecuencia mensual,
+          ticket promedio (MXN) y engagement digital (0–100).</li>
+        <li><b>Identificador (opcional):</b> una columna llamada ID o que empiece con «ID» (p. ej. ID_cliente) solo sirve para reconocer
+          a cada cliente; no entra al análisis.</li>
         <li><b>Solo números</b> con punto decimal: 915.5, no «$915.50 MXN» ni «15%».</li>
         <li><b>No incluyan los arquetipos en el Excel</b>: se definen en el panel izquierdo de esta página.</li>
-        <li><b>Otras columnas</b> (p. ej. «Canal») se ignoran. <b>Celdas vacías:</b> la fila de ese cliente se descarta y la app avisa cuántas.</li>
+        <li><b>Columnas de texto</b> (p. ej. «Canal»: web/app) se ignoran. <b>Celdas vacías:</b> la fila de ese cliente se descarta y la app avisa cuántas.</li>
         <li><b>Tamaño:</b> entre 20 y 5,000 clientes, y al menos 10 clientes por arquetipo.</li>
         <li><b>Privacidad:</b> nunca incluyan nombres, correos, teléfonos ni direcciones; usen un ID anónimo. Sus datos no salen de esta computadora: la app no los envía a ningún lado.</li>
         <li><b>Formatos:</b> .xlsx, .xls, .ods o .csv (en CSV: primera fila con encabezados, separado por comas).</li>

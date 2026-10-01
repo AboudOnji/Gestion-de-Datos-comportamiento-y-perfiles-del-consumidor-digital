@@ -1,7 +1,8 @@
 /* modelos/cap02_datos.js — lectura y validación de datos propios para la app
    de segmentación del Cap. 2. Recibe la hoja ya convertida en una tabla
    (arreglo de filas; la fila 0 son los encabezados) y aplica las reglas de
-   la sección «¿Cómo deben venir sus datos?» de la app. No depende del
+   la sección «¿Cómo deben venir sus datos?» de la app. Las variables son
+   las columnas numéricas del archivo, con los nombres que traigan. No depende del
    navegador: se prueba en Node (pruebas/verificar_datos_propios.js). */
 (function (raiz) {
   'use strict';
@@ -75,37 +76,64 @@
     return { errores, avisos, columnas, filasDatos, idCol: idCol ? idCol.nombre : null };
   }
 
-  // Las 3 variables del libro, en este orden. Se reconocen sin importar
-  // mayúsculas, acentos, espacios o guiones (p. ej. «Ticket promedio (MXN)»).
-  const REQUERIDAS = [
-    { nombre: 'Frecuencia_mensual', prefijo: 'frecuencia', unidad: 'compras al mes' },
-    { nombre: 'Ticket_promedio_MXN', prefijo: 'ticket', unidad: 'MXN por compra' },
-    { nombre: 'Engagement_digital', prefijo: 'engagement', unidad: 'índice 0–100' }
-  ];
   const normalizar = t => String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
 
-  // Encuentra en la tabla las 3 columnas requeridas. Devuelve {errores,
-  // avisos, nombres} con el nombre real de cada columna en el archivo.
-  function mapearColumnas(tabla) {
-    const errores = [], avisos = [], nombres = [];
-    REQUERIDAS.forEach(function (r) {
-      const candidatas = tabla.columnas.filter(c => normalizar(c.nombre).startsWith(r.prefijo));
-      if (!candidatas.length) {
-        errores.push('Falta la columna «' + r.nombre + '» (' + r.unidad + '). El archivo debe tener exactamente estas columnas: ' +
-          REQUERIDAS.map(q => q.nombre).join(', ') + ' (más ID_cliente, opcional).');
-        return;
-      }
-      if (candidatas.length > 1) avisos.push('Hay varias columnas que parecen «' + r.nombre + '»; se usa «' + candidatas[0].nombre + '».');
-      const c = candidatas[0];
-      if (c.tipo !== 'numerica') errores.push('La columna «' + c.nombre + '» debe tener números (' + r.unidad + '), pero casi todas sus celdas son texto o están vacías.');
-      else if (c.constante) errores.push('La columna «' + c.nombre + '» tiene el mismo valor en todas las filas: así no se puede segmentar.');
-      nombres.push(c.nombre);
-    });
-    const usadas = new Set(nombres);
-    const extra = tabla.columnas.filter(c => c.tipo !== 'id' && !usadas.has(c.nombre)).map(c => c.nombre);
-    if (extra.length) avisos.push('Columnas que no se usan (el análisis solo usa las 3 variables del libro): ' + extra.join(', ') + '.');
-    return { errores, avisos, nombres };
+  // Variables que se pueden usar: columnas numéricas que no son constantes.
+  // Los nombres son los encabezados del archivo, sean cuales sean.
+  function variablesDisponibles(tabla) {
+    const errores = [];
+    const nombres = tabla.columnas.filter(c => c.tipo === 'numerica' && !c.constante).map(c => c.nombre);
+    if (nombres.length < LIMITES.minVars) {
+      errores.push('Se necesitan al menos ' + LIMITES.minVars + ' columnas numéricas (por ejemplo, frecuencia de compra y gasto); se encontraron ' +
+        nombres.length + '. Revisen que los números no estén escritos como texto con símbolos (p. ej. «916 pesos»).');
+    }
+    return { errores, nombres };
   }
+
+  // Valores de una columna (solo las celdas numéricas válidas).
+  function valoresColumna(tabla, nombre) {
+    const c = tabla.columnas.find(x => x.nombre === nombre);
+    return c ? c.valores.filter(v => v !== null && !Number.isNaN(v)) : [];
+  }
+
+  const redondear = v => {
+    if (v === 0 || !Number.isFinite(v)) return v;
+    const dig = Math.max(0, 2 - Math.floor(Math.log10(Math.abs(v))));
+    return +v.toFixed(Math.min(dig, 4));
+  };
+
+  // Propuesta automática de arquetipos para columnas cualesquiera: el
+  // arquetipo i de k toma, en cada variable, el percentil 100·(i+0.5)/k
+  // (con k = 3: percentiles 17, 50 y 83 → «bajo», «medio», «alto»). Es solo
+  // un punto de partida neutral para que el estudiante lo edite.
+  function proponerArquetipos(tabla, nombresVars, k) {
+    const N = (typeof module === 'object' && module.exports) ? require('../numerico.js') : raiz.Numerico;
+    return Array.from({ length: k }, (_, i) => {
+      const valores = {};
+      nombresVars.forEach(n => { valores[n] = redondear(N.prctile(valoresColumna(tabla, n), 100 * (i + 0.5) / k)); });
+      return valores;
+    });
+  }
+  const NOMBRES_PROPUESTOS = { 2: ['Bajo', 'Alto'], 3: ['Bajo', 'Medio', 'Alto'], 4: ['Bajo', 'Medio-bajo', 'Medio-alto', 'Alto'] };
+  const nombrePropuesto = (i, k) => (NOMBRES_PROPUESTOS[k] || [])[i] || 'Arquetipo ' + (i + 1);
+
+  // Arquetipos del libro (cap02_segmentacion.m). Sus valores solo se usan si
+  // la columna del archivo empieza como la variable del libro (frecuencia…,
+  // ticket…, engagement…), sin importar mayúsculas, acentos o sufijos.
+  const ARQUETIPOS_LIBRO = [
+    { nombre: 'Ocasional', valores: { frecuencia: 1.5, ticket: 350, engagement: 25 } },
+    { nombre: 'Leal', valores: { frecuencia: 4.0, ticket: 900, engagement: 78 } },
+    { nombre: 'Intermedio', valores: { frecuencia: 2.6, ticket: 600, engagement: 52 } }
+  ];
+  function valorDelLibro(i, nombreColumna) {
+    const a = ARQUETIPOS_LIBRO[i];
+    if (!a) return null;
+    const n = normalizar(nombreColumna);
+    const clave = Object.keys(a.valores).find(c => n.startsWith(c));
+    return clave ? a.valores[clave] : null;
+  }
+  // ¿Las variables elegidas son (todas) las del libro?
+  const sonVariablesDelLibro = nombresVars => nombresVars.length > 0 && nombresVars.every(n => valorDelLibro(0, n) !== null);
 
   // Construye la matriz de análisis con las variables elegidas; descarta las
   // filas con celdas vacías o con texto en esas variables.
@@ -147,7 +175,8 @@
     return { errores, avisos, datos, ids, filasExcel, descartadas, nombres: nombresVars };
   }
 
-  const M = { LIMITES, REQUERIDAS, aNumero, procesarTabla, mapearColumnas, construirMatriz };
+  const M = { LIMITES, aNumero, procesarTabla, variablesDisponibles, valoresColumna, proponerArquetipos, nombrePropuesto,
+    ARQUETIPOS_LIBRO, valorDelLibro, sonVariablesDelLibro, construirMatriz };
   if (typeof module === 'object' && module.exports) module.exports = M;
   else raiz.DatosPropios = M;
 })(this);

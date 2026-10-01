@@ -7,31 +7,40 @@
 (function () {
   'use strict';
   const S = Numerico.sprintf;
-  const VARS = DatosPropios.REQUERIDAS.map(r => r.nombre);
-  const ETIQ = ['Frecuencia', 'Ticket', 'Engagement'];
+  const DP = DatosPropios;
   const K_MIN = 2, K_MAX = 8;
 
-  const ARQUETIPOS_LIBRO = [
-    { nombre: 'Ocasional', valores: [1.5, 350, 25] },
-    { nombre: 'Leal', valores: [4.0, 900, 78] },
-    { nombre: 'Intermedio', valores: [2.6, 600, 52] }
-  ];
-  const copiaArq = a => a.map(x => ({ nombre: x.nombre, valores: x.valores.slice() }));
+  // Un arquetipo = { nombre, valores: { nombreDeColumna: valor } }. Los
+  // valores se guardan por nombre de columna, así sobreviven si el alumno
+  // marca o desmarca variables.
+  function fmt(v) { return Math.abs(v) >= 100 ? v.toFixed(0) : (+v.toFixed(2)).toString(); }
+  const copiaArq = a => a.map(x => ({ nombre: x.nombre, valores: Object.assign({}, x.valores) }));
+  const ARQ_LIBRO_VACIOS = DP.ARQUETIPOS_LIBRO.map(a => ({ nombre: a.nombre, valores: {} }));
+  const esDelLibro = (a, i) => DP.ARQUETIPOS_LIBRO[i] && a.nombre === DP.ARQUETIPOS_LIBRO[i].nombre;
 
   // Estado
-  let tabla = null, origen = '', hoja = '', columnasArchivo = null;
-  let arquetipos = copiaArq(ARQUETIPOS_LIBRO);
+  let tabla = null, origen = '', hoja = '';
+  let disponibles = [];      // columnas numéricas utilizables del archivo
+  let vars = [];             // columnas elegidas para segmentar (en orden)
+  let arquetipos = copiaArq(ARQ_LIBRO_VACIOS);
   let recalcular = function () {};
   let matriz = null, ultimo = null;
 
   /* ---------- carga de datos ---------- */
   function cargarFilas(filas, nombre, nombreHoja) {
-    tabla = DatosPropios.procesarTabla(filas);
+    tabla = DP.procesarTabla(filas);
     origen = nombre; hoja = nombreHoja || '';
-    const mapa = tabla.errores.length ? { errores: [], avisos: [], nombres: [] } : DatosPropios.mapearColumnas(tabla);
-    tabla.errores = tabla.errores.concat(mapa.errores);
-    tabla.avisos = tabla.avisos.concat(mapa.avisos);
-    columnasArchivo = mapa.nombres;
+    const v = tabla.errores.length ? { errores: [], nombres: [] } : DP.variablesDisponibles(tabla);
+    tabla.errores = tabla.errores.concat(v.errores);
+    disponibles = v.nombres;
+    vars = disponibles.slice(0, DP.LIMITES.maxVars);
+    if (disponibles.length > DP.LIMITES.maxVars) tabla.avisos.push('El archivo tiene ' + disponibles.length + ' columnas numéricas; se marcaron las primeras ' + DP.LIMITES.maxVars + '.');
+    // Si los arquetipos siguen siendo los del libro pero las columnas no son las del libro, se proponen desde los datos.
+    const arqSonLibro = arquetipos.length === DP.ARQUETIPOS_LIBRO.length && arquetipos.every(esDelLibro);
+    if (arqSonLibro && !DP.sonVariablesDelLibro(vars)) proponerDesdeDatos(true);
+    else completarArquetipos();
+    dibujarVariables();
+    dibujarArquetipos();
     dibujarResumenDatos();
     recalcular();
   }
@@ -41,7 +50,17 @@
     UI.$('#estadoArchivo').textContent = 'Leyendo «' + archivo.name + '»…';
     lector.onload = function (e) {
       try {
-        const wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+        const bytes = new Uint8Array(e.target.result);
+        let wb;
+        if (/\.(csv|txt)$/i.test(archivo.name)) {
+          // CSV: decodificar el texto nosotros (UTF-8; si no es válido, Windows-1252,
+          // como lo guarda Excel en español) para que los acentos de los
+          // encabezados («Antigüedad», «Región») no se lean mal.
+          let texto;
+          try { texto = new TextDecoder('utf-8', { fatal: true }).decode(bytes); }
+          catch (_) { texto = new TextDecoder('windows-1252').decode(bytes); }
+          wb = XLSX.read(texto.replace(/^\uFEFF/, ''), { type: 'string' });
+        } else wb = XLSX.read(bytes, { type: 'array' });
         const nombreHoja = wb.SheetNames.find(n => n.trim().toLowerCase() === 'datos') || wb.SheetNames[0];
         const filas = XLSX.utils.sheet_to_json(wb.Sheets[nombreHoja], { header: 1, raw: true, defval: null, blankrows: false });
         cargarFilas(filas, archivo.name, nombreHoja);
@@ -56,6 +75,7 @@
 
   function cargarEjemplo() {
     const E = window.EJEMPLO_CAP02;
+    arquetipos = copiaArq(ARQ_LIBRO_VACIOS);
     cargarFilas([E.encabezados].concat(E.filas), 'Datos de ejemplo (sintéticos)', 'Datos');
   }
 
@@ -64,9 +84,11 @@
     if (!tabla) { est.textContent = 'Aún no hay datos.'; res.textContent = ''; vista.innerHTML = ''; return; }
     const tipos = { id: 'identificador', numerica: 'numérica', texto: 'texto', vacia: 'vacía' };
     est.innerHTML = (tabla.errores.length ? '⚠ ' : '✔ ') + '<b>' + UI.esc(origen) + '</b>' + (hoja ? ' · hoja «' + UI.esc(hoja) + '»' : '') +
-      ' · ' + tabla.filasDatos.length + ' clientes' + (tabla.errores.length ? '<br>' + tabla.errores.map(UI.esc).join('<br>') : '');
+      ' · ' + tabla.filasDatos.length + ' clientes · ' + disponibles.length + ' variables numéricas' +
+      (tabla.errores.length ? '<br>' + tabla.errores.map(UI.esc).join('<br>') : '');
     res.innerHTML = '<b>Columnas detectadas:</b> ' + tabla.columnas.map(c => UI.esc(c.nombre) + ' <i>(' +
-      ((columnasArchivo || []).includes(c.nombre) ? 'se usa' : (c.tipo === 'id' ? 'identificador' : 'no se usa: ' + tipos[c.tipo])) +
+      (vars.includes(c.nombre) ? 'se usa' : c.tipo === 'id' ? 'identificador' : c.constante ? 'no se usa: constante' :
+        c.tipo === 'numerica' ? 'numérica, no marcada' : 'no se usa: ' + tipos[c.tipo]) +
       (c.nVacios ? ', ' + c.nVacios + ' vacías' : '') + (c.tipo === 'numerica' && c.nTexto ? ', ' + c.nTexto + ' con texto' : '') + ')</i>').join(' · ') +
       (tabla.avisos.length ? '<br>' + tabla.avisos.map(a => 'ℹ ' + UI.esc(a)).join('<br>') : '');
     let h = '<table class="tabla"><thead><tr><th>Fila</th>' + tabla.columnas.map(c => '<th>' + UI.esc(c.nombre) + '</th>').join('') + '</tr></thead><tbody>';
@@ -77,25 +99,74 @@
     vista.innerHTML = h;
   }
 
-  /* ---------- arquetipos editables ---------- */
+  /* ---------- variables (columnas) ---------- */
+  function dibujarVariables() {
+    const cont = UI.$('#listaVariables');
+    if (!tabla || !disponibles.length) { cont.textContent = '—'; llenarEjes(); return; }
+    cont.innerHTML = disponibles.map(function (n) {
+      const vals = DP.valoresColumna(tabla, n);
+      const mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals);
+      return '<label style="display:block;margin:3px 0"><input type="checkbox" data-var="' + UI.esc(n) + '"' + (vars.includes(n) ? ' checked' : '') + '> ' +
+        UI.esc(n) + ' <span style="opacity:.7">[' + fmt(mn) + ' – ' + fmt(mx) + ']</span></label>';
+    }).join('');
+    cont.querySelectorAll('input[type=checkbox]').forEach(cb => cb.addEventListener('change', function () {
+      vars = disponibles.filter(n => { const el = cont.querySelector('input[data-var="' + CSS.escape(n) + '"]'); return el && el.checked; });
+      completarArquetipos();
+      dibujarArquetipos(); llenarEjes(); dibujarResumenDatos(); recalcular();
+    }));
+    llenarEjes();
+  }
+
+  function llenarEjes() {
+    ['#ejeX', '#ejeY'].forEach(function (id, i) {
+      const sel = UI.$(id), previo = sel.value;
+      sel.innerHTML = vars.map(n => '<option>' + UI.esc(n) + '</option>').join('');
+      if (vars.includes(previo)) sel.value = previo;
+      else if (vars.length) sel.value = vars[i === 0 ? 0 : vars.length - 1];
+    });
+  }
+
+  /* ---------- arquetipos ---------- */
+  // Llena los valores que falten: los del libro si el arquetipo y la columna
+  // son del libro; si no, la propuesta por percentiles de los datos.
+  function completarArquetipos() {
+    if (!tabla || !vars.length) return;
+    const k = arquetipos.length;
+    const propuesta = DP.proponerArquetipos(tabla, vars, k);
+    arquetipos.forEach(function (a, i) {
+      vars.forEach(function (n) {
+        if (Number.isFinite(a.valores[n])) return;
+        const libro = esDelLibro(a, i) ? DP.valorDelLibro(i, n) : null;
+        a.valores[n] = libro !== null ? libro : propuesta[i][n];
+      });
+    });
+  }
+
+  // Reemplaza los valores (y, si se pide, los nombres) por la propuesta bajo/medio/alto.
+  function proponerDesdeDatos(cambiarNombres) {
+    if (!tabla || !vars.length) return;
+    const k = arquetipos.length;
+    const propuesta = DP.proponerArquetipos(tabla, vars, k);
+    arquetipos = arquetipos.map((a, i) => ({ nombre: cambiarNombres ? DP.nombrePropuesto(i, k) : a.nombre, valores: propuesta[i] }));
+  }
+
   function dibujarArquetipos() {
-    // una tarjeta por arquetipo: nombre arriba y los 3 valores con su unidad
-    const etiquetas = ['Frecuencia', 'Ticket (MXN)', 'Engagement'];
     let h = '';
     arquetipos.forEach(function (a, i) {
       h += '<div class="arq" style="border-left-color:' + UI.lineas[i % UI.lineas.length] + '"><div class="arq-cab">' +
-        '<input type="text" data-f="' + i + '" data-c="n" value="' + UI.esc(a.nombre) + '" aria-label="Nombre del arquetipo ' + (i + 1) + '">' +
+        '<input type="text" data-f="' + i + '" data-c="" value="' + UI.esc(a.nombre) + '" aria-label="Nombre del arquetipo ' + (i + 1) + '">' +
         '<button class="btn sec peq" type="button" data-quitar="' + i + '" title="Quitar este arquetipo"' + (arquetipos.length <= K_MIN ? ' disabled' : '') + '>✕</button></div>' +
-        '<div class="arq-vals">' + a.valores.map((v, j) => '<label><span>' + etiquetas[j] + '</span>' +
-          '<input type="number" step="any" data-f="' + i + '" data-c="' + j + '" value="' + v + '" aria-label="' + etiquetas[j] + ' de ' + UI.esc(a.nombre) + '"></label>').join('') + '</div></div>';
+        '<div class="arq-vals">' + vars.map(n => '<label title="' + UI.esc(n) + '"><span>' + UI.esc(n) + '</span>' +
+          '<input type="number" step="any" data-f="' + i + '" data-c="' + UI.esc(n) + '" value="' + (Number.isFinite(a.valores[n]) ? a.valores[n] : '') +
+          '" aria-label="' + UI.esc(n) + ' de ' + UI.esc(a.nombre) + '"></label>').join('') + '</div></div>';
     });
     const cont = UI.$('#matrizArquetipos');
     cont.innerHTML = h;
     cont.querySelectorAll('input').forEach(function (inp) {
       inp.addEventListener('input', function () {
         const a = arquetipos[+inp.dataset.f];
-        if (inp.dataset.c === 'n') a.nombre = inp.value;
-        else a.valores[+inp.dataset.c] = inp.value === '' ? NaN : Number(inp.value);
+        if (inp.dataset.c === '') a.nombre = inp.value;
+        else a.valores[inp.dataset.c] = inp.value === '' ? NaN : Number(inp.value);
         recalcular();
       });
     });
@@ -103,33 +174,39 @@
       arquetipos.splice(+b.dataset.quitar, 1); dibujarArquetipos(); recalcular();
     }));
     UI.$('#btnAgregarArquetipo').disabled = arquetipos.length >= K_MAX;
+    UI.$('#btnArquetiposLibro').style.display = DP.sonVariablesDelLibro(vars) ? '' : 'none';
   }
 
   /* ---------- validación y análisis ---------- */
   function leerExtra(v) {
-    v.arquetipos = copiaArq(arquetipos);
+    v.vars = vars.slice();
+    v.arquetipos = arquetipos.map(a => ({ nombre: a.nombre, vector: vars.map(n => a.valores[n]) }));
     const e = [];
     const k = arquetipos.length;
-    if (k < K_MIN || k > K_MAX) e.push('Definan entre ' + K_MIN + ' y ' + K_MAX + ' arquetipos.');
-    arquetipos.forEach(function (a, i) {
-      if (!a.nombre.trim()) e.push('El arquetipo ' + (i + 1) + ' no tiene nombre.');
-      if (!a.valores.every(Number.isFinite)) e.push('Al arquetipo «' + (a.nombre || i + 1) + '» le faltan valores.');
-    });
-    const nombres = arquetipos.map(a => a.nombre.trim().toLowerCase());
-    if (new Set(nombres).size < nombres.length) e.push('Hay arquetipos con el mismo nombre; usen nombres distintos.');
-    for (let i = 0; i < k; i++) for (let j = i + 1; j < k; j++) {
-      if (arquetipos[i].valores.every((x, t) => x === arquetipos[j].valores[t])) e.push('Los arquetipos «' + arquetipos[i].nombre + '» y «' + arquetipos[j].nombre + '» tienen los mismos valores.');
-    }
     if (!tabla) e.push('Suban el archivo de sus clientes o pulsen «Usar datos de ejemplo».');
     else if (tabla.errores.length) e.push('Corrijan el archivo y vuelvan a subirlo (vean «¿Cómo ordenar mis datos?» al final de la página).');
     if (e.length) return e;
-    matriz = DatosPropios.construirMatriz(tabla, columnasArchivo, k);
+    if (vars.length < DP.LIMITES.minVars) e.push('Marquen al menos ' + DP.LIMITES.minVars + ' variables en «2. Variables».');
+    if (vars.length > DP.LIMITES.maxVars) e.push('Marquen como máximo ' + DP.LIMITES.maxVars + ' variables.');
+    if (k < K_MIN || k > K_MAX) e.push('Definan entre ' + K_MIN + ' y ' + K_MAX + ' arquetipos.');
+    v.arquetipos.forEach(function (a, i) {
+      if (!a.nombre.trim()) e.push('El arquetipo ' + (i + 1) + ' no tiene nombre.');
+      const faltan = vars.filter((n, j) => !Number.isFinite(a.vector[j]));
+      if (faltan.length) e.push('Al arquetipo «' + (a.nombre || i + 1) + '» le falta el valor de ' + faltan.join(', ') + '.');
+    });
+    const nombres = v.arquetipos.map(a => a.nombre.trim().toLowerCase());
+    if (new Set(nombres).size < nombres.length) e.push('Hay arquetipos con el mismo nombre; usen nombres distintos.');
+    for (let i = 0; i < k; i++) for (let j = i + 1; j < k; j++) {
+      if (v.arquetipos[i].vector.every((x, t) => x === v.arquetipos[j].vector[t])) e.push('Los arquetipos «' + v.arquetipos[i].nombre + '» y «' + v.arquetipos[j].nombre + '» tienen los mismos valores.');
+    }
+    if (e.length) return e;
+    matriz = DP.construirMatriz(tabla, vars, k);
     return matriz.errores;
   }
 
   function ejecutar(v) {
-    const arq = v.arquetipos, k = arq.length, M = matriz;
-    const R = Cap02.analizarConArquetipos(M.datos, arq.map(a => a.valores));
+    const arq = v.arquetipos, k = arq.length, M = matriz, vs = v.vars;
+    const R = Cap02.analizarConArquetipos(M.datos, arq.map(a => a.vector));
     const n = M.datos.length;
     const nom = arq.map(a => a.nombre.trim());
     const sil = Numerico.silhouette(R.X, R.ajustado.etiqueta);
@@ -139,6 +216,7 @@
     const L = [];
     L.push(S('=== Resultados: %d segmentos, %d clientes ===', k, n));
     L.push('Datos: ' + origen + (hoja ? ' (hoja «' + hoja + '»)' : ''));
+    L.push('Variables: ' + vs.join(', '));
     L.push('Arquetipos de partida: ' + nom.join(', '));
     if (M.descartadas.length) L.push(S('Filas descartadas por datos faltantes o no numéricos: %d', M.descartadas.length));
     L.push('');
@@ -159,14 +237,14 @@
     const avisos = M.avisos.slice();
     R.ajustado.tam.forEach((t, s) => { if (t === 0) avisos.push('El segmento «' + nom[s] + '» quedó vacío: otro arquetipo describe mejor a esos clientes. Consideren quitarlo o cambiar sus valores.'); });
     arq.forEach(function (a) {
-      const fuera = a.valores.map((x, j) => (x < R.mu[j] - 3 * R.sd[j] || x > R.mu[j] + 3 * R.sd[j]) ? ETIQ[j] : null).filter(Boolean);
+      const fuera = a.vector.map((x, j) => (x < R.mu[j] - 3 * R.sd[j] || x > R.mu[j] + 3 * R.sd[j]) ? vs[j] : null).filter(Boolean);
       if (fuera.length) avisos.push('El arquetipo «' + a.nombre + '» está muy lejos de sus datos en ' + fuera.join(' y ') + ' (más de 3 desviaciones estándar del promedio).');
     });
-    ultimo = { R, M, nom, k, n, arq, sil, comp };
+    ultimo = { R, M, nom, k, n, arq, sil, comp, vars: vs };
     return {
-      consola: L.join('\n'), avisos, R, M, nom, k, n, arq, sil, comp,
+      consola: L.join('\n'), avisos, R, M, nom, k, n, arq, sil, comp, vars: vs,
       metricas: {
-        origen, arquetipos: nom.join(', '), n, k,
+        origen, variables: vs.join(', '), arquetipos: nom.join(', '), n, k,
         silAj: R.ajustado.silProm, nivel: niv.nivel, ambAj: 100 * comp.ambiguos / n,
         coinciden: comp.pctCoinciden, cambioMedio
       }
@@ -180,10 +258,9 @@
   }
 
   /* ---------- figuras ---------- */
-  function fmt(v) { return Math.abs(v) >= 100 ? v.toFixed(0) : (+v.toFixed(2)).toString(); }
 
   function dibujar(r) {
-    const R = r.R, k = r.k, nom = r.nom;
+    const R = r.R, k = r.k, nom = r.nom, VARS = r.vars;
     const jx = Math.max(0, VARS.indexOf(UI.$('#ejeX').value)), jy = Math.max(0, VARS.indexOf(UI.$('#ejeY').value));
     const x = R.X.map(f => f[jx]), y = R.X.map(f => f[jy]);
     const tinta = UI.esOscuro() ? '#fff' : '#000';
@@ -248,7 +325,17 @@
     dibujarTablaArquetipos(r);
     const cats = VARS.concat([VARS[0]]);
     const t5 = [];
-    nom.forEach(function (n, s) {
+    if (VARS.length < 3) {
+      // con 2 variables el radar no forma figura: barras propuesto/real por variable
+      nom.forEach(function (n, s) {
+        const col = UI.lineas[s % UI.lineas.length];
+        t5.push({ x: VARS.map(v => n + '<br>' + v), y: R.perfilesDefinidos[s], type: 'bar', name: n + ' (propuesto)', marker: { color: col, opacity: 0.4 } });
+        t5.push({ x: VARS.map(v => n + '<br>' + v), y: R.perfilesAjustados[s], type: 'bar', name: n + ' (en sus datos)', marker: { color: col } });
+      });
+      UI.graficar('figRadar', t5, { title: 'Perfil propuesto (claro) contra perfil real (oscuro)', barmode: 'group',
+        yaxis: { title: { text: 'Escala 0–1 (mín.–máx. de sus datos)' }, range: [0, 1.05] }, legend: { orientation: 'h', y: -0.3, font: { size: 10 } },
+        margin: { b: 110 } }, { archivo: 'paso5_perfiles' });
+    } else nom.forEach(function (n, s) {
       const col = UI.lineas[s % UI.lineas.length];
       const pd = R.perfilesDefinidos[s], pa = R.perfilesAjustados[s];
       t5.push({ type: 'scatterpolar', r: pd.concat([pd[0]]), theta: cats, mode: 'lines', name: n + ' (propuesto)', legendgroup: 'a' + s,
@@ -256,7 +343,7 @@
       t5.push({ type: 'scatterpolar', r: pa.concat([pa[0]]), theta: cats, mode: 'lines+markers', name: n + ' (en sus datos)', legendgroup: 'a' + s,
         line: { color: col, width: 2.5 }, marker: { size: 6 }, hovertemplate: '%{theta}: %{r:.2f}<extra>' + UI.esc(n) + ' en sus datos</extra>' });
     });
-    UI.graficar('figRadar', t5, { title: 'Perfil propuesto (···) contra perfil real (—)', polar: { radialaxis: { range: [0, 1.05] } },
+    if (VARS.length >= 3) UI.graficar('figRadar', t5, { title: 'Perfil propuesto (···) contra perfil real (—)', polar: { radialaxis: { range: [0, 1.05] } },
       legend: { orientation: 'h', y: -0.12, font: { size: 10 } }, margin: { l: 110, r: 110, b: 90 } }, { archivo: 'paso5_radar' });
     const flechas = R.Cz.map((c, s) => ({ x: Ckz[s][jx], y: Ckz[s][jy], ax: c[jx], ay: c[jy], xref: 'x', yref: 'y', axref: 'x', ayref: 'y',
       showarrow: true, arrowhead: 3, arrowsize: 1.2, arrowwidth: 2.5, arrowcolor: UI.lineas[s % UI.lineas.length], text: '' }));
@@ -269,7 +356,7 @@
   }
 
   function dibujarTablaArquetipos(r) {
-    const R = r.R;
+    const R = r.R, VARS = r.vars;
     let h = '<table class="tabla"><thead><tr><th>Arquetipo</th><th>Clientes</th>' +
       VARS.map(n => '<th>' + UI.esc(n) + '<br><span style="text-transform:none">propuesto → real</span></th>').join('') +
       '<th>Cambio</th><th>Veredicto</th></tr></thead><tbody>';
@@ -277,7 +364,7 @@
       const v = veredictoCambio(R.desplazamiento[s]);
       h += '<tr><td><span class="chip-color" style="background:' + UI.lineas[s % UI.lineas.length] + '"></span>' + UI.esc(n) + '</td><td>' +
         R.ajustado.tam[s] + '</td>' +
-        r.arq[s].valores.map((x, j) => '<td>' + fmt(x) + ' → <b>' + fmt(R.ajustado.centrosFCM[s][j]) + '</b></td>').join('') +
+        r.arq[s].vector.map((x, j) => '<td>' + fmt(x) + ' → <b>' + fmt(R.ajustado.centrosFCM[s][j]) + '</b></td>').join('') +
         '<td>' + R.desplazamiento[s].toFixed(2) + '</td><td class="izq"><span class="veredicto-arq ' + v.c + '">' + v.t + '</span></td></tr>';
     });
     h += '<tr><td><i>Promedio de sus clientes</i></td><td>' + r.n + '</td>' + R.mu.map(x => '<td><i>' + fmt(x) + '</i></td>').join('') + '<td></td><td></td></tr>';
@@ -288,7 +375,7 @@
   /* ---------- descargas ---------- */
   function descargarResultados() {
     if (!ultimo) { alert('Primero carguen datos y definan sus arquetipos.'); return; }
-    const { R, M, nom, k, n, sil, comp } = ultimo;
+    const { R, M, nom, k, n, sil, comp } = ultimo, VARS = ultimo.vars;
     const idNombre = tabla.idCol || 'Fila';
     const nombreDifuso = s => { const c = comp.mapa.indexOf(s); return nom[c >= 0 ? c : s]; };
     const filas = M.datos.map(function (d, i) {
@@ -306,7 +393,7 @@
     });
     const arquetiposHoja = nom.map(function (a, s) {
       const f = { Arquetipo: a, Clientes_rigido: R.ajustado.tam[s] };
-      VARS.forEach((nm, j) => { f[nm + '_propuesto'] = ultimo.arq[s].valores[j]; f[nm + '_real'] = +R.ajustado.centrosFCM[s][j].toFixed(4); });
+      VARS.forEach((nm, j) => { f[nm + '_propuesto'] = ultimo.arq[s].vector[j]; f[nm + '_real'] = +R.ajustado.centrosFCM[s][j].toFixed(4); });
       f.Cambio_desv_est = +R.desplazamiento[s].toFixed(4);
       f.Veredicto = veredictoCambio(R.desplazamiento[s]).t;
       return f;
@@ -319,6 +406,7 @@
       ['Fecha del análisis', new Date().toLocaleString('es-MX')],
       ['Clientes analizados', n],
       ['Filas descartadas', M.descartadas.length],
+      ['Variables', VARS.join(', ')],
       ['Segmentos (arquetipos)', k + ': ' + nom.join(', ')],
       [],
       ['Silueta promedio (rígido, k-means)', +R.ajustado.silProm.toFixed(4), 'estructura ' + Cap02.nivelSilueta(R.ajustado.silProm).nivel + ' (Kaufman y Rousseeuw, 1990)'],
@@ -346,7 +434,7 @@
 
   /* ---------- comparación de corridas ---------- */
   const columnas = [
-    { id: 'origen', titulo: 'Datos', izq: true }, { id: 'arquetipos', titulo: 'Arquetipos', izq: true },
+    { id: 'origen', titulo: 'Datos', izq: true }, { id: 'variables', titulo: 'Variables', izq: true }, { id: 'arquetipos', titulo: 'Arquetipos', izq: true },
     { id: 'n', titulo: 'Clientes', dec: 0 }, { id: 'k', titulo: 'k', dec: 0 },
     { id: 'silAj', titulo: 'Silueta (rígido)', dec: 3 }, { id: 'nivel', titulo: 'Estructura' },
     { id: 'ambAj', titulo: '% ambiguos (difuso)', dec: 1 },
@@ -368,9 +456,9 @@
   }
 
   UI.iniciarApp({
-    clave: 'cap02_datos_rigido_difuso', specs: [], defecto: { arquetipos: ARQUETIPOS_LIBRO }, presets: [], columnas,
+    clave: 'cap02_datos_variables_libres', specs: [], defecto: { arquetipos: ARQ_LIBRO_VACIOS }, presets: [], columnas,
     ejecutar, dibujar, leerExtra, dibujarComparacion,
-    fijarExtra: function (v) { arquetipos = copiaArq(v.arquetipos); dibujarArquetipos(); },
+    fijarExtra: function (v) { arquetipos = copiaArq(v.arquetipos); completarArquetipos(); dibujarArquetipos(); },
     caso: r => ({ valores: r.metricas }),
     alIniciar: function (diferido) {
       recalcular = diferido;
@@ -381,11 +469,7 @@
       col.insertBefore(UI.$('#panelConceptos'), col.firstChild);
       UI.$('#btnRestablecer').textContent = 'Arquetipos del libro';
       UI.$('#btnRestablecer').style.display = 'none'; // ya hay un botón igual junto a la tabla
-      ['#ejeX', '#ejeY'].forEach((id, i) => {
-        UI.$(id).innerHTML = VARS.map(n => '<option>' + n + '</option>').join('');
-        UI.$(id).value = VARS[i === 0 ? 0 : 2];
-        UI.$(id).addEventListener('change', diferido);
-      });
+      ['#ejeX', '#ejeY'].forEach(id => UI.$(id).addEventListener('change', diferido));
       const input = UI.$('#archivo');
       input.addEventListener('change', () => { if (input.files[0]) leerArchivo(input.files[0]); input.value = ''; });
       const caja = zona.querySelector('.subir');
@@ -397,13 +481,17 @@
       UI.$('#btnDescargarResultados').addEventListener('click', descargarResultados);
       UI.$('#btnAgregarArquetipo').addEventListener('click', function () {
         if (arquetipos.length >= K_MAX) return;
-        // nuevo arquetipo propuesto en el promedio de los datos (o el último + algo)
-        const base = ultimo ? ultimo.R.mu.map(v => +v.toFixed(2)) : arquetipos[arquetipos.length - 1].valores.slice();
+        // nuevo arquetipo propuesto en el promedio de los datos de cada variable
+        const base = {};
+        vars.forEach(n => { const x = DP.valoresColumna(tabla, n); base[n] = x.length ? +Numerico.media(x).toPrecision(3) : NaN; });
         arquetipos.push({ nombre: 'Arquetipo ' + (arquetipos.length + 1), valores: base });
         dibujarArquetipos(); recalcular();
       });
       UI.$('#btnArquetiposLibro').addEventListener('click', function () {
-        arquetipos = copiaArq(ARQUETIPOS_LIBRO); dibujarArquetipos(); recalcular();
+        arquetipos = copiaArq(ARQ_LIBRO_VACIOS); completarArquetipos(); dibujarArquetipos(); recalcular();
+      });
+      UI.$('#btnProponer').addEventListener('click', function () {
+        proponerDesdeDatos(false); dibujarArquetipos(); recalcular();
       });
       dibujarArquetipos();
       cargarEjemplo(); // arranca mostrando el ejemplo, claramente rotulado

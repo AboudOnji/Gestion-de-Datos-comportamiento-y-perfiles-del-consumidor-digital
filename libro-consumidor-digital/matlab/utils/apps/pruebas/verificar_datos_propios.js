@@ -24,10 +24,12 @@ const leer = (wb, hoja) => XLSX.utils.sheet_to_json(wb.Sheets[hoja], { header: 1
 const wb = XLSX.read(require('fs').readFileSync(path.join(raiz, '..', '..', 'cap02', 'cap02_datos_ejemplo.xlsx')), { type: 'buffer' });
 comprobar('El ejemplo tiene una sola hoja: Datos', wb.SheetNames.join() === 'Datos', wb.SheetNames.join());
 const tabla = DP.procesarTabla(leer(wb, 'Datos'));
-const mapa = DP.mapearColumnas(tabla);
+const mapa = DP.variablesDisponibles(tabla);
 comprobar('Ejemplo sin errores de formato', tabla.errores.length === 0 && mapa.errores.length === 0, tabla.errores.concat(mapa.errores).join(' '));
 comprobar('Ejemplo: ID_cliente detectado como identificador', tabla.idCol === 'ID_cliente');
-comprobar('Ejemplo: las 3 columnas del libro', mapa.nombres.join() === 'Frecuencia_mensual,Ticket_promedio_MXN,Engagement_digital', mapa.nombres.join(', '));
+// los nombres se toman tal cual vienen en el Excel (el usuario puede renombrarlos)
+comprobar('Ejemplo: 3 variables numéricas, con los nombres del archivo', mapa.nombres.length === 3, mapa.nombres.join(', '));
+comprobar('Ejemplo: se reconocen como variables del libro', DP.sonVariablesDelLibro(mapa.nombres));
 
 const cerca = (a, b, tol) => Math.abs(a - b) <= tol;
 // todas las permutaciones de 0..k-1 (k <= 4 en las pruebas)
@@ -70,16 +72,29 @@ const base = Array.from({ length: 30 }, (_, i) => ['C' + i, 1 + (i % 5), 300 + 2
 const tres = ['Frecuencia_mensual', 'Ticket_promedio_MXN', 'Engagement_digital'];
 
 let t = DP.procesarTabla([cab].concat(base));
-let mp = DP.mapearColumnas(t);
-comprobar('Columna extra (Canal) se ignora con aviso', mp.errores.length === 0 && mp.avisos.some(a => a.includes('Canal')));
+let mp = DP.variablesDisponibles(t);
+comprobar('Columna de texto (Canal) no es variable', mp.errores.length === 0 && !mp.nombres.includes('Canal') && mp.nombres.length === 3);
 
-t = DP.procesarTabla([['id', 'frecuencia mensual', 'Ticket promedio (MXN)', 'ENGAGEMENT DIGITAL']].concat(base.map(f => f.slice(0, 4))));
-mp = DP.mapearColumnas(t);
-comprobar('Encabezados con espacios/mayúsculas/paréntesis se reconocen', mp.errores.length === 0 && mp.nombres.length === 3, mp.nombres.join(' | '));
+const libres = ['Folio', 'Visitas_web', 'Gasto promedio ($)', 'Antigüedad (meses)', 'Región'];
+t = DP.procesarTabla([libres].concat(base.map((f, i) => ['F' + i, f[1], f[2], 2 + (i * 7) % 30, i % 2 ? 'Norte' : 'Sur'])));
+mp = DP.variablesDisponibles(t);
+// «Folio» es texto (F0, F1…) y «Región» también: solo quedan las 3 numéricas, con su nombre original
+comprobar('Nombres de columna libres se detectan tal cual', mp.errores.length === 0 &&
+  mp.nombres.join('|') === 'Visitas_web|Gasto promedio ($)|Antigüedad (meses)', mp.nombres.join(' | '));
+comprobar('Columnas libres no se confunden con las del libro', !DP.sonVariablesDelLibro(mp.nombres));
+const prop = DP.proponerArquetipos(t, mp.nombres, 3);
+comprobar('Propuesta automática: 3 arquetipos ordenados bajo < medio < alto en cada variable',
+  prop.length === 3 && mp.nombres.every(n => prop[0][n] <= prop[1][n] && prop[1][n] <= prop[2][n]), JSON.stringify(prop));
+{
+  const Mx = DP.construirMatriz(t, mp.nombres, 3);
+  const Rx = Cap02.analizarConArquetipos(Mx.datos, prop.map(a => mp.nombres.map(n => a[n])));
+  comprobar('Análisis completo con columnas de nombre libre', Mx.errores.length === 0 && Rx.ajustado.tam.reduce((a, b) => a + b, 0) === 30 && Number.isFinite(Rx.ajustado.silProm),
+    'silueta ' + Rx.ajustado.silProm.toFixed(3));
+}
+comprobar('Valores del libro con encabezado renombrado (Frecuencia_men)', DP.valorDelLibro(1, 'Frecuencia_men') === 4 && DP.valorDelLibro(0, 'ticket promedio (MXN)') === 350 && DP.valorDelLibro(0, 'Visitas') === null);
 
-t = DP.procesarTabla([['ID_cliente', 'Frecuencia_mensual', 'Engagement_digital']].concat(base.map(f => [f[0], f[1], f[3]])));
-mp = DP.mapearColumnas(t);
-comprobar('Falta una columna: error que dice cuál', mp.errores.some(e => e.includes('Ticket_promedio_MXN')), mp.errores[0]);
+t = DP.procesarTabla([['ID', 'Gasto', 'Canal']].concat(base.map(f => [f[0], f[2], f[4]])));
+comprobar('Una sola columna numérica: error claro', DP.variablesDisponibles(t).errores.some(e => e.includes('al menos 2 columnas numéricas')));
 
 t = DP.procesarTabla([cab].concat(base.map((f, i) => i === 3 ? [f[0], f[1], '$1,250.00', f[3], f[4]] : f)));
 comprobar('Texto con $ y comas se convierte a número', t.columnas[2].valores[3] === 1250);
@@ -95,12 +110,7 @@ t = DP.procesarTabla([[null, null], [null, null], cab].concat(base));
 comprobar('Filas vacías arriba: aviso y encabezados encontrados', t.avisos.some(a => a.includes('fila(s) vacía(s)')) && t.errores.length === 0);
 
 t = DP.procesarTabla([cab].concat(base.map(f => [f[0], f[1], 500, f[3], f[4]])));
-mp = DP.mapearColumnas(t);
-comprobar('Columna requerida constante: error', mp.errores.some(e => e.includes('mismo valor')));
-
-t = DP.procesarTabla([cab].concat(base.map(f => [f[0], f[1], 'alto', f[3], f[4]])));
-mp = DP.mapearColumnas(t);
-comprobar('Columna requerida con texto: error', mp.errores.some(e => e.includes('debe tener números')));
+comprobar('Columna constante: no se ofrece como variable', !DP.variablesDisponibles(t).nombres.includes('Ticket_promedio_MXN'));
 
 m = DP.construirMatriz(DP.procesarTabla([cab].concat(base.slice(0, 15))), tres, 3);
 comprobar('Menos de 20 clientes: error', m.errores.some(e => e.includes('al menos 20')));
@@ -111,7 +121,7 @@ comprobar('Pocos clientes por arquetipo: error con k sugerido', m.errores.some(e
 const csv = 'ID_cliente,Frecuencia_mensual,Ticket_promedio_MXN,Engagement_digital\n' + base.map(f => f.slice(0, 4).join(',')).join('\n');
 const wbCsv = XLSX.read(csv, { type: 'string' });
 t = DP.procesarTabla(leer(wbCsv, wbCsv.SheetNames[0]));
-comprobar('CSV se lee igual que Excel', t.errores.length === 0 && DP.mapearColumnas(t).errores.length === 0 && t.filasDatos.length === 30);
+comprobar('CSV se lee igual que Excel', t.errores.length === 0 && DP.variablesDisponibles(t).nombres.length === 3 && t.filasDatos.length === 30);
 
 console.log('\n' + (total - fallas) + ' de ' + total + ' comprobaciones correctas.');
 process.exit(fallas ? 1 : 0);

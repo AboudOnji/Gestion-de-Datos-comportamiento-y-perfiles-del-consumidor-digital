@@ -19,7 +19,9 @@
 carpeta = fileparts(mfilename('fullpath'));
 archivo = fullfile(carpeta, '..', '..', '..', 'cap02', 'cap02_datos_ejemplo.xlsx');
 T = readtable(archivo, 'Sheet', 'Datos');
-datos = T{:, {'Frecuencia_mensual', 'Ticket_promedio_MXN', 'Engagement_digital'}};
+% columnas 2 a 4 (frecuencia, ticket, engagement) por posición: el encabezado
+% puede venir renombrado (la app acepta cualquier nombre de columna)
+datos = T{:, 2:4};
 mu = mean(datos); sd = std(datos);
 X = (datos - mu) ./ sd;
 

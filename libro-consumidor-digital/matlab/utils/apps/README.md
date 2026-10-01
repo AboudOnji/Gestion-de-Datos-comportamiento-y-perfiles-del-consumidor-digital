@@ -23,9 +23,15 @@ conexión, sin instalar nada y sin MATLAB.
 ## App con datos propios (Cap. 2)
 `matlab/cap02/cap02_segmentacion_datos_propios.html` aplica el análisis de
 `cap02_segmentacion.m` a un Excel/CSV del estudiante (extensión opcional del
-laboratorio). El Excel trae **solo los clientes** (ID_cliente opcional,
-Frecuencia_mensual, Ticket_promedio_MXN, Engagement_digital); los
-**arquetipos se definen en la app**. La app compara (1) arquetipos fijos
+laboratorio). El Excel trae **solo los clientes**: una columna ID opcional y
+**cualquier número de columnas numéricas con cualquier nombre** (la app las
+detecta y el estudiante elige de 2 a 10). Los **arquetipos se definen en la
+app**, con una tarjeta por arquetipo y un campo por variable elegida. Si las
+columnas son las del libro (empiezan con frecuencia…, ticket…, engagement…),
+se cargan los arquetipos del libro; si no, la app propone arquetipos
+«bajo / medio / alto» con percentiles de los datos (botón «Proponer desde mis
+datos»). Los CSV se decodifican como UTF-8 (o Windows-1252) para respetar los
+acentos de los encabezados. La app compara (1) arquetipos fijos
 (cliente al arquetipo más cercano + pertenencia difusa a los arquetipos tal
 como se definieron) contra (2) segmentos ajustados (k-means y fuzzy c-means que
 parten de los arquetipos) y muestra cuánto se movió cada arquetipo. Está
@@ -43,7 +49,7 @@ navegador.
 ```bash
 conda run -n research python matlab/utils/apps/datos/crear_excel_ejemplo_cap02.py  # Excel + JSON de ejemplo
 matlab -batch "run('pruebas/referencias_datos_propios.m')"                        # referencia MATLAB
-node pruebas/verificar_datos_propios.js                                            # 48 comprobaciones
+node pruebas/verificar_datos_propios.js                                            # 57 comprobaciones
 ```
 Arquetipos fijos y k-means ajustado coinciden exactamente con MATLAB
 (`kmeans(...,'Start',C)`). En R2026a, `fcm` con `fcmOptions(ClusterCenters=C)`
