@@ -1,0 +1,248 @@
+% Actividad adicional Cap. 2 — Tlacoyo Express (versión estudiante)
+% Fuente: cap02_actividad_tlacoyo.md  |  Compilar: pdflatex dos veces
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage{lmodern}
+\usepackage[top=2.6cm,bottom=2.2cm,left=2.3cm,right=2.3cm,headheight=28pt]{geometry}
+\usepackage{microtype}
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage{booktabs,tabularx,array,colortbl}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{lastpage}
+
+\definecolor{guinda}{HTML}{6F1D46}
+\definecolor{guindaOsc}{HTML}{45102C}
+\definecolor{guindaClara}{HTML}{F4E9EF}
+\definecolor{dorado}{HTML}{B8975A}
+\definecolor{terracota}{HTML}{9C5B44}
+\definecolor{terracotaClara}{HTML}{F6ECE6}
+\definecolor{bronce}{HTML}{8C6B3F}
+\definecolor{bronceClaro}{HTML}{F5F0E3}
+\definecolor{gris}{HTML}{58595B}
+\definecolor{grisClaro}{HTML}{F2F2F2}
+
+\hypersetup{colorlinks=true,linkcolor=guinda,urlcolor=guinda,pdftitle={Actividad Cap. 2 — Tlacoyo Express},pdfauthor={Dr. Aboud Barsekh Onji}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\extrarowheight}{1pt}
+\setlist{itemsep=0.25em,topsep=0.3em}
+
+% Encabezado y pie
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{\small\bfseries\color{guinda}Instituto Polit\'ecnico Nacional - Dr. Aboud Barsekh Onji}
+\fancyhead[R]{\small\color{gris}Cap\'itulo 2 \textperiodcentered{} Actividad Tlacoyo Express}
+\fancyfoot[L]{\footnotesize\color{gris}ESCA Unidad Santo Tom\'as}
+\fancyfoot[R]{\footnotesize\color{gris}P\'agina \thepage\ de \pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+  \fancyfoot[L]{\footnotesize\color{gris}ESCA Unidad Santo Tom\'as}
+  \fancyfoot[R]{\footnotesize\color{gris}P\'agina \thepage\ de \pageref{LastPage}}}
+
+% Secciones
+\titleformat{\section}{\large\bfseries\color{guinda}}{\thesection.}{0.5em}{}[\vspace{-0.5em}{\color{dorado}\rule{\linewidth}{0.8pt}}]
+\titleformat{\subsection}{\normalsize\bfseries\color{guindaOsc}}{}{0em}{}
+\titlespacing*{\section}{0pt}{1.4em}{0.6em}
+\titlespacing*{\subsection}{0pt}{1em}{0.3em}
+
+% Recuadros
+\newtcolorbox{aviso}[1]{enhanced,breakable,colback=terracotaClara,colframe=terracota,boxrule=0pt,
+  leftrule=3pt,arc=0pt,left=8pt,right=8pt,top=5pt,bottom=5pt,title={#1},
+  coltitle=terracota,fonttitle=\bfseries,attach boxed title to top left={yshift=-2mm},
+  boxed title style={colback=terracotaClara,boxrule=0pt,left=0pt,top=0pt,bottom=0pt},before skip=8pt,after skip=8pt}
+\newtcolorbox{entrevista}[1]{enhanced,breakable,colback=guindaClara,colframe=guinda,boxrule=0pt,
+  leftrule=3pt,arc=0pt,left=8pt,right=8pt,top=4pt,bottom=4pt,
+  title={#1},coltitle=guinda,fonttitle=\bfseries\small,
+  attach boxed title to top left={yshift=-2mm},boxed title style={colback=guindaClara,boxrule=0pt,left=0pt,top=0pt,bottom=0pt},
+  before skip=6pt,after skip=6pt}
+\newtcolorbox{caso}[1]{enhanced,breakable,colback=white,colframe=bronce,boxrule=0.6pt,
+  arc=2pt,left=8pt,right=8pt,top=4pt,bottom=4pt,
+  title={#1},colbacktitle=bronce,coltitle=white,fonttitle=\bfseries,before skip=8pt,after skip=8pt}
+\newtcolorbox{nota}{enhanced,breakable,colback=grisClaro,colframe=gris,boxrule=0pt,leftrule=3pt,arc=0pt,
+  left=8pt,right=8pt,top=4pt,bottom=4pt,fontupper=\small,before skip=6pt,after skip=6pt}
+
+\newcommand{\app}[1]{\textbf{\color{guindaOsc}«#1»}}
+\newcommand{\col}[1]{\texttt{\footnotesize #1}}
+
+\begin{document}
+
+% ---------- Portada compacta ----------
+\begin{tcolorbox}[enhanced,colback=guinda,colframe=guinda,arc=0pt,boxrule=0pt,
+  left=14pt,right=14pt,top=12pt,bottom=12pt,borderline south={3pt}{0pt}{dorado}]
+  {\color{white}\small\scshape Laboratorio: Gesti\'on de datos, comportamiento y perfiles del consumidor digital\par}
+  \vspace{4pt}
+  {\color{white}\LARGE\bfseries Actividad adicional del Cap\'itulo 2\par}
+  {\color{white}\Large El caso Tlacoyo Express\par}
+  \vspace{4pt}
+  {\color{dorado}\normalsize Segmentaci\'on r\'igida contra difusa con datos de clientes}
+\end{tcolorbox}
+
+\vspace{4pt}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries\color{guinda}}l@{\hspace{1.2em}}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Modalidad & Individual \\
+Material & \col{cap02\_segmentacion\_datos\_propios.html} (se abre en cualquier navegador, sin internet y sin MATLAB) y \col{cap02\_actividad\_tlacoyo\_datos.xlsx} \\
+Se relaciona con & Cap\'itulo 2: segmentaci\'on r\'igida (\emph{k-means}), segmentaci\'on difusa (\emph{fuzzy c-means}), silueta y pertenencia ambigua \\
+\bottomrule
+\end{tabularx}
+
+\begin{aviso}{Empresa y datos ficticios}
+Tlacoyo Express no existe. Los 240 clientes del archivo fueron simulados para esta actividad y no representan a ning\'un negocio real.
+\end{aviso}
+
+% ---------- 1 ----------
+\section{Contexto}
+
+\textbf{Tlacoyo Express} es una app de comida a domicilio que opera en cinco alcald\'ias de la Ciudad de M\'exico. Tiene dos a\~nos en el mercado y su base de clientes creci\'o r\'apido. Hasta ahora manda \textbf{la misma promoci\'on a todos los clientes}: un cup\'on de 15\,\% los martes. El director comercial sospecha que eso desperdicia presupuesto y le pide al equipo de mercadotecnia \textbf{dividir a los clientes en segmentos} para dise\~nar una campa\~na distinta para cada uno.
+
+El \'area de datos export\'o una muestra de \textbf{240 clientes activos} con tres variables, calculadas como promedio de los \'ultimos tres meses:
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{5.6cm}>{\raggedright\arraybackslash}Xl@{}}
+\toprule
+\textbf{Columna del Excel} & \textbf{Qu\'e mide} & \textbf{Unidad} \\
+\midrule
+\col{ID\_cliente} & Identificador an\'onimo del cliente (T0001, T0002\ldots) & --- \\
+\col{Pedidos\_al\_mes} & Cu\'antos pedidos hace el cliente al mes & pedidos/mes \\
+\col{Gasto\_por\_pedido\_MXN} & Cu\'anto gasta en promedio en cada pedido & pesos (MXN) \\
+\col{Notificaciones\_abiertas\_pct} & De cada 100 notificaciones \emph{push} que recibe, cu\'antas abre & \% (0 a 100) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Lo que dicen las entrevistas}
+
+Antes de ver los datos, el equipo de mercadotecnia entrevist\'o a repartidores, a restaurantes aliados y a algunos clientes. De esas conversaciones salieron \textbf{tres perfiles de cliente}:
+
+\begin{entrevista}{1 \textperiodcentered{} El oficinista entre semana}
+Pide de lunes a viernes a la hora de la comida, casi siempre desde la oficina. Hace \textbf{unos ocho pedidos al mes}: una comida corrida o un antojo para una persona, de \textbf{unos \$150}. Abre \textbf{m\'as o menos la mitad} de las notificaciones; muchas le llegan cuando est\'a en juntas.
+\end{entrevista}
+\begin{entrevista}{2 \textperiodcentered{} La familia de fin de semana}
+Pide \textbf{tres o cuatro veces al mes}, casi siempre s\'abado o domingo, para toda la familia. Sus pedidos son grandes: \textbf{m\'as de \$400}. \textbf{Casi no abre} las notificaciones (una de cada tres, o menos): ya sabe qu\'e quiere pedir.
+\end{entrevista}
+\begin{entrevista}{3 \textperiodcentered{} El cazador de promociones}
+Pide \textbf{unas cinco o seis veces al mes}, pero casi solo cuando hay descuento. Gasta \textbf{alrededor de \$200} por pedido y \textbf{abre casi todas} las notificaciones (tres de cada cuatro, o m\'as), porque est\'a atento a los cupones.
+\end{entrevista}
+
+\subsection{La hip\'otesis del director}
+
+El director comercial est\'a convencido de que existe un \textbf{cuarto perfil}: el \textbf{\enquote{premium nocturno}}, que pide de noche unas \textbf{seis veces al mes}, gasta \textbf{unos \$800} por pedido (cenas para reuniones) y abre \textbf{m\'as de la mitad} de las notificaciones. Quiere lanzar para \'el una campa\~na de restaurantes de lujo. Su equipo no est\'a tan seguro.
+
+\begin{tcolorbox}[enhanced,colback=guindaClara,colframe=guinda,boxrule=0pt,arc=2pt,left=10pt,right=10pt,top=6pt,bottom=6pt]
+\textbf{\color{guinda}La pregunta de negocio:} ¿cu\'antos segmentos tiene realmente la base de clientes, qu\'e tan claros son y qu\'e hacemos con los clientes que no encajan en ninguno?
+\end{tcolorbox}
+
+% ---------- 2 ----------
+\section{Antes de empezar}
+\begin{enumerate}[leftmargin=*]
+\item Abre \col{cap02\_segmentacion\_datos\_propios.html} con doble clic. Si lo abres desde el correo o desde Drive, primero \textbf{desc\'argalo}.
+\item En el panel izquierdo, en \app{1. Datos de sus clientes}, sube \col{cap02\_actividad\_tlacoyo\_datos.xlsx}.
+\item Revisa que la app reporte \textbf{240 clientes y 3 variables num\'ericas}, y que en \app{2. Variables} est\'en marcadas las tres. En la secci\'on \app{Datos cargados} (abajo) comprueba que no se descart\'o ninguna fila.
+\item Si es la primera vez que usas la app, lee el recuadro \app{Conceptos clave en un minuto}.
+\end{enumerate}
+
+% ---------- 3 ----------
+\section{Las tres corridas}
+En cada corrida vas a cambiar \textbf{solo los arquetipos} (panel izquierdo, \app{3. Arquetipos}). Al terminar cada una, escribe el nombre del caso en el recuadro de \app{Comparar corridas} y pulsa \app{Guardar corrida como caso}.
+
+\begin{caso}{Caso A \textperiodcentered{} Arquetipos autom\'aticos}
+Pulsa \app{Proponer desde mis datos}. La app crea tres arquetipos llamados \emph{Bajo}, \emph{Medio} y \emph{Alto}, calculados solo con los n\'umeros, sin saber nada del negocio. \textbf{No los cambies.} Recorre los pasos 1 a 5 de la app y guarda la corrida como \app{A autom\'aticos}.
+\end{caso}
+
+\begin{caso}{Caso B \textperiodcentered{} Arquetipos de las entrevistas}
+Traduce los \textbf{tres perfiles de las entrevistas} (secci\'on 1) a n\'umeros: escribe en cada tarjeta el valor t\'ipico de pedidos al mes, gasto por pedido y \% de notificaciones abiertas. Cambia los nombres \emph{Bajo / Medio / Alto} por \emph{Oficinista}, \emph{Familia} y \emph{Cazador de promociones}. Guarda la corrida como \app{B entrevistas}.
+
+\smallskip
+\begin{nota}
+Las entrevistas no dan n\'umeros exactos. Decide qu\'e n\'umero representa mejor cada descripci\'on y anota por qu\'e. No hay una \'unica respuesta correcta.
+\end{nota}
+\end{caso}
+
+\begin{caso}{Caso C \textperiodcentered{} La hip\'otesis del director}
+Con los tres arquetipos del Caso B, pulsa \app{+ Agregar arquetipo}, ll\'amalo \emph{Premium nocturno} y escribe los valores que describe el director. Lee con atenci\'on los \textbf{avisos} que aparecen debajo de \app{Resultados}. Guarda la corrida como \app{C director}.
+\end{caso}
+
+% ---------- 4 ----------
+\section{Cuadro de resultados}
+Copia los valores del cuadro de \app{Comparar corridas} (o desc\'argalo con \app{Descargar cuadro (CSV/Excel)}) y compl\'etalo:
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{5.2cm}|X|X|X@{}}
+\toprule
+\rowcolor{guinda}
+ & \multicolumn{1}{c|}{\color{white}\bfseries\begin{tabular}[c]{@{}c@{}}Caso A\\autom\'aticos\end{tabular}} & \multicolumn{1}{c|}{\color{white}\bfseries\begin{tabular}[c]{@{}c@{}}Caso B\\entrevistas\end{tabular}} & \multicolumn{1}{c}{\color{white}\bfseries\begin{tabular}[c]{@{}c@{}}Caso C\\director\end{tabular}} \\
+\midrule
+N\'umero de segmentos ($k$) & & & \\[1.1ex]
+\hline
+Silueta del r\'igido (y su nivel) & & & \\[1.1ex]
+\hline
+\% de clientes ambiguos (difuso) & & & \\[1.1ex]
+\hline
+\% de clientes en que coinciden r\'igido y difuso & & & \\[1.1ex]
+\hline
+Cambio medio de los arquetipos & & & \\[1.1ex]
+\hline
+Arquetipo que m\'as cambi\'o (y su veredicto en el paso 5) & & & \\[2.2ex]
+\hline
+Segmento con m\'as clientes ambiguos (paso 4) & & & \\[2.2ex]
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------- 5 ----------
+\section{Preguntas de an\'alisis}
+Responde por escrito, citando los n\'umeros de tu cuadro y las gr\'aficas de la app.
+
+\begin{enumerate}[leftmargin=*,label=\textbf{\color{guinda}\arabic*.},itemsep=0.6em]
+\item \textbf{Nombres que enga\~nan.} En el Caso A, ¿qu\'e clientes reales terminaron en el segmento \emph{Bajo} y en el segmento \emph{Alto}? (Usa la tabla \app{propuesto $\to$ real} del paso 5.) ¿Por qu\'e los nombres \emph{Bajo}, \emph{Medio} y \emph{Alto} no sirven para describir a estos clientes? \emph{Pista:} compara pedidos al mes contra gasto por pedido.
+\item \textbf{¿Por qu\'e la silueta casi no cambia entre A y B?} Si los arquetipos de partida fueron tan distintos, ¿por qu\'e el m\'etodo r\'igido llega a una silueta casi igual? ¿Qu\'e s\'i cambi\'o entre A y B que es importante para el negocio? (Revisa el \enquote{cambio} y el \enquote{veredicto} de cada arquetipo.)
+\item \textbf{Tus hip\'otesis contra los datos.} En el Caso B, ¿qu\'e arquetipo de las entrevistas describ\'ia mejor a los clientes reales y cu\'al tuvo que corregirse m\'as? ¿En qu\'e variable estuvo la correcci\'on?
+\item \textbf{Lo que el r\'igido esconde.} En el Caso B, ¿qu\'e segmento tiene m\'as clientes ambiguos (paso 4)? Busca en \app{Ejemplos} un cliente ambiguo: ¿entre qu\'e dos segmentos est\'a repartido? Describe con palabras de negocio qui\'en podr\'ia ser ese cliente. Por ejemplo, ¿un oficinista que tambi\'en caza promociones?
+\item \textbf{La hip\'otesis del director.} En el Caso C, ¿cu\'antos clientes quedaron en el segmento \emph{Premium nocturno} seg\'un \emph{k-means}? ¿Qu\'e pas\'o con el \% de ambiguos y con el arquetipo \emph{Familia}? ¿Qu\'e dice el aviso de la app sobre el gasto de \$800? Con esos datos, ¿recomendar\'ias la campa\~na de lujo?
+\item \textbf{Decisi\'on de segmentaci\'on.} Para la campa\~na real, ¿usar\'ias la segmentaci\'on r\'igida, la difusa o ambas? Prop\'on qu\'e hacer con los clientes ambiguos: ¿mensaje propio, el mensaje de su segmento principal o una mezcla? Justifica con los n\'umeros.
+\end{enumerate}
+
+% ---------- 6 ----------
+\section{Entregables}
+\begin{enumerate}[leftmargin=*,label=\textbf{\color{guinda}\arabic*.}]
+\item \textbf{El cuadro de resultados} (secci\'on 4), lleno o descargado de la app.
+\item \textbf{El Excel de resultados del Caso B}, con el bot\'on \app{Descargar resultados por cliente (Excel)} del paso 5.
+\item \textbf{Un memor\'andum de una p\'agina para el director comercial} con:
+  \begin{itemize}
+  \item cu\'antos segmentos recomiendas y c\'omo se llaman;
+  \item un p\'arrafo por segmento: qui\'en es, cu\'antos clientes tiene y qu\'e campa\~na le har\'ias;
+  \item qu\'e hacer con los clientes ambiguos;
+  \item tu respuesta, con datos, a la hip\'otesis del \emph{premium nocturno}.
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Criterios de evaluaci\'on}
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+\toprule
+\rowcolor{guinda}\color{white}\textbf{Criterio} & \color{white}\textbf{Peso} \\
+\midrule
+Cuadro de resultados completo y correcto & 20\,\% \\
+\rowcolor{guindaClara}Traducci\'on razonada de las entrevistas a arquetipos (Caso B), con su justificaci\'on & 20\,\% \\
+Respuestas de an\'alisis sustentadas en n\'umeros y gr\'aficas de la app & 30\,\% \\
+\rowcolor{guindaClara}Memor\'andum: recomendaci\'on clara, accionable y basada en los datos & 30\,\% \\
+\midrule
+\textbf{Total} & \textbf{100\,\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{aviso}{\'Etica y datos personales}
+Esta actividad usa datos sint\'eticos. Con datos reales de clientes, el perfilamiento exige base legal y un prop\'osito declarado que el consumidor pueda conocer (recuadros de \'etica de los cap\'itulos 2 y 3). El archivo nunca debe incluir nombres, correos, tel\'efonos ni direcciones: solo un identificador an\'onimo. La app procesa los datos en tu computadora y no los env\'ia a ning\'un lado.
+\end{aviso}
+
+\end{document}
