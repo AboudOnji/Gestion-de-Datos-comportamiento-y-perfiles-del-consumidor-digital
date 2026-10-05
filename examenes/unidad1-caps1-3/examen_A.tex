@@ -1,0 +1,312 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}\usepackage{lmodern}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage[top=0.8cm,bottom=0.8cm,left=1.0cm,right=1.0cm,nohead,nofoot]{geometry}
+\usepackage{multicol,amsmath,graphicx,xcolor,array,enumitem,tabularx,booktabs}
+\usepackage{pgfplots}\pgfplotsset{compat=1.17}\usetikzlibrary{patterns}
+\definecolor{dorado}{HTML}{B8975A}
+\definecolor{guinda}{HTML}{6F1D46}\definecolor{tinta}{HTML}{000000}
+\pagestyle{empty}\setlength{\parindent}{0pt}\setlength{\columnsep}{0.55cm}
+\setlength{\columnseprule}{0.3pt}
+\newlength{\wbola}\settowidth{\wbola}{\scriptsize$\bigcirc$}
+\begin{document}\fontsize{8.1}{9.15}\selectfont\color{tinta}\columnseprulecolor{\color{tinta}}
+\begingroup\color{tinta}
+\begin{minipage}{0.09\textwidth}\includegraphics[height=1.15cm]{ipn-escudo.png}\end{minipage}%
+\begin{minipage}{0.70\textwidth}\centering
+{\color{guinda}\textbf{\large Instituto Politécnico Nacional · ESCA Unidad Santo Tomás}}\\[-1pt]
+{\small Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital}\\[1pt]
+{\normalsize\textbf{Examen de la Unidad I (Capítulos 1 a 3)}} \hfill {\small Profesor: \textbf{Dr. Aboud Barsekh-Onji}}
+\end{minipage}%
+\begin{minipage}{0.19\textwidth}\centering
+{\color{guinda}\fbox{\parbox[c][1.0cm][c]{1.3cm}{\centering\textbf{\scriptsize VERSIÓN}\\[-2pt]{\Huge\textbf{A}}}}}
+\end{minipage}
+\vspace{2pt}\hrule\vspace{3pt}
+{\small\textbf{Nombre:} \rule{7.2cm}{0.3pt} \hfill \textbf{Grupo:} \rule{1.6cm}{0.3pt} \hfill \textbf{Fecha:} \rule{2.2cm}{0.3pt} \hfill \textbf{Calif.:} \rule{1.5cm}{0.3pt}}\\[3pt]
+{\footnotesize\textbf{Duración: 50 min.} 30 reactivos de opción múltiple con \textbf{una sola} respuesta correcta. Contesta en la \textbf{hoja de respuestas independiente}: rellena por completo un solo círculo por reactivo y marca la \textbf{versión} de este examen (la letra de la esquina). Cada acierto vale $10/30$ de punto. Algunos reactivos piden analizar las figuras y resultados de abajo (laboratorios). Lee con atención cada enunciado.}
+\vspace{2pt}\hrule\vspace{4pt}
+\endgroup
+\begingroup\tiny\pgfplotsset{every axis/.append style={tick label style={font=\tiny},label style={font=\tiny},title style={font=\tiny},
+  every axis plot/.append style={line width=0.6pt}, xlabel style={yshift=2pt}, ylabel style={yshift=-2pt}}}
+\noindent\begin{minipage}[t]{0.215\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[width=4.5cm,height=4.1cm,xlabel={periodo},ylabel={tasa de adopción},xmin=0,xmax=20,ymin=0,ymax=0.16,
+ axis lines*=left,ytick={0,0.05,0.1,0.15},xtick={0,5,10,15,20}]
+\addplot[domain=0:20,samples=60,black,dashed]{(0.18)^2*exp(-0.18*x)/0.08/(1+0.10/0.08*exp(-0.18*x))^2};
+\addplot[domain=0:20,samples=60,black]{(0.41)^2*exp(-0.41*x)/0.03/(1+0.38/0.03*exp(-0.41*x))^2};
+\addplot[domain=0:20,samples=60,black,dotted,line width=1pt]{(0.56)^2*exp(-0.56*x)/0.01/(1+0.55/0.01*exp(-0.56*x))^2};
+\node[font=\tiny] at (axis cs:2.6,0.097) {A}; \node[font=\tiny] at (axis cs:4.5,0.125) {B}; \node[font=\tiny] at (axis cs:11.2,0.14) {C};
+\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 1.} Tasa de adopción (Bass).\\ A: $p{=}.08,q{=}.10$; B: $p{=}.03,q{=}.38$; C: $p{=}.01,q{=}.55$}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.285\textwidth}\centering
+\vspace*{0.5cm}{\tiny\renewcommand{\arraystretch}{1.1}\setlength{\tabcolsep}{2.5pt}\begin{tabular}{@{}lcccc@{}}\toprule
+Caso & Arquet. & Traslape & Silueta & \% ambig.\\\midrule
+A & 3 & base & 0.58 & 14.6\\ B & 3 & mayor & 0.41 & 36.7\\ C & 4 & base & 0.58 & 21.6\\\bottomrule\end{tabular}}\\[1pt]
+\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[xbar stacked,width=5.0cm,height=2.5cm,bar width=5pt,xmin=0,xmax=100,symbolic y coords={Cl.4,Cl.3,Cl.2,Cl.1},ytick=data,
+ xlabel={pertenencia (\%)},axis lines*=left,enlarge y limits=0.22]
+\addplot[fill=black!25,draw=black!60] coordinates{(92,Cl.1)(78,Cl.2)(48,Cl.3)(15,Cl.4)};
+\addplot[fill=black!55,draw=black!70] coordinates{(5,Cl.1)(12,Cl.2)(44,Cl.3)(20,Cl.4)};
+\addplot[fill=white,draw=black!70,pattern=north east lines] coordinates{(3,Cl.1)(10,Cl.2)(8,Cl.3)(65,Cl.4)};
+\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 2.} Corridas del laboratorio (arriba) y pertenencias de cuatro clientes (abajo, hipotéticas): segmento 1 gris claro, 2 gris oscuro, 3 rayado}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.215\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[ybar,width=4.5cm,height=4.1cm,bar width=7pt,symbolic x coords={Camp.,Leal,Riesgo,Perd.},xtick=data,ymin=0,ymax=170,ylabel={clientes},axis lines*=left,enlarge x limits=0.22,
+ nodes near coords={},ytick={0,50,100,150}]
+\addplot[fill=black!40,draw=black!70] coordinates{(Camp.,36)(Leal,135)(Riesgo,100)(Perd.,29)};
+\node[font=\tiny,anchor=south] at (axis cs:Camp.,44) {\$10{,}631}; \node[font=\tiny,anchor=south] at (axis cs:Leal,143) {\$8{,}015};
+\node[font=\tiny,anchor=south] at (axis cs:Riesgo,108) {\$4{,}675}; \node[font=\tiny,anchor=south] at (axis cs:Perd.,37) {\$2{,}957};
+\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 3.} Clientes por segmento RFM y CLV promedio (sobre cada barra)}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.255\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north)]
+\begin{axis}[name=a,ybar,width=2.45cm,height=4.1cm,bar width=7pt,symbolic x coords={A,B},xtick=data,ymin=0,ymax=18,ylabel={conversión (\%)},axis lines*=left,enlarge x limits=0.5,title={$n{=}1{,}200$},ytick={0,5,10,15}]
+\addplot[fill=black!25,draw=black!70,error bars/.cd,y dir=both,y explicit] coordinates{(A,11.0) +- (0,1.77) (B,13.47) +- (0,1.95)};
+\end{axis}
+\begin{axis}[at={(a.east)},xshift=0.15cm,anchor=west,ybar,width=2.45cm,height=4.1cm,bar width=7pt,symbolic x coords={A,B},xtick=data,ymin=0,ymax=18,axis lines*=left,enlarge x limits=0.5,title={$n{=}6{,}000$},yticklabels={}]
+\addplot[fill=black!25,draw=black!70,error bars/.cd,y dir=both,y explicit] coordinates{(A,11.0) +- (0,0.79) (B,13.47) +- (0,0.87)};
+\end{axis}
+\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 4.} Prueba A/B: conversión de A y B con margen de error (IC 95\,\%) para dos tamaños de muestra}
+\end{minipage}
+\endgroup
+\vspace{2pt}\hrule\vspace{3pt}
+\begin{multicols}{2}
+\noindent\textbf{1.} ¿Qué cambió realmente con la segmentación digital respecto de la tradicional?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item No creó variables nuevas: abarató la conductual, que antes dependía de que el consumidor la declarara y hoy se registra sola.
+\item Encareció la variable conductual, porque ahora exige procesar más datos de los que aportaba una encuesta tradicional.
+\item Inventó variables de segmentación que no existían antes, como la frecuencia, el monto y el momento de las compras.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{2.} La Figura 1 muestra la tasa de adopción de tres canales digitales simulados con el modelo de Bass (A: $p=0.08$, $q=0.10$; B: $p=0.03$, $q=0.38$; C: $p=0.01$, $q=0.55$). ¿Qué canal tiene el pico más tardío y más alto, y cómo se interpreta?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item El canal B: es el único con balance entre innovación e imitación, y por eso su pico es el más tardío y más alto.
+\item El canal A: como su coeficiente $p$ es el mayor, su pico llega al final del periodo y es el más alto de los tres.
+\item El canal C: con imitación dominante la adopción arranca lenta y despega después, con un pico más alto por el contagio social.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{3.} Un equipo estima que el patrón de adopción de su canal se parece a la curva C de la Figura 1. ¿Qué decisión de lanzamiento es más coherente?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Concentrar todo el presupuesto en publicidad masiva el primer mes, porque la adopción es casi toda independiente.
+\item Esperar a que el pico ocurra sin intervenir, porque ni $p$ ni $q$ pueden influirse con acciones de mercadotecnia.
+\item Impulsar el contagio social (referidos, prueba social), porque el crecimiento depende sobre todo de la imitación.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{4.} Marcela compara precios, lee reseñas y revisa especificaciones antes de comprar, pero cambia de teléfono cada año y desecha el anterior. Según el capítulo, su consumo es:
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Inteligente, porque decide informada por datos, pero no necesariamente sostenible: el impacto ambiental es un criterio distinto.
+\item Ni inteligente ni sostenible, porque cambiar de teléfono cada año invalida por completo la comparación que hizo antes de comprarlo.
+\item Sostenible, porque comparar precios y leer reseñas antes de comprar reduce por sí solo el impacto ambiental de cada compra.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{5.} Según la ENIF 2024, 72.8\,\% de las mujeres y 80.9\,\% de los hombres tienen un producto financiero formal. Si un banco define «cliente de alto valor» con RFM sobre sus datos, ¿qué riesgo advierte el capítulo?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Ninguno: como el RFM usa solo números, sus resultados son neutrales respecto del género y de cualquier otra característica.
+\item Que la brecha demuestre que las mujeres no usan servicios financieros y que por ello deban excluirse del análisis.
+\item Que la definición herede el sesgo social de los datos y subrepresente a las mujeres sin que ningún paso técnico lo haga explícito.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{6.} Una app de entregas descubre, con analítica de embudo, que la mayoría de quienes abandonan lo hacen en la pantalla de pago. Corregir ese paso ilustra principalmente la ventaja de:
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Anticipar tendencias: la app se adelanta a un cambio en los gustos y las preferencias del consumidor antes que la competencia.
+\item Reducir la fricción en el recorrido: detectar en qué punto se abandona el proceso de decisión y corregirlo.
+\item Personalizar la oferta: la app ajusta precio y mensaje al perfil inferido de cada usuario para aumentar la conversión.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{7.} Una tienda opera sitio web, app y tiendas físicas, pero cada canal guarda a sus clientes en una base distinta y nadie reconoce que son la misma persona. Según Verhoef, Kannan e Inman (2015), esa tienda es:
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Multicanal, no omnicanal: falta la gestión sinérgica con una identidad única de cliente que atraviese los canales.
+\item Omnicanal, porque la tienda está presente en múltiples canales y puntos de contacto con el mismo cliente.
+\item Omnicanal, siempre que cada canal optimice por separado su propio desempeño y su propia experiencia.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{8.} Un directivo afirma: «ya no hay que preocuparse por las cookies de terceros, porque desaparecieron de los navegadores». ¿Cómo se valora esa afirmación a septiembre de 2026, según el capítulo?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Es correcta: Google las eliminó en 2024 y las sustituyó con las APIs de Privacy Sandbox, que hoy las reemplazan por completo.
+\item No es verificable: Google revirtió su plan en 2024 y las cookies de terceros siguen activas por defecto en Chrome.
+\item Es incorrecta, y por eso la recolección de datos de primera y cero parte dejó de ser relevante para la estrategia.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{9.} En el panel izquierdo de la Figura 4 (1{,}200 y 1{,}180 visitantes) los márgenes de error de A (11.0\,\%) y B (13.5\,\%) se traslapan. ¿Qué indica y qué conviene hacer?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Que A es mejor, porque su margen de error es más angosto y por eso su conversión es más confiable.
+\item Que la diferencia puede ser suerte: todavía no se sabe si B es mejor y conviene seguir la prueba con más visitantes.
+\item Que B es mejor, porque su barra es más alta; el traslape solo indica que ambas mediciones son precisas.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{10.} Un proveedor de analítica vende su plataforma con la promesa central de «anticipar tendencias antes que la competencia». ¿Qué observación hace un analista crítico, con base en el nivel de evidencia del capítulo?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Que es la ventaja menos sostenida por evidencia: un patrón histórico no garantiza que se repita y hay riesgo de sobreajuste a ruido.
+\item Que es la ventaja con la evidencia más sólida del cuadro, pues la literatura arbitrada la respalda desde los trabajos de Smith (1956).
+\item Que es imposible de lograr, porque los datos de comportamiento no permiten ninguna clase de predicción útil sobre el consumidor.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{11.} ¿Cuál afirmación describe mejor la relación entre Smith (1956) y el proceso STP (segmentación, \textit{targeting}, posicionamiento)?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Smith aporta la base conceptual; el STP es su sistematización posterior en los manuales de Kotler y sigue vigente como marco.
+\item Smith propuso el STP completo en 1956 y los manuales posteriores solo lo difundieron entre profesionales sin modificarlo.
+\item El STP quedó obsoleto con la analítica digital, que lo reemplazó por la segmentación difusa como marco de decisión.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{12.} En 2025 el comercio electrónico en México creció 19.2\,\% anual, mientras que el uso de internet pasó de 83.1\,\% a 86.1\,\% de la población. ¿Qué lectura sugiere esa comparación?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item El crecimiento del comercio electrónico se explica casi por completo por nuevos usuarios que se conectaron a internet durante ese año.
+\item Buena parte del crecimiento viene de personas ya conectadas que compran más, no solo de personas nuevas que se conectan.
+\item Ambas cifras miden en realidad el mismo fenómeno, por lo que sus tasas de crecimiento tendrían que ser prácticamente iguales.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{13.} Según la Figura 1, ¿en qué periodo ocurre aproximadamente el pico de adopción del canal B ($p=0.03$, $q=0.38$)?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Alrededor del periodo 12, cuando la adopción acumulada ya casi alcanza todo el mercado potencial.
+\item Alrededor del periodo 1, porque la curva parte de su valor máximo y luego solo disminuye.
+\item Alrededor del periodo 6, que coincide con $t^\ast=\ln(q/p)/(p+q)\approx 6.2$ que calcula el script.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{14.} Una consultora afirma: «el consumidor 4.0 ya es mayoritario en México porque así lo establece \textit{Marketing 4.0}». ¿Cuál es la crítica más sólida a ese argumento?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item La afirmación es inválida, porque \textit{Marketing 5.0} y \textit{6.0} ya reemplazaron por completo a la versión 4.0 en todos los mercados.
+\item La afirmación es válida, porque la serie de Kotler es la teoría académica con mayor revisión por pares sobre la evolución del consumidor digital.
+\item La serie \textit{Marketing X.0} es una periodización editorial, no un modelo validado: la afirmación requiere evidencia empírica.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{15.} El capítulo señala que, según fuentes de análisis jurídico, la nueva LFPDPPP admitiría el consentimiento tácito como regla general y a la vez exigiría que sea libre, específico e informado, y no resuelve esa tensión. ¿Por qué?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Porque viene de fuentes secundarias no confirmadas contra el texto legal; una postura firme sin verificarlo carecería de sustento.
+\item Porque el libro considera que el consentimiento no es relevante para la gestión de datos del consumidor digital.
+\item Porque la ley es contradictoria y, por esa razón, carece de validez para regular el tratamiento de datos personales.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{16.} Un blog afirma que «existen siete tipos de consumidor digital» sin explicar autoría ni método. ¿Cómo debe tratarlo un analista, según el capítulo?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Como equivalente a \textit{El Cubo NORISO}, que es una tipología de perfiles validada mediante revisión por pares.
+\item Como una tipología científica, siempre que el blog tenga muchos seguidores y sea citado con frecuencia en el medio.
+\item Como una tipología sin respaldo académico; lo que sí lo tiene es el método de \textit{clustering} aplicado a datos propios.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{17.} Respecto de k-means y \textit{fuzzy c-means}, ¿qué relación es correcta?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Son equivalentes cuando el exponente difuso vale 2, por lo que siempre producen exactamente las mismas asignaciones.
+\item k-means es el caso límite en que toda la pertenencia va a un segmento ($u_{ik}\in\{0,1\}$); la difusa es la general.
+\item La difusa es un caso particular de k-means en el que se permiten pertenencias parciales a varios segmentos a la vez.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{18.} En el laboratorio, los montos faltantes se imputan con la mediana y los atípicos se acotan al límite $Q_3+1.5\times\mathrm{RIC}$ en lugar de eliminar al cliente. ¿Cuál es la razón de fondo?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item El promedio siempre es mayor que la mediana, por lo que imputar con él inflaría artificialmente el CLV de los clientes.
+\item La mediana resiste los valores extremos y acotar conserva la recencia y la frecuencia del cliente; además, la regla queda documentada.
+\item Eliminar clientes con valores atípicos es incorrecto en cualquier análisis, por lo que nunca debe hacerse bajo ninguna regla.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{19.} La Figura 2 (parte inferior) muestra la pertenencia difusa de cuatro clientes a tres segmentos (datos hipotéticos). ¿Qué cliente ilustra mejor el problema de la asignación única y por qué?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item El cliente 3: su mayor pertenencia (48\,\%) no llega a 60\,\%; k-means lo asigna a un segmento sin avisar que es una mezcla.
+\item El cliente 1: su pertenencia de 92\,\% a un segmento muestra que k-means siempre fuerza una casilla que no corresponde.
+\item El cliente 4: tiene 35\,\% repartido entre los otros dos segmentos, por lo que es el más ambiguo de los cuatro.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{20.} En una plataforma de anuncios, el equipo define audiencias personalizadas, públicos similares (\textit{lookalike}) y exclusiones. Esto muestra que, en el entorno digital, el mercado meta:
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Deja de ser una decisión estratégica de la organización, porque el algoritmo de la plataforma lo elige por sí solo.
+\item Además de declararse en el plan, se configura como parámetro, y un error de configuración desperdicia presupuesto en horas.
+\item Solo se declara en el plan de mercadotecnia; la plataforma no interviene en su definición operativa ni en su ejecución.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{21.} Una persona es «ocasional» para su plataforma de streaming y «de alto compromiso» para su banco. ¿Cómo se interpreta?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item No hay contradicción: cada negocio mide un comportamiento distinto y el perfil depende del negocio, no es un atributo fijo.
+\item El banco usa un algoritmo más preciso, por lo que su etiqueta debe prevalecer también en la plataforma de streaming.
+\item Una de las dos plataformas se equivocó: el perfil verdadero de la persona es único y portable entre todos los negocios.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{22.} Una cadena de farmacias detecta que el 60\,\% de los abandonos de carrito ocurre al pedir un segundo teléfono, sin que ningún cliente se haya quejado. Este hallazgo proviene principalmente de una señal:
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item De contexto: la determinan la hora, el canal y el dispositivo en que ocurre la interacción, no el paso del proceso.
+\item Declarada: los clientes expresaron su inconformidad de forma explícita mediante reseñas, encuestas o comentarios en redes.
+\item Conductual: lo que el consumidor hace (dónde abandona), observable aunque nadie lo declare de forma explícita.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{23.} En la tabla de la Figura 2, del Caso A al Caso C (de 3 a 4 arquetipos) la silueta casi no cambia (0.58), pero el porcentaje de clientes ambiguos pasa de 14.6\,\% a 21.6\,\%. ¿Qué enseña esa comparación?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Que agregar un cuarto arquetipo no afecta a los clientes, porque la silueta se mantuvo sin cambios.
+\item Que la silueta de la segmentación rígida por sí sola no revela cuántos clientes quedaron en frontera; la pertenencia difusa sí lo muestra.
+\item Que la segmentación difusa falló al aumentar los arquetipos, porque ahora marca como ambiguos a más clientes.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{24.} Un equipo decide analizar solo tableros de métricas y descarta las entrevistas con clientes por considerarlas «subjetivas». Desde la doble naturaleza del consumidor digital, su error es:
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Tratar al consumidor solo como dato estructurado y perder el contexto humano de la decisión.
+\item Tratar al consumidor solo como persona vivida y quedar sin capacidad de operar a la escala de un mercado digital.
+\item Ninguno: los datos conductuales son siempre más objetivos que cualquier fuente de contexto humano.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{25.} En la Figura 4 compare los dos paneles: las conversiones son las mismas (11.0\,\% y 13.5\,\%), pero en el panel derecho hay cinco veces más visitantes. ¿Qué cambió y qué se concluye?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Los márgenes de error se angostaron y ya no se traslapan: la misma diferencia pasa a ser confiable porque el azar mueve menos las proporciones.
+\item La diferencia entre A y B aumentó con la muestra mayor, por eso en el panel derecho la mejora ya es confiable.
+\item El umbral de duda se volvió más estricto, y por eso los márgenes de error del panel derecho son más angostos.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{26.} Una app bancaria tiene una interfaz rápida y fácil de usar, pero el servicio al cliente detrás de ella es lento e inconsistente. Esto describe:
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Una UX deficiente, porque la lentitud del servicio es un problema de diseño de la interfaz.
+\item Una CX sólida, porque la facilidad de uso de la app define por sí sola la experiencia completa del cliente.
+\item Una UX sólida dentro de una CX deficiente: la interfaz es solo una parte de la experiencia total del cliente.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{27.} La Figura 3 muestra, por segmento RFM, el número de clientes y el CLV promedio del laboratorio. ¿Qué segmento concentra más valor total para la empresa?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Campeón: tiene el mayor CLV promedio por cliente, así que es el segmento que concentra más valor total.
+\item En riesgo: es el segundo más numeroso y está por recuperarse, por lo que su valor total supera al de Leal.
+\item Leal: su CLV promedio es menor que el de Campeón, pero tiene muchos más clientes (135 contra 36) y el valor total es clientes por CLV promedio.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{28.} La radiografía del consumidor mexicano muestra que las horas diarias de uso de internet caen de forma casi monótona con la edad. ¿Qué advertencia metodológica se desprende?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Que la edad explica por completo el uso de internet, por lo que ya no es necesario segmentar a los consumidores.
+\item Saltar a variables psicográficas sin controlar edad y zona construye categorías elegantes sobre una base demográfica ya explicativa.
+\item Que las variables demográficas son irrelevantes y conviene segmentar únicamente con variables psicográficas de estilo de vida.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{29.} Una empresa lanza un solo producto y le dedica una gran campaña para convencer a todo el mercado de que lo compre. Con la distinción de Wendell Smith (1956), esa estrategia es:
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Mercado meta digital, porque la empresa eligió un único producto y una única campaña para dirigirse a su audiencia.
+\item Diferenciación de producto: adapta el mercado al producto; la segmentación haría lo contrario y adaptaría el producto a subgrupos.
+\item Segmentación de mercado, porque la empresa dirige su campaña a un mercado heterogéneo y busca cubrir todas las preferencias.
+\end{enumerate}
+\vspace{2pt}
+\noindent\textbf{30.} En una encuesta, 70\,\% de los consumidores dice preferir productos sostenibles, pero esos productos son solo 8\,\% de las ventas (datos hipotéticos). ¿Qué explicación es coherente con el capítulo?
+\vspace{-3pt}
+\begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item La sostenibilidad no influye en la decisión de compra, por lo que conviene eliminarla de los análisis de mercado de la empresa.
+\item Los consumidores mienten deliberadamente en las encuestas, por lo que ningún dato declarado tiene valor analítico para la mercadotecnia.
+\item Brecha actitud-conducta: la actitud declarada predice mal la compra real, donde pesan el precio, la conveniencia y la confianza en la etiqueta.
+\end{enumerate}
+\vspace{2pt}
+\end{multicols}
+\end{document}

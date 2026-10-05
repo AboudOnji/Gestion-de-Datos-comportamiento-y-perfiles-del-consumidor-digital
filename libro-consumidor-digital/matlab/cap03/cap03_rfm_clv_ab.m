@@ -8,7 +8,7 @@
 %               atípicos; (2) segmentación RFM (Recencia, Frecuencia,
 %               Monto) y cálculo de CLV (valor de vida del cliente) simple;
 %               (3) prueba A/B con test de dos proporciones para decidir
-%               entre dos versiones de una página de checkout. Este MISMO
+%               entre dos versiones de una página de checkout (¿B es mejor o fue suerte?). Este MISMO
 %               script es el que se usa en el libro y en la Práctica 2 de
 %               la Unidad I: el estudiante solo modifica la sección de
 %               parámetros, corre el script para cada caso que le pidan, y
@@ -26,7 +26,8 @@ clc; clear; close all; rng(42);
 %  ===================================================================
 nClientes = 300;          % tamaño de la base de clientes sintética (Bloques 1-2)
 horizonteAnios = 3;        % horizonte de vida esperado para el CLV simple
-alfa = 0.05;                % nivel de significancia de la prueba A/B (Bloque 3)
+alfa = 0.05;                % umbral de duda de la prueba A/B (Bloque 3): 0.05 = se acepta que el azar
+                            % produzca una diferencia así en menos de 5 de cada 100 experimentos
 
 % Prueba A/B: cambien estos cuatro valores para simular otro experimento
 % (otro tamaño de muestra, otra diferencia de conversión observada).
@@ -141,15 +142,18 @@ valorP = 2 * (1 - normcdf(abs(z)));  % prueba de dos colas
 
 fprintf('Conversión A = %.2f%% (n=%d), Conversión B = %.2f%% (n=%d)\n', ...
     100*pA, nA, 100*pB, nB);
-fprintf('Estadístico z = %.3f, valor p = %.4f (alfa = %.2f)\n', z, valorP, alfa);
+fprintf('Diferencia observada (B - A): %+.2f puntos porcentuales\n', 100*(pB-pA));
+fprintf('¿Fue suerte? valor p = %.4f (estadístico z = %.3f; umbral de duda alfa = %.2f)\n', valorP, z, alfa);
+fprintf('En lenguaje llano: si A y B fueran iguales, el azar solo daría una diferencia así\n');
+fprintf('de grande (o mayor) en %.1f de cada 100 experimentos.\n', 100*valorP);
 if valorP < alfa
-    fprintf('Decisión: se rechaza H0 -- la diferencia es estadísticamente significativa.\n');
+    fprintf('Decisión: la diferencia es confiable -- el azar rara vez la produce solo.\n');
 else
-    fprintf('Decisión: no se rechaza H0 -- la diferencia observada podría deberse al azar.\n');
+    fprintf('Decisión: todavía no se puede saber -- la diferencia observada podría deberse al azar.\n');
 end
 
 %% Resultados y visualización — Figura 2: prueba A/B
-% Intervalo de confianza 95% de cada proporción (aproximación normal).
+% Margen de error (intervalo de confianza 95%) de cada proporción (aproximación normal).
 icA = 1.96 * sqrt(pA*(1-pA)/nA);
 icB = 1.96 * sqrt(pB*(1-pB)/nB);
 
@@ -161,7 +165,7 @@ errorbar([1 2], [pA pB]*100, [icA icB]*100, 'k.', 'LineWidth', 1.5, 'CapSize', 1
 hold off;
 grid on;
 ylabel('Tasa de conversión (%)');
-title(sprintf('Prueba A/B de checkout (z=%.2f, p=%.4f)', z, valorP));
+title(sprintf('Prueba A/B de checkout (¿fue suerte? p = %.4f)', valorP));
 
 exportgraphics(gcf, '../../figuras/matlab/cap03_prueba_ab.pdf', 'ContentType', 'vector');
 exportgraphics(gcf, '../../figuras/matlab/cap03_prueba_ab.png', 'Resolution', 300);

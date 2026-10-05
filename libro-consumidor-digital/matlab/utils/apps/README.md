@@ -57,6 +57,22 @@ devuelve C sin moverlo, así que el FCM ajustado se compara contra `fcm`
 estándar emparejando centros (diferencia < 0.05 desv. est.; % de ambiguos
 ±0.5 pp, un cliente de frontera en el juego de 4 arquetipos).
 
+## App con datos propios (Cap. 3)
+`matlab/cap03/cap03_rfm_datos_propios.html` aplica el análisis de `cap03_rfm_clv_ab.m` a un Excel/CSV del estudiante:
+hoja «Datos» (una fila por cliente: recencia, frecuencia y monto; la app reconoce las columnas por nombre y se pueden
+reasignar) y hoja opcional «Experimento» (`Version`, `Convirtio`, o resumen `Version/Visitantes/Conversiones`) para la
+prueba A/B. Recorrido en 5 pasos: calidad de datos (reglas de limpieza visibles), RFM, CLV (extensiones: periodo de la
+frecuencia y tasa de descuento; con 12 meses y 0 % es el CLV del script), prueba A/B (IC de la diferencia y muestra por
+versión para potencia 80 %) y lectura de negocio; descarga resultados en Excel. Con valores muy repetidos (p. ej.
+frecuencia 1–3) los quintiles se asignan por rango promedio y la app avisa (MATLAB `discretize` fallaría).
+Modelo: `modelos/cap03_datos.js`; la prueba A/B es `Cap03.pruebaAB` (compartida con la app principal).
+
+```bash
+conda run -n research python matlab/utils/apps/datos/crear_excel_ejemplo_cap03.py   # Excel + JSON de ejemplo
+matlab -batch "run('pruebas/referencias_cap03_datos.m')"                           # referencia MATLAB
+node pruebas/verificar_cap03_datos.js                                               # 118 comprobaciones
+```
+
 ## Fidelidad con MATLAB
 Los datos sintéticos son **los mismos** que genera MATLAB con `rng(42)`: los
 números aleatorios se exportan desde MATLAB (`datos/exportar_datos_matlab.m`)

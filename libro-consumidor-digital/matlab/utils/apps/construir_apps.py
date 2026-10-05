@@ -69,6 +69,25 @@ CAPITULOS = [
         "datos": [("BASE_CAP03", "cap03_datos.json")],
     },
     {
+        # App para analizar datos propios (Excel/CSV) con RFM, CLV y prueba A/B del Cap. 3
+        "id": "cap03_datos",
+        "modelos": ["cap02_datos", "cap03", "cap03_datos"],
+        "script": "cap03/cap03_rfm_clv_ab.m",
+        "salida": "cap03_rfm_datos_propios.html",
+        "titulo": "RFM, CLV y prueba A/B con datos propios",
+        "titulo_corto": "Datos propios · Cap. 3",
+        "subtitulo": "Extensión del laboratorio del Capítulo 3 · calidad de datos, RFM, CLV y prueba A/B",
+        "insignia": "Datos propios",
+        "pie": ("Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Aplica a sus datos el mismo "
+                "análisis de <code>cap03_rfm_clv_ab.m</code> (imputación por mediana, atípicos 1.5×RIC, quintiles RFM, CLV y test z de dos proporciones). "
+                "<b>Sus datos no salen de esta computadora</b>: se procesan en el navegador y no se envían a ningún lado. "
+                "Lectura de Excel con SheetJS (Apache-2.0)."),
+        "nota_parametros": ("Suban el Excel con los datos de sus clientes (y, si lo tienen, su experimento A/B) y ajusten los supuestos. "
+                            "Al cambiar cualquier valor, los resultados se recalculan solos."),
+        "vendor": ["xlsx.full.min.js"],
+        "datos": [("EJEMPLO_CAP03", "cap03_ejemplo.json")],
+    },
+    {
         "id": "cap04",
         "script": "cap04/cap04_series_texto.m",
         "titulo": "Tendencia, estacionalidad y frecuencia de términos",

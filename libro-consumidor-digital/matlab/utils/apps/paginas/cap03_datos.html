@@ -1,0 +1,146 @@
+<!-- BLOQUE:PARAMETROS_EXTRA -->
+    <div id="zonaArchivo">
+      <h3 style="margin-top:4px">1. Datos de sus clientes (Excel)</h3>
+      <label class="subir" for="archivo">
+        <input type="file" id="archivo" accept=".xlsx,.xls,.ods,.csv">
+        <span class="subir-caja"><b>Subir archivo</b><br><span class="nota">Excel (.xlsx, .xls), .ods o .csv — o arrástrenlo aquí</span></span>
+      </label>
+      <div class="botones">
+        <button id="btnEjemplo" class="btn sec peq" type="button">Usar datos de ejemplo</button>
+        <button id="btnDescargarEjemplo" class="btn sec peq" type="button">Descargar Excel de ejemplo</button>
+        <a class="btn sec peq" href="#panelFormato" style="text-decoration:none">¿Cómo ordenar mis datos?</a>
+      </div>
+      <div id="estadoArchivo" class="nota-caja" style="margin-top:10px"></div>
+
+      <h3>2. ¿Qué columna es cada dato?</h3>
+      <p class="nota" style="margin:0 0 4px">La app las reconoce por el nombre; si se equivoca, cámbienlas aquí.</p>
+      <label class="campo"><span class="ayuda"><b>Recencia</b>: días desde la última compra (menos es mejor)</span><select id="colR"></select></label>
+      <label class="campo"><span class="ayuda"><b>Frecuencia</b>: número de compras en el periodo</span><select id="colF"></select></label>
+      <label class="campo"><span class="ayuda"><b>Monto</b>: gasto o ticket promedio (MXN)</span><select id="colM"></select></label>
+      <h3>3. Supuestos del CLV</h3>
+    </div>
+    <div id="bloqueAB" class="nota-caja" style="margin:8px 0">
+      <b>4. Prueba A/B.</b> <span id="textoAB"></span>
+    </div>
+<!-- BLOQUE:FIGURAS -->
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">1</span>Calidad de datos: ¿qué tan confiable es lo que cargaron?</h3>
+          <div id="kpisCalidad" class="kpis"></div>
+          <div class="explica"><p>Antes de segmentar hay que limpiar, y <b>cada decisión de limpieza debe quedar escrita</b>, no hecha en silencio.
+            La app aplica las mismas reglas que el script: los montos <b>faltantes</b> se llenan con la <b>mediana</b> (no con el promedio, que los
+            atípicos arrastran) y los montos <b>atípicos</b> —los que superan <b>Q3 + 1.5×RIC</b>, donde RIC = Q3 − Q1— se <b>acotan</b> a ese límite en vez
+            de borrar al cliente, para no perder su recencia y su frecuencia.</p></div>
+          <div id="tablaCalidad" class="tabla-scroll"></div>
+          <div class="paso-graficas" style="margin-top:10px">
+            <div class="figura"><div class="grafica" id="figLimpieza"></div><div class="pie">Monto promedio antes (con atípicos) y después de acotar al límite 1.5×RIC (línea punteada). Los faltantes ya están imputados con la mediana.</div></div>
+            <div class="figura"><div class="grafica" id="figHistMonto"></div><div class="pie">Distribución del monto limpio: la línea punteada marca el límite superior; lo que quedó acotado está en la última barra.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">2</span>Segmentación RFM: ¿quién es quién?</h3>
+          <div class="explica"><p>A cada cliente se le da un puntaje de <b>1 a 5</b> en tres dimensiones, cortando a sus clientes en cinco grupos del mismo tamaño
+            (<b>quintiles</b>): <b>R</b>ecencia (compró hace poco = 5), <b>F</b>recuencia (compra seguido = 5) y <b>M</b>onto (gasta más = 5). La suma va de 3 a 15:
+            <b>12 o más = Campeón</b>, <b>9 a 11 = Leal</b>, <b>6 a 8 = En riesgo</b>, <b>menos de 6 = Perdido</b>.</p>
+            <p>Ojo: los quintiles son <i>relativos a sus propios clientes</i>. Un «Campeón» es el mejor de <i>su</i> base, no un cliente excelente en términos absolutos.</p></div>
+          <div id="avisosRFM"></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figSegmentos"></div><div class="pie">Clientes por segmento RFM (como la Figura 1 del script).</div></div>
+            <div class="figura"><div class="grafica" id="figRF"></div><div class="pie">Cada punto es un cliente: recencia contra frecuencia, con el color de su segmento y el tamaño según su monto. Pasen el cursor para ver el ID.</div></div>
+          </div>
+          <div id="tablaSegmentos" class="tabla-scroll" style="margin-top:10px"></div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">3</span>Valor de vida del cliente (CLV): ¿cuánto vale cada segmento?</h3>
+          <div class="explica"><p><b>CLV simple</b> = monto × frecuencia anual × horizonte (años). Es una aproximación didáctica: supone que el cliente
+            seguirá comprando igual durante todo el horizonte. Con una <b>tasa de descuento</b> mayor a 0 el dinero futuro vale menos
+            (CLV descontado, la extensión opcional del libro) y con el periodo de observación se anualiza la frecuencia. Con 12 meses y descuento 0 es
+            exactamente el CLV del script.</p></div>
+          <div id="kpisCLV" class="kpis"></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figCLV"></div><div class="pie">CLV promedio por segmento (como la Figura 1 del script).</div></div>
+            <div class="figura"><div class="grafica" id="figPareto"></div><div class="pie">Qué parte de sus clientes es cada segmento contra qué parte del CLV total aporta: la distancia entre las dos barras es la concentración del valor.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">4</span>Prueba A/B: ¿B es realmente mejor o fue suerte?</h3>
+          <div class="explica"><p><b>La idea.</b> Mostraron la versión <b>A</b> a unos visitantes y la <b>B</b> a otros. B convirtió un poco más. Pero si lanzan una moneda 10 veces y salen 6 caras,
+            no concluyen que la moneda esté cargada: el <b>azar siempre mueve los números</b>. La pregunta es: <i>¿esta diferencia es más grande de lo que el azar produce solo?</i></p>
+            <p><b>Cómo lo averiguamos.</b> Imaginen que A y B <b>son iguales</b> y repetimos el experimento miles de veces en la computadora, con los mismos visitantes. Cada repetición da una diferencia
+            distinta, solo por suerte. Luego vemos <b>en cuántas repeticiones el azar iguala o supera la diferencia que ustedes midieron</b>.</p>
+            <p><b>Cómo se decide.</b> Si el azar solo la alcanza en <b>menos de 5 de cada 100</b> repeticiones (el «umbral de duda», que ustedes pueden cambiar), la diferencia es confiable. Si la alcanza más seguido,
+            <b>todavía no se puede saber</b>: no significa que A y B sean iguales, significa que falta información.</p></div>
+          <div id="kpisAB" class="kpis"></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figAB"></div><div class="pie">Lo que midieron: conversión de cada versión, con su margen de error. Si las rayitas de A y B se traslapan mucho, desconfíen de la diferencia.</div></div>
+            <div class="figura"><div class="grafica" id="figDif"></div><div class="pie">Lo que hace el azar: cada barra cuenta cuántos experimentos simulados (A y B iguales) dieron esa diferencia. La línea dorada es la diferencia que ustedes midieron: las barras rojas, más allá de las líneas, son los experimentos donde el azar solo igualó o superó lo medido (equivale a las «x de cada 100» del recuadro de arriba; una simulación varía un poco).</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">5</span>Lectura de negocio: ¿qué decisión sostienen sus datos?</h3>
+          <div class="explica" id="conclusion"></div>
+          <div class="botones no-imprimir">
+            <button id="btnDescargarResultados" class="btn" type="button">Descargar resultados por cliente (Excel)</button>
+          </div>
+          <p class="nota">El Excel incluye, para cada cliente: sus puntajes R, F y M, su segmento, su CLV y si su monto fue imputado o acotado; más hojas con el
+            resumen por segmento, la prueba A/B y las reglas de limpieza que se aplicaron.</p>
+        </div>
+<!-- BLOQUE:NOTA_COMPARAR -->
+Guarden una corrida por cada escenario que quieran comparar. El ejercicio del libro pide tres casos de la prueba A/B: <b>Caso A</b> (valores del script),
+<b>Caso B</b> (misma tasa, 5 veces más muestra) y <b>Caso C</b> (datos del Caso A con α = 0.10): cárguenlos con los botones de la izquierda y guarden cada uno.
+También pueden comparar el CLV con distintos horizontes o tasas de descuento, o dos archivos de clientes. Registren la conversión de cada versión, el valor p («¿fue suerte?») y la decisión.
+<!-- BLOQUE:FIGURAS_COMPARACION -->
+        <div class="figura"><div class="grafica" id="comp1"></div><div class="pie">Valor p de cada caso (barras) contra su umbral de duda (marcas ◆): si la barra queda por debajo de su marca, la diferencia es confiable.</div></div>
+        <div class="figura"><div class="grafica" id="comp2"></div><div class="pie">Conversión de A y B en cada caso con su margen de error: más visitantes ⇒ margen más angosto.</div></div>
+<!-- BLOQUE:SECCIONES_EXTRA -->
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>Imputar</b>Llenar un dato faltante con un valor razonable (aquí, la mediana) y dejarlo anotado.</div>
+        <div class="concepto"><b>Atípico (1.5×RIC)</b>Valor tan alto que queda fuera de lo normal: supera Q3 + 1.5 veces el rango entre cuartiles. Puede ser un error o un cliente excepcional: hay que revisarlo.</div>
+        <div class="concepto"><b>RFM</b>Recencia, Frecuencia y Monto: tres números que resumen qué tan reciente, seguido y fuerte compra cada cliente.</div>
+        <div class="concepto"><b>Quintil</b>Cada uno de los cinco grupos del mismo tamaño en que se ordena a los clientes (puntaje 1 a 5).</div>
+        <div class="concepto"><b>CLV</b>Valor de vida del cliente: cuánto dinero se espera que deje durante su relación con el negocio.</div>
+        <div class="concepto"><b>Prueba A/B</b>Experimento que muestra dos versiones a grupos distintos y compara su conversión con un test estadístico.</div>
+        <div class="concepto"><b>¿Fue suerte? (valor p)</b>De cada 100 experimentos en que A y B son iguales, cuántos dan una diferencia como la que midieron. Poco = confiable; mucho = puede ser suerte.</div>
+        <div class="concepto"><b>Umbral de duda (α)</b>Cuánta suerte aceptamos antes de creerle a la diferencia. Se fija <i>antes</i> de la prueba; el usual es 5 de cada 100 (α = 0.05).</div>
+      </div>
+    </section>
+
+    <section class="panel" id="panelDatos">
+      <h2>Datos cargados</h2>
+      <div id="resumenDatos" class="nota"></div>
+      <div id="vistaDatos" class="tabla-scroll" style="margin-top:8px"></div>
+    </section>
+
+    <section class="panel" id="panelFormato">
+      <h2>¿Cómo deben venir sus datos?</h2>
+      <p class="nota">El Excel lleva <b>una fila por cliente</b>. Lo más fácil: descarguen el <b>Excel de ejemplo</b> (botón del panel izquierdo o archivo
+        <code>cap03_datos_ejemplo.xlsx</code>), borren las filas 2 en adelante de la hoja «Datos», escriban en la fila 1 los nombres de sus columnas y peguen sus datos.
+        Así se ve la hoja «Datos» del ejemplo:</p>
+      <div class="tabla-scroll">
+        <table class="tabla ejemplo-formato">
+          <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+          <tbody>
+            <tr class="cab"><td>1</td><td>ID_cliente</td><td>Recencia_dias</td><td>Frecuencia_compras</td><td>Monto_promedio_MXN</td></tr>
+            <tr><td>2</td><td>C0001</td><td>31</td><td>3</td><td>694.30</td></tr>
+            <tr><td>3</td><td>C0002</td><td>58</td><td>5</td><td>550.47</td></tr>
+            <tr><td>4</td><td>C0003</td><td>12</td><td>4</td><td><i>(vacía = faltante)</i></td></tr>
+            <tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="reglas">
+        <li><b>Hoja «Datos»</b> (si no existe, se usa la primera hoja). <b>Encabezados en la fila 1</b>, sin repetir, y los datos desde la fila 2, columna A. Sin títulos, celdas combinadas ni filas de totales.</li>
+        <li><b>Una fila = un cliente</b>, con tres columnas numéricas: <b>recencia</b> (días desde su última compra), <b>frecuencia</b> (número de compras en el periodo que analizan) y <b>monto</b> (gasto o ticket promedio en pesos). Pueden llamarse como quieran: la app las reconoce por el nombre y ustedes confirman cuál es cuál.</li>
+        <li><b>Identificador (opcional):</b> una columna cuyo nombre empiece con «ID». Si un ID se repite, la app conserva solo la primera fila de ese cliente y avisa.</li>
+        <li><b>Solo números</b> con punto decimal: 694.30, no «$694.30 MXN». Un <b>monto vacío</b> se imputa con la mediana; un monto en cero o negativo (¿devolución?) se trata como faltante. Una <b>recencia o frecuencia vacía</b>, o una frecuencia en 0, descarta la fila.</li>
+        <li><b>Tamaño:</b> entre 30 y 20,000 clientes.</li>
+        <li><b>Prueba A/B (opcional):</b> una segunda hoja llamada <b>«Experimento»</b>, con una fila por visitante: <code>ID_visita</code>, <code>Version</code> (A o B) y <code>Convirtio</code> (1/0 o Sí/No). También sirve un resumen de dos filas con <code>Version</code>, <code>Visitantes</code> y <code>Conversiones</code>. Si no la incluyen, escriban los cuatro números a mano en el panel izquierdo.</li>
+        <li><b>Privacidad:</b> nunca incluyan nombres, correos, teléfonos ni direcciones; usen un ID anónimo. Sus datos no salen de esta computadora: la app no los envía a ningún lado.</li>
+        <li><b>Formatos:</b> .xlsx, .xls, .ods o .csv (en CSV hay una sola tabla, la de clientes: la prueba A/B se captura a mano).</li>
+      </ol>
+    </section>

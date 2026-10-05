@@ -8,6 +8,51 @@
   const DEFECTO = { nClientes: 300, horizonteAnios: 3, alfa: 0.05, nA: 1200, conversionesA: 132, nB: 1180, conversionesB: 159 };
   const ORDEN = ['Campeón', 'Leal', 'En riesgo', 'Perdido'];
 
+  // Prueba A/B de dos proporciones (test z con proporción conjunta), igual que
+  // el Bloque 3 del script. Además del script: IC de la diferencia B - A y la
+  // muestra por versión que haría falta para detectar la diferencia observada
+  // con potencia 80 % (misma alfa), como apoyo para decidir «¿seguimos probando?».
+  function norminv(p) { // inversa de normcdf por bisección (suficiente para planear muestras)
+    let lo = -10, hi = 10;
+    for (let i = 0; i < 80; i++) { const mid = (lo + hi) / 2; if (N.normcdf(mid) < p) lo = mid; else hi = mid; }
+    return (lo + hi) / 2;
+  }
+  function pruebaAB(nA, cA, nB, cB, alfa) {
+    const pA = cA / nA, pB = cB / nB;
+    const pC = (cA + cB) / (nA + nB);
+    const ee = Math.sqrt(pC * (1 - pC) * (1 / nA + 1 / nB));
+    const z = (pB - pA) / ee;
+    const valorP = 2 * (1 - N.normcdf(Math.abs(z)));
+    const icA = 1.96 * Math.sqrt(pA * (1 - pA) / nA);
+    const icB = 1.96 * Math.sqrt(pB * (1 - pB) / nB);
+    const zc = norminv(1 - alfa / 2);
+    const eeDif = Math.sqrt(pA * (1 - pA) / nA + pB * (1 - pB) / nB);
+    const dif = pB - pA;
+    const zb = norminv(0.80);
+    const nNecesario = dif === 0 ? Infinity : Math.ceil((zc + zb) * (zc + zb) * (pA * (1 - pA) + pB * (1 - pB)) / (dif * dif));
+    return { pA, pB, z, valorP, rechaza: valorP < alfa, icA, icB, dif, icDif: [dif - zc * eeDif, dif + zc * eeDif], nNecesario };
+  }
+
+  // «¿Y si fuera solo azar?»: simula `veces` experimentos con los mismos visitantes
+  // suponiendo que A y B convierten igual (la proporción conjunta). Devuelve la
+  // diferencia B − A (en puntos porcentuales) de cada simulación y en cuántas el
+  // azar solo iguala o supera, en valor absoluto, la diferencia observada.
+  // Es la versión intuitiva del valor p (solo ilustrativa: no es parte del script).
+  function simularAzar(nA, cA, nB, cB, veces, semilla) {
+    const rng = N.crearRng(semilla || 2026);
+    const pC = (cA + cB) / (nA + nB);
+    const obs = Math.abs(cB / nB - cA / nA);
+    const difs = new Array(veces);
+    let extremos = 0;
+    const binom = (n) => { let c = 0; for (let i = 0; i < n; i++) if (rng() < pC) c++; return c; };
+    for (let t = 0; t < veces; t++) {
+      const d = binom(nB) / nB - binom(nA) / nA;
+      difs[t] = 100 * d;
+      if (Math.abs(d) >= obs - 1e-12) extremos++;
+    }
+    return { difs, extremos, veces, pSim: extremos / veces };
+  }
+
   function ejecutar(P, baseExportada) {
     const base = baseExportada[String(P.nClientes)];
     const nClientes = P.nClientes, horizonte = P.horizonteAnios, alfa = P.alfa;
@@ -65,19 +110,16 @@
     L.push('');
     L.push('--- Bloque 3: prueba A/B ---');
     const nA = P.nA, nB = P.nB, cA = P.conversionesA, cB = P.conversionesB;
-    const pA = cA / nA, pB = cB / nB;
-    const pC = (cA + cB) / (nA + nB);
-    const ee = Math.sqrt(pC * (1 - pC) * (1 / nA + 1 / nB));
-    const z = (pB - pA) / ee;
-    const valorP = 2 * (1 - N.normcdf(Math.abs(z)));
+    const ab = pruebaAB(nA, cA, nB, cB, alfa);
+    const { pA, pB, z, valorP, rechaza, icA, icB } = ab;
     L.push(N.sprintf('Conversión A = %.2f%% (n=%d), Conversión B = %.2f%% (n=%d)', 100 * pA, nA, 100 * pB, nB));
-    L.push(N.sprintf('Estadístico z = %.3f, valor p = %.4f (alfa = %.2f)', z, valorP, alfa));
-    const rechaza = valorP < alfa;
+    L.push(N.sprintf('Diferencia observada (B - A): %s%.2f puntos porcentuales', pB - pA >= 0 ? '+' : '-', Math.abs(100 * (pB - pA))));
+    L.push(N.sprintf('¿Fue suerte? valor p = %.4f (estadístico z = %.3f; umbral de duda alfa = %.2f)', valorP, z, alfa));
+    L.push('En lenguaje llano: si A y B fueran iguales, el azar solo daría una diferencia así');
+    L.push(N.sprintf('de grande (o mayor) en %.1f de cada 100 experimentos.', 100 * valorP));
     L.push(rechaza
-      ? 'Decisión: se rechaza H0 -- la diferencia es estadísticamente significativa.'
-      : 'Decisión: no se rechaza H0 -- la diferencia observada podría deberse al azar.');
-    const icA = 1.96 * Math.sqrt(pA * (1 - pA) / nA);
-    const icB = 1.96 * Math.sqrt(pB * (1 - pB) / nB);
+      ? 'Decisión: la diferencia es confiable -- el azar rara vez la produce solo.'
+      : 'Decisión: todavía no se puede saber -- la diferencia observada podría deberse al azar.');
 
     const avisos = [];
     if (cA > nA || cB > nB) avisos.push('Las conversiones no pueden ser mayores que el tamaño de muestra.');
@@ -87,13 +129,13 @@
       conteos, clvProm, pA, pB, z, valorP, rechaza, icA, icB,
       metricas: {
         nA, cA, nB, cB, alfa, convA: 100 * pA, convB: 100 * pB, z, valorP,
-        decision: rechaza ? 'Se rechaza H0' : 'No se rechaza H0',
+        decision: rechaza ? 'Diferencia confiable' : 'Todavía no se sabe',
         nClientes, horizonte, clvCampeon: clvProm[0], clvLeal: clvProm[1], clvRiesgo: clvProm[2], clvPerdido: clvProm[3]
       }
     };
   }
 
-  const M = { DEFECTO, ORDEN, ejecutar };
+  const M = { DEFECTO, ORDEN, ejecutar, pruebaAB, norminv, simularAzar };
   if (typeof module === 'object' && module.exports) module.exports = M;
   else raiz.Cap03 = M;
 })(this);

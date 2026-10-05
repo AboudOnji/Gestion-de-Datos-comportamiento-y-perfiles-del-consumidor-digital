@@ -235,15 +235,16 @@ ul.conclusion li { margin: 4px 0; }
       <div class="figuras">
         <div class="figura"><div class="grafica" id="fig1a"></div><div class="pie">Figura 1 (izq.) — Distribución de segmentos RFM.</div></div>
         <div class="figura"><div class="grafica" id="fig1b"></div><div class="pie">Figura 1 (der.) — CLV simple promedio por segmento.</div></div>
-        <div class="figura"><div class="grafica" id="fig2"></div><div class="pie">Figura 2 — Prueba A/B: tasa de conversión con intervalo de confianza del 95 %.</div></div>
+        <div class="figura"><div class="grafica" id="fig2"></div><div class="pie">Figura 2 — Prueba A/B: tasa de conversión de cada versión con su margen de error (intervalo de confianza del 95 %). Si las rayitas se traslapan mucho, desconfíen de la diferencia.</div></div>
         <div class="figura"><div class="grafica" id="fig3"></div><div class="pie"><b>Complemento de la app</b> (no está en el .m): Bloque 1 — monto promedio antes y después de acotar los atípicos al límite 1.5×RIC (línea punteada). Los faltantes ya están imputados con la mediana.</div></div>
+        <div class="figura"><div class="grafica" id="fig4"></div><div class="pie"><b>Complemento de la app</b> (no está en el .m): la idea detrás del valor p. Se repite el experimento miles de veces suponiendo que A y B son <b>iguales</b>; cada barra cuenta los experimentos que dieron esa diferencia solo por azar. Las barras rojas son los que igualan o superan la diferencia medida (línea dorada): son las «x de cada 100» que imprime el script.</div></div>
       </div>
     </section>
 
     <section class="panel" id="panelComparar">
       <h2>Comparar corridas (ejercicio propuesto)</h2>
       <p class="nota">El ejercicio pide tres corridas de la prueba A/B: <b>Caso A</b> (valores del script), <b>Caso B</b> (misma tasa, 5 veces más
-muestra) y <b>Caso C</b> (datos del Caso A con α = 0.10). Registren la conversión de cada versión, el estadístico z, el valor p
+muestra) y <b>Caso C</b> (datos del Caso A con α = 0.10). Registren la conversión de cada versión, el valor p («¿fue suerte?»)
 y la decisión. Carguen cada caso, pulsen <b>Guardar corrida como caso</b> y comparen en el cuadro y las gráficas.</p>
       <div class="botones no-imprimir">
         <input id="etiquetaCaso" type="text" aria-label="Nombre del caso" style="max-width:170px">
@@ -254,8 +255,8 @@ y la decisión. Carguen cada caso, pulsen <b>Guardar corrida como caso</b> y com
       </div>
       <div id="tablaCasos" style="margin-top:10px"></div>
       <div class="figuras" style="margin-top:12px">
-        <div class="figura"><div class="grafica" id="comp1"></div><div class="pie">Valor p de cada caso (barras) contra su α (marcas ◆): si la barra queda por debajo de su marca, se rechaza H0.</div></div>
-        <div class="figura"><div class="grafica" id="comp2"></div><div class="pie">Conversión de A y B en cada caso con su intervalo de confianza del 95 %: más muestra ⇒ intervalos más angostos.</div></div>
+        <div class="figura"><div class="grafica" id="comp1"></div><div class="pie">Valor p de cada caso (barras) contra su umbral de duda (marcas ◆): si la barra queda por debajo de su marca, la diferencia es confiable.</div></div>
+        <div class="figura"><div class="grafica" id="comp2"></div><div class="pie">Conversión de A y B en cada caso con su margen de error: más visitantes ⇒ margen más angosto.</div></div>
       </div>
     </section>
 
@@ -4813,6 +4814,51 @@ window.BASE_CAP03 = {"100":{"r":[59,3,19,31,111,111,171,9,31,21,233,2,11,93,102,
   const DEFECTO = { nClientes: 300, horizonteAnios: 3, alfa: 0.05, nA: 1200, conversionesA: 132, nB: 1180, conversionesB: 159 };
   const ORDEN = ['Campeón', 'Leal', 'En riesgo', 'Perdido'];
 
+  // Prueba A/B de dos proporciones (test z con proporción conjunta), igual que
+  // el Bloque 3 del script. Además del script: IC de la diferencia B - A y la
+  // muestra por versión que haría falta para detectar la diferencia observada
+  // con potencia 80 % (misma alfa), como apoyo para decidir «¿seguimos probando?».
+  function norminv(p) { // inversa de normcdf por bisección (suficiente para planear muestras)
+    let lo = -10, hi = 10;
+    for (let i = 0; i < 80; i++) { const mid = (lo + hi) / 2; if (N.normcdf(mid) < p) lo = mid; else hi = mid; }
+    return (lo + hi) / 2;
+  }
+  function pruebaAB(nA, cA, nB, cB, alfa) {
+    const pA = cA / nA, pB = cB / nB;
+    const pC = (cA + cB) / (nA + nB);
+    const ee = Math.sqrt(pC * (1 - pC) * (1 / nA + 1 / nB));
+    const z = (pB - pA) / ee;
+    const valorP = 2 * (1 - N.normcdf(Math.abs(z)));
+    const icA = 1.96 * Math.sqrt(pA * (1 - pA) / nA);
+    const icB = 1.96 * Math.sqrt(pB * (1 - pB) / nB);
+    const zc = norminv(1 - alfa / 2);
+    const eeDif = Math.sqrt(pA * (1 - pA) / nA + pB * (1 - pB) / nB);
+    const dif = pB - pA;
+    const zb = norminv(0.80);
+    const nNecesario = dif === 0 ? Infinity : Math.ceil((zc + zb) * (zc + zb) * (pA * (1 - pA) + pB * (1 - pB)) / (dif * dif));
+    return { pA, pB, z, valorP, rechaza: valorP < alfa, icA, icB, dif, icDif: [dif - zc * eeDif, dif + zc * eeDif], nNecesario };
+  }
+
+  // «¿Y si fuera solo azar?»: simula `veces` experimentos con los mismos visitantes
+  // suponiendo que A y B convierten igual (la proporción conjunta). Devuelve la
+  // diferencia B − A (en puntos porcentuales) de cada simulación y en cuántas el
+  // azar solo iguala o supera, en valor absoluto, la diferencia observada.
+  // Es la versión intuitiva del valor p (solo ilustrativa: no es parte del script).
+  function simularAzar(nA, cA, nB, cB, veces, semilla) {
+    const rng = N.crearRng(semilla || 2026);
+    const pC = (cA + cB) / (nA + nB);
+    const obs = Math.abs(cB / nB - cA / nA);
+    const difs = new Array(veces);
+    let extremos = 0;
+    const binom = (n) => { let c = 0; for (let i = 0; i < n; i++) if (rng() < pC) c++; return c; };
+    for (let t = 0; t < veces; t++) {
+      const d = binom(nB) / nB - binom(nA) / nA;
+      difs[t] = 100 * d;
+      if (Math.abs(d) >= obs - 1e-12) extremos++;
+    }
+    return { difs, extremos, veces, pSim: extremos / veces };
+  }
+
   function ejecutar(P, baseExportada) {
     const base = baseExportada[String(P.nClientes)];
     const nClientes = P.nClientes, horizonte = P.horizonteAnios, alfa = P.alfa;
@@ -4870,19 +4916,16 @@ window.BASE_CAP03 = {"100":{"r":[59,3,19,31,111,111,171,9,31,21,233,2,11,93,102,
     L.push('');
     L.push('--- Bloque 3: prueba A/B ---');
     const nA = P.nA, nB = P.nB, cA = P.conversionesA, cB = P.conversionesB;
-    const pA = cA / nA, pB = cB / nB;
-    const pC = (cA + cB) / (nA + nB);
-    const ee = Math.sqrt(pC * (1 - pC) * (1 / nA + 1 / nB));
-    const z = (pB - pA) / ee;
-    const valorP = 2 * (1 - N.normcdf(Math.abs(z)));
+    const ab = pruebaAB(nA, cA, nB, cB, alfa);
+    const { pA, pB, z, valorP, rechaza, icA, icB } = ab;
     L.push(N.sprintf('Conversión A = %.2f%% (n=%d), Conversión B = %.2f%% (n=%d)', 100 * pA, nA, 100 * pB, nB));
-    L.push(N.sprintf('Estadístico z = %.3f, valor p = %.4f (alfa = %.2f)', z, valorP, alfa));
-    const rechaza = valorP < alfa;
+    L.push(N.sprintf('Diferencia observada (B - A): %s%.2f puntos porcentuales', pB - pA >= 0 ? '+' : '-', Math.abs(100 * (pB - pA))));
+    L.push(N.sprintf('¿Fue suerte? valor p = %.4f (estadístico z = %.3f; umbral de duda alfa = %.2f)', valorP, z, alfa));
+    L.push('En lenguaje llano: si A y B fueran iguales, el azar solo daría una diferencia así');
+    L.push(N.sprintf('de grande (o mayor) en %.1f de cada 100 experimentos.', 100 * valorP));
     L.push(rechaza
-      ? 'Decisión: se rechaza H0 -- la diferencia es estadísticamente significativa.'
-      : 'Decisión: no se rechaza H0 -- la diferencia observada podría deberse al azar.');
-    const icA = 1.96 * Math.sqrt(pA * (1 - pA) / nA);
-    const icB = 1.96 * Math.sqrt(pB * (1 - pB) / nB);
+      ? 'Decisión: la diferencia es confiable -- el azar rara vez la produce solo.'
+      : 'Decisión: todavía no se puede saber -- la diferencia observada podría deberse al azar.');
 
     const avisos = [];
     if (cA > nA || cB > nB) avisos.push('Las conversiones no pueden ser mayores que el tamaño de muestra.');
@@ -4892,13 +4935,13 @@ window.BASE_CAP03 = {"100":{"r":[59,3,19,31,111,111,171,9,31,21,233,2,11,93,102,
       conteos, clvProm, pA, pB, z, valorP, rechaza, icA, icB,
       metricas: {
         nA, cA, nB, cB, alfa, convA: 100 * pA, convB: 100 * pB, z, valorP,
-        decision: rechaza ? 'Se rechaza H0' : 'No se rechaza H0',
+        decision: rechaza ? 'Diferencia confiable' : 'Todavía no se sabe',
         nClientes, horizonte, clvCampeon: clvProm[0], clvLeal: clvProm[1], clvRiesgo: clvProm[2], clvPerdido: clvProm[3]
       }
     };
   }
 
-  const M = { DEFECTO, ORDEN, ejecutar };
+  const M = { DEFECTO, ORDEN, ejecutar, pruebaAB, norminv, simularAzar };
   if (typeof module === 'object' && module.exports) module.exports = M;
   else raiz.Cap03 = M;
 })(this);
@@ -4917,7 +4960,7 @@ window.BASE_CAP03 = {"100":{"r":[59,3,19,31,111,111,171,9,31,21,233,2,11,93,102,
     { id: 'horizonteAnios', tipo: 'numero', min: 0, minExclusivo: true, deslizMin: 1, deslizMax: 10, paso: 1,
       ayuda: 'Horizonte de vida esperado para el CLV simple (años).' },
     { id: 'alfa', tipo: 'numero', min: 0, max: 1, minExclusivo: true, maxExclusivo: true, deslizMin: 0.01, deslizMax: 0.20, paso: 0.01,
-      ayuda: 'Nivel de significancia de la prueba A/B (Bloque 3). Válido: 0 &lt; α &lt; 1; usuales 0.01, 0.05, 0.10.' },
+      ayuda: '«Umbral de duda» (α) de la prueba A/B (Bloque 3): cuánta suerte aceptan antes de creerle a la diferencia. 0.05 = 5 de cada 100. Válido: 0 &lt; α &lt; 1; usuales 0.01, 0.05, 0.10.' },
     { id: 'nA', tipo: 'entero', min: 1, deslizMin: 100, deslizMax: 10000, paso: 10, ayuda: 'Visitantes de la versión A (control).' },
     { id: 'conversionesA', tipo: 'entero', min: 0, deslizMin: 0, deslizMax: 2000, paso: 1, ayuda: 'Conversiones de la versión A.' },
     { id: 'nB', tipo: 'entero', min: 1, deslizMin: 100, deslizMax: 10000, paso: 10, ayuda: 'Visitantes de la versión B (variante).' },
@@ -4935,8 +4978,8 @@ window.BASE_CAP03 = {"100":{"r":[59,3,19,31,111,111,171,9,31,21,233,2,11,93,102,
     { id: 'nA', titulo: 'nA', dec: 0 }, { id: 'cA', titulo: 'conv. A', dec: 0 },
     { id: 'nB', titulo: 'nB', dec: 0 }, { id: 'cB', titulo: 'conv. B', dec: 0 },
     { id: 'convA', titulo: 'Conversión A (%)', dec: 2 }, { id: 'convB', titulo: 'Conversión B (%)', dec: 2 },
-    { id: 'z', titulo: 'z', dec: 3 }, { id: 'valorP', titulo: 'Valor p', dec: 4 },
-    { id: 'alfa', titulo: 'α', dec: 2 }, { id: 'decision', titulo: 'Decisión' },
+    { id: 'valorP', titulo: '¿Fue suerte? (valor p)', dec: 4 },
+    { id: 'alfa', titulo: 'Umbral de duda α', dec: 2 }, { id: 'decision', titulo: 'Decisión' },
     { id: 'clvCampeon', titulo: 'CLV Campeón', dec: 0 }, { id: 'clvPerdido', titulo: 'CLV Perdido', dec: 0 }
   ];
 
@@ -4960,7 +5003,7 @@ window.BASE_CAP03 = {"100":{"r":[59,3,19,31,111,111,171,9,31,21,233,2,11,93,102,
     { title: S('CLV por segmento (horizonte de %d años)', v.horizonteAnios), yaxis: { title: { text: 'CLV simple promedio (MXN)' } }, showlegend: false },
     { archivo: 'cap03_clv' });
 
-    const titulo = S('Prueba A/B de checkout (z=%.2f, p=%.4f)', r.z, r.valorP);
+    const titulo = S('Prueba A/B de checkout (¿fue suerte? p = %.4f)', r.valorP);
     UI.graficar('fig2', [{
       x: ['A (control)', 'B (variante)'], y: [100 * r.pA, 100 * r.pB], type: 'bar', width: 0.5,
       marker: { color: [UI.color.guinda, UI.color.dorado] },
@@ -4969,10 +5012,29 @@ window.BASE_CAP03 = {"100":{"r":[59,3,19,31,111,111,171,9,31,21,233,2,11,93,102,
     }], {
       title: titulo, yaxis: { title: { text: 'Tasa de conversión (%)' }, rangemode: 'tozero' }, showlegend: false,
       annotations: [{ xref: 'paper', yref: 'paper', x: 0.5, y: -0.2, showarrow: false,
-        text: r.rechaza ? '<b>Se rechaza H0</b> (p &lt; α = ' + v.alfa + ')' : '<b>No se rechaza H0</b> (p ≥ α = ' + v.alfa + ')',
+        text: r.rechaza ? '<b>Diferencia confiable</b> (p &lt; α = ' + v.alfa + ')' : '<b>Todavía no se puede saber</b> (p ≥ α = ' + v.alfa + ')',
         font: { color: r.rechaza ? '#2E7D4F' : '#A4461F' } }],
       margin: { b: 80 }
     }, { archivo: 'cap03_prueba_ab' });
+
+    // Complemento de la app: ¿y si fuera solo azar? (simulación con A y B iguales)
+    const veces = (v.nA + v.nB) > 20000 ? 2000 : 5000;
+    const sim = Cap03.simularAzar(v.nA, v.conversionesA, v.nB, v.conversionesB, veces, 2026);
+    const obs = 100 * (r.pB - r.pA), lim = Math.abs(obs);
+    const mn = Math.min.apply(null, sim.difs.concat([-lim])), mx = Math.max.apply(null, sim.difs.concat([lim]));
+    const ancho = Math.max(0.05, (mx - mn) / 40), ini = Math.floor(mn / ancho) * ancho;
+    const cuentas = new Array(Math.ceil((mx - ini) / ancho) + 1).fill(0);
+    sim.difs.forEach(d => { cuentas[Math.floor((d - ini) / ancho)]++; });
+    const centros = cuentas.map((_, i) => ini + (i + 0.5) * ancho);
+    UI.graficar('fig4', [{ x: centros, y: cuentas, type: 'bar', width: ancho * 0.95,
+      marker: { color: centros.map(c => Math.abs(c) >= lim - ancho / 2 + 1e-9 ? '#A4461F' : UI.color.gris) },
+      hovertemplate: 'diferencia por azar ≈ %{x:.1f} puntos<br>experimentos: %{y}<extra></extra>' }],
+    { title: S('¿Y si fuera solo azar? %d experimentos simulados', veces), showlegend: false, bargap: 0,
+      xaxis: { title: { text: 'Diferencia B − A por puro azar (puntos porcentuales)' } }, yaxis: { title: { text: 'Número de experimentos' } },
+      shapes: [{ type: 'line', yref: 'paper', y0: 0, y1: 1, x0: obs, x1: obs, line: { color: UI.color.dorado, width: 3 } },
+        { type: 'line', yref: 'paper', y0: 0, y1: 1, x0: -obs, x1: -obs, line: { color: UI.color.dorado, width: 3, dash: 'dot' } }],
+      annotations: [{ x: obs, yref: 'paper', y: 1.02, text: 'lo que midieron', showarrow: false, font: { color: UI.color.dorado } }], margin: { b: 60 } },
+    { archivo: 'cap03_simulacion_azar' });
 
     UI.graficar('fig3', [
       { y: r.montoOriginal, type: 'box', name: 'Antes (con atípicos)', marker: { color: UI.color.gris }, boxpoints: 'outliers' },
@@ -4994,14 +5056,14 @@ window.BASE_CAP03 = {"100":{"r":[59,3,19,31,111,111,171,9,31,21,233,2,11,93,102,
         text: lista.map(c => c.valores.valorP.toFixed(4)), textposition: 'outside', cliponaxis: false },
       { x: nombres, y: lista.map(c => c.valores.alfa), type: 'scatter', mode: 'markers', name: 'α',
         marker: { symbol: 'diamond', size: 14, color: UI.esOscuro() ? '#fff' : '#000' } }
-    ], { title: 'Valor p contra α por caso', yaxis: { title: { text: 'Probabilidad' }, rangemode: 'tozero' },
+    ], { title: '¿Fue suerte? (valor p) contra el umbral de duda', yaxis: { title: { text: 'Probabilidad' }, rangemode: 'tozero' },
       legend: { orientation: 'h', y: -0.2 } }, { archivo: 'cap03_comparacion_p' });
     UI.graficar('comp2', [
       { x: nombres, y: lista.map(c => c.valores.convA), type: 'bar', name: 'A (control)', marker: { color: UI.color.guinda },
         error_y: { type: 'data', array: lista.map(c => c.extra ? c.extra.icA : 0), visible: true } },
       { x: nombres, y: lista.map(c => c.valores.convB), type: 'bar', name: 'B (variante)', marker: { color: UI.color.dorado },
         error_y: { type: 'data', array: lista.map(c => c.extra ? c.extra.icB : 0), visible: true } }
-    ], { title: 'Conversión A y B con IC 95 % por caso', barmode: 'group', yaxis: { title: { text: 'Tasa de conversión (%)' }, rangemode: 'tozero' },
+    ], { title: 'Conversión A y B con margen de error por caso', barmode: 'group', yaxis: { title: { text: 'Tasa de conversión (%)' }, rangemode: 'tozero' },
       legend: { orientation: 'h', y: -0.2 } }, { archivo: 'cap03_comparacion_conversion' });
   }
 

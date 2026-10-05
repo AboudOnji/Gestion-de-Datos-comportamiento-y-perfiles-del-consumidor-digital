@@ -272,7 +272,7 @@
       "clvLeal": 8015.3181765229992,
       "clvRiesgo": 4674.5709274769142,
       "clvPerdido": 2957.3173950804576,
-      "decision": "No se rechaza H0"
+      "decision": "Todavía no se sabe"
     },
     "cap": "cap03",
     "caso": "A"
@@ -296,7 +296,7 @@
       "clvLeal": 8015.3181765229992,
       "clvRiesgo": 4674.5709274769142,
       "clvPerdido": 2957.3173950804576,
-      "decision": "Se rechaza H0"
+      "decision": "Diferencia confiable"
     },
     "cap": "cap03",
     "caso": "B"
@@ -320,7 +320,7 @@
       "clvLeal": 8015.3181765229992,
       "clvRiesgo": 4674.5709274769142,
       "clvPerdido": 2957.3173950804576,
-      "decision": "Se rechaza H0"
+      "decision": "Diferencia confiable"
     },
     "cap": "cap03",
     "caso": "C"
@@ -344,7 +344,7 @@
       "clvLeal": 12545.508769364282,
       "clvRiesgo": 7374.4931295720808,
       "clvPerdido": 4699.0807896111046,
-      "decision": "No se rechaza H0"
+      "decision": "Todavía no se sabe"
     },
     "cap": "cap03",
     "caso": "extra n=650, h=5"

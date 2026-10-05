@@ -224,8 +224,8 @@ en el diseño de un sistema de gestión de datos.
 faltantes y atípicos, segmentar clientes por valor con el método RFM
 (Recencia, Frecuencia, Monto), calcular un valor de vida del cliente (CLV)
 simple, y decidir entre dos versiones de una página de checkout con una
-prueba A/B basada en un test estadístico, no en la simple comparación de
-porcentajes.
+prueba A/B que responde si una diferencia es real o fue suerte, y no se
+queda en la simple comparación de porcentajes.
 
 \textbf{Concepto detrás del código.} RFM puntúa a cada cliente en tres
 dimensiones (recencia: qué tan reciente fue su última compra; frecuencia:
@@ -237,14 +237,21 @@ aquí es
 \]
 una aproximación didáctica —no incorpora tasa de descuento ni probabilidad
 de retención, que un CLV de negocio real sí debería considerar—. La prueba
-A/B compara dos proporciones (tasa de conversión de la versión A vs. B) con
-un test $z$ de dos proporciones:
-\[
-  z = \frac{\hat{p}_B - \hat{p}_A}{\sqrt{\hat{p}(1-\hat{p})\left(\frac{1}{n_A}+\frac{1}{n_B}\right)}},
-  \qquad \hat{p} = \frac{x_A + x_B}{n_A + n_B},
-\]
-donde $\hat{p}$ es la proporción conjunta bajo la hipótesis nula de que
-ambas versiones convierten igual.
+A/B compara la tasa de conversión de dos versiones (A, el control, y B, la
+variante) y responde una pregunta: \emph{¿la diferencia que vemos es real o la
+produjo el azar?} La idea es la de la moneda: si se lanza 10 veces y salen
+6 caras, nadie concluye que esté cargada, porque el azar siempre mueve los
+números. Con A/B se procede igual en tres pasos: (1) medir la diferencia
+observada; (2) imaginar que A y B son \textbf{iguales} y preguntarse cuánta
+diferencia produciría el azar solo, por ejemplo repitiendo el experimento miles
+de veces en la computadora; (3) contar en cuántos de esos experimentos el azar
+iguala o supera la diferencia medida. Esa cuenta, expresada como
+probabilidad, es el \textbf{valor $p$} (\enquote{¿fue suerte?}): si es menor
+que el \textbf{umbral de duda} $\alpha$ fijado de antemano (usualmente 0.05,
+es decir, 5 de cada 100), la diferencia se considera \textbf{confiable}; si no,
+\textbf{todavía no se puede saber}. El script calcula $p$ con una fórmula
+(el test $z$ de dos proporciones); la app interactiva lo muestra además con
+la simulación descrita.
 
 \textbf{Script.} \texttt{matlab/cap03/cap03\_rfm\_clv\_ab.m}. Es el
 \textbf{mismo script, sin modificar}, que se usa en la Práctica 2 de esta
@@ -256,14 +263,14 @@ real que resolver.
 \begin{lstlisting}[style=MATLABStyle, caption={Bloque de parámetros editable (\texttt{cap03\_rfm\_clv\_ab.m}) — es lo único que cambia entre corridas.}]
 nClientes = 300;    % tamano de la base sintetica (Bloques 1-2)
 horizonteAnios = 3; % horizonte del CLV simple
-alfa = 0.05;         % significancia de la prueba A/B (Bloque 3)
+alfa = 0.05;         % umbral de duda de la prueba A/B (Bloque 3)
 nA = 1200; conversionesA = 132;   % version A (control)
 nB = 1180; conversionesB = 159;   % version B (variante)
 \end{lstlisting}
 
 \textbf{Salida esperada.} Dos figuras: distribución de segmentos RFM y CLV
 promedio por segmento (figura~\ref{fig:cap03-rfmclv}), y resultado de la
-prueba A/B con intervalos de confianza (figura~\ref{fig:cap03-ab}).
+prueba A/B con el margen de error de cada versión (figura~\ref{fig:cap03-ab}).
 
 \begin{center}
   \includegraphics[width=0.98\textwidth]{figuras/matlab/cap03_rfm_clv.pdf}
@@ -276,8 +283,9 @@ prueba A/B con intervalos de confianza (figura~\ref{fig:cap03-ab}).
 \begin{center}
   \includegraphics[width=0.62\textwidth]{figuras/matlab/cap03_prueba_ab.pdf}
   \captionof{figure}{Prueba A/B de checkout: la versión B convierte 2.5
-  puntos porcentuales más, pero la diferencia no alcanza significancia
-  estadística al 95\,\% ($p=0.065$). Fuente: elaboración propia con datos
+  puntos porcentuales más, pero todavía no se puede saber si es real: el azar
+  solo produce una diferencia así en 6.5 de cada 100 experimentos
+  ($p=0.065$), más que el umbral de 5. Fuente: elaboración propia con datos
   sintéticos.}
   \label{fig:cap03-ab}
 \end{center}
@@ -288,36 +296,39 @@ mejor a simple vista (13.5\,\% contra 11.0\,\% de conversión), y un equipo
 que decida \enquote{por el ojo} adoptaría B sin dudar —exactamente el tipo de
 juicio bajo incertidumbre que Tversky y Kahneman documentan como propenso a
 la heurística de representatividad, ver diferencia donde solo hay ruido
-muestral \parencite{tverskykahneman1974}. El test estadístico
-dice otra cosa: con $p=0.065$, apenas por encima del umbral convencional de
-0.05, la diferencia observada es compatible con el azar. Los intervalos de
-confianza de la figura~\ref{fig:cap03-ab} se traslapan de forma visible, lo
-que confirma la misma conclusión sin necesidad de leer el valor $p$. La
-decisión correcta no es \enquote{B es mejor, cámbiate} ni \enquote{no hay
-diferencia, no importa}: es reconocer que la muestra actual no permite
-concluir con la confianza convencional, y que la opción disciplinada es
-correr la prueba más tiempo o con más tráfico antes de decidir —exactamente
-el tipo de paciencia que la presión de negocio, en la práctica, más cuesta
-sostener.
+muestral \parencite{tverskykahneman1974}. La pregunta correcta es otra: si A y
+B fueran iguales, ¿con qué frecuencia el azar solo daría una diferencia de 2.5
+puntos? La respuesta del script es $p=0.065$: en 6.5 de cada 100
+experimentos, apenas por encima del umbral de 5. Los márgenes de error de la
+figura~\ref{fig:cap03-ab} se traslapan de forma visible, lo que confirma la
+misma conclusión sin necesidad de leer el valor $p$. La decisión correcta no
+es \enquote{B es mejor, cámbiate} ni \enquote{no hay diferencia, no importa}:
+es reconocer que \textbf{todavía no se puede saber} con esta muestra, y que la
+opción disciplinada es seguir la prueba o conseguir más tráfico antes de
+decidir —exactamente el tipo de paciencia que la presión de negocio, en la
+práctica, más cuesta sostener. Nótese que \enquote{todavía no se puede saber}
+\emph{no} equivale a \enquote{son iguales}: significa que falta información.
 
 \textbf{Ejercicio propuesto (usen exactamente este script, solo cambien el
 bloque de parámetros).} Corran el script tres veces y completen un cuadro
-con la conversión de cada versión, el estadístico $z$, el valor $p$ y la
+con la conversión de cada versión, el valor $p$ (\enquote{¿fue suerte?}) y la
 decisión que imprime cada corrida:
 \begin{enumerate}
   \item \textbf{Caso A — valores por defecto:} $n_A=1200$, conversiones$_A=132$;
   $n_B=1180$, conversiones$_B=159$; $\alpha=0.05$.
-  \item \textbf{Caso B — mismas tasas, más muestra:} multipliquen por 5 los
+  \item \textbf{Caso B — mismas tasas, más visitantes:} multipliquen por 5 los
   cuatro valores de la prueba A/B ($n_A=6000$, conversiones$_A=660$;
   $n_B=5900$, conversiones$_B=795$), sin cambiar $\alpha$.
   \item \textbf{Caso C — mismos datos del Caso A, umbral más laxo:}
-  regresen a los valores del Caso A y cambien solo $\alpha$ a 0.10.
+  regresen a los valores del Caso A y cambien solo $\alpha$ a 0.10 (aceptan
+  más suerte).
 \end{enumerate}
 Con el cuadro completo, respondan por escrito: ¿cambia la decisión entre el
 Caso A y el Caso B, aunque las proporciones observadas sean idénticas? ¿A
-qué se debe? ¿Cambia la decisión entre el Caso A y el Caso C? ¿Qué tipo de
-error (falso positivo o falso negativo) se vuelve más probable al relajar
-$\alpha$, y en qué escenarios de negocio sería aceptable correr ese riesgo?
+qué se debe? ¿Cambia la decisión entre el Caso A y el Caso C? ¿Qué riesgo
+(\enquote{falsa alarma}: creer en una diferencia que era suerte) se vuelve más
+probable al subir $\alpha$, y en qué escenarios de negocio sería aceptable
+correr ese riesgo?
 
 \textbf{Extensión opcional.} Incorporar una tasa de descuento al cálculo de
 CLV (CLV descontado a valor presente) y comparar el orden resultante de los
@@ -350,13 +361,13 @@ puntos porcentuales, hay que lanzarlo a todos los usuarios}.
 \textbf{Preguntas guía.}
 \begin{enumerate}
   \item Con los datos dados (400 y 400 estudiantes, 11\,\% y 8.5\,\%),
-  replique el cálculo del test $z$ de dos proporciones del laboratorio y
-  determine si la diferencia es estadísticamente significativa al 95\,\%.
-  \item Si el resultado no fuera significativo, ¿qué le respondería al
+  use el laboratorio (parámetros $n_A=n_B=400$, conversiones 34 y 44) y
+  determine si la diferencia es confiable o todavía no se puede saber.
+  \item Si todavía no se pudiera saber, ¿qué le respondería al
   equipo de producto que quiere lanzar el cambio de inmediato?
   \item ¿Qué otros datos —más allá de la tasa de finalización— ayudarían a
   decidir si vale la pena el costo de desarrollo del rediseño, incluso si la
-  diferencia fuera significativa?
+  diferencia fuera confiable?
   \item Relacione este caso con la distinción entre señal declarada y señal
   conductual de la §2.3: ¿en qué categoría cae la tasa de finalización de
   cursos?
@@ -374,7 +385,7 @@ puntos porcentuales, hay que lanzarlo a todos los usuarios}.
   de una organización mexicana (app, sitio o servicio digital) donde una de
   las dos esté claramente mejor atendida que la otra.
   \item[Solución de casos] Resolver el estudio de caso de la plataforma de
-  cursos en línea (§4) con el cálculo estadístico completo.
+  cursos en línea (§4) con la corrida del laboratorio y su interpretación.
   \item[Reporte de prácticas] Documentar, paso por paso, la ejecución del
   laboratorio MATLAB de este capítulo (bloques 1--3), con capturas de las
   dos figuras y una interpretación propia de al menos un párrafo por bloque.
@@ -406,9 +417,8 @@ canales, tarea que es a la vez técnica y legal. El marco mexicano de
 protección de datos personales cambió de fondo en 2025, con una tensión
 normativa —consentimiento tácito frente a consentimiento informado— que este
 libro no resuelve por sí solo. Y ninguna decisión basada en datos es mejor
-que el rigor del método que la sostiene: la comparación simple de
-porcentajes en una prueba A/B, sin prueba estadística, es la forma más común
-de auto-engaño con buena presentación visual.
+que el rigor del método que la sostiene: comparar dos porcentajes en una prueba A/B sin preguntarse si la diferencia
+fue suerte es la forma más común de auto-engaño con buena presentación visual.
 
 \subsection*{Glosario del capítulo}
 \begin{description}
@@ -421,11 +431,14 @@ de auto-engaño con buena presentación visual.
   voluntaria y explícita.
   \item[Datos de primera parte] Datos que una organización recolecta
   directamente de su propia relación con el consumidor.
-  \item[Nivel de significancia ($\alpha$)] Umbral de probabilidad, definido
-  antes de la prueba, por debajo del cual se considera que una diferencia
-  observada es \enquote{estadísticamente significativa}. Rango: $\alpha \in
-  (0,1)$; valores convencionales en la práctica son 0.01, 0.05 y 0.10 (el
-  script de este capítulo usa 0.05 por defecto, editable).
+  \item[Prueba A/B] Experimento que muestra dos versiones (A, control; B,
+  variante) a grupos distintos de visitantes para saber si una diferencia en
+  la conversión es real o fue suerte.
+  \item[Umbral de duda ($\alpha$)] Cuánta suerte se acepta antes de creerle a
+  una diferencia; se fija antes de la prueba. Rango: $\alpha \in (0,1)$;
+  valores convencionales en la práctica son 0.01, 0.05 y 0.10 (el script de
+  este capítulo usa 0.05 por defecto, editable). Nombre técnico: nivel de
+  significancia.
   \item[Omnicanalidad] Gestión sinérgica de múltiples canales de forma que la
   experiencia y el desempeño del cliente se optimicen a través de ellos.
   \item[Puntaje RFM] Suma de los tres puntajes por quintil (recencia,
@@ -435,10 +448,10 @@ de auto-engaño con buena presentación visual.
   compra.
   \item[UX (\textit{user experience})] Diseño de la interacción con un
   producto o interfaz específicos.
-  \item[Valor $p$] Probabilidad de observar una diferencia al menos tan
-  grande como la registrada si, en realidad, no hubiera diferencia entre las
-  dos versiones (hipótesis nula). Rango: $p \in [0,1]$; se rechaza la
-  hipótesis nula cuando $p < \alpha$.
+  \item[Valor $p$ (\enquote{¿fue suerte?})] Si en realidad no hubiera
+  diferencia entre las dos versiones, probabilidad de que el azar solo
+  produjera una diferencia al menos tan grande como la registrada. Rango:
+  $p \in [0,1]$; si $p < \alpha$ la diferencia se considera confiable.
 \end{description}
 
 \subsection*{Autoevaluación}
@@ -469,7 +482,7 @@ de auto-engaño con buena presentación visual.
   $\alpha=0.05$ significa que:
   \begin{enumerate}
     \item[a)] La versión B es definitivamente mejor.
-    \item[b)] No hay evidencia suficiente para rechazar la hipótesis de que ambas versiones convierten igual. \textit{(correcta)}
+    \item[b)] El azar solo produciría una diferencia así en 6.5 de cada 100 experimentos, más que el umbral de 5: todavía no se puede saber si B es mejor. \textit{(correcta)}
     \item[c)] El experimento falló y debe descartarse.
     \item[d)] La versión A es mejor.
   \end{enumerate}

@@ -10,7 +10,7 @@
     { id: 'horizonteAnios', tipo: 'numero', min: 0, minExclusivo: true, deslizMin: 1, deslizMax: 10, paso: 1,
       ayuda: 'Horizonte de vida esperado para el CLV simple (años).' },
     { id: 'alfa', tipo: 'numero', min: 0, max: 1, minExclusivo: true, maxExclusivo: true, deslizMin: 0.01, deslizMax: 0.20, paso: 0.01,
-      ayuda: 'Nivel de significancia de la prueba A/B (Bloque 3). Válido: 0 &lt; α &lt; 1; usuales 0.01, 0.05, 0.10.' },
+      ayuda: '«Umbral de duda» (α) de la prueba A/B (Bloque 3): cuánta suerte aceptan antes de creerle a la diferencia. 0.05 = 5 de cada 100. Válido: 0 &lt; α &lt; 1; usuales 0.01, 0.05, 0.10.' },
     { id: 'nA', tipo: 'entero', min: 1, deslizMin: 100, deslizMax: 10000, paso: 10, ayuda: 'Visitantes de la versión A (control).' },
     { id: 'conversionesA', tipo: 'entero', min: 0, deslizMin: 0, deslizMax: 2000, paso: 1, ayuda: 'Conversiones de la versión A.' },
     { id: 'nB', tipo: 'entero', min: 1, deslizMin: 100, deslizMax: 10000, paso: 10, ayuda: 'Visitantes de la versión B (variante).' },
@@ -28,8 +28,8 @@
     { id: 'nA', titulo: 'nA', dec: 0 }, { id: 'cA', titulo: 'conv. A', dec: 0 },
     { id: 'nB', titulo: 'nB', dec: 0 }, { id: 'cB', titulo: 'conv. B', dec: 0 },
     { id: 'convA', titulo: 'Conversión A (%)', dec: 2 }, { id: 'convB', titulo: 'Conversión B (%)', dec: 2 },
-    { id: 'z', titulo: 'z', dec: 3 }, { id: 'valorP', titulo: 'Valor p', dec: 4 },
-    { id: 'alfa', titulo: 'α', dec: 2 }, { id: 'decision', titulo: 'Decisión' },
+    { id: 'valorP', titulo: '¿Fue suerte? (valor p)', dec: 4 },
+    { id: 'alfa', titulo: 'Umbral de duda α', dec: 2 }, { id: 'decision', titulo: 'Decisión' },
     { id: 'clvCampeon', titulo: 'CLV Campeón', dec: 0 }, { id: 'clvPerdido', titulo: 'CLV Perdido', dec: 0 }
   ];
 
@@ -53,7 +53,7 @@
     { title: S('CLV por segmento (horizonte de %d años)', v.horizonteAnios), yaxis: { title: { text: 'CLV simple promedio (MXN)' } }, showlegend: false },
     { archivo: 'cap03_clv' });
 
-    const titulo = S('Prueba A/B de checkout (z=%.2f, p=%.4f)', r.z, r.valorP);
+    const titulo = S('Prueba A/B de checkout (¿fue suerte? p = %.4f)', r.valorP);
     UI.graficar('fig2', [{
       x: ['A (control)', 'B (variante)'], y: [100 * r.pA, 100 * r.pB], type: 'bar', width: 0.5,
       marker: { color: [UI.color.guinda, UI.color.dorado] },
@@ -62,10 +62,29 @@
     }], {
       title: titulo, yaxis: { title: { text: 'Tasa de conversión (%)' }, rangemode: 'tozero' }, showlegend: false,
       annotations: [{ xref: 'paper', yref: 'paper', x: 0.5, y: -0.2, showarrow: false,
-        text: r.rechaza ? '<b>Se rechaza H0</b> (p &lt; α = ' + v.alfa + ')' : '<b>No se rechaza H0</b> (p ≥ α = ' + v.alfa + ')',
+        text: r.rechaza ? '<b>Diferencia confiable</b> (p &lt; α = ' + v.alfa + ')' : '<b>Todavía no se puede saber</b> (p ≥ α = ' + v.alfa + ')',
         font: { color: r.rechaza ? '#2E7D4F' : '#A4461F' } }],
       margin: { b: 80 }
     }, { archivo: 'cap03_prueba_ab' });
+
+    // Complemento de la app: ¿y si fuera solo azar? (simulación con A y B iguales)
+    const veces = (v.nA + v.nB) > 20000 ? 2000 : 5000;
+    const sim = Cap03.simularAzar(v.nA, v.conversionesA, v.nB, v.conversionesB, veces, 2026);
+    const obs = 100 * (r.pB - r.pA), lim = Math.abs(obs);
+    const mn = Math.min.apply(null, sim.difs.concat([-lim])), mx = Math.max.apply(null, sim.difs.concat([lim]));
+    const ancho = Math.max(0.05, (mx - mn) / 40), ini = Math.floor(mn / ancho) * ancho;
+    const cuentas = new Array(Math.ceil((mx - ini) / ancho) + 1).fill(0);
+    sim.difs.forEach(d => { cuentas[Math.floor((d - ini) / ancho)]++; });
+    const centros = cuentas.map((_, i) => ini + (i + 0.5) * ancho);
+    UI.graficar('fig4', [{ x: centros, y: cuentas, type: 'bar', width: ancho * 0.95,
+      marker: { color: centros.map(c => Math.abs(c) >= lim - ancho / 2 + 1e-9 ? '#A4461F' : UI.color.gris) },
+      hovertemplate: 'diferencia por azar ≈ %{x:.1f} puntos<br>experimentos: %{y}<extra></extra>' }],
+    { title: S('¿Y si fuera solo azar? %d experimentos simulados', veces), showlegend: false, bargap: 0,
+      xaxis: { title: { text: 'Diferencia B − A por puro azar (puntos porcentuales)' } }, yaxis: { title: { text: 'Número de experimentos' } },
+      shapes: [{ type: 'line', yref: 'paper', y0: 0, y1: 1, x0: obs, x1: obs, line: { color: UI.color.dorado, width: 3 } },
+        { type: 'line', yref: 'paper', y0: 0, y1: 1, x0: -obs, x1: -obs, line: { color: UI.color.dorado, width: 3, dash: 'dot' } }],
+      annotations: [{ x: obs, yref: 'paper', y: 1.02, text: 'lo que midieron', showarrow: false, font: { color: UI.color.dorado } }], margin: { b: 60 } },
+    { archivo: 'cap03_simulacion_azar' });
 
     UI.graficar('fig3', [
       { y: r.montoOriginal, type: 'box', name: 'Antes (con atípicos)', marker: { color: UI.color.gris }, boxpoints: 'outliers' },
@@ -87,14 +106,14 @@
         text: lista.map(c => c.valores.valorP.toFixed(4)), textposition: 'outside', cliponaxis: false },
       { x: nombres, y: lista.map(c => c.valores.alfa), type: 'scatter', mode: 'markers', name: 'α',
         marker: { symbol: 'diamond', size: 14, color: UI.esOscuro() ? '#fff' : '#000' } }
-    ], { title: 'Valor p contra α por caso', yaxis: { title: { text: 'Probabilidad' }, rangemode: 'tozero' },
+    ], { title: '¿Fue suerte? (valor p) contra el umbral de duda', yaxis: { title: { text: 'Probabilidad' }, rangemode: 'tozero' },
       legend: { orientation: 'h', y: -0.2 } }, { archivo: 'cap03_comparacion_p' });
     UI.graficar('comp2', [
       { x: nombres, y: lista.map(c => c.valores.convA), type: 'bar', name: 'A (control)', marker: { color: UI.color.guinda },
         error_y: { type: 'data', array: lista.map(c => c.extra ? c.extra.icA : 0), visible: true } },
       { x: nombres, y: lista.map(c => c.valores.convB), type: 'bar', name: 'B (variante)', marker: { color: UI.color.dorado },
         error_y: { type: 'data', array: lista.map(c => c.extra ? c.extra.icB : 0), visible: true } }
-    ], { title: 'Conversión A y B con IC 95 % por caso', barmode: 'group', yaxis: { title: { text: 'Tasa de conversión (%)' }, rangemode: 'tozero' },
+    ], { title: 'Conversión A y B con margen de error por caso', barmode: 'group', yaxis: { title: { text: 'Tasa de conversión (%)' }, rangemode: 'tozero' },
       legend: { orientation: 'h', y: -0.2 } }, { archivo: 'cap03_comparacion_conversion' });
   }
 

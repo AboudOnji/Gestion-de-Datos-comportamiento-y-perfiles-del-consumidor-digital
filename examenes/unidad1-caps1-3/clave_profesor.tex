@@ -1,0 +1,63 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}\usepackage{lmodern}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage[top=1.3cm,bottom=1.2cm,left=1.0cm,right=1.0cm,nohead,nofoot]{geometry}
+\usepackage{multicol,amsmath,graphicx,xcolor,array,enumitem,tabularx,booktabs}
+\usepackage{pgfplots}\pgfplotsset{compat=1.17}\usetikzlibrary{patterns}
+\definecolor{dorado}{HTML}{B8975A}
+\definecolor{guinda}{HTML}{6F1D46}\definecolor{tinta}{HTML}{000000}
+\pagestyle{empty}\setlength{\parindent}{0pt}\setlength{\columnsep}{0.55cm}
+\setlength{\columnseprule}{0.3pt}
+\newlength{\wbola}\settowidth{\wbola}{\scriptsize$\bigcirc$}
+\begin{document}\small\color{tinta}
+{\color{guinda}\textbf{\large Clave de respuestas — Examen de la Unidad I (Caps. 1 a 3)}}\hfill{\footnotesize\textbf{Uso exclusivo del profesor} · Dr. Aboud Barsekh-Onji}
+\vspace{2pt}\hrule\vspace{4pt}
+Las tres versiones son \textbf{el mismo examen}: cambian el orden de los reactivos y de las opciones. Duración: 50 min. Calificación: aciertos $\times\,10/30$. La clave es \textbf{irregular} (10 a, 10 b y 10 c por versión), de modo que no puede deducirse del examen. Los alumnos contestan en \texttt{hoja\_respuestas.pdf} (marcan también su versión). \textbf{Corrección principal:} escanear las hojas y correr \texttt{calificar\_hojas.py} (lee las casillas, aplica la clave de la versión marcada y genera una tabla con las incidencias). \textbf{Respaldo manual:} \texttt{plantilla\_A/B/C.pdf}, impresa al 100\,\% en acetato, alineando los cuadros negros con los de la hoja; o la clave escrita de abajo.
+
+\vspace{3pt}
+\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{@{}cl@{}}\toprule \textbf{Versión} & \textbf{Respuestas correctas, reactivos 1 a 30 (grupos de cinco)}\\\midrule
+\textbf{A} & \texttt{\textbf{accac babba abcca cbbab acbaa ccbbc}}\\
+\textbf{B} & \texttt{\textbf{abbca ccbcb baccb aacbb aabaa ccacb}}\\
+\textbf{C} & \texttt{\textbf{cbbab caacb bcbcb acbcc aabba acaca}}\\
+\bottomrule\end{tabular}\end{center}
+
+\vspace{2pt}
+\textbf{Correspondencia y justificación de cada reactivo}\\[2pt]
+{\scriptsize\renewcommand{\arraystretch}{1.08}\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{@{}l c c c c X@{}}\toprule
+\textbf{ID} & \textbf{N.º A} & \textbf{N.º B} & \textbf{N.º C} & \textbf{Clave} & \textbf{Tema y justificación (fuente en el libro)}\\\midrule
+1.01 & 14 & 3 & 22 & c/b/a & \textbf{Evolución del consumidor: relato editorial vs. empírico}. Subtema 1.1.1. La serie X.0 es lectura de tendencias de la práctica, no un programa de investigación con aparato empírico propio.\\
+1.02 & 12 & 1 & 20 & b/a/c & \textbf{Evidencia: comercio electrónico y conectividad}. Evidencia de México. El comercio electrónico crece más que la conectividad, así que el aumento viene de gente ya conectada que compra más.\\
+1.03 & 4 & 23 & 12 & a/b/c & \textbf{Consumo inteligente vs. sostenible}. Subtema 1.1.2. «Inteligente» y «sostenible» no son sinónimos: el primero se refiere a decisiones informadas; el segundo, al impacto ambiental y social.\\
+1.04 & 30 & 19 & 8 & c/b/a & \textbf{Brecha actitud-conducta}. Subtema 1.1.2 (recuadro de Frontera). La actitud pro-ambiental declarada predice sistemáticamente peor la conducta real.\\
+1.05 & 10 & 29 & 18 & a/c/b & \textbf{Ventajas del análisis: nivel de evidencia}. Subtema 1.1.3 (cuadro de ventajas). «anticipación de tendencias» tiene nivel bajo-medio; depende de la calidad del dato y del sesgo de representatividad.\\
+1.06 & 6 & 25 & 14 & b/a/c & \textbf{Ventajas del análisis: reducción de fricción}. Subtema 1.1.3 (cuadro de ventajas). La reducción de fricción tiene evidencia alta y se instrumenta con analítica de embudo.\\
+1.07 & 3 & 22 & 11 & c/a/b & \textbf{Modelo de Bass: decisión de lanzamiento (Figura 1)}. Laboratorio (interpretación de negocio). Con imitación dominante la adopción depende del contagio social.\\
+1.08 & 24 & 13 & 2 & a/c/b & \textbf{Doble naturaleza del consumidor digital}. Subtema 1.1.1 (doble naturaleza). El consumidor es persona vivida y dato estructurado a la vez; ninguna lectura basta por sí sola.\\
+1.09 & 2 & 21 & 10 & c/a/b & \textbf{Modelo de Bass: lectura de la curva de tasa de adopción}. Laboratorio (Figura 1, cálculo con $t^\ast=\ln(q/p)/(p+q)$): A pica en $t\approx1.2$, B en $\approx6.2$ y C en $\approx7.2$, con la tasa máxima mayor en C.\\
+1.10 & 13 & 2 & 21 & c/b/a & \textbf{Modelo de Bass: lectura del periodo del pico}. Laboratorio, interpretación de negocio: el pico del caso por defecto ocurre en $t^\ast\approx6.2$ con 46\,\% del mercado adoptado.\\
+\midrule
+2.01 & 29 & 18 & 7 & b/c/a & \textbf{Smith (1956): diferenciación vs. segmentación}. Subtema 1.2.1. Diferenciación = una oferta y mucha promoción; segmentación = adaptar el producto a subgrupos con preferencias distintas.\\
+2.02 & 11 & 30 & 19 & a/b/c & \textbf{Relación Smith - STP}. Subtema 1.2.1. Lo que cambió con lo digital es el método para llenar el marco, no el marco.\\
+2.03 & 1 & 20 & 9 & a/b/c & \textbf{Variables de segmentación: costo relativo}. Subtema 1.2.1. La verdadera revolución es el costo relativo; la variable conductual pasó de ser la más cara a ser la más barata.\\
+2.04 & 20 & 9 & 28 & b/c/a & \textbf{Mercado meta digital}. Subtema 1.2.2. Elegir mal el mercado meta ya no es solo un error estratégico, es un parámetro mal configurado.\\
+2.05 & 16 & 5 & 24 & c/a/b & \textbf{Tipologías de perfil y método de clustering}. Subtema 1.2.3. No existe una tipología académica con autoría y método rastreables; NORISO es de autor y de divulgación, no revisada por pares.\\
+2.06 & 17 & 6 & 25 & b/c/a & \textbf{k-means y fuzzy c-means}. Subtema 1.2.3 (frontera). La rígida es el caso particular de la difusa, no al revés.\\
+2.07 & 28 & 17 & 6 & b/a/c & \textbf{Radiografía: edad y sobreajuste}. Subtema 1.2.4. Riesgo de sobreajuste al ignorar la base demográfica.\\
+2.08 & 21 & 10 & 29 & a/b/c & \textbf{El perfil como función del negocio}. Subtema 1.2.5. No existe un «perfil digital» único; cuantos más negocios observan a la persona, más perfiles parciales existen.\\
+2.09 & 19 & 8 & 27 & a/b/c & \textbf{Pertenencia difusa: cliente ambiguo (datos hipotéticos)}. Laboratorio, Bloque difuso: ambiguo = pertenencia máxima menor a 0.6; la rígida asigna igual al segmento más cercano.\\
+2.10 & 23 & 12 & 1 & b/a/c & \textbf{Laboratorio de segmentación: lectura de las corridas A, B y C}. Laboratorio (corridas A, B y C ejecutadas en MATLAB): silueta 0.58, 0.41 y 0.58; ambiguos 14.6, 36.7 y 21.6\,\%.\\
+\midrule
+3.01 & 26 & 15 & 4 & c/b/a & \textbf{CX vs. UX}. Subtema 1.3.1. UX es el diseño de una interacción específica; CX es la suma de todas las interacciones en el tiempo y los canales.\\
+3.02 & 7 & 26 & 15 & a/c/b & \textbf{Multicanal vs. omnicanal}. Subtema 1.3.2. La omnicanalidad exige que los canales compartan una sola identidad de cliente reconocible.\\
+3.03 & 22 & 11 & 30 & c/b/a & \textbf{Momentos de escucha: tipo de señal}. Subtema 1.3.3. El caso de apertura es escucha puramente conductual; quien abandona no suele quejarse, simplemente se va.\\
+3.04 & 8 & 27 & 16 & b/c/a & \textbf{Cookies de terceros: hechos verificables}. Subtema 1.3.4 (recuadro de Frontera). El fin de las cookies de terceros no ocurrió como se anunció.\\
+3.05 & 15 & 4 & 23 & a/c/b & \textbf{LFPDPPP: tensión en el consentimiento}. Subtema 1.3.4. Se señala la tensión para que el estudiante sepa que existe y consulte el texto vigente o a un especialista.\\
+3.06 & 18 & 7 & 26 & b/c/a & \textbf{Calidad de datos: imputación y atípicos}. Laboratorio, Bloque 1. Imputación por mediana (regla documentada) y acotado del atípico para no perder información de recencia y frecuencia.\\
+3.07 & 5 & 24 & 13 & c/a/b & \textbf{Sesgo en la definición de «cliente de alto valor»}. Evidencia de México. Una decisión técnica de segmentación puede heredar un sesgo social ya presente en los datos.\\
+3.08 & 27 & 16 & 5 & c/a/b & \textbf{RFM y CLV: lectura de la figura del laboratorio}. Laboratorio, Figura 1 del script: 135$\times$\$8{,}015 (Leal) frente a 36$\times$\$10{,}631 (Campeón); Leal aporta 53.6\,\% del CLV total.\\
+3.09 & 9 & 28 & 17 & b/a/c & \textbf{Prueba A/B: márgenes de error que se traslapan}. Laboratorio, Figura 2 del script: $p=0.065$; con los márgenes traslapados no se puede concluir.\\
+3.10 & 25 & 14 & 3 & a/c/b & \textbf{Prueba A/B: efecto de 5 veces más visitantes}. Laboratorio, Caso B del ejercicio: mismas tasas, 6{,}000 y 5{,}900 visitantes, $z=4.12$ ($p<0.001$).\\
+\bottomrule\end{tabularx}}
+\\[3pt]{\scriptsize Clave: letra correcta en las versiones A/B/C. Distribución: 10 reactivos por capítulo (1.01--1.10, 2.01--2.10, 3.01--3.10). Los casos marcados como hipotéticos en los enunciados se construyeron para el examen; las demás cifras son las del libro.}
+\end{document}

@@ -101,7 +101,7 @@ function ejecutarAislado(temporal)
         zz_res.esperado.(zz_m{zz_j,1}) = eval(zz_m{zz_j,2});
     end
     if exist('valorP', 'var')
-        if valorP < alfa, zz_res.decisionTexto = 'Se rechaza H0'; else, zz_res.decisionTexto = 'No se rechaza H0'; end
+        if valorP < alfa, zz_res.decisionTexto = 'Diferencia confiable'; else, zz_res.decisionTexto = 'Todavía no se sabe'; end
     end
     setappdata(0, 'refResultado', zz_res);
     close all;
