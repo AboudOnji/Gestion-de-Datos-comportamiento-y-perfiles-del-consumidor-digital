@@ -100,7 +100,7 @@ def cabecera(v, plantilla=False):
 \end{minipage}
 \vspace{2pt}\hrule\vspace{3pt}
 {\small\textbf{Nombre:} \rule{7.2cm}{0.3pt} \hfill \textbf{Grupo:} \rule{1.6cm}{0.3pt} \hfill \textbf{Fecha:} \rule{2.2cm}{0.3pt} \hfill \textbf{Calif.:} \rule{1.5cm}{0.3pt}}\\[3pt]
-{\footnotesize\textbf{Duración: @D@ min.} @N@ reactivos de opción múltiple con \textbf{una sola} respuesta correcta. Contesta en la \textbf{hoja de respuestas independiente}: rellena por completo un solo círculo por reactivo y marca la \textbf{versión} de este examen (la letra de la esquina). Cada acierto vale $10/@N@$ de punto. Algunos reactivos piden analizar las figuras y resultados de abajo (laboratorios). Lee con atención cada enunciado.}
+{\footnotesize\textbf{Duración: @D@ min.} @N@ reactivos de opción múltiple con \textbf{una sola} respuesta correcta. Contesta en la \textbf{hoja de respuestas única} (es la misma para las tres versiones): rellena por completo un solo círculo por reactivo y \textbf{anota la versión que te tocó} (la letra de la esquina de este examen). Cada acierto vale $10/@N@$ de punto. Algunos reactivos piden analizar las figuras y resultados de arriba. Lee con atención cada enunciado.}
 \vspace{2pt}\hrule\vspace{4pt}
 """.replace("@LOGO@", r"\rule{0pt}{1.15cm}" if plantilla else r"\includegraphics[height=1.15cm]{ipn-escudo.png}").replace("@V@", v).replace("@D@", str(DURACION)).replace("@N@", str(N))
 
@@ -159,7 +159,8 @@ def hoja_tex(plantilla=False, version=None):
             xl = x0 + {"Nombre completo:": 3.3, "Grupo:": 1.5, "Matrícula / boleta:": 3.6, "Fecha:": 1.4}[etiqueta]
             L.append(rf"\draw[line width=0.4pt] ({xl},{y}) -- ({x1},{y});")
         L.append(r"\node[anchor=north west,font=\footnotesize,text width=17.5cm] at (1.6,6.6) {Escribe tus datos con letra clara. \textbf{Rellena por completo un solo círculo por reactivo} con pluma o lápiz oscuro (sin palomitas, cruces ni tachaduras). No escribas fuera de los círculos ni dobles esta hoja.};")
-        L.append(r"\node[anchor=south west,font=\small\bfseries] at (1.6,8.4) {VERSIÓN de tu examen (la letra de la esquina superior):};")
+        L.append(r"\node[anchor=south west,font=\normalsize\bfseries,text=guinda] at (1.6,8.15) {ANOTA LA VERSIÓN QUE TE TOCÓ (la letra de la esquina de tu examen): rellena un círculo};")
+        L.append(r"\node[anchor=west,font=\small] at (14.2,%.2f) {y escríbela aquí: \rule{1.2cm}{0.3pt}};" % VERSION_XY["A"][1])
         for k, (x, y) in VERSION_XY.items():
             L.append(rf"\draw[line width=0.5pt] ({x},{y}) circle ({R_BURBUJA});")
             L.append(rf"\node[anchor=west,font=\small\bfseries] at ({x + 0.45},{y}) {{{k}}};")
@@ -200,22 +201,16 @@ A & 3 & base & 0.58 & 14.6\\ B & 3 & mayor & 0.41 & 36.7\\ C & 4 & base & 0.58 &
 \end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 2.} Corridas del laboratorio (arriba) y pertenencias de cuatro clientes (abajo, hipotéticas): segmento 1 gris claro, 2 gris oscuro, 3 rayado}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.215\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[ybar,width=4.5cm,height=4.1cm,bar width=7pt,symbolic x coords={Camp.,Leal,Riesgo,Perd.},xtick=data,ymin=0,ymax=170,ylabel={clientes},axis lines*=left,enlarge x limits=0.22,
- nodes near coords={},ytick={0,50,100,150}]
-\addplot[fill=black!40,draw=black!70] coordinates{(Camp.,36)(Leal,135)(Riesgo,100)(Perd.,29)};
-\node[font=\tiny,anchor=south] at (axis cs:Camp.,44) {\$10{,}631}; \node[font=\tiny,anchor=south] at (axis cs:Leal,143) {\$8{,}015};
-\node[font=\tiny,anchor=south] at (axis cs:Riesgo,108) {\$4{,}675}; \node[font=\tiny,anchor=south] at (axis cs:Perd.,37) {\$2{,}957};
-\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 3.} Clientes por segmento RFM y CLV promedio (sobre cada barra)}
+\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[ybar,width=4.5cm,height=4.1cm,bar width=8pt,symbolic x coords={18--24,25--34,35--44,55--64,65+},xtick=data,ymin=0,ymax=7,
+ xlabel={edad (años)},ylabel={horas diarias de internet},axis lines*=left,enlarge x limits=0.15,nodes near coords,nodes near coords style={font=\tiny},ytick={0,2,4,6},x tick label style={font=\tiny,rotate=45,anchor=east}]
+\addplot[fill=black!40,draw=black!70] coordinates{(18--24,5.7)(25--34,5.6)(35--44,4.7)(55--64,3.2)(65+,3.0)};
+\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 3.} Uso diario de internet por edad en México (ENDUTIH 2024; no se muestra 45--54)}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.255\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north)]
-\begin{axis}[name=a,ybar,width=2.45cm,height=4.1cm,bar width=7pt,symbolic x coords={A,B},xtick=data,ymin=0,ymax=18,ylabel={conversión (\%)},axis lines*=left,enlarge x limits=0.5,title={$n{=}1{,}200$},ytick={0,5,10,15}]
-\addplot[fill=black!25,draw=black!70,error bars/.cd,y dir=both,y explicit] coordinates{(A,11.0) +- (0,1.77) (B,13.47) +- (0,1.95)};
-\end{axis}
-\begin{axis}[at={(a.east)},xshift=0.15cm,anchor=west,ybar,width=2.45cm,height=4.1cm,bar width=7pt,symbolic x coords={A,B},xtick=data,ymin=0,ymax=18,axis lines*=left,enlarge x limits=0.5,title={$n{=}6{,}000$},yticklabels={}]
-\addplot[fill=black!25,draw=black!70,error bars/.cd,y dir=both,y explicit] coordinates{(A,11.0) +- (0,0.79) (B,13.47) +- (0,0.87)};
-\end{axis}
-\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 4.} Prueba A/B: conversión de A y B con margen de error (IC 95\,\%) para dos tamaños de muestra}
+\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[ybar,width=4.9cm,height=4.1cm,bar width=11pt,symbolic x coords={Mujeres,Hombres,Total},xtick=data,ymin=0,ymax=100,
+ ylabel={\% con producto financiero formal},axis lines*=left,enlarge x limits=0.3,nodes near coords,nodes near coords style={font=\tiny},ytick={0,25,50,75,100}]
+\addplot[fill=black!40,draw=black!70] coordinates{(Mujeres,72.8)(Hombres,80.9)(Total,76.5)};
+\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 4.} Personas con un producto financiero formal (ENIF 2024, INEGI/CNBV)}
 \end{minipage}
 \endgroup
 """
@@ -245,7 +240,7 @@ def clave():
     t += r"{\color{guinda}\textbf{\large Clave de respuestas — Examen de la Unidad I (Caps. 1 a 3)}}\hfill{\footnotesize\textbf{Uso exclusivo del profesor} · Dr. Aboud Barsekh-Onji}" + "\n\\vspace{2pt}\\hrule\\vspace{4pt}\n"
     t += (r"Las tres versiones son \textbf{el mismo examen}: cambian el orden de los reactivos y de las opciones. "
           r"Duración: @D@ min. Calificación: aciertos $\times\,10/@N@$. La clave es \textbf{irregular} (10 a, 10 b y 10 c por versión), de modo que no puede deducirse del examen. "
-          r"Los alumnos contestan en \texttt{hoja\_respuestas.pdf} (marcan también su versión). \textbf{Corrección principal:} escanear las hojas y correr \texttt{calificar\_hojas.py} "
+          r"Los alumnos contestan en \texttt{hoja\_respuestas.pdf}, \textbf{una sola hoja para las tres versiones}, en la que anotan la versión que les tocó. \textbf{Corrección principal:} escanear las hojas y correr \texttt{calificar\_hojas.py} "
           r"(lee las casillas, aplica la clave de la versión marcada y genera una tabla con las incidencias). \textbf{Respaldo manual:} \texttt{plantilla\_A/B/C.pdf}, impresa al 100\,\% en acetato, "
           r"alineando los cuadros negros con los de la hoja; o la clave escrita de abajo.".replace("@D@", str(DURACION)).replace("@N@", str(N)) + "\n\n\\vspace{3pt}\n")
     t += r"\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{@{}cl@{}}\toprule \textbf{Versión} & \textbf{Respuestas correctas, reactivos 1 a %d (grupos de cinco)}\\\midrule" % N + "\n"

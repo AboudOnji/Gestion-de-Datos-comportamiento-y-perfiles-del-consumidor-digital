@@ -2,8 +2,8 @@
 
 | Archivo | Para qué |
 |---|---|
-| `examen_A.pdf`, `examen_B.pdf`, `examen_C.pdf` | Examen (2 páginas, una hoja por ambos lados). Mismo examen, distinto orden de reactivos y opciones. 30 reactivos (22 conceptuales + 8 de análisis de figuras/resultados de laboratorio) |
-| `hoja_respuestas.pdf` | Hoja independiente: datos del alumno, casilla de **versión**, 30 reactivos. Se escanea |
+| `examen_A.pdf`, `examen_B.pdf`, `examen_C.pdf` | Examen (2 páginas, una hoja por ambos lados). Mismo examen, distinto orden de reactivos y opciones. 30 reactivos (23 conceptuales + 7 de análisis de figuras y resultados; sin preguntas del laboratorio de la sesión 3, solo el concepto de CLV) |
+| `hoja_respuestas.pdf` | **Hoja única para las tres versiones**: datos del alumno, el alumno anota la **versión** que le tocó (círculo A/B/C), 30 reactivos. Se escanea |
 | `calificar_hojas.py` | Lee los escaneos y califica (ver abajo) |
 | `clave_profesor.pdf` | Clave irregular de A/B/C, correspondencia de reactivos y justificaciones |
 | `plantilla_A/B/C.pdf` | Respaldo manual: acetato impreso al 100 % sobre la hoja del alumno |

@@ -22,7 +22,7 @@
 \end{minipage}
 \vspace{2pt}\hrule\vspace{3pt}
 {\small\textbf{Nombre:} \rule{7.2cm}{0.3pt} \hfill \textbf{Grupo:} \rule{1.6cm}{0.3pt} \hfill \textbf{Fecha:} \rule{2.2cm}{0.3pt} \hfill \textbf{Calif.:} \rule{1.5cm}{0.3pt}}\\[3pt]
-{\footnotesize\textbf{Duración: 50 min.} 30 reactivos de opción múltiple con \textbf{una sola} respuesta correcta. Contesta en la \textbf{hoja de respuestas independiente}: rellena por completo un solo círculo por reactivo y marca la \textbf{versión} de este examen (la letra de la esquina). Cada acierto vale $10/30$ de punto. Algunos reactivos piden analizar las figuras y resultados de abajo (laboratorios). Lee con atención cada enunciado.}
+{\footnotesize\textbf{Duración: 50 min.} 30 reactivos de opción múltiple con \textbf{una sola} respuesta correcta. Contesta en la \textbf{hoja de respuestas única} (es la misma para las tres versiones): rellena por completo un solo círculo por reactivo y \textbf{anota la versión que te tocó} (la letra de la esquina de este examen). Cada acierto vale $10/30$ de punto. Algunos reactivos piden analizar las figuras y resultados de arriba. Lee con atención cada enunciado.}
 \vspace{2pt}\hrule\vspace{4pt}
 \endgroup
 \begingroup\tiny\pgfplotsset{every axis/.append style={tick label style={font=\tiny},label style={font=\tiny},title style={font=\tiny},
@@ -48,22 +48,16 @@ A & 3 & base & 0.58 & 14.6\\ B & 3 & mayor & 0.41 & 36.7\\ C & 4 & base & 0.58 &
 \end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 2.} Corridas del laboratorio (arriba) y pertenencias de cuatro clientes (abajo, hipotéticas): segmento 1 gris claro, 2 gris oscuro, 3 rayado}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.215\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[ybar,width=4.5cm,height=4.1cm,bar width=7pt,symbolic x coords={Camp.,Leal,Riesgo,Perd.},xtick=data,ymin=0,ymax=170,ylabel={clientes},axis lines*=left,enlarge x limits=0.22,
- nodes near coords={},ytick={0,50,100,150}]
-\addplot[fill=black!40,draw=black!70] coordinates{(Camp.,36)(Leal,135)(Riesgo,100)(Perd.,29)};
-\node[font=\tiny,anchor=south] at (axis cs:Camp.,44) {\$10{,}631}; \node[font=\tiny,anchor=south] at (axis cs:Leal,143) {\$8{,}015};
-\node[font=\tiny,anchor=south] at (axis cs:Riesgo,108) {\$4{,}675}; \node[font=\tiny,anchor=south] at (axis cs:Perd.,37) {\$2{,}957};
-\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 3.} Clientes por segmento RFM y CLV promedio (sobre cada barra)}
+\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[ybar,width=4.5cm,height=4.1cm,bar width=8pt,symbolic x coords={18--24,25--34,35--44,55--64,65+},xtick=data,ymin=0,ymax=7,
+ xlabel={edad (años)},ylabel={horas diarias de internet},axis lines*=left,enlarge x limits=0.15,nodes near coords,nodes near coords style={font=\tiny},ytick={0,2,4,6},x tick label style={font=\tiny,rotate=45,anchor=east}]
+\addplot[fill=black!40,draw=black!70] coordinates{(18--24,5.7)(25--34,5.6)(35--44,4.7)(55--64,3.2)(65+,3.0)};
+\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 3.} Uso diario de internet por edad en México (ENDUTIH 2024; no se muestra 45--54)}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.255\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north)]
-\begin{axis}[name=a,ybar,width=2.45cm,height=4.1cm,bar width=7pt,symbolic x coords={A,B},xtick=data,ymin=0,ymax=18,ylabel={conversión (\%)},axis lines*=left,enlarge x limits=0.5,title={$n{=}1{,}200$},ytick={0,5,10,15}]
-\addplot[fill=black!25,draw=black!70,error bars/.cd,y dir=both,y explicit] coordinates{(A,11.0) +- (0,1.77) (B,13.47) +- (0,1.95)};
-\end{axis}
-\begin{axis}[at={(a.east)},xshift=0.15cm,anchor=west,ybar,width=2.45cm,height=4.1cm,bar width=7pt,symbolic x coords={A,B},xtick=data,ymin=0,ymax=18,axis lines*=left,enlarge x limits=0.5,title={$n{=}6{,}000$},yticklabels={}]
-\addplot[fill=black!25,draw=black!70,error bars/.cd,y dir=both,y explicit] coordinates{(A,11.0) +- (0,0.79) (B,13.47) +- (0,0.87)};
-\end{axis}
-\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 4.} Prueba A/B: conversión de A y B con margen de error (IC 95\,\%) para dos tamaños de muestra}
+\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[ybar,width=4.9cm,height=4.1cm,bar width=11pt,symbolic x coords={Mujeres,Hombres,Total},xtick=data,ymin=0,ymax=100,
+ ylabel={\% con producto financiero formal},axis lines*=left,enlarge x limits=0.3,nodes near coords,nodes near coords style={font=\tiny},ytick={0,25,50,75,100}]
+\addplot[fill=black!40,draw=black!70] coordinates{(Mujeres,72.8)(Hombres,80.9)(Total,76.5)};
+\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 4.} Personas con un producto financiero formal (ENIF 2024, INEGI/CNBV)}
 \end{minipage}
 \endgroup
 \vspace{2pt}\hrule\vspace{3pt}
@@ -116,12 +110,12 @@ A & 3 & base & 0.58 & 14.6\\ B & 3 & mayor & 0.41 & 36.7\\ C & 4 & base & 0.58 &
 \item k-means es el caso límite en que toda la pertenencia va a un segmento ($u_{ik}\in\{0,1\}$); la difusa es la general.
 \end{enumerate}
 \vspace{2pt}
-\noindent\textbf{7.} En el laboratorio, los montos faltantes se imputan con la mediana y los atípicos se acotan al límite $Q_3+1.5\times\mathrm{RIC}$ en lugar de eliminar al cliente. ¿Cuál es la razón de fondo?
+\noindent\textbf{7.} La Figura 4 muestra el porcentaje de mujeres y de hombres con un producto financiero formal (ENIF 2024). Si un banco define «cliente de alto valor» a partir de los productos que sus clientes tienen contratados, ¿qué riesgo advierte el capítulo?
 \vspace{-3pt}
 \begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
-\item Eliminar clientes con valores atípicos es incorrecto en cualquier análisis, por lo que nunca debe hacerse bajo ninguna regla.
-\item El promedio siempre es mayor que la mediana, por lo que imputar con él inflaría artificialmente el CLV de los clientes.
-\item La mediana resiste los valores extremos y acotar conserva la recencia y la frecuencia del cliente; además, la regla queda documentada.
+\item Que la brecha demuestre que las mujeres no usan servicios financieros y que por ello deban excluirse del análisis.
+\item Ninguno: como la definición usa solo números, sus resultados son neutrales respecto del género y de cualquier otra característica.
+\item Que la definición herede el sesgo social de los datos de origen y subrepresente a las mujeres sin que ningún paso técnico lo haga explícito.
 \end{enumerate}
 \vspace{2pt}
 \noindent\textbf{8.} La Figura 2 (parte inferior) muestra la pertenencia difusa de cuatro clientes a tres segmentos (datos hipotéticos). ¿Qué cliente ilustra mejor el problema de la asignación única y por qué?
@@ -172,12 +166,12 @@ A & 3 & base & 0.58 & 14.6\\ B & 3 & mayor & 0.41 & 36.7\\ C & 4 & base & 0.58 &
 \item Tratar al consumidor solo como dato estructurado y perder el contexto humano de la decisión.
 \end{enumerate}
 \vspace{2pt}
-\noindent\textbf{14.} En la Figura 4 compare los dos paneles: las conversiones son las mismas (11.0\,\% y 13.5\,\%), pero en el panel derecho hay cinco veces más visitantes. ¿Qué cambió y qué se concluye?
+\noindent\textbf{14.} Un equipo asegura que su decisión es correcta porque sus datos están limpios y se recolectaron con base legal. Según el capítulo, esa condición es:
 \vspace{-3pt}
 \begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
-\item La diferencia entre A y B aumentó con la muestra mayor, por eso en el panel derecho la mejora ya es confiable.
-\item El umbral de duda se volvió más estricto, y por eso los márgenes de error del panel derecho son más angostos.
-\item Los márgenes de error se angostaron y ya no se traslapan: la misma diferencia pasa a ser confiable porque el azar mueve menos las proporciones.
+\item Suficiente: un dato limpio y legal garantiza por sí solo una buena decisión de mercadotecnia.
+\item Innecesaria: lo decisivo es la intuición del equipo, y los datos solo ilustran lo que ya se había decidido.
+\item Necesaria pero no suficiente: además hace falta un método que traduzca el dato en decisión sin engañarse a sí mismo.
 \end{enumerate}
 \vspace{2pt}
 \noindent\textbf{15.} Una app bancaria tiene una interfaz rápida y fácil de usar, pero el servicio al cliente detrás de ella es lento e inconsistente. Esto describe:
@@ -188,15 +182,15 @@ A & 3 & base & 0.58 & 14.6\\ B & 3 & mayor & 0.41 & 36.7\\ C & 4 & base & 0.58 &
 \item Una UX deficiente, porque la lentitud del servicio es un problema de diseño de la interfaz.
 \end{enumerate}
 \vspace{2pt}
-\noindent\textbf{16.} La Figura 3 muestra, por segmento RFM, el número de clientes y el CLV promedio del laboratorio. ¿Qué segmento concentra más valor total para la empresa?
+\noindent\textbf{16.} Un despacho afirma que el INAI sigue siendo la autoridad de protección de datos personales de los particulares en México. Según la cronología del capítulo, ¿qué se puede responder?
 \vspace{-3pt}
 \begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
-\item Leal: su CLV promedio es menor que el de Campeón, pero tiene muchos más clientes (135 contra 36) y el valor total es clientes por CLV promedio.
-\item En riesgo: es el segundo más numeroso y está por recuperarse, por lo que su valor total supera al de Leal.
-\item Campeón: tiene el mayor CLV promedio por cliente, así que es el segmento que concentra más valor total.
+\item Que el INAI fue extinguido por la reforma de simplificación orgánica y la Secretaría Anticorrupción y Buen Gobierno asumió la protección de datos de particulares.
+\item Que ninguna autoridad asumió esas funciones, por lo que hoy la ley no tiene quien vigile su cumplimiento.
+\item Que es correcto: la nueva LFPDPPP de 2025 reforzó al INAI y le dio más atribuciones que antes.
 \end{enumerate}
 \vspace{2pt}
-\noindent\textbf{17.} La radiografía del consumidor mexicano muestra que las horas diarias de uso de internet caen de forma casi monótona con la edad. ¿Qué advertencia metodológica se desprende?
+\noindent\textbf{17.} La Figura 3 muestra las horas diarias de uso de internet por grupo de edad en México (ENDUTIH 2024): caen de forma casi monótona al aumentar la edad. ¿Qué advertencia metodológica se desprende para quien segmenta?
 \vspace{-3pt}
 \begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
 \item Saltar a variables psicográficas sin controlar edad y zona construye categorías elegantes sobre una base demográfica ya explicativa.
@@ -252,12 +246,12 @@ A & 3 & base & 0.58 & 14.6\\ B & 3 & mayor & 0.41 & 36.7\\ C & 4 & base & 0.58 &
 \item Ni inteligente ni sostenible, porque cambiar de teléfono cada año invalida por completo la comparación que hizo antes de comprarlo.
 \end{enumerate}
 \vspace{2pt}
-\noindent\textbf{24.} Según la ENIF 2024, 72.8\,\% de las mujeres y 80.9\,\% de los hombres tienen un producto financiero formal. Si un banco define «cliente de alto valor» con RFM sobre sus datos, ¿qué riesgo advierte el capítulo?
+\noindent\textbf{24.} Una tienda de ropa pide a sus clientes que llenen, de forma voluntaria, un cuestionario de talla y estilo para recomendarles prendas. ¿Qué tipo de datos obtiene?
 \vspace{-3pt}
 \begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
-\item Que la definición herede el sesgo social de los datos y subrepresente a las mujeres sin que ningún paso técnico lo haga explícito.
-\item Que la brecha demuestre que las mujeres no usan servicios financieros y que por ello deban excluirse del análisis.
-\item Ninguno: como el RFM usa solo números, sus resultados son neutrales respecto del género y de cualquier otra característica.
+\item Datos de cero parte: el consumidor los entrega de forma voluntaria y explícita.
+\item Datos de primera parte observados: la tienda los deduce de los clics y compras del cliente sin que él los declare.
+\item Datos de tercera parte: los comparte un tercero sobre el comportamiento del cliente en otros sitios.
 \end{enumerate}
 \vspace{2pt}
 \noindent\textbf{25.} Una app de entregas descubre, con analítica de embudo, que la mayoría de quienes abandonan lo hacen en la pantalla de pago. Corregir ese paso ilustra principalmente la ventaja de:
@@ -284,12 +278,12 @@ A & 3 & base & 0.58 & 14.6\\ B & 3 & mayor & 0.41 & 36.7\\ C & 4 & base & 0.58 &
 \item No es verificable: Google revirtió su plan en 2024 y las cookies de terceros siguen activas por defecto en Chrome.
 \end{enumerate}
 \vspace{2pt}
-\noindent\textbf{28.} En el panel izquierdo de la Figura 4 (1{,}200 y 1{,}180 visitantes) los márgenes de error de A (11.0\,\%) y B (13.5\,\%) se traslapan. ¿Qué indica y qué conviene hacer?
+\noindent\textbf{28.} Una empresa decide cuánto invertir en retener a un cliente comparándolo con lo que se espera que el cliente le deje. Esa cifra esperada corresponde al:
 \vspace{-3pt}
 \begin{enumerate}[label=\alph*),leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt]
-\item Que la diferencia puede ser suerte: todavía no se sabe si B es mejor y conviene seguir la prueba con más visitantes.
-\item Que B es mejor, porque su barra es más alta; el traslape solo indica que ambas mediciones son precisas.
-\item Que A es mejor, porque su margen de error es más angosto y por eso su conversión es más confiable.
+\item CLV (valor de vida del cliente): el ingreso esperado que el cliente genera durante toda su relación con la organización.
+\item Ticket promedio: lo que el cliente gasta en una sola compra, sin considerar cuántas veces vuelve a comprar.
+\item Costo de adquisición: lo que costó atraer a ese cliente la primera vez, sin importar lo que compre después.
 \end{enumerate}
 \vspace{2pt}
 \noindent\textbf{29.} Un proveedor de analítica vende su plataforma con la promesa central de «anticipar tendencias antes que la competencia». ¿Qué observación hace un analista crítico, con base en el nivel de evidencia del capítulo?
