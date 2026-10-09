@@ -1,0 +1,559 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}\usepackage{lmodern}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage[top=1.5cm,bottom=1.6cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage{amsmath,amssymb,graphicx,xcolor,array,enumitem,tabularx,booktabs,longtable,colortbl,fancyhdr,multicol,pgfplots,textcomp}
+\pgfplotsset{compat=1.17}\usetikzlibrary{patterns}
+\definecolor{guinda}{HTML}{6F1D46}\definecolor{dorado}{HTML}{B8975A}\definecolor{tinta}{HTML}{000000}
+\definecolor{verde}{HTML}{1B7F3B}\definecolor{rojo}{HTML}{B3261E}\definecolor{gris}{HTML}{F2EEF0}
+\usepackage[colorlinks=true,linkcolor=guinda,urlcolor=guinda]{hyperref}
+\setlength{\parindent}{0pt}\setlength{\parskip}{3pt}
+\pagestyle{fancy}\fancyhf{}\renewcommand{\headrulewidth}{0.3pt}
+\fancyhead[L]{\scriptsize\color{guinda}IPN · ESCA Unidad Santo Tomás}
+\fancyhead[R]{\scriptsize Clave comentada del examen de la Unidad I}
+\fancyfoot[C]{\scriptsize\thepage}
+\newcommand{\encab}[2]{%
+\noindent\begin{minipage}{0.1\textwidth}\includegraphics[height=1.5cm]{ipn-escudo.png}\end{minipage}%
+\begin{minipage}{0.88\textwidth}
+{\color{guinda}\Large\textbf{#1}}\\[2pt]
+{\small #2}
+\end{minipage}\par\vspace{2pt}{\color{dorado}\hrule height 1.2pt}\vspace{6pt}}
+\begin{document}
+\encab{Clave comentada — Examen de la Unidad I (Caps. 1 a 3)}{Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital · Uso del profesor · Dr. Aboud Barsekh-Onji}
+Las versiones A, B y C son \textbf{el mismo examen} con distinto orden de reactivos y de opciones. A continuación se dan las respuestas correctas por versión y, para cada reactivo, la respuesta correcta, su explicación y por qué falla cada opción incorrecta. El orden es el del banco (Cap.\ 1, 2 y 3); la columna \textit{N.º/letra} indica el número del reactivo y la letra correcta en cada versión.
+\section*{Respuestas correctas por versión}
+\begin{center}\renewcommand{\arraystretch}{1.25}\begin{tabular}{@{}cl@{}}\toprule \textbf{Versión} & \textbf{Reactivos 1 a 30 (grupos de cinco)}\\\midrule
+\textbf{A} & \texttt{\textbf{accac babba abcca cbbab acbaa ccbbc}}\\
+\textbf{B} & \texttt{\textbf{abbca ccbcb baccb aacbb aabaa ccacb}}\\
+\textbf{C} & \texttt{\textbf{cbbab caacb bcbcb acbcc aabba acaca}}\\
+\bottomrule\end{tabular}\end{center}
+\begin{center}\small\renewcommand{\arraystretch}{1.1}\setlength{\tabcolsep}{2.2pt}\begin{tabular}{@{}lcccccccccccccccccccccccccccccc@{}}\toprule
+\textbf{N.º} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30\\\midrule
+\textbf{A} & A & C & C & A & C & B & A & B & B & A & A & B & C & C & A & C & B & B & A & B & A & C & B & A & A & C & C & B & B & C\\
+\textbf{B} & A & B & B & C & A & C & C & B & C & B & B & A & C & C & B & A & A & C & B & B & A & A & B & A & A & C & C & A & C & B\\
+\textbf{C} & C & B & B & A & B & C & A & A & C & B & B & C & B & C & B & A & C & B & C & C & A & A & B & B & A & A & C & A & C & A\\
+\bottomrule\end{tabular}\end{center}
+\section*{Figuras citadas en los reactivos}
+
+\begingroup\tiny\pgfplotsset{every axis/.append style={tick label style={font=\tiny},label style={font=\tiny},title style={font=\tiny},
+  every axis plot/.append style={line width=0.6pt}, xlabel style={yshift=2pt}, ylabel style={yshift=-2pt}}}
+\noindent\begin{minipage}[t]{0.215\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[width=4.5cm,height=4.1cm,xlabel={periodo},ylabel={tasa de adopción},xmin=0,xmax=20,ymin=0,ymax=0.16,
+ axis lines*=left,ytick={0,0.05,0.1,0.15},xtick={0,5,10,15,20}]
+\addplot[domain=0:20,samples=60,black,dashed]{(0.18)^2*exp(-0.18*x)/0.08/(1+0.10/0.08*exp(-0.18*x))^2};
+\addplot[domain=0:20,samples=60,black]{(0.41)^2*exp(-0.41*x)/0.03/(1+0.38/0.03*exp(-0.41*x))^2};
+\addplot[domain=0:20,samples=60,black,dotted,line width=1pt]{(0.56)^2*exp(-0.56*x)/0.01/(1+0.55/0.01*exp(-0.56*x))^2};
+\node[font=\tiny] at (axis cs:2.6,0.097) {A}; \node[font=\tiny] at (axis cs:4.5,0.125) {B}; \node[font=\tiny] at (axis cs:11.2,0.14) {C};
+\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 1.} Tasa de adopción (Bass).\\ A: $p{=}.08,q{=}.10$; B: $p{=}.03,q{=}.38$; C: $p{=}.01,q{=}.55$}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.285\textwidth}\centering
+\vspace*{0.5cm}{\tiny\renewcommand{\arraystretch}{1.1}\setlength{\tabcolsep}{2.5pt}\begin{tabular}{@{}lcccc@{}}\toprule
+Caso & Arquet. & Traslape & Silueta & \% ambig.\\\midrule
+A & 3 & base & 0.58 & 14.6\\ B & 3 & mayor & 0.41 & 36.7\\ C & 4 & base & 0.58 & 21.6\\\bottomrule\end{tabular}}\\[1pt]
+\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[xbar stacked,width=5.0cm,height=2.5cm,bar width=5pt,xmin=0,xmax=100,symbolic y coords={Cl.4,Cl.3,Cl.2,Cl.1},ytick=data,
+ xlabel={pertenencia (\%)},axis lines*=left,enlarge y limits=0.22]
+\addplot[fill=black!25,draw=black!60] coordinates{(92,Cl.1)(78,Cl.2)(48,Cl.3)(15,Cl.4)};
+\addplot[fill=black!55,draw=black!70] coordinates{(5,Cl.1)(12,Cl.2)(44,Cl.3)(20,Cl.4)};
+\addplot[fill=white,draw=black!70,pattern=north east lines] coordinates{(3,Cl.1)(10,Cl.2)(8,Cl.3)(65,Cl.4)};
+\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 2.} Corridas del laboratorio (arriba) y pertenencias de cuatro clientes (abajo, hipotéticas): segmento 1 gris claro, 2 gris oscuro, 3 rayado}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.215\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[ybar,width=4.5cm,height=4.1cm,bar width=8pt,symbolic x coords={18--24,25--34,35--44,55--64,65+},xtick=data,ymin=0,ymax=7,
+ xlabel={edad (años)},ylabel={horas diarias de internet},axis lines*=left,enlarge x limits=0.15,nodes near coords,nodes near coords style={font=\tiny},ytick={0,2,4,6},x tick label style={font=\tiny,rotate=45,anchor=east}]
+\addplot[fill=black!40,draw=black!70] coordinates{(18--24,5.7)(25--34,5.6)(35--44,4.7)(55--64,3.2)(65+,3.0)};
+\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 3.} Uso diario de internet por edad en México (ENDUTIH 2024; no se muestra 45--54)}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.255\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north)]\begin{axis}[ybar,width=4.9cm,height=4.1cm,bar width=11pt,symbolic x coords={Mujeres,Hombres,Total},xtick=data,ymin=0,ymax=100,
+ ylabel={\% con producto financiero formal},axis lines*=left,enlarge x limits=0.3,nodes near coords,nodes near coords style={font=\tiny},ytick={0,25,50,75,100}]
+\addplot[fill=black!40,draw=black!70] coordinates{(Mujeres,72.8)(Hombres,80.9)(Total,76.5)};
+\end{axis}\end{tikzpicture}\\[-2pt]{\tiny\textbf{Figura 4.} Personas con un producto financiero formal (ENIF 2024, INEGI/CNBV)}
+\end{minipage}
+\endgroup
+
+\vspace{4pt}{\footnotesize Figura 2: tabla de corridas A, B y C del laboratorio (arriba) y pertenencias hipotéticas de cuatro clientes a tres segmentos (abajo). El cliente 3 tiene pertenencias 48/44/8\,\%; el cliente 4, 15/20/65\,\%.}
+\newpage\section*{Explicación de cada reactivo}
+\subsection*{\color{guinda}Capítulo 1 — Consumidor digital, evidencia y modelo de Bass}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 1.01}} \textbf{— Evolución del consumidor: relato editorial vs. empírico}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 14 (c) · B: n.º 3 (b) · C: n.º 22 (a) \hfill \textbf{Acertaron: 19/27 (70\,\%)}}
+
+\textit{Una consultora afirma: «el consumidor 4.0 ya es mayoritario en México porque así lo establece \textit{Marketing 4.0}». ¿Cuál es la crítica más sólida a ese argumento?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} La serie \textit{Marketing X.0} es una periodización editorial, no un modelo validado: la afirmación requiere evidencia empírica.
+
+\textbf{Explicación.} Subtema 1.1.1. La serie X.0 es lectura de tendencias de la práctica, no un programa de investigación con aparato empírico propio.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{La afirmación es válida, porque la serie de Kotler es la teoría académica con mayor revisión por pares sobre la evolución del consumidor digital.} --- La serie X.0 no es la teoría con mayor revisión por pares: es una periodización editorial, sin aparato empírico propio.
+\item[\textcolor{rojo}{$\times$}] \textit{La afirmación es inválida, porque \textit{Marketing 5.0} y \textit{6.0} ya reemplazaron por completo a la versión 4.0 en todos los mercados.} --- El problema no es que haya versiones posteriores: las etapas X.0 no se sustituyen unas a otras ni se han validado empíricamente.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 1.02}} \textbf{— Evidencia: comercio electrónico y conectividad}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 12 (b) · B: n.º 1 (a) · C: n.º 20 (c) \hfill \textbf{Acertaron: 19/27 (70\,\%)}}
+
+\textit{En 2025 el comercio electrónico en México creció 19.2\,\% anual, mientras que el uso de internet pasó de 83.1\,\% a 86.1\,\% de la población. ¿Qué lectura sugiere esa comparación?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Buena parte del crecimiento viene de personas ya conectadas que compran más, no solo de personas nuevas que se conectan.
+
+\textbf{Explicación.} Evidencia de México. El comercio electrónico crece más que la conectividad, así que el aumento viene de gente ya conectada que compra más.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{El crecimiento del comercio electrónico se explica casi por completo por nuevos usuarios que se conectaron a internet durante ese año.} --- La conectividad subió solo $\approx3.6$\,\% ($83.1\to86.1$) frente a $19.2$\,\% del comercio electrónico: los nuevos usuarios no alcanzan a explicarlo.
+\item[\textcolor{rojo}{$\times$}] \textit{Ambas cifras miden en realidad el mismo fenómeno, por lo que sus tasas de crecimiento tendrían que ser prácticamente iguales.} --- Miden cosas distintas (acceso a internet vs.\ volumen de compras); sus tasas de crecimiento difieren justamente por eso.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 1.03}} \textbf{— Consumo inteligente vs. sostenible}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 4 (a) · B: n.º 23 (b) · C: n.º 12 (c) \hfill \textbf{Acertaron: 14/27 (52\,\%)}}
+
+\textit{Marcela compara precios, lee reseñas y revisa especificaciones antes de comprar, pero cambia de teléfono cada año y desecha el anterior. Según el capítulo, su consumo es:}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Inteligente, porque decide informada por datos, pero no necesariamente sostenible: el impacto ambiental es un criterio distinto.
+
+\textbf{Explicación.} Subtema 1.1.2. «Inteligente» y «sostenible» no son sinónimos: el primero se refiere a decisiones informadas; el segundo, al impacto ambiental y social.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Sostenible, porque comparar precios y leer reseñas antes de comprar reduce por sí solo el impacto ambiental de cada compra.} --- Informado no significa sostenible: comparar precios y reseñas no mide impacto ambiental.
+\item[\textcolor{rojo}{$\times$}] \textit{Ni inteligente ni sostenible, porque cambiar de teléfono cada año invalida por completo la comparación que hizo antes de comprarlo.} --- Su decisión sí es inteligente (informada); cambiar de teléfono cada año solo afecta la dimensión de sostenibilidad.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 1.04}} \textbf{— Brecha actitud-conducta}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 30 (c) · B: n.º 19 (b) · C: n.º 8 (a) \hfill \textbf{Acertaron: 22/27 (81\,\%)}}
+
+\textit{En una encuesta, 70\,\% de los consumidores dice preferir productos sostenibles, pero esos productos son solo 8\,\% de las ventas (datos hipotéticos). ¿Qué explicación es coherente con el capítulo?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Brecha actitud-conducta: la actitud declarada predice mal la compra real, donde pesan el precio, la conveniencia y la confianza en la etiqueta.
+
+\textbf{Explicación.} Subtema 1.1.2 (recuadro de Frontera). La actitud pro-ambiental declarada predice sistemáticamente peor la conducta real.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Los consumidores mienten deliberadamente en las encuestas, por lo que ningún dato declarado tiene valor analítico para la mercadotecnia.} --- La brecha no exige que mientan: es una discrepancia sistemática entre actitud declarada y conducta; el dato declarado sigue siendo útil con cautela.
+\item[\textcolor{rojo}{$\times$}] \textit{La sostenibilidad no influye en la decisión de compra, por lo que conviene eliminarla de los análisis de mercado de la empresa.} --- La sostenibilidad sí influye en la actitud; lo que ocurre es que en la compra real pesan más precio, conveniencia y confianza.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 1.05}} \textbf{— Ventajas del análisis: nivel de evidencia}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 10 (a) · B: n.º 29 (c) · C: n.º 18 (b) \hfill \textbf{Acertaron: 20/27 (74\,\%)}}
+
+\textit{Un proveedor de analítica vende su plataforma con la promesa central de «anticipar tendencias antes que la competencia». ¿Qué observación hace un analista crítico, con base en el nivel de evidencia del capítulo?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Que es la ventaja menos sostenida por evidencia: un patrón histórico no garantiza que se repita y hay riesgo de sobreajuste a ruido.
+
+\textbf{Explicación.} Subtema 1.1.3 (cuadro de ventajas). «anticipación de tendencias» tiene nivel bajo-medio; depende de la calidad del dato y del sesgo de representatividad.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Que es la ventaja con la evidencia más sólida del cuadro, pues la literatura arbitrada la respalda desde los trabajos de Smith (1956).} --- La anticipación de tendencias es la ventaja de menor nivel de evidencia (bajo-medio), y Smith (1956) trata de segmentación, no de analítica predictiva.
+\item[\textcolor{rojo}{$\times$}] \textit{Que es imposible de lograr, porque los datos de comportamiento no permiten ninguna clase de predicción útil sobre el consumidor.} --- No es imposible: es parcial y no garantizada. El análisis crítico matiza la promesa, no la descarta por completo.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 1.06}} \textbf{— Ventajas del análisis: reducción de fricción}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 6 (b) · B: n.º 25 (a) · C: n.º 14 (c) \hfill \textbf{Acertaron: 20/27 (74\,\%)}}
+
+\textit{Una app de entregas descubre, con analítica de embudo, que la mayoría de quienes abandonan lo hacen en la pantalla de pago. Corregir ese paso ilustra principalmente la ventaja de:}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Reducir la fricción en el recorrido: detectar en qué punto se abandona el proceso de decisión y corregirlo.
+
+\textbf{Explicación.} Subtema 1.1.3 (cuadro de ventajas). La reducción de fricción tiene evidencia alta y se instrumenta con analítica de embudo.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Anticipar tendencias: la app se adelanta a un cambio en los gustos y las preferencias del consumidor antes que la competencia.} --- Corregir un paso del proceso donde se abandona no es adelantarse a un cambio de gustos: es eliminar fricción.
+\item[\textcolor{rojo}{$\times$}] \textit{Personalizar la oferta: la app ajusta precio y mensaje al perfil inferido de cada usuario para aumentar la conversión.} --- No hay ajuste de precio ni mensaje por perfil: se corrige un paso común del recorrido de pago.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 1.07}} \textbf{— Modelo de Bass: decisión de lanzamiento (Figura 1)} · \textit{Figura 1}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 3 (c) · B: n.º 22 (a) · C: n.º 11 (b) \hfill \textbf{Acertaron: 18/27 (67\,\%)}}
+
+\textit{Un equipo estima que el patrón de adopción de su canal se parece a la curva C de la Figura 1. ¿Qué decisión de lanzamiento es más coherente?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Impulsar el contagio social (referidos, prueba social), porque el crecimiento depende sobre todo de la imitación.
+
+\textbf{Explicación.} Laboratorio (interpretación de negocio). Con imitación dominante la adopción depende del contagio social.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Concentrar todo el presupuesto en publicidad masiva el primer mes, porque la adopción es casi toda independiente.} --- Con $p=0.01$ la innovación es baja y domina la imitación; la publicidad masiva inicial no es lo coherente con la curva C.
+\item[\textcolor{rojo}{$\times$}] \textit{Esperar a que el pico ocurra sin intervenir, porque ni $p$ ni $q$ pueden influirse con acciones de mercadotecnia.} --- Sí se puede influir en $p$ y $q$: referidos, prueba social e incentivos actúan sobre el contagio.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 1.08}} \textbf{— Doble naturaleza del consumidor digital}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 24 (a) · B: n.º 13 (c) · C: n.º 2 (b) \hfill \textbf{Acertaron: 23/27 (85\,\%)}}
+
+\textit{Un equipo decide analizar solo tableros de métricas y descarta las entrevistas con clientes por considerarlas «subjetivas». Desde la doble naturaleza del consumidor digital, su error es:}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Tratar al consumidor solo como dato estructurado y perder el contexto humano de la decisión.
+
+\textbf{Explicación.} Subtema 1.1.1 (doble naturaleza). El consumidor es persona vivida y dato estructurado a la vez; ninguna lectura basta por sí sola.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Tratar al consumidor solo como persona vivida y quedar sin capacidad de operar a la escala de un mercado digital.} --- Es el error contrario al descrito: el equipo ya trata al consumidor solo como dato, no como persona vivida.
+\item[\textcolor{rojo}{$\times$}] \textit{Ninguno: los datos conductuales son siempre más objetivos que cualquier fuente de contexto humano.} --- Los datos conductuales no son superiores por ser ``objetivos'': carecen del porqué y del contexto de la decisión.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 1.09}} \textbf{— Modelo de Bass: lectura de la curva de tasa de adopción} · \textit{Figura 1}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 2 (c) · B: n.º 21 (a) · C: n.º 10 (b) \hfill \textbf{Acertaron: 19/27 (70\,\%)}}
+
+\textit{La Figura 1 muestra la tasa de adopción de tres canales digitales simulados con el modelo de Bass (A: $p=0.08$, $q=0.10$; B: $p=0.03$, $q=0.38$; C: $p=0.01$, $q=0.55$). ¿Qué canal tiene el pico más tardío y más alto, y cómo se interpreta?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} El canal C: con imitación dominante la adopción arranca lenta y despega después, con un pico más alto por el contagio social.
+
+\textbf{Explicación.} Laboratorio (Figura 1, cálculo con $t^\ast=\ln(q/p)/(p+q)$): A pica en $t\approx1.2$, B en $\approx6.2$ y C en $\approx7.2$, con la tasa máxima mayor en C.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{El canal A: como su coeficiente $p$ es el mayor, su pico llega al final del periodo y es el más alto de los tres.} --- Un $p$ alto adelanta el pico ($t^\ast\approx1.2$) y lo vuelve más bajo; no lo retrasa ni lo eleva.
+\item[\textcolor{rojo}{$\times$}] \textit{El canal B: es el único con balance entre innovación e imitación, y por eso su pico es el más tardío y más alto.} --- B pica en $t^\ast\approx6.2$, antes y más bajo que C ($\approx7.2$): el equilibrio entre $p$ y $q$ no implica el pico más alto.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 1.10}} \textbf{— Modelo de Bass: lectura del periodo del pico} · \textit{Figura 1}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 13 (c) · B: n.º 2 (b) · C: n.º 21 (a) \hfill \textbf{Acertaron: 23/27 (85\,\%)}}
+
+\textit{Según la Figura 1, ¿en qué periodo ocurre aproximadamente el pico de adopción del canal B ($p=0.03$, $q=0.38$)?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Alrededor del periodo 6, que coincide con $t^\ast=\ln(q/p)/(p+q)\approx 6.2$ que calcula el script.
+
+\textbf{Explicación.} Laboratorio, interpretación de negocio: el pico del caso por defecto ocurre en $t^\ast\approx6.2$ con 46\,\% del mercado adoptado.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Alrededor del periodo 1, porque la curva parte de su valor máximo y luego solo disminuye.} --- La curva de B no parte de su máximo: con $p=0.03$ arranca baja y sube hasta $t^\ast$.
+\item[\textcolor{rojo}{$\times$}] \textit{Alrededor del periodo 12, cuando la adopción acumulada ya casi alcanza todo el mercado potencial.} --- Hacia el periodo 12 la tasa ya descendió; la adopción acumulada casi total ocurre después del pico, no en él.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\subsection*{\color{guinda}Capítulo 2 — Segmentación y perfiles}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 2.01}} \textbf{— Smith (1956): diferenciación vs. segmentación}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 29 (b) · B: n.º 18 (c) · C: n.º 7 (a) \hfill \textbf{Acertaron: 12/27 (44\,\%)}}
+
+\textit{Una empresa lanza un solo producto y le dedica una gran campaña para convencer a todo el mercado de que lo compre. Con la distinción de Wendell Smith (1956), esa estrategia es:}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Diferenciación de producto: adapta el mercado al producto; la segmentación haría lo contrario y adaptaría el producto a subgrupos.
+
+\textbf{Explicación.} Subtema 1.2.1. Diferenciación = una oferta y mucha promoción; segmentación = adaptar el producto a subgrupos con preferencias distintas.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Segmentación de mercado, porque la empresa dirige su campaña a un mercado heterogéneo y busca cubrir todas las preferencias.} --- Un solo producto para todo el mercado es diferenciación (se adapta el mercado al producto); segmentar sería adaptar el producto a subgrupos.
+\item[\textcolor{rojo}{$\times$}] \textit{Mercado meta digital, porque la empresa eligió un único producto y una única campaña para dirigirse a su audiencia.} --- Elegir un único producto y campaña no define un mercado meta; el concepto no corresponde a la distinción de Smith.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 2.02}} \textbf{— Relación Smith - STP}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 11 (a) · B: n.º 30 (b) · C: n.º 19 (c) \hfill \textbf{Acertaron: 23/27 (85\,\%)}}
+
+\textit{¿Cuál afirmación describe mejor la relación entre Smith (1956) y el proceso STP (segmentación, \textit{targeting}, posicionamiento)?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Smith aporta la base conceptual; el STP es su sistematización posterior en los manuales de Kotler y sigue vigente como marco.
+
+\textbf{Explicación.} Subtema 1.2.1. Lo que cambió con lo digital es el método para llenar el marco, no el marco.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Smith propuso el STP completo en 1956 y los manuales posteriores solo lo difundieron entre profesionales sin modificarlo.} --- Smith (1956) aportó la idea de segmentar; el STP completo es una sistematización posterior (manuales de Kotler).
+\item[\textcolor{rojo}{$\times$}] \textit{El STP quedó obsoleto con la analítica digital, que lo reemplazó por la segmentación difusa como marco de decisión.} --- El STP sigue vigente: cambió el método para llenarlo; la segmentación difusa es un método, no un marco sustituto.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 2.03}} \textbf{— Variables de segmentación: costo relativo}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 1 (a) · B: n.º 20 (b) · C: n.º 9 (c) \hfill \textbf{Acertaron: 11/27 (41\,\%)}}
+
+\textit{¿Qué cambió realmente con la segmentación digital respecto de la tradicional?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} No creó variables nuevas: abarató la conductual, que antes dependía de que el consumidor la declarara y hoy se registra sola.
+
+\textbf{Explicación.} Subtema 1.2.1. La verdadera revolución es el costo relativo; la variable conductual pasó de ser la más cara a ser la más barata.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Inventó variables de segmentación que no existían antes, como la frecuencia, el monto y el momento de las compras.} --- La frecuencia, el monto y el momento de compra ya existían como variables conductuales; lo nuevo es su costo de obtención.
+\item[\textcolor{rojo}{$\times$}] \textit{Encareció la variable conductual, porque ahora exige procesar más datos de los que aportaba una encuesta tradicional.} --- Fue al revés: la variable conductual se abarató porque hoy se registra sola.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 2.04}} \textbf{— Mercado meta digital}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 20 (b) · B: n.º 9 (c) · C: n.º 28 (a) \hfill \textbf{Acertaron: 12/27 (44\,\%)}}
+
+\textit{En una plataforma de anuncios, el equipo define audiencias personalizadas, públicos similares (\textit{lookalike}) y exclusiones. Esto muestra que, en el entorno digital, el mercado meta:}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Además de declararse en el plan, se configura como parámetro, y un error de configuración desperdicia presupuesto en horas.
+
+\textbf{Explicación.} Subtema 1.2.2. Elegir mal el mercado meta ya no es solo un error estratégico, es un parámetro mal configurado.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Solo se declara en el plan de mercadotecnia; la plataforma no interviene en su definición operativa ni en su ejecución.} --- En una plataforma de anuncios el mercado meta se configura operativamente (audiencias, \textit{lookalikes}, exclusiones).
+\item[\textcolor{rojo}{$\times$}] \textit{Deja de ser una decisión estratégica de la organización, porque el algoritmo de la plataforma lo elige por sí solo.} --- La decisión estratégica sigue siendo de la organización; el algoritmo ejecuta sobre los parámetros que ella define.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 2.05}} \textbf{— Tipologías de perfil y método de clustering}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 16 (c) · B: n.º 5 (a) · C: n.º 24 (b) \hfill \textbf{Acertaron: 19/27 (70\,\%)}}
+
+\textit{Un blog afirma que «existen siete tipos de consumidor digital» sin explicar autoría ni método. ¿Cómo debe tratarlo un analista, según el capítulo?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Como una tipología sin respaldo académico; lo que sí lo tiene es el método de \textit{clustering} aplicado a datos propios.
+
+\textbf{Explicación.} Subtema 1.2.3. No existe una tipología académica con autoría y método rastreables; NORISO es de autor y de divulgación, no revisada por pares.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Como una tipología científica, siempre que el blog tenga muchos seguidores y sea citado con frecuencia en el medio.} --- Seguidores y citas no sustituyen autoría y método rastreables: popularidad no es validez científica.
+\item[\textcolor{rojo}{$\times$}] \textit{Como equivalente a \textit{El Cubo NORISO}, que es una tipología de perfiles validada mediante revisión por pares.} --- NORISO es una tipología de autor y de divulgación, no validada por revisión por pares.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 2.06}} \textbf{— k-means y fuzzy c-means}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 17 (b) · B: n.º 6 (c) · C: n.º 25 (a) \hfill \textbf{Acertaron: 13/27 (48\,\%)}}
+
+\textit{Respecto de k-means y \textit{fuzzy c-means}, ¿qué relación es correcta?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} k-means es el caso límite en que toda la pertenencia va a un segmento ($u_{ik}\in\{0,1\}$); la difusa es la general.
+
+\textbf{Explicación.} Subtema 1.2.3 (frontera). La rígida es el caso particular de la difusa, no al revés.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{La difusa es un caso particular de k-means en el que se permiten pertenencias parciales a varios segmentos a la vez.} --- Está invertido: k-means es el caso límite de la difusa ($u_{ik}\in\{0,1\}$), no al revés.
+\item[\textcolor{rojo}{$\times$}] \textit{Son equivalentes cuando el exponente difuso vale 2, por lo que siempre producen exactamente las mismas asignaciones.} --- Un exponente difuso de 2 no vuelve discretas las pertenencias; las asignaciones difieren (k-means es el límite cuando el exponente tiende a 1).
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 2.07}} \textbf{— Radiografía (Figura 3): edad y sobreajuste} · \textit{Figura 3}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 28 (b) · B: n.º 17 (a) · C: n.º 6 (c) \hfill \textbf{Acertaron: 17/27 (63\,\%)}}
+
+\textit{La Figura 3 muestra las horas diarias de uso de internet por grupo de edad en México (ENDUTIH 2024): caen de forma casi monótona al aumentar la edad. ¿Qué advertencia metodológica se desprende para quien segmenta?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Saltar a variables psicográficas sin controlar edad y zona construye categorías elegantes sobre una base demográfica ya explicativa.
+
+\textbf{Explicación.} Subtema 1.2.4. Riesgo de sobreajuste al ignorar la base demográfica.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Que las variables demográficas son irrelevantes y conviene segmentar únicamente con variables psicográficas de estilo de vida.} --- La figura muestra que la edad es muy explicativa; las variables demográficas no son irrelevantes.
+\item[\textcolor{rojo}{$\times$}] \textit{Que la edad explica por completo el uso de internet, por lo que ya no es necesario segmentar a los consumidores.} --- ``Por completo'' sobregeneraliza: la figura muestra una tendencia por edad, no que explique todo, y segmentar sigue siendo necesario.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 2.08}} \textbf{— El perfil como función del negocio}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 21 (a) · B: n.º 10 (b) · C: n.º 29 (c) \hfill \textbf{Acertaron: 23/27 (85\,\%)}}
+
+\textit{Una persona es «ocasional» para su plataforma de streaming y «de alto compromiso» para su banco. ¿Cómo se interpreta?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} No hay contradicción: cada negocio mide un comportamiento distinto y el perfil depende del negocio, no es un atributo fijo.
+
+\textbf{Explicación.} Subtema 1.2.5. No existe un «perfil digital» único; cuantos más negocios observan a la persona, más perfiles parciales existen.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Una de las dos plataformas se equivocó: el perfil verdadero de la persona es único y portable entre todos los negocios.} --- No hay un perfil único ni portable: cada negocio observa conductas distintas y arma su propio perfil parcial.
+\item[\textcolor{rojo}{$\times$}] \textit{El banco usa un algoritmo más preciso, por lo que su etiqueta debe prevalecer también en la plataforma de streaming.} --- La precisión del algoritmo no convierte un perfil parcial en universal; ninguna etiqueta ``prevalece'' sobre otro negocio.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 2.09}} \textbf{— Pertenencia difusa: cliente ambiguo (datos hipotéticos)} · \textit{Figura 2}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 19 (a) · B: n.º 8 (b) · C: n.º 27 (c) \hfill \textbf{Acertaron: 14/27 (52\,\%)}}
+
+\textit{La Figura 2 (parte inferior) muestra la pertenencia difusa de cuatro clientes a tres segmentos (datos hipotéticos). ¿Qué cliente ilustra mejor el problema de la asignación única y por qué?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} El cliente 3: su mayor pertenencia (48\,\%) no llega a 60\,\%; k-means lo asigna a un segmento sin avisar que es una mezcla.
+
+\textbf{Explicación.} Laboratorio, Bloque difuso: ambiguo = pertenencia máxima menor a 0.6; la rígida asigna igual al segmento más cercano.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{El cliente 1: su pertenencia de 92\,\% a un segmento muestra que k-means siempre fuerza una casilla que no corresponde.} --- Con 92\,\% de pertenencia a un segmento, el cliente 1 es un caso claro: no ilustra ambigüedad.
+\item[\textcolor{rojo}{$\times$}] \textit{El cliente 4: tiene 35\,\% repartido entre los otros dos segmentos, por lo que es el más ambiguo de los cuatro.} --- Su mayor pertenencia es 65\,\% ($\ge60$\,\%): no es ambiguo. El cliente 3 (48/44/8\,\%) lo es más.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 2.10}} \textbf{— Laboratorio de segmentación: lectura de las corridas A, B y C} · \textit{Figura 2}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 23 (b) · B: n.º 12 (a) · C: n.º 1 (c) \hfill \textbf{Acertaron: 17/27 (63\,\%)}}
+
+\textit{En la tabla de la Figura 2, del Caso A al Caso C (de 3 a 4 arquetipos) la silueta casi no cambia (0.58), pero el porcentaje de clientes ambiguos pasa de 14.6\,\% a 21.6\,\%. ¿Qué enseña esa comparación?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Que la silueta de la segmentación rígida por sí sola no revela cuántos clientes quedaron en frontera; la pertenencia difusa sí lo muestra.
+
+\textbf{Explicación.} Laboratorio (corridas A, B y C ejecutadas en MATLAB): silueta 0.58, 0.41 y 0.58; ambiguos 14.6, 36.7 y 21.6\,\%.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Que agregar un cuarto arquetipo no afecta a los clientes, porque la silueta se mantuvo sin cambios.} --- Los ambiguos pasan de 14.6 a 21.6\,\%: sí hay efecto sobre los clientes, que la silueta no capta.
+\item[\textcolor{rojo}{$\times$}] \textit{Que la segmentación difusa falló al aumentar los arquetipos, porque ahora marca como ambiguos a más clientes.} --- La difusa no falló: reveló un efecto que la silueta de la segmentación rígida deja oculto.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\subsection*{\color{guinda}Capítulo 3 — Experiencia, datos y marco legal}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 3.01}} \textbf{— CX vs. UX}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 26 (c) · B: n.º 15 (b) · C: n.º 4 (a) \hfill \textbf{Acertaron: 21/27 (78\,\%)}}
+
+\textit{Una app bancaria tiene una interfaz rápida y fácil de usar, pero el servicio al cliente detrás de ella es lento e inconsistente. Esto describe:}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Una UX sólida dentro de una CX deficiente: la interfaz es solo una parte de la experiencia total del cliente.
+
+\textbf{Explicación.} Subtema 1.3.1. UX es el diseño de una interacción específica; CX es la suma de todas las interacciones en el tiempo y los canales.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Una CX sólida, porque la facilidad de uso de la app define por sí sola la experiencia completa del cliente.} --- La facilidad de la app es UX; la CX incluye todo el servicio, y un servicio lento e inconsistente la vuelve deficiente.
+\item[\textcolor{rojo}{$\times$}] \textit{Una UX deficiente, porque la lentitud del servicio es un problema de diseño de la interfaz.} --- La interfaz es rápida y fácil: el problema está fuera de la interfaz, es decir, en la CX y no en la UX.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 3.02}} \textbf{— Multicanal vs. omnicanal}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 7 (a) · B: n.º 26 (c) · C: n.º 15 (b) \hfill \textbf{Acertaron: 14/27 (52\,\%)}}
+
+\textit{Una tienda opera sitio web, app y tiendas físicas, pero cada canal guarda a sus clientes en una base distinta y nadie reconoce que son la misma persona. Según Verhoef, Kannan e Inman (2015), esa tienda es:}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Multicanal, no omnicanal: falta la gestión sinérgica con una identidad única de cliente que atraviese los canales.
+
+\textbf{Explicación.} Subtema 1.3.2. La omnicanalidad exige que los canales compartan una sola identidad de cliente reconocible.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Omnicanal, porque la tienda está presente en múltiples canales y puntos de contacto con el mismo cliente.} --- Estar presente en varios canales es multicanalidad; la omnicanalidad exige una identidad única de cliente entre canales.
+\item[\textcolor{rojo}{$\times$}] \textit{Omnicanal, siempre que cada canal optimice por separado su propio desempeño y su propia experiencia.} --- Optimizar cada canal por separado es lo propio de lo multicanal; la omnicanalidad busca gestión sinérgica.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 3.03}} \textbf{— Momentos de escucha: tipo de señal}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 22 (c) · B: n.º 11 (b) · C: n.º 30 (a) \hfill \textbf{Acertaron: 26/27 (96\,\%)}}
+
+\textit{Una cadena de farmacias detecta que el 60\,\% de los abandonos de carrito ocurre al pedir un segundo teléfono, sin que ningún cliente se haya quejado. Este hallazgo proviene principalmente de una señal:}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Conductual: lo que el consumidor hace (dónde abandona), observable aunque nadie lo declare de forma explícita.
+
+\textbf{Explicación.} Subtema 1.3.3. El caso de apertura es escucha puramente conductual; quien abandona no suele quejarse, simplemente se va.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Declarada: los clientes expresaron su inconformidad de forma explícita mediante reseñas, encuestas o comentarios en redes.} --- Ningún cliente se quejó: no hay reseña, encuesta ni comentario; la señal no es declarada.
+\item[\textcolor{rojo}{$\times$}] \textit{De contexto: la determinan la hora, el canal y el dispositivo en que ocurre la interacción, no el paso del proceso.} --- La señal es el paso del proceso donde se abandona (conducta), no la hora, el canal o el dispositivo.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 3.04}} \textbf{— Cookies de terceros: hechos verificables}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 8 (b) · B: n.º 27 (c) · C: n.º 16 (a) \hfill \textbf{Acertaron: 18/27 (67\,\%)}}
+
+\textit{Un directivo afirma: «ya no hay que preocuparse por las cookies de terceros, porque desaparecieron de los navegadores». ¿Cómo se valora esa afirmación a septiembre de 2026, según el capítulo?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} No es verificable: Google revirtió su plan en 2024 y las cookies de terceros siguen activas por defecto en Chrome.
+
+\textbf{Explicación.} Subtema 1.3.4 (recuadro de Frontera). El fin de las cookies de terceros no ocurrió como se anunció.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Es correcta: Google las eliminó en 2024 y las sustituyó con las APIs de Privacy Sandbox, que hoy las reemplazan por completo.} --- Google revirtió su plan en 2024; las cookies de terceros siguen activas por defecto en Chrome.
+\item[\textcolor{rojo}{$\times$}] \textit{Es incorrecta, y por eso la recolección de datos de primera y cero parte dejó de ser relevante para la estrategia.} --- Aun si se afirmara su desaparición, los datos de primera y cero parte no dejan de ser relevantes: la conclusión no se sigue.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 3.05}} \textbf{— LFPDPPP: tensión en el consentimiento}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 15 (a) · B: n.º 4 (c) · C: n.º 23 (b) \hfill \textbf{Acertaron: 15/27 (56\,\%)}}
+
+\textit{El capítulo señala que, según fuentes de análisis jurídico, la nueva LFPDPPP admitiría el consentimiento tácito como regla general y a la vez exigiría que sea libre, específico e informado, y no resuelve esa tensión. ¿Por qué?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Porque viene de fuentes secundarias no confirmadas contra el texto legal; una postura firme sin verificarlo carecería de sustento.
+
+\textbf{Explicación.} Subtema 1.3.4. Se señala la tensión para que el estudiante sepa que existe y consulte el texto vigente o a un especialista.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Porque la ley es contradictoria y, por esa razón, carece de validez para regular el tratamiento de datos personales.} --- La tensión proviene de fuentes secundarias no confirmadas; no equivale a que la ley sea inválida.
+\item[\textcolor{rojo}{$\times$}] \textit{Porque el libro considera que el consentimiento no es relevante para la gestión de datos del consumidor digital.} --- El consentimiento es central en la gestión de datos; por eso el libro señala la tensión en lugar de ignorarla.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 3.06}} \textbf{— ENIF (Figura 4): sesgo en la definición de «cliente de alto valor»} · \textit{Figura 4}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 18 (b) · B: n.º 7 (c) · C: n.º 26 (a) \hfill \textbf{Acertaron: 15/27 (56\,\%)}}
+
+\textit{La Figura 4 muestra el porcentaje de mujeres y de hombres con un producto financiero formal (ENIF 2024). Si un banco define «cliente de alto valor» a partir de los productos que sus clientes tienen contratados, ¿qué riesgo advierte el capítulo?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Que la definición herede el sesgo social de los datos de origen y subrepresente a las mujeres sin que ningún paso técnico lo haga explícito.
+
+\textbf{Explicación.} Evidencia de México: una decisión técnica de segmentación puede heredar un sesgo social ya presente en los datos (72.8\,\% mujeres frente a 80.9\,\% hombres).
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Ninguno: como la definición usa solo números, sus resultados son neutrales respecto del género y de cualquier otra característica.} --- Una definición con números puede heredar el sesgo social de los datos de origen aunque no sea explícita.
+\item[\textcolor{rojo}{$\times$}] \textit{Que la brecha demuestre que las mujeres no usan servicios financieros y que por ello deban excluirse del análisis.} --- La brecha (72.8 vs.\ 80.9\,\%) es descriptiva y no demuestra falta de uso; excluir a las mujeres amplificaría el sesgo.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 3.07}} \textbf{— Datos de primera, cero y tercera parte}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 5 (c) · B: n.º 24 (a) · C: n.º 13 (b) \hfill \textbf{Acertaron: 25/27 (93\,\%)}}
+
+\textit{Una tienda de ropa pide a sus clientes que llenen, de forma voluntaria, un cuestionario de talla y estilo para recomendarles prendas. ¿Qué tipo de datos obtiene?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Datos de cero parte: el consumidor los entrega de forma voluntaria y explícita.
+
+\textbf{Explicación.} Subtema 1.3.4: primera parte = recolectados directamente de la relación con el consumidor; cero parte = entregados voluntaria y explícitamente (p. ej., cuestionario de talla).
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Datos de tercera parte: los comparte un tercero sobre el comportamiento del cliente en otros sitios.} --- Datos de tercera parte vienen de un tercero; aquí el propio cliente los entrega de forma voluntaria.
+\item[\textcolor{rojo}{$\times$}] \textit{Datos de primera parte observados: la tienda los deduce de los clics y compras del cliente sin que él los declare.} --- Los de primera parte observados se deducen del comportamiento; aquí el cliente los declara explícitamente.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 3.08}} \textbf{— LFPDPPP: cambio de autoridad}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 27 (c) · B: n.º 16 (a) · C: n.º 5 (b) \hfill \textbf{Acertaron: 9/27 (33\,\%)}}
+
+\textit{Un despacho afirma que el INAI sigue siendo la autoridad de protección de datos personales de los particulares en México. Según la cronología del capítulo, ¿qué se puede responder?}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Que el INAI fue extinguido por la reforma de simplificación orgánica y la Secretaría Anticorrupción y Buen Gobierno asumió la protección de datos de particulares.
+
+\textbf{Explicación.} Subtema 1.3.4, cuadro de cronología: reforma del 20-dic-2024 (extinción del INAI) y entrega-recepción a la Secretaría Anticorrupción y Buen Gobierno el 9-may-2025.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Que es correcto: la nueva LFPDPPP de 2025 reforzó al INAI y le dio más atribuciones que antes.} --- El INAI fue extinguido por la reforma del 20-dic-2024; la nueva ley no lo reforzó.
+\item[\textcolor{rojo}{$\times$}] \textit{Que ninguna autoridad asumió esas funciones, por lo que hoy la ley no tiene quien vigile su cumplimiento.} --- Sí hubo relevo: la Secretaría Anticorrupción y Buen Gobierno asumió las funciones (entrega-recepción el 9-may-2025).
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 3.09}} \textbf{— Concepto de CLV (valor de vida del cliente)}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 9 (b) · B: n.º 28 (a) · C: n.º 17 (c) \hfill \textbf{Acertaron: 17/27 (63\,\%)}}
+
+\textit{Una empresa decide cuánto invertir en retener a un cliente comparándolo con lo que se espera que el cliente le deje. Esa cifra esperada corresponde al:}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} CLV (valor de vida del cliente): el ingreso esperado que el cliente genera durante toda su relación con la organización.
+
+\textbf{Explicación.} Glosario del capítulo 3: CLV = ingreso esperado que un cliente generará a lo largo de su relación con la organización.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Ticket promedio: lo que el cliente gasta en una sola compra, sin considerar cuántas veces vuelve a comprar.} --- El ticket promedio mide una sola compra, sin horizonte de relación con el cliente.
+\item[\textcolor{rojo}{$\times$}] \textit{Costo de adquisición: lo que costó atraer a ese cliente la primera vez, sin importar lo que compre después.} --- El costo de adquisición es lo que costó atraerlo, no lo que se espera obtener de él.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\begin{minipage}{\textwidth}
+{\color{guinda}\textbf{Reactivo 3.10}} \textbf{— Decisiones basadas en datos: condición necesaria, no suficiente}\\[-1pt]
+{\scriptsize N.º/letra correcta: A: n.º 25 (a) · B: n.º 14 (c) · C: n.º 3 (b) \hfill \textbf{Acertaron: 23/27 (85\,\%)}}
+
+\textit{Un equipo asegura que su decisión es correcta porque sus datos están limpios y se recolectaron con base legal. Según el capítulo, esa condición es:}
+
+\textcolor{verde}{$\checkmark$} \textbf{Correcta:} Necesaria pero no suficiente: además hace falta un método que traduzca el dato en decisión sin engañarse a sí mismo.
+
+\textbf{Explicación.} Subtema 1.3.5: un dato limpio, bien recolectado y con base legal es condición necesaria, no suficiente.
+
+\textbf{Por qué fallan las otras opciones:}
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=1.3em,parsep=0pt]
+\item[\textcolor{rojo}{$\times$}] \textit{Suficiente: un dato limpio y legal garantiza por sí solo una buena decisión de mercadotecnia.} --- Un dato limpio y legal no garantiza una buena decisión: falta un método que lo traduzca en decisión.
+\item[\textcolor{rojo}{$\times$}] \textit{Innecesaria: lo decisivo es la intuición del equipo, y los datos solo ilustran lo que ya se había decidido.} --- Los datos son necesarios: sin ellos la intuición queda sin contraste; no son un mero adorno.
+\end{itemize}
+\end{minipage}\par\vspace{5pt}{\color{gray!40}\hrule}\vspace{5pt}
+\end{document}
