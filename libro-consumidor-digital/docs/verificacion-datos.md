@@ -30,6 +30,11 @@ abajo (dato · cifra · año · fuente · URL/DOI · fecha de consulta · capít
 | Artículo fundacional de segmentación de mercado | Smith (1956), *Journal of Marketing* 21(1), 3-8 | 1956 | Smith, W.R. | https://doi.org/10.1177/002224295602100102 | 2026-09-18 | Cap. 2 |
 | Artículo fundacional de omnicanalidad | Verhoef, Kannan & Inman (2015), *Journal of Retailing* 91(2), 174-181 | 2015 | Verhoef, Kannan & Inman | https://doi.org/10.1016/j.jretai.2015.02.005 | 2026-09-18 | Cap. 3 |
 | Retiro de 10 APIs de Privacy Sandbox de Chrome | 17-oct-2025 (deprecación desde Chrome 144, ene-2026; retiro total Chrome 150, jul-2026) | 2025-2026 | Privacy Sandbox / Google, blog oficial | https://privacysandbox.google.com/blog/update-on-the-plan-for-phase-out-of-third-party-cookies-on-chrome | 2026-09-18 | Cap. 3 |
+| Transición UA a GA4: UA dejó de procesar datos nuevos / se perdió el acceso a la interfaz y la API | 1 jul 2023 / 1 jul 2024 | 2023-2024 | Google, Analytics Help, «Google Analytics 4 has replaced Universal Analytics» | https://support.google.com/analytics/answer/9973999 | 2026-10-12 | Cap. 5 |
+| Caducidad por defecto de la cookie _ga | 2 años | 2026 | Google, Analytics Help, «Cookie usage on websites» | https://support.google.com/analytics/answer/11397207 | 2026-10-12 | Cap. 5 |
+| Límites de recolección en propiedades estándar | 25 parámetros por evento; 25 propiedades de usuario; nombres de 40 caracteres | 2026 | Google, Analytics Help, «Collection limits» | https://support.google.com/analytics/answer/9267744 | 2026-10-12 | Cap. 5 |
+| Retención de datos de usuario y de evento (afecta Exploraciones, no informes estándar) | 2 o 14 meses | 2026 | Google, Analytics Help, «Data retention» | https://support.google.com/analytics/answer/7667196 | 2026-10-12 | Cap. 5 |
+| Cuenta de demostración de GA4: no permite exportar (observación directa del profesor, no de fuente de Google) | — | 2026 | Observación en clase, octubre de 2026 | https://goo.gle/ga-demo | 2026-10-12 | Cap. 5 |
 
 ## Parte II — Proceso de decisión de compra digital (Cap. 5–8)
 

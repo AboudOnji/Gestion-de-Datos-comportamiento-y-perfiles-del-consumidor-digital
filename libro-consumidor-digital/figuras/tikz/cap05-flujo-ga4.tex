@@ -1,0 +1,18 @@
+% figuras/tikz/cap05-flujo-ga4.tex
+% Cómo llegan los datos a una propiedad de GA4 y cómo se consultan (vigente a octubre de 2026).
+\begin{tikzpicture}[
+    nodo/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                 minimum width=3.1cm, minimum height=0.9cm, align=center, font=\footnotesize},
+    nodom/.style={rectangle, rounded corners, draw=doradoIPN, very thick, fill=bronceIPNClaro,
+                  minimum width=3.3cm, minimum height=2.9cm, align=center, font=\small},
+    flecha/.style={-{Stealth[length=2.6mm]}, thick, draw=grisIPN}
+  ]
+  \node[nodo] (w) at (0,1.4)  {Sitio web\\ (etiqueta de Google)};
+  \node[nodo] (a) at (0,0)    {App móvil\\ (SDK de Firebase)};
+  \node[nodo] (s) at (0,-1.4) {Servidor o tienda\\ (Measurement Protocol)};
+  \node[nodom] (p) at (5,0)   {\textbf{Propiedad GA4}\\[3pt]\footnotesize flujos de datos\\ eventos y parámetros\\ propiedades de usuario};
+  \node[nodo] (r) at (10,0.8) {Informes\\ y Exploraciones};
+  \node[nodo] (e) at (10,-0.8) {Exportación\\ (solo cuenta propia)};
+  \draw[flecha] (w) -- (p); \draw[flecha] (a) -- (p); \draw[flecha] (s) -- (p);
+  \draw[flecha] (p) -- (r); \draw[flecha] (p) -- (e);
+\end{tikzpicture}
