@@ -1,0 +1,27 @@
+\frametitle{El script: \texttt {cap03\_rfm\_clv\_ab.m}}
+\begin{columns}[T]
+  \column{0.58\textwidth}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+%% ==================================
+%  PARAMETROS: UNICA SECCION QUE
+%  EL ESTUDIANTE DEBE EDITAR
+%  ==================================
+nClientes = 300;     % base sintetica
+horizonteAnios = 3;  % horizonte del CLV
+alfa = 0.05;         % significancia A/B
+nA = 1200; conversionesA = 132;  % A
+nB = 1180; conversionesB = 159;  % B
+\end{lstlisting}
+  \column{0.38\textwidth}
+  \begin{block}{Reglas y rangos}
+    \scriptsize
+    \begin{itemize}
+      \item \texttt{alfa} = \enquote{umbral de duda}: entre 0 y 1; usuales 0.01, 0.05, 0.10.
+      \item Conversiones $\leq$ visitantes.
+      \item Datos \textbf{sintéticos} (\texttt{rng(42)}); el resto del script no se toca.
+    \end{itemize}
+  \end{block}
+  \begin{exampleblock}{Sin MATLAB}
+    \scriptsize \texttt{cap03\_rfm\_clv\_ab\_\allowbreak interactivo.html}: mismos parámetros y casos A, B, C.
+  \end{exampleblock}
+\end{columns}

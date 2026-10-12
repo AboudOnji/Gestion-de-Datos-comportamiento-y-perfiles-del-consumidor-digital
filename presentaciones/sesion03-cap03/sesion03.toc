@@ -1,0 +1,11 @@
+\babel@toc {spanish}{}\relax 
+\beamer@sectionintoc {1}{Encuadre}{2}{0}{1}
+\beamer@sectionintoc {2}{Caso de apertura}{6}{0}{2}
+\beamer@sectionintoc {3}{1.3.1--1.3.2 Valor y omnicanalidad}{8}{0}{3}
+\beamer@sectionintoc {4}{1.3.3 Momentos de escucha}{12}{0}{4}
+\beamer@sectionintoc {5}{1.3.4 Recolección de datos y marco legal}{14}{0}{5}
+\beamer@sectionintoc {6}{1.3.5 Decisiones basadas en datos}{19}{0}{6}
+\beamer@sectionintoc {7}{Evidencia de México}{21}{0}{7}
+\beamer@sectionintoc {8}{Laboratorio MATLAB}{23}{0}{8}
+\beamer@sectionintoc {9}{Estudio de caso}{34}{0}{9}
+\beamer@sectionintoc {10}{Cierre}{37}{0}{10}

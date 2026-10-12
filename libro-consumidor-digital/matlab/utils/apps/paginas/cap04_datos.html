@@ -1,0 +1,156 @@
+<!-- BLOQUE:PARAMETROS_EXTRA -->
+    <div id="zonaArchivo">
+      <h3 style="margin-top:4px">1. Sus datos (Excel)</h3>
+      <label class="subir" for="archivo">
+        <input type="file" id="archivo" accept=".xlsx,.xls,.ods,.csv">
+        <span class="subir-caja"><b>Subir archivo</b><br><span class="nota">Excel (.xlsx, .xls), .ods o .csv — o arrástrenlo aquí</span></span>
+      </label>
+      <div class="botones">
+        <button id="btnEjemplo1" class="btn sec peq" type="button" title="La serie sintética del laboratorio del libro">Ejemplo 1: serie del libro</button>
+        <button id="btnEjemplo2" class="btn sec peq" type="button" title="El caso de la marca de electrodomésticos">Ejemplo 2: caso de estudio</button>
+        <button id="btnDescargarEjemplo" class="btn sec peq" type="button">Descargar Excel de ejemplo</button>
+        <a class="btn sec peq" href="#panelFormato" style="text-decoration:none">¿Cómo ordenar mis datos?</a>
+      </div>
+      <div id="estadoArchivo" class="nota-caja" style="margin-top:10px"></div>
+
+      <h3>2. ¿Qué columna es cada dato?</h3>
+      <p class="nota" style="margin:0 0 4px">La app las reconoce por el nombre; si se equivoca, cámbienlas aquí.</p>
+      <label class="campo"><span class="ayuda"><b>Fecha</b> de cada dato (una fila por semana, mes o día)</span><select id="colFecha"></select></label>
+      <label class="campo"><span class="ayuda"><b>Valor</b> de la serie (interés de búsqueda, visitas, ventas…)</span><select id="colValor"></select></label>
+      <label class="campo"><span class="ayuda"><b>Comentarios</b> de escucha social (opcional)</span><select id="colTexto"></select></label>
+      <h3>3. Cómo se descompone la serie</h3>
+      <p class="nota" id="notaCiclo" style="margin:0 0 4px"></p>
+    </div>
+    <div id="zonaTexto" style="margin-top:6px">
+      <h3>4. Escucha social: opciones del texto</h3>
+      <label style="display:block;margin:3px 0;font-size:.85rem"><input type="checkbox" id="opMinusculas" checked> Pasar todo a minúsculas («Precio» = «precio»)</label>
+      <label style="display:block;margin:3px 0;font-size:.85rem"><input type="checkbox" id="opAcentos"> Quitar acentos («envío» = «envio»)</label>
+      <label class="campo"><span class="ayuda"><b>Palabras vacías</b> (no se cuentan; separadas por espacios o comas). Agreguen las propias.</span>
+        <textarea id="txtVacias" rows="4" style="width:100%"></textarea></label>
+      <label class="campo"><span class="ayuda"><b>O peguen comentarios aquí</b> (uno por línea) si su Excel no trae la hoja «Comentarios»</span>
+        <textarea id="txtComentarios" rows="4" style="width:100%" placeholder="el envio llego rapido&#10;la app se traba al pagar"></textarea></label>
+    </div>
+<!-- BLOQUE:FIGURAS -->
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">1</span>Su serie: ¿qué tan confiable es lo que cargaron?</h3>
+          <div id="kpisSerie" class="kpis"></div>
+          <div class="explica"><p>Una <b>serie de tiempo</b> es una medición repetida a intervalos regulares (cada semana, cada mes…). Antes de analizarla hay que revisar que
+            no falten periodos y que las fechas sean parejas. Si falta un dato en medio de la serie, la app lo <b>rellena por interpolación lineal</b> (traza una línea recta entre
+            el dato anterior y el siguiente) y lo marca con un ✕; si faltaran muchos, la serie dejaría de ser confiable.</p></div>
+          <div class="paso-graficas">
+            <div class="figura ancha"><div class="grafica" id="figSerie" style="height:320px"></div><div class="pie">Su serie tal como la entregaron (los ✕ son valores rellenados). Aún no se ha separado nada: tendencia, temporada y ruido vienen mezclados.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">2</span>Tendencia y estacionalidad: separar lo que cambia de lo que se repite</h3>
+          <div class="explica"><p>Tres cosas se mezclan en cualquier serie: la <b>tendencia</b> (hacia dónde va a largo plazo: sube, baja o es plana), la <b>estacionalidad</b>
+            (un patrón que se repite cada año: temporada alta, Buen Fin, regreso a clases…) y el <b>ruido</b> (variación al azar semana a semana).</p>
+            <p><b>Cómo se separan</b> (igual que en el laboratorio): la tendencia es un <b>promedio móvil</b> de un ciclo completo (52 semanas, si son datos semanales): en cada punto se promedian las
+            52 semanas alrededor, y como ese promedio abarca un año entero, el efecto de la temporada <i>se cancela</i>. La estacionalidad es lo que sobra:
+            <b>serie − tendencia</b>. Si el promedio móvil abarcara menos de un ciclo (por ejemplo 13 semanas), la tendencia se «comería» parte de la temporada: pruébenlo en <b>Casos de práctica</b>.</p></div>
+          <div id="kpisDesc" class="kpis"></div>
+          <div id="avisosDesc"></div>
+          <div class="paso-graficas">
+            <div class="figura ancha"><div class="grafica" id="figTend" style="height:340px"></div><div class="pie">Serie observada (gris) y tendencia: promedio móvil centrado de un ciclo completo (guinda).</div></div>
+            <div class="figura ancha"><div class="grafica" id="figEst" style="height:300px"></div><div class="pie">Componente estacional = serie − tendencia. Arriba de cero: la serie está por encima de su nivel normal; abajo: por debajo. Los extremos de la serie son menos confiables (ver nota).</div></div>
+            <div class="figura"><div class="grafica" id="figMes"></div><div class="pie">Componente estacional promedio por mes del calendario: ¿cuándo está su temporada alta y cuándo la baja?</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">3</span>¿Fue la campaña o fue la temporada? (el caso de la marca de electrodomésticos)</h3>
+          <div class="explica"><p>El error clásico: ver que el interés <b>subió 20 puntos</b> en las últimas semanas y atribuírselo a la campaña más reciente. Antes de concluir hay que preguntarse:
+            <i>¿ocurrió lo mismo en esta misma época el año pasado?</i> Si sí, es muy probable que sea <b>temporada</b> (estacionalidad) y no efecto de la campaña. La app compara el cambio de los últimos
+            <b>k periodos</b> contra el cambio de los mismos periodos un año antes.</p></div>
+          <div id="kpisAnio" class="kpis"></div>
+          <div class="explica" id="conclusionAnio"></div>
+          <div class="paso-graficas">
+            <div class="figura ancha"><div class="grafica" id="figAnio" style="height:320px"></div><div class="pie">El último año de la serie (guinda) sobre el año anterior (gris), alineados por fecha. Si las dos curvas suben juntas en la misma época, el salto es de temporada.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">4</span>Escucha social: ¿de qué habla la gente?</h3>
+          <div class="explica"><p>Los comentarios se convierten en una <b>bolsa de palabras</b>: se separa cada comentario en palabras, se quitan las <b>palabras vacías</b> (el, la, de, que… no dicen nada del negocio) y se
+            <b>cuenta cuántas veces aparece cada término</b>. La nube de palabras muestra los términos más frecuentes con letra más grande. Pero ojo: una palabra frecuente no dice <i>si</i> la gente
+            está contenta o molesta: eso lo decide la persona que clasifica los términos (abajo).</p></div>
+          <div id="avisosTexto"></div>
+          <div id="kpisTexto" class="kpis"></div>
+          <div class="paso-graficas">
+            <div class="figura">
+              <div class="grafica" style="position:relative"><canvas id="nube" style="width:100%;height:100%;display:block" aria-label="Nube de palabras"></canvas></div>
+              <div class="pie">Nube de palabras de sus comentarios. <button class="btn sec peq no-imprimir" id="btnNubePNG" type="button">Descargar PNG</button></div>
+            </div>
+            <div class="figura"><div class="grafica" id="figTop"></div><div class="pie">Los términos más frecuentes (los que imprime el script como «Top»).</div></div>
+          </div>
+          <h4 style="margin:14px 0 4px">Clasifiquen a mano los términos más frecuentes</h4>
+          <div id="tablaClasificar" class="tabla-scroll"></div>
+          <div id="resumenClasif" class="nota-caja" style="margin-top:8px"></div>
+          <div class="botones no-imprimir">
+            <button id="btnCSVClasif" class="btn sec" type="button">Descargar clasificación (CSV/Excel)</button>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">5</span>Lectura de negocio: ¿qué decisión sostienen sus datos?</h3>
+          <div class="explica" id="conclusion"></div>
+          <div class="botones no-imprimir">
+            <button id="btnDescargarResultados" class="btn" type="button">Descargar resultados (Excel)</button>
+          </div>
+          <p class="nota">El Excel incluye la serie con su tendencia y su componente estacional, el perfil por mes, la comparación con el año anterior, la frecuencia de términos con su clasificación y las reglas aplicadas.</p>
+        </div>
+<!-- BLOQUE:NOTA_COMPARAR -->
+Guarden una corrida por cada escenario que quieran comparar. Los <b>Casos de práctica</b> de la izquierda repiten el análisis con ventanas distintas de promedio móvil: <b>Caso A</b> (un ciclo completo, como el script),
+<b>Caso B</b> (13 periodos: un trimestre) y <b>Caso C</b> (4 periodos). También pueden comparar dos archivos (por ejemplo, el Ejemplo 1 y el Ejemplo 2). Observen cómo cambian la tendencia, la amplitud estacional
+y el veredicto de «temporada o campaña».
+<!-- BLOQUE:FIGURAS_COMPARACION -->
+        <div class="figura ancha"><div class="grafica" id="comp1" style="height:360px"></div><div class="pie">Serie y tendencia de cada caso guardado: con una ventana corta la tendencia copia a la serie.</div></div>
+        <div class="figura ancha"><div class="grafica" id="comp2" style="height:320px"></div><div class="pie">Componente estacional de cada caso: con una ventana corta la estacionalidad se «encoge».</div></div>
+<!-- BLOQUE:SECCIONES_EXTRA -->
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>Serie de tiempo</b>Una medición repetida a intervalos regulares (semana, mes, día): por ejemplo, el interés de búsqueda de una marca.</div>
+        <div class="concepto"><b>Tendencia</b>Hacia dónde va la serie a largo plazo, sin el vaivén de las temporadas ni el ruido.</div>
+        <div class="concepto"><b>Estacionalidad</b>Un patrón que se repite con periodo fijo (cada año): temporada alta, Buen Fin, regreso a clases.</div>
+        <div class="concepto"><b>Ruido</b>Variación al azar de semana a semana que no sigue ningún patrón.</div>
+        <div class="concepto"><b>Promedio móvil</b>En cada punto, el promedio de los periodos que lo rodean. Con un ciclo completo, la temporada se cancela y queda la tendencia.</div>
+        <div class="concepto"><b>Bolsa de palabras</b>Contar cuántas veces aparece cada término en un conjunto de comentarios, sin importar el orden.</div>
+        <div class="concepto"><b>Palabras vacías</b>Palabras muy comunes (el, la, de…) que no aportan información sobre el negocio y se descartan antes de contar.</div>
+        <div class="concepto"><b>Escucha social</b>Analizar lo que la gente dice en línea sobre una marca. Requiere base legal aunque los comentarios sean públicos.</div>
+      </div>
+    </section>
+
+    <section class="panel" id="panelDatos">
+      <h2>Datos cargados</h2>
+      <div id="resumenDatos" class="nota"></div>
+      <div id="vistaDatos" class="tabla-scroll" style="margin-top:8px"></div>
+    </section>
+
+    <section class="panel" id="panelFormato">
+      <h2>¿Cómo deben venir sus datos?</h2>
+      <p class="nota">Lo más fácil: descarguen el <b>Excel de ejemplo</b> (botón del panel izquierdo o archivo <code>cap04_datos_ejemplo.xlsx</code>), borren las filas 2 en adelante de cada hoja,
+        escriban en la fila 1 los nombres de sus columnas y peguen sus datos. Así se ve la hoja «Serie» del ejemplo:</p>
+      <div class="tabla-scroll">
+        <table class="tabla ejemplo-formato">
+          <thead><tr><th></th><th>A</th><th>B</th></tr></thead>
+          <tbody>
+            <tr class="cab"><td>1</td><td>Fecha</td><td>Interes_busqueda</td></tr>
+            <tr><td>2</td><td>2024-09-16</td><td>22.28</td></tr>
+            <tr><td>3</td><td>2024-09-23</td><td>28.62</td></tr>
+            <tr><td>4</td><td>2024-09-30</td><td><i>(vacía = faltante)</i></td></tr>
+            <tr><td>…</td><td>…</td><td>…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="reglas">
+        <li><b>Hoja «Serie»</b> (si no existe, se usa la primera hoja): <b>encabezados en la fila 1</b>, datos desde la fila 2. Una columna de <b>fecha</b> (formato fecha de Excel, o texto <code>2024-09-16</code> / <code>16/09/2024</code>) y una columna numérica con el <b>valor</b>.</li>
+        <li><b>Intervalos regulares</b>: una fila por semana, por mes o por día, sin saltarse periodos. La app detecta el ciclo (52 semanas, 12 meses, 365 días, 4 trimestres); si no coincide, ajústenlo en «Periodos por ciclo anual».</li>
+        <li><b>Longitud</b>: de 8 a 5,000 puntos. Para ver la estacionalidad se necesita <b>al menos un ciclo completo</b> (52 semanas) y, mejor, <b>dos años</b> para confirmar que el patrón se repite.</li>
+        <li><b>Faltantes</b>: un valor vacío o con texto en medio de la serie se rellena por interpolación lineal y se avisa; vacíos al inicio o al final se recortan. Valores negativos se aceptan, pero revisen si son errores.</li>
+        <li><b>Hoja «Comentarios» (opcional)</b>: una columna (por ejemplo <code>Comentario</code>) con un comentario por fila. También pueden pegar los comentarios en el panel izquierdo.</li>
+        <li><b>Privacidad</b>: no incluyan nombres de usuario, correos ni datos que identifiquen personas; la escucha social con datos reales requiere base legal (LFPDPPP). Sus datos no salen de esta computadora.</li>
+        <li><b>Formatos</b>: .xlsx, .xls, .ods o .csv (en CSV hay una sola tabla: la serie; los comentarios se pegan aparte).</li>
+      </ol>
+    </section>

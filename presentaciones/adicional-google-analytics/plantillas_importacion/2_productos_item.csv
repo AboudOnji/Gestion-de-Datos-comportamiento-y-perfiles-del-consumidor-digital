@@ -1,0 +1,4 @@
+item_id,item_name,item_cat1,item_cat2,item_cat3,item_cat4,item_cat5,brand,variant
+p100001,Licuadora 600 W,Hogar,Cocina,Electrodomesticos,,,MarcaFicticia,1.5 L
+p100002,Cafetera de goteo,Hogar,Cocina,Electrodomesticos,,,MarcaFicticia,12 tazas
+p100003,Plancha de vapor,Hogar,Ropa,Electrodomesticos,,,OtraMarca,1800 W

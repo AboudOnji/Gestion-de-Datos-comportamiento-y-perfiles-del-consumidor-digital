@@ -1,0 +1,3 @@
+measurement_id,client_id,timestamp_micros,event_name,event_param.transaction_id,event_param.value,event_param.currency
+G-XXXXXXXXXX,1234567890.1234567890,1790000000000000,compra_en_tienda,T-0001,1250.00,MXN
+G-XXXXXXXXXX,2345678901.2345678901,1790000100000000,compra_en_tienda,T-0002,640.50,MXN

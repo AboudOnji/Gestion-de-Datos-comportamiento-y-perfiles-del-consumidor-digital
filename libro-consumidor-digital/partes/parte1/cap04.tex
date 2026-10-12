@@ -46,7 +46,7 @@ sino ofrecer cuatro criterios de análisis que se sostienen con independencia
 de qué marca domine el mercado en el momento en que se lean
 (figura~\ref{fig:cap04-criterios}).
 
-\begin{figure}[htbp]
+\begin{figure}[!htb]
   \centering
   \input{figuras/tikz/cap04-criterios-evaluacion}
   \caption{Matriz de criterios durables para evaluar buscadores, plataformas
@@ -59,7 +59,7 @@ El cuadro~\ref{tab:cap04-criterios} desarrolla cada criterio con la pregunta
 concreta que un mercadólogo digital debería hacerse frente a cualquier
 plataforma —la que use hoy, o la que la reemplace mañana—.
 
-\begin{table}[htbp]
+\begin{table}[!htb]
 \centering
 \begin{tabular}{@{}p{3.3cm}p{9.1cm}@{}}
 \toprule
@@ -100,7 +100,7 @@ puede, sin cambiar de tecnología, pasar de facilitar la decisión del
 consumidor a sesgarla.
 \end{cajaFrontera}
 
-\begin{figure}[htbp]
+\begin{figure}[!htb]
   \centering
   \input{figuras/tikz/cap04-comercio-agentico}
   \caption{El comercio agéntico como capa de intermediación entre el
@@ -123,7 +123,7 @@ conoce.
 
 \section{Evidencia de México y del mundo}
 
-\begin{table}[htbp]
+\begin{table}[!htb]
 \centering
 \begin{tabular}{@{}p{3.3cm}p{4.6cm}p{4.1cm}@{}}
 \toprule
@@ -208,7 +208,7 @@ desviacionRuido = 4;               % ruido aleatorio semana a semana
 social (figura~\ref{fig:cap04-nube}).
 
 \begin{center}
-  \includegraphics[width=0.95\textwidth]{figuras/matlab/cap04_tendencia_estacionalidad.pdf}
+  \includegraphics[width=0.88\textwidth]{figuras/matlab/cap04_tendencia_estacionalidad.pdf}
   \captionof{figure}{Serie de interés de búsqueda: observada, tendencia
   (media móvil de 52 semanas) y componente estacional. Fuente: elaboración
   propia con datos sintéticos, \texttt{rng(42)}.}
@@ -216,7 +216,7 @@ social (figura~\ref{fig:cap04-nube}).
 \end{center}
 
 \begin{center}
-  \includegraphics[width=0.72\textwidth]{figuras/matlab/cap04_nube_palabras.pdf}
+  \includegraphics[width=0.58\textwidth]{figuras/matlab/cap04_nube_palabras.pdf}
   \captionof{figure}{Frecuencia de términos en un corpus sintético de
   escucha social. Fuente: elaboración propia con datos sintéticos.}
   \label{fig:cap04-nube}
@@ -225,12 +225,15 @@ social (figura~\ref{fig:cap04-nube}).
 \textbf{Interpretación de negocio.} El componente estacional de la
 figura~\ref{fig:cap04-tendencia} (panel inferior) revela un patrón que la
 serie observada (panel superior, línea gris) oculta a simple vista bajo el
-ruido semana a semana: un pico recurrente hacia fin de año, de magnitud
-similar en ambos ciclos anuales capturados. Una organización que planee
+ruido semana a semana: un pico recurrente (en esta serie sintética, hacia
+marzo-abril de cada ciclo), de magnitud similar en los dos ciclos anuales
+capturados. Conviene leer con cautela los primeros y los últimos meses de la
+serie: ahí la media móvil de 52 semanas usa una ventana incompleta y el
+componente estacional estimado es menos confiable. Una organización que planee
 inventario, personal de soporte o presupuesto publicitario a partir de la
 serie observada sin aislar este componente corre el riesgo de interpretar
 como \enquote{tendencia acelerada} lo que en realidad es la fase ascendente
-predecible del ciclo estacional —error que se repite cada fin de año en
+predecible del ciclo estacional —error que se repite cada temporada alta en
 organizaciones que no separan ambos componentes—. En la nube de palabras
 (figura~\ref{fig:cap04-nube}), los términos dominantes —\textit{precio},
 \textit{producto}, \textit{envío}, \textit{llegó}, \textit{excelente},

@@ -1,0 +1,676 @@
+% presentaciones/adicional-google-analytics/google_analytics_presentacion.tex
+% Sesión adicional — Google Analytics 4: contexto, usos, visualización y extracción de datos
+% Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital
+% Lic. en Mercadotecnia Digital · ESCA Unidad Santo Tomás · IPN
+% Fuente de contenido: libro-consumidor-digital/guia_google_analytics.tex (documento complementario)
+% Figuras reutilizadas del libro (TikZ y MATLAB) sin copiarlas: ver \graphicspath y \input.
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usetheme{Berlin}
+
+%----------------------------------------------------------------------------------------
+%   PALETA INSTITUCIONAL IPN (Manual de Identidad Gráfica, Pantone 222C)
+%----------------------------------------------------------------------------------------
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\definecolor{IPNguinda}{HTML}{6F1D46}       % Pantone 222C oficial — color primario
+\definecolor{IPNguindaOsc}{HTML}{45102C}    % sombra / paleta secundaria
+\definecolor{IPNguindaClara}{HTML}{F4E9EF}  % fondo de bloques normales
+\definecolor{IPNdorado}{HTML}{B8975A}       % dorado — SOLO enlaces y detalles del cierre
+\definecolor{IPNterracota}{HTML}{9C5B44}    % alertblock
+\definecolor{IPNterracotaClara}{HTML}{F6ECE6}
+\definecolor{IPNbronce}{HTML}{8C6B3F}       % exampleblock
+\definecolor{IPNbronceClaro}{HTML}{F5F0E3}
+\definecolor{IPNgris}{HTML}{58595B}         % texto secundario / notas
+
+% Alias con los nombres de config/colores.tex del libro, para que las figuras
+% TikZ del libro se puedan \input sin modificarlas
+\colorlet{guindaIPN}{IPNguinda}
+\colorlet{guindaIPNOsc}{IPNguindaOsc}
+\colorlet{guindaIPNClara}{IPNguindaClara}
+\colorlet{doradoIPN}{IPNdorado}
+\colorlet{bronceIPN}{IPNbronce}
+\colorlet{bronceIPNClaro}{IPNbronceClaro}
+\colorlet{grisIPN}{IPNgris}
+\colorlet{terracotaIPN}{IPNterracota}
+\colorlet{terracotaIPNClara}{IPNterracotaClara}
+\definecolor{colorLaboratorio}{HTML}{1B6E7A}
+
+\setbeamercolor{palette primary}{bg=IPNguinda,fg=white}
+\setbeamercolor{palette secondary}{bg=IPNguindaOsc,fg=white}
+\setbeamercolor{palette tertiary}{bg=IPNguindaOsc,fg=white}
+\setbeamercolor{palette quaternary}{bg=IPNguinda,fg=white}
+\setbeamercolor{structure}{fg=IPNguinda}
+\setbeamercolor{title}{bg=IPNguinda,fg=white}
+\setbeamercolor{frametitle}{bg=IPNguinda,fg=white}
+\setbeamercolor{block title}{bg=IPNguinda,fg=white}
+\setbeamercolor{block body}{bg=IPNguindaClara,fg=black}
+\setbeamercolor{block title alerted}{bg=IPNterracota,fg=white}
+\setbeamercolor{block body alerted}{bg=IPNterracotaClara,fg=black}
+\setbeamercolor{block title example}{bg=IPNbronce,fg=white}
+\setbeamercolor{block body example}{bg=IPNbronceClaro,fg=black}
+\setbeamercolor{alerted text}{fg=IPNterracota}
+\setbeamercolor{item}{fg=IPNguinda}
+\setbeamercolor{section in toc}{fg=IPNguinda}
+\setbeamercolor{footline}{bg=IPNguindaOsc,fg=white}
+
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+\setbeamertemplate{caption}[numbered]
+\usepackage{xurl}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\graphicspath{{./}{../../libro-consumidor-digital/figuras/matlab/}}
+\newcommand{\figtikz}[1]{../../libro-consumidor-digital/figuras/tikz/#1}
+\newcommand{\fuente}[1]{{\tiny\color{IPNgris}Fuente: #1}}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=IPNdorado,
+    filecolor=IPNguinda,
+    urlcolor=IPNguinda,
+    citecolor=IPNguinda,
+    pdftitle={Google Analytics 4 - contexto, usos, visualizacion y extraccion de datos},
+    pdfauthor={Dr. Aboud Barsekh-Onji},
+}
+
+%----------------------------------------------------------------------------------------
+%   CODE LISTINGS — sintaxis ESTÁNDAR del lenguaje
+%----------------------------------------------------------------------------------------
+\usepackage{listings}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.99}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+
+\lstdefinestyle{MATLABStyle}{
+  language=Matlab,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{codegreen},
+  stringstyle=\color{violet},
+  breaklines=true,
+  numbers=left,
+  numbersep=5pt,
+  frame=lines,
+  backgroundcolor=\color{backcolour}
+}
+\lstset{style=MATLABStyle}
+
+%----------------------------------------------------------------------------------------
+%   TITLE CONFIGURATION
+%----------------------------------------------------------------------------------------
+\logo{\includegraphics[height=0.75cm]{ipn-escudo.png}}
+\title[Google Analytics 4]{Google Analytics 4 para mercadotecnia digital}
+\subtitle{Sesión adicional · Unidad I — Complemento del Capítulo 4}
+\author{Dr. Aboud Barsekh-Onji}
+\institute[IPN]{
+    Instituto Politécnico Nacional \\
+    \small ESCA Unidad Santo Tomás · Lic. en Mercadotecnia Digital \\
+    \footnotesize Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital
+}
+\date{\today}
+
+%----------------------------------------------------------------------------------------
+%   AUTO AGENDA AT EACH SECTION
+%----------------------------------------------------------------------------------------
+\AtBeginSection[]{
+  \begin{frame}{Agenda}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \vspace{-4pt}
+    \begin{center}
+        {\tiny\color{IPNgris} ORCID: \href{https://orcid.org/0009-0004-5440-8092}{0009-0004-5440-8092}}
+    \end{center}
+\end{frame}
+
+%------------------------------------------------
+\section{Encuadre}
+%------------------------------------------------
+
+\begin{frame}{Ficha de la sesión}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Sesión adicional}
+    \small Complemento de la Unidad I (Cap.~3 y 4): \textbf{una herramienta concreta} para observar el comportamiento del consumidor digital en un sitio web o una app.
+  \end{block}
+  \begin{block}{Contenido}
+    \tiny
+    \begin{itemize}
+      \item Contexto: de UA a GA4; cómo funciona.
+      \item Usos en mercadotecnia digital.
+      \item \textbf{Visualizar} y \textbf{sacar} datos.
+    \end{itemize}
+  \end{block}
+  \column{0.44\textwidth}
+  \begin{exampleblock}{Material}
+    \small Presentación + \textbf{guía en PDF} (\texttt{guia\_google\_analytics.pdf}).
+  \end{exampleblock}
+  \begin{alertblock}{Requisito}
+    \small Una cuenta de Google para entrar a la \textbf{cuenta de demostración}.
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Al terminar la sesión podrás\ldots}
+\begin{enumerate}
+  \item \textbf{Explicar} qué es GA4, de dónde viene y cómo recolecta datos.
+  \vspace{4pt}
+  \item \textbf{Relacionar} preguntas de mercadotecnia con los informes de GA4 que las responden.
+  \vspace{4pt}
+  \item \textbf{Visualizar} datos en informes y Exploraciones con la cuenta de demostración.
+  \vspace{4pt}
+  \item \textbf{Sacar} datos de GA4 (CSV y Looker Studio; BigQuery y API solo como referencia). La demo no permite exportar: se explica y se practica la lectura en pantalla.
+  \vspace{4pt}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Una advertencia de vigencia}
+\begin{alertblock}{Como en el Capítulo 4: la plataforma cambia}
+  Esta sesión se preparó con la \textbf{ayuda oficial de Google Analytics consultada el 12 de octubre de 2026}. Los menús, los nombres y los límites cambian: antes de aplicar un paso en una propiedad real, \textbf{compáralo con la página de ayuda vigente}.
+\end{alertblock}
+\begin{block}{Por eso aprendemos el \textbf{modelo}, no solo los clics}
+  \small Qué es un evento, qué es una dimensión, qué es una métrica, qué datos son agregados y cuáles personales. Eso sobrevive a un rediseño de la interfaz.
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+\section[Contexto]{Contexto}
+%------------------------------------------------
+
+\begin{frame}{¿Qué es Google Analytics?}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Definición de trabajo}
+    \small Servicio gratuito de analítica web y de aplicaciones: \textbf{registra interacciones} con un sitio o app y las resume en informes. Existe una versión de pago, Analytics 360.
+  \end{block}
+  \begin{exampleblock}{En términos de la Unidad I}
+    \small Es una fuente de \textbf{datos de primera parte} y de \textbf{señal conductual}: lo que la gente \emph{hace} en \emph{tu} sitio.
+  \end{exampleblock}
+  \column{0.44\textwidth}
+  \begin{alertblock}{Lo que NO es}
+    \small No dice \emph{por qué} actúan así (señal declarada), ni qué hacen fuera de tu sitio. Complementa, no sustituye, encuestas, escucha social y CRM.
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{De Universal Analytics a GA4}
+\begin{center}
+\begin{tikzpicture}[
+    hito/.style={rectangle, rounded corners, thick, draw=IPNguinda, fill=IPNguindaClara, minimum width=3.6cm, minimum height=1.25cm, align=center, font=\scriptsize},
+    flecha/.style={-{Stealth[length=3mm]}, thick, draw=IPNdorado}
+  ]
+  \node[hito] (a) at (0,0) {\textbf{1 jul 2023}\\ UA estándar deja de\\ procesar datos nuevos};
+  \node[hito] (b) at (4.3,0) {\textbf{1 jul 2024}\\ Se cierra el acceso a la\\ interfaz y API de UA};
+  \node[hito, fill=IPNbronceClaro, draw=IPNbronce] (c) at (8.6,0) {\textbf{Hoy}\\ GA4 es la medición\\ vigente};
+  \draw[flecha] (a) -- (b); \draw[flecha] (b) -- (c);
+\end{tikzpicture}
+\end{center}
+\vspace{4pt}
+\begin{itemize}
+  \small
+  \item UA medía \textbf{sesiones y vistas de página}; GA4 mide \textbf{eventos} con parámetros, en sitios web y apps dentro de una misma propiedad.
+  \item Un tutorial anterior a 2023 puede describir UA: \textbf{revisen siempre la fecha}.
+\end{itemize}
+\fuente{Google, Analytics Help, \enquote{Google Analytics 4 has replaced Universal Analytics}.}
+\end{frame}
+
+%------------------------------------------------
+\section[Cómo funciona]{Cómo funciona GA4}
+%------------------------------------------------
+
+\begin{frame}{Todo es un evento}
+\begin{columns}[T]
+  \column{0.5\textwidth}
+  \begin{block}{Tres piezas}
+    \small
+    \begin{itemize}
+      \item \textbf{Evento:} interacción con nombre (\texttt{page\_view}, \texttt{purchase}).
+      \item \textbf{Parámetros:} describen el evento (página, valor, moneda).
+      \item \textbf{Propiedades de usuario:} atributos de la persona (p.\,ej., un segmento).
+    \end{itemize}
+  \end{block}
+  \column{0.46\textwidth}
+  \begin{exampleblock}{Ejemplo}
+    \scriptsize
+    \texttt{purchase}\\[2pt]
+    \hspace{1em}\texttt{transaction\_id = T-0001}\\
+    \hspace{1em}\texttt{value = 1250.00}\\
+    \hspace{1em}\texttt{currency = MXN}\\
+    \hspace{1em}ítem: \texttt{p100001}, licuadora\\[3pt]
+    usuario: \texttt{segmento\_rfm = Leal}
+  \end{exampleblock}
+\end{columns}
+\vspace{4pt}
+\begin{center}\small La pregunta de la Sesión 2 reaparece: \textbf{¿qué comportamiento decides medir?}\end{center}
+\end{frame}
+
+\begin{frame}{Cuatro categorías de eventos}
+\footnotesize
+\begin{center}
+\begin{tabular}{@{}>{\raggedright}p{2.7cm}>{\raggedright}p{4.6cm}>{\raggedright\arraybackslash}p{5.0cm}@{}}
+\toprule
+\textbf{Categoría} & \textbf{Qué es} & \textbf{Ejemplos} \\
+\midrule
+Automáticos & Se registran al instalar la etiqueta o el SDK & \texttt{first\_visit}, \texttt{session\_start}, \texttt{user\_engagement} \\
+Medición mejorada & Activos por defecto en sitios web & \texttt{page\_view}, \texttt{scroll}, \texttt{click}, \texttt{file\_download}, \texttt{form\_submit} \\
+Recomendados & Nombres sugeridos por Google; hay que implementarlos & \texttt{purchase}, \texttt{add\_to\_cart} \\
+Personalizados & Los define la organización & \texttt{compra\_en\_tienda} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\fuente{Google, Analytics Help, \enquote{Automatically collected events} y eventos recomendados.}
+\end{frame}
+
+\begin{frame}{Cómo llegan los datos a la propiedad}
+\begin{center}
+\begin{tikzpicture}[
+    caja/.style={rectangle, rounded corners, thick, draw=IPNguinda, fill=IPNguindaClara, minimum width=3.0cm, minimum height=0.95cm, align=center, font=\scriptsize},
+    prop/.style={rectangle, rounded corners, thick, draw=IPNbronce, fill=IPNbronceClaro, minimum width=3.2cm, minimum height=3.3cm, align=center, font=\small},
+    flecha/.style={-{Stealth[length=2.6mm]}, thick, draw=IPNdorado}
+  ]
+  \node[caja] (w) at (0,1.5) {Sitio web\\ (Google tag / GTM)};
+  \node[caja] (a) at (0,0) {App\\ (SDK de Firebase)};
+  \node[caja] (s) at (0,-1.5) {Servidor / tienda\\ (Measurement Protocol)};
+  \node[prop] (p) at (5.2,0) {\textbf{Propiedad GA4}\\[3pt]\scriptsize flujos de datos\\ eventos, parámetros,\\ usuarios};
+  \node[caja] (e) at (10.2,0) {Informes y\\ Exploraciones};
+  \draw[flecha] (w) -- (p); \draw[flecha] (a) -- (p); \draw[flecha] (s) -- (p);
+  \draw[flecha] (p) -- (e);
+\end{tikzpicture}
+\end{center}
+\vspace{-2pt}
+\begin{center}\scriptsize Cada fuente es un \textbf{flujo de datos} con su identificador de medición.\end{center}
+\end{frame}
+
+\begin{frame}{¿Cómo reconoce GA4 a una persona?}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Identificador de cliente (\texttt{client\_id})}
+    \small Se guarda en la cookie \texttt{\_ga}. Caducidad por defecto: \textbf{2 años} (configurable; los navegadores pueden acortarla). Reconoce \textbf{navegadores}, no personas.
+  \end{block}
+  \begin{exampleblock}{User-ID}
+    \small Identificador propio de la organización para usuarios con \textbf{inicio de sesión}. Permite unir dispositivos.
+  \end{exampleblock}
+  \column{0.44\textwidth}
+  \begin{alertblock}{Lo que implica}
+    \small Una persona con tres dispositivos y sin sesión iniciada aparece como \textbf{tres usuarios}: es el problema de la \textbf{identidad única} de la omnicanalidad (Sesión 3).
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Dimensiones y métricas}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Dimensión = atributo}
+    \small Sirve para \textbf{agrupar}: país, canal de adquisición, página, dispositivo.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{Métrica = cantidad}
+    \small Lo que se \textbf{mide}: usuarios activos, sesiones, número de eventos, eventos clave, ingresos.
+  \end{exampleblock}
+\end{columns}
+\vspace{6pt}
+\begin{itemize}
+  \small
+  \item Un informe es una \textbf{tabla}: una columna por dimensión, una por métrica.
+  \item Las \textbf{dimensiones personalizadas} tienen ámbito de \textbf{evento}, \textbf{usuario} o \textbf{artículo} y deben crearse antes de usarse.
+  \item Límites de recolección (propiedad estándar): \textbf{25 parámetros por evento}; nombres de evento y parámetro de \textbf{40 caracteres}; valores de parámetro de 100.
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\section[Usos]{Usos en mercadotecnia digital}
+%------------------------------------------------
+
+\begin{frame}{De la pregunta de negocio al informe}
+\scriptsize
+\begin{center}
+\begin{tabular}{@{}>{\raggedright}p{4.4cm}>{\raggedright}p{4.7cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
+\toprule
+\textbf{Pregunta} & \textbf{Dónde se responde} & \textbf{Unidad I} \\
+\midrule
+¿De dónde llegan los visitantes y cuáles canales convierten? & \textit{Acquisition} & Cap.~4 \\
+¿Qué hacen y en qué paso abandonan? & \textit{Engagement}; embudo y rutas & Cap.~1 (fricción) \\
+¿Qué se vende y cuánto ingreso deja? & \textit{Monetization}; datos de artículos & Cap.~3 \\
+¿Vuelven? ¿Cuánto vale una cohorte? & \textit{Retention}; cohortes, valor de vida & Cap.~3 (CLV) \\
+¿Qué segmentos tengo? & Audiencias; superposición de segmentos & Cap.~2 \\
+¿Hay estacionalidad en mi tráfico? & Serie semanal leída y descompuesta & Cap.~4 (laboratorio) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\fuente{elaboración propia.}
+\end{frame}
+
+%------------------------------------------------
+\section[Visualizar]{Cómo visualizar los datos}
+%------------------------------------------------
+
+\begin{frame}{Paso 0: entrar a la cuenta de demostración}
+\begin{columns}[T]
+  \column{0.56\textwidth}
+  \begin{block}{Pasos}
+    \small
+    \begin{enumerate}
+      \item Inicia sesión con una cuenta de Google y abre \url{https://goo.gle/ga-demo}.
+      \item Acepta los términos: Google agrega la cuenta de demostración a tu cuenta de Analytics.
+      \item En el selector de propiedades elige \textbf{GA4 -- Google Merchandise Store}.
+      \item Verifica en \textit{Admin} que eres \textit{Viewer}: no puedes cambiar nada, y es lo esperado.
+    \end{enumerate}
+  \end{block}
+  \column{0.40\textwidth}
+  \begin{exampleblock}{Qué contiene}
+    \scriptsize Datos de comercio electrónico de la tienda de mercancía de Google y de un juego (\textit{Flood-It!}).
+  \end{exampleblock}
+  \begin{alertblock}{Ojo}
+    \scriptsize Cuenta contra tu máximo de cuentas de Analytics; puedes quitarla. Verifica en el enlace oficial que sigue disponible.
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Mapa de la interfaz}
+\small
+\begin{center}
+\begin{tabular}{@{}>{\raggedright}p{2.3cm}>{\raggedright\arraybackslash}p{9.4cm}@{}}
+\toprule
+\textbf{Sección} & \textbf{Para qué sirve} \\
+\midrule
+\textit{Home} & Resumen y tarjetas con lo más reciente \\
+\textit{Reports} & Informes estándar: \textit{Reports snapshot}, \textit{Realtime} y colecciones \\
+\textit{Explore} & Exploraciones: análisis a la medida \\
+\textit{Advertising} & Atribución y planeación de canales \\
+\textit{Admin} & Flujos de datos, eventos clave, dimensiones personalizadas, retención \\
+\bottomrule
+\end{tabular}
+\end{center}
+\fuente{Google, Analytics Help, \enquote{Reports in the Analytics app}.}
+\end{frame}
+
+\begin{frame}{Informes estándar: colecciones}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Colección \textit{Life cycle}}
+    \small Sigue el recorrido del cliente:
+    \begin{itemize}
+      \scriptsize
+      \item \textit{Acquisition}: de dónde llegan.
+      \item \textit{Engagement}: qué hacen.
+      \item \textit{Monetization}: qué ingreso generan.
+      \item \textit{Retention}: si regresan.
+    \end{itemize}
+  \end{block}
+  \column{0.44\textwidth}
+  \begin{block}{Colección \textit{User}}
+    \small \textit{User attributes} y \textit{Tech}: quiénes son (agregado) y con qué dispositivos.
+  \end{block}
+  \begin{exampleblock}{Eventos clave}
+    \scriptsize Las acciones que importan (compra, registro) se marcan como \textbf{eventos clave} (antes, \enquote{conversiones} en Analytics).
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Práctica 1: ¿de dónde llega el tráfico?}
+\begin{block}{En \textit{Reports $\rightarrow$ Acquisition $\rightarrow$ Traffic acquisition}}
+  \small
+  \begin{enumerate}
+    \item Fija el rango a los \textbf{últimos 28 días}.
+    \item Cambia la dimensión principal a \textit{Session source / medium}.
+    \item Agrega una \textbf{comparación} (p.\,ej., tipo de dispositivo).
+    \item ¿Qué canal tiene más sesiones? ¿Cuál tiene mejor tasa de interacción? ¿Coinciden?
+  \end{enumerate}
+\end{block}
+\begin{alertblock}{Lectura crítica}
+  \small Compara con el \textbf{mismo periodo del año anterior}: 28 días no bastan para distinguir tendencia de estacionalidad (Capítulo 4).
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Exploraciones: siete técnicas}
+\footnotesize
+\begin{center}
+\begin{tabular}{@{}>{\raggedright}p{3.2cm}>{\raggedright\arraybackslash}p{8.6cm}@{}}
+\toprule
+\textbf{Técnica} & \textbf{Qué responde} \\
+\midrule
+\textit{Free form} & Tablas cruzadas con barras, líneas, dispersión o mapas \\
+\textit{Funnel} & Cuántos avanzan en cada paso y dónde se pierden \\
+\textit{Path} & Qué rutas siguen por el sitio o la app \\
+\textit{Segment overlap} & Cómo se traslapan segmentos de usuarios \\
+\textit{User explorer} & Qué hizo cada usuario de un segmento \\
+\textit{Cohort} & Grupos con un atributo común (p.\,ej., fecha de llegada) \\
+\textit{User lifetime} & Comportamiento y valor a lo largo de su vida como clientes \\
+\bottomrule
+\end{tabular}
+\end{center}
+\fuente{Google, Analytics Help, \enquote{Explorations}.}
+\end{frame}
+
+\begin{frame}{Práctica 2: un embudo de compra}
+\begin{block}{En \textit{Explore $\rightarrow$ Funnel exploration}}
+  \small
+  \begin{enumerate}
+    \item Define los pasos: \texttt{view\_item} $\rightarrow$ \texttt{add\_to\_cart} $\rightarrow$ \texttt{begin\_checkout} $\rightarrow$ \texttt{purchase}.
+    \item Anota el porcentaje que avanza de un paso al siguiente.
+    \item Señala el paso con \textbf{mayor abandono}: es la \textbf{fricción} del Capítulo 1.
+    \item Compara dos segmentos (móvil frente a escritorio): ¿abandonan en el mismo paso?
+  \end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{¿Cuánto tiempo se conservan los datos?}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Retención en propiedades estándar}
+    \small Datos de usuario y de evento: \textbf{2 meses o 14 meses}.
+  \end{block}
+  \begin{alertblock}{Qué afecta}
+    \small Solo a las \textbf{Exploraciones y los embudos}; los \textbf{informes estándar agregados no} se ven afectados.
+  \end{alertblock}
+  \column{0.44\textwidth}
+  \begin{exampleblock}{Consecuencia}
+    \small Una exploración de más de 14 meses \enquote{se corta} aunque el informe estándar muestre todo el periodo. Los datos de edad, género e intereses se conservan solo 2 meses.
+  \end{exampleblock}
+\end{columns}
+\fuente{Google, Analytics Help, \enquote{Data retention}.}
+\end{frame}
+
+%------------------------------------------------
+\section[Sacar datos]{Cómo sacar datos de GA4}
+%------------------------------------------------
+
+\begin{frame}{Cuatro vías para llevarse los datos}
+\footnotesize
+\begin{center}
+\begin{tabular}{@{}>{\raggedright}p{2.5cm}>{\raggedright}p{5.6cm}>{\raggedright\arraybackslash}p{3.7cm}@{}}
+\toprule
+\textbf{Vía} & \textbf{Qué ofrece} & \textbf{Cuándo usarla} \\
+\midrule
+Exportar desde una exploración & Sheets, CSV, TSV o PDF con \textit{Export data} & Una tabla puntual para Excel o para la app del Cap.~4 \\
+Looker Studio & Tableros conectados a la propiedad & Reportes periódicos para terceros \\
+Exportación a BigQuery (nube) & Eventos \textbf{crudos}, uno por fila, en un almacén de Google Cloud & Solo lo mencionamos: lo configura el área de TI y puede costar \\
+Conexión automática (API) & Conexión automática con otros programas & Solo lo mencionamos: requiere programar; no la usaremos \\
+\bottomrule
+\end{tabular}
+\end{center}
+\fuente{Google, Analytics Help y Google for Developers (API de datos de Google Analytics).}
+\end{frame}
+
+\begin{frame}{Aviso: la cuenta de demostración no deja exportar}
+\begin{alertblock}{Qué pasa en la demo}
+  \small La cuenta de demostración de Google es de \textbf{solo consulta}: ahí \textbf{no se pueden descargar ni exportar datos} (la opción \textit{Export data} no está disponible). Es una restricción de esa cuenta pública, no un error tuyo.
+\end{alertblock}
+\begin{exampleblock}{En una cuenta propia sí}
+  \small En una propiedad propia, con un rol de \textbf{Analista o superior}, sí se podrá exportar a CSV, Sheets o PDF. Por eso las prácticas de esta sesión \textbf{no te piden descargar nada}: se resuelven leyendo y capturando la pantalla.
+\end{exampleblock}
+\scriptsize Verifica en la ayuda vigente de Google qué rol exige cada exportación.
+\end{frame}
+
+\begin{frame}{Práctica 3: leer una serie en pantalla}
+\begin{block}{Tendencia y estacionalidad, sin descargar}
+  \footnotesize
+  \begin{enumerate}
+    \item En \textit{Explore}, \textit{Free form}, elige visualización de \textbf{líneas}: dimensión \textbf{semana} (o fecha), métrica \textbf{sesiones}; rango lo más largo posible.
+    \item \textbf{Captura la pantalla} de la gráfica.
+    \item Con lápiz sobre la captura: marca la \textbf{tendencia} (¿sube, baja, se mantiene?) y los \textbf{picos que se repiten}.
+    \item Responde en una frase: ¿es un patrón de \textbf{temporada} o un salto de \textbf{campaña}? ¿Hay \textbf{dos ciclos} para confirmarlo?
+  \end{enumerate}
+\end{block}
+\begin{exampleblock}{Con cuenta propia (opcional)}
+  \scriptsize Exporta la serie a CSV, déjala en dos columnas en Excel (fecha y valor) y súbela a \texttt{cap04\_series\_datos\_propios.html} con 52 periodos por ciclo.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Precauciones con lo que sale de GA4}
+\begin{alertblock}{Los datos exportados no son \enquote{la verdad}}
+  \small Vienen \textbf{agregados} (no hay filas por persona), pueden tener umbrales de privacidad o muestreo en exploraciones grandes, y dos fuentes (informe, otra exportación) pueden \textbf{no coincidir exactamente}.
+\end{alertblock}
+\begin{block}{Buena práctica}
+  \small Registra siempre \textbf{de qué fuente, con qué filtros y con qué fecha de consulta} salió cada cifra: el mismo criterio de verificación del libro.
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+\section[Ética]{Privacidad y base legal}
+%------------------------------------------------
+
+\begin{frame}{Analítica = tratamiento de datos personales}
+\begin{alertblock}{La base legal no es opcional}
+  Una cookie que identifica un navegador, un User-ID o un CRM unido a la analítica son datos que la \textbf{Sesión 3} sitúa bajo la \textbf{LFPDPPP}. Se necesita \textbf{base legal} y \textbf{propósito declarado}: verifica el texto vigente.
+\end{alertblock}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Buenas prácticas}
+    \scriptsize
+    \begin{itemize}
+      \item \textbf{Informar} el uso de cookies y analítica.
+      \item Usar \textbf{Consent Mode} según el consentimiento.
+      \item \textbf{Minimizar}: recolectar solo lo necesario.
+    \end{itemize}
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{Reglas de Google}
+    \scriptsize
+    \begin{itemize}
+      \item \textbf{Prohibido} subir información personal identificable.
+      \item Retención: \textbf{2 o 14 meses} según la necesidad real.
+    \end{itemize}
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Evaluar GA con la matriz del Capítulo 4}
+\footnotesize
+\begin{center}
+\begin{tabular}{@{}>{\raggedright}p{3.2cm}>{\raggedright\arraybackslash}p{8.4cm}@{}}
+\toprule
+\textbf{Criterio} & \textbf{Pregunta aplicada a Google Analytics} \\
+\midrule
+Modelo de negocio & ¿Cómo se financia el servicio gratuito? ¿Qué incentivos genera para quien lo usa? \\
+Intermediación de datos & ¿Quién es dueño del dato de comportamiento: la organización, Google o ambos? \\
+Interoperabilidad & ¿Qué tan fácil es llevarse los datos (CSV, Looker Studio)? \\
+Exposición regulatoria & ¿Qué obligaciones trae usarlo (LFPDPPP, consentimiento)? \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{center}\scriptsize Responder esto es parte de la \textbf{práctica final} de la guía.\end{center}
+\end{frame}
+
+%------------------------------------------------
+\section{Cierre}
+%------------------------------------------------
+
+\begin{frame}{Práctica guiada y entregable}
+\small
+\begin{enumerate}
+  \item \textbf{Contexto:} sesión frente a evento; por qué importa el cambio de UA a GA4.
+  \item \textbf{Acceso:} captura del \textit{Reports snapshot} de la demostración.
+  \item \textbf{Adquisición:} canal con más sesiones y con mejor tasa de interacción.
+  \item \textbf{Embudo:} paso con mayor abandono.
+  \item \textbf{Leer en pantalla} una serie semanal: tendencia y estacionalidad (sin descargar).
+  \item \textbf{Reflexión} con la matriz de criterios del Capítulo 4.
+\end{enumerate}
+\begin{alertblock}{Entregable}
+  \scriptsize Reporte de 2 a 3 páginas con capturas y respuestas. Rúbrica en la guía.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Síntesis}
+\begin{itemize}
+  \small
+  \item GA4 mide \textbf{eventos} con parámetros; reconoce \textbf{navegadores}, no personas, salvo que haya User-ID.
+  \item \textbf{Visualizar:} informes estándar para lo habitual; Exploraciones para preguntas a la medida (embudos, rutas, cohortes).
+  \item \textbf{Sacar:} CSV y Looker Studio en cuenta propia (la demo no exporta; BigQuery y API quedan para el área técnica); lo exportado está \textbf{agregado} y hay que documentar su fuente.
+  \item La interfaz cambia: se aprende el \textbf{modelo} y se \textbf{verifica la vigencia}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Autoevaluación rápida}
+\footnotesize
+\begin{enumerate}
+  \item La unidad básica de medición de GA4 es:
+  \begin{itemize}
+    \item[a)] la sesión;
+    \item[b)] \alt<2->{\textcolor{IPNguinda}{\textbf{el evento, con sus parámetros}}}{el evento, con sus parámetros};
+    \item[c)] la página vista.
+  \end{itemize}
+  \item La retención de datos de 14 meses:
+  \begin{itemize}
+    \item[a)] borra los informes estándar anteriores;
+    \item[b)] \alt<2->{\textcolor{IPNguinda}{\textbf{limita las Exploraciones y los embudos, no los informes estándar}}}{limita las Exploraciones y los embudos, no los informes estándar};
+    \item[c)] impide exportar datos.
+  \end{itemize}
+  \item Los datos que se exportan de un informe de GA4 vienen:
+  \begin{itemize}
+    \item[a)] como una fila por persona;
+    \item[b)] \alt<2->{\textcolor{IPNguinda}{\textbf{agregados, por lo que hay que documentar su fuente}}}{agregados, por lo que hay que documentar su fuente};
+    \item[c)] sin ninguna restricción de privacidad.
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Glosario de la sesión}
+\scriptsize
+\begin{description}
+  \item[Evento / parámetro] Interacción con nombre / dato que la describe (valor, moneda, página).
+  \item[Dimensión / métrica] Atributo para agrupar / cantidad que se mide.
+  \item[Flujo de datos] Fuente de la propiedad: sitio web o app.
+  \item[Evento clave] Evento marcado como importante para el negocio (antes, \enquote{conversión} en Analytics).
+  \item[Exploración] Análisis a la medida: tabla libre, embudo, rutas, cohortes\ldots
+  \item[Client ID / User-ID] Identificador del navegador (cookie \texttt{\_ga}) / identificador propio para usuarios con sesión.
+  \item[BigQuery] Almacén de datos en la nube al que GA4 exporta eventos crudos.
+\end{description}
+\end{frame}
+
+\begin{frame}{Referencias (consultadas el 12-oct-2026)}
+\tiny
+\begin{itemize}
+  \item[] Google. (s.\,f.). \textit{Google Analytics 4 has replaced Universal Analytics}. Analytics Help. \url{https://support.google.com/analytics/answer/9973999}
+  \item[] Google. (s.\,f.). \textit{Automatically collected events}. \url{https://support.google.com/analytics/answer/9234069} · \textit{Collection limits}. \url{https://support.google.com/analytics/answer/9267744}
+  \item[] Google. (s.\,f.). \textit{Reports in the Analytics app}. \url{https://support.google.com/analytics/answer/9924671} · \textit{Explorations}. \url{https://support.google.com/analytics/answer/7579450}
+  \item[] Google. (s.\,f.). \textit{Data retention}. \url{https://support.google.com/analytics/answer/7667196} · \textit{BigQuery Export}. \url{https://support.google.com/analytics/answer/9358801}
+  \item[] Google. (s.\,f.). \textit{Cookie usage on websites}. \url{https://support.google.com/analytics/answer/11397207} · \textit{Consent mode reference}. \url{https://support.google.com/analytics/answer/13802165}
+  \item[] Google. (s.\,f.). \textit{Create a report} (Google Analytics Data API). \url{https://developers.google.com/analytics/devguides/reporting/data/v1/basics} · Cuenta de demostración: \url{https://goo.gle/ga-demo}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+        {\Large \textcolor{IPNguinda}{\textbf{Gracias}}}\\[6pt]
+        {\color{IPNdorado}\rule{0.4\linewidth}{1.2pt}}\\[6pt]
+        Dr. Aboud Barsekh-Onji \\
+        \small Instituto Politécnico Nacional · ESCA Unidad Santo Tomás \\
+        \small \texttt{ORCID: \href{https://orcid.org/0009-0004-5440-8092}{0009-0004-5440-8092}}
+    \end{center}
+\end{frame}
+
+\end{document}

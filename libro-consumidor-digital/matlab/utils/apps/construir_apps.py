@@ -95,6 +95,25 @@ CAPITULOS = [
         "subtitulo": "Laboratorio del Capítulo 4 · Práctica 2 de la Unidad I",
         "datos": [("RANDN42", "randn42.json")],
     },
+    {
+        # App para analizar series de tiempo y comentarios propios (Excel/CSV) con el análisis del Cap. 4
+        "id": "cap04_datos",
+        "modelos": ["cap02_datos", "cap04", "cap04_datos"],
+        "script": "cap04/cap04_series_texto.m",
+        "salida": "cap04_series_datos_propios.html",
+        "titulo": "Serie de tiempo y escucha social con datos propios",
+        "titulo_corto": "Datos propios · Cap. 4",
+        "subtitulo": "Extensión del laboratorio del Capítulo 4 · tendencia, estacionalidad y frecuencia de términos",
+        "insignia": "Datos propios",
+        "pie": ("Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Aplica a sus datos el mismo "
+                "análisis de <code>cap04_series_texto.m</code> (tendencia con promedio móvil de un ciclo completo, estacionalidad = serie − tendencia y bolsa de palabras). "
+                "<b>Sus datos no salen de esta computadora</b>: se procesan en el navegador y no se envían a ningún lado. "
+                "Lectura de Excel con SheetJS (Apache-2.0)."),
+        "nota_parametros": ("Suban el Excel con su serie de tiempo (y, si los tienen, comentarios de escucha social) o prueben los ejemplos. "
+                            "Al cambiar cualquier valor, los resultados se recalculan solos."),
+        "vendor": ["xlsx.full.min.js"],
+        "datos": [("EJEMPLO_CAP04", "cap04_ejemplo.json")],
+    },
 ]
 
 NOTA_PARAMETROS_POR_DEFECTO = (

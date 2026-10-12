@@ -73,6 +73,24 @@ matlab -batch "run('pruebas/referencias_cap03_datos.m')"                        
 node pruebas/verificar_cap03_datos.js                                               # 118 comprobaciones
 ```
 
+## App con datos propios (Cap. 4)
+`matlab/cap04/cap04_series_datos_propios.html` aplica el análisis de `cap04_series_texto.m` a una serie de tiempo y a
+comentarios de escucha social del estudiante. Excel: hoja «Serie» (columna de fecha y una columna de valor; la app detecta
+la frecuencia semanal/mensual/diaria/trimestral y propone los «periodos por ciclo») y hoja opcional «Comentarios». Recorrido en
+5 pasos: calidad de la serie (faltantes interiores por interpolación lineal, intervalos irregulares), tendencia (promedio móvil de un
+ciclo completo, como `movmean(y, w)`) y estacionalidad (serie − tendencia) con perfil por mes, **¿campaña o temporada?** (cambio de los
+últimos k periodos frente al mismo cambio un ciclo antes: el estudio de caso del libro), bolsa de palabras con palabras vacías editables
+y clasificación manual de los términos, y lectura de negocio con descarga en Excel. Los «casos de práctica» A/B/C repiten el análisis con
+promedio móvil de 52, 13 y 4 periodos. Los extremos de la serie usan ventana incompleta (como el script): la app lo avisa y reporta también la
+amplitud y la pendiente de la zona central. Ejemplo 1 = serie del libro (`rng(42)`); Ejemplo 2 = caso de la marca de electrodomésticos.
+Modelo: `modelos/cap04_datos.js`.
+
+```bash
+conda run -n research python matlab/utils/apps/datos/crear_excel_ejemplo_cap04.py   # Excel + JSON de ejemplo
+matlab -batch "run('pruebas/referencias_cap04_datos.m')"                           # referencia MATLAB
+node pruebas/verificar_cap04_datos.js                                               # 74 comprobaciones
+```
+
 ## Fidelidad con MATLAB
 Los datos sintéticos son **los mismos** que genera MATLAB con `rng(42)`: los
 números aleatorios se exportan desde MATLAB (`datos/exportar_datos_matlab.m`)

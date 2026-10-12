@@ -36,7 +36,7 @@ semana = (1:nSemanas)';
 fechas = fechaInicio + calweeks(0:nSemanas-1)';
 
 tendencia = 30 + crecimientoSemanal*semana;                                   % crecimiento sostenido
-estacionalidad = amplitudEstacional*sin(2*pi*semana/52 - pi/2) + 6;           % pico anual (p. ej., Buen Fin/fin de año)
+estacionalidad = amplitudEstacional*sin(2*pi*semana/52 - pi/2) + 6;           % pico anual (una temporada alta; con fechaInicio = 2024-09-16 cae hacia marzo)
 ruido = normrnd(0, desviacionRuido, nSemanas, 1);
 interesBusqueda = max(tendencia + estacionalidad + ruido, 0);   % el índice no puede ser negativo
 

@@ -1,0 +1,4 @@
+client_id,stream_id,segmento_rfm,clv_nivel
+1234567890.1234567890,1234567,Campeon,alto
+2345678901.2345678901,1234567,Leal,medio
+3456789012.3456789012,1234567,En riesgo,bajo

@@ -1,0 +1,145 @@
+[
+  {
+    "archivo": "cap04_datos_ejemplo.xlsx",
+    "ventana": 52,
+    "minimo": 22.28,
+    "maximo": 82.01,
+    "promedio": 54.192788461538463,
+    "ampEst": 38.921538461538468,
+    "ampCentral": 38.921538461538468,
+    "pendiente": 0.33449095022624425,
+    "tend1": 41.1223076923077,
+    "tendFin": 67.388888888888886,
+    "mesPico": 4,
+    "mesValle": 10,
+    "cambioReciente": 1.9775000000000063,
+    "cambioAnterior": 2.5575000000000045
+  },
+  {
+    "archivo": "cap04_datos_ejemplo.xlsx",
+    "ventana": 13,
+    "minimo": 22.28,
+    "maximo": 82.01,
+    "promedio": 54.192788461538463,
+    "ampEst": 21.00461538461537,
+    "ampCentral": 21.00461538461537,
+    "pendiente": 0.31186813186813189,
+    "tend1": 26.410000000000004,
+    "tendFin": 58.765714285714289,
+    "mesPico": 9,
+    "mesValle": 10,
+    "cambioReciente": 1.9775000000000063,
+    "cambioAnterior": -6.25
+  },
+  {
+    "archivo": "cap04_datos_ejemplo.xlsx",
+    "ventana": 4,
+    "minimo": 22.28,
+    "maximo": 82.01,
+    "promedio": 54.192788461538463,
+    "ampEst": 17.027499999999989,
+    "ampCentral": 17.027499999999989,
+    "pendiente": 0.325959595959596,
+    "tend1": 25.4,
+    "tendFin": 59.6,
+    "mesPico": 11,
+    "mesValle": 5,
+    "cambioReciente": 1.9775000000000063,
+    "cambioAnterior": -5.01250000000001
+  },
+  {
+    "archivo": "cap04_datos_ejemplo_caso.xlsx",
+    "ventana": 52,
+    "minimo": 5.2,
+    "maximo": 93.6,
+    "promedio": 49.867307692307691,
+    "ampEst": 85.507692307692309,
+    "ampCentral": 85.507692307692309,
+    "pendiente": 0.11101055806938093,
+    "tend1": 67.6923076923077,
+    "tendFin": 31.788888888888888,
+    "mesPico": 11,
+    "mesValle": 6,
+    "cambioReciente": 16.874999999999986,
+    "cambioAnterior": 19.42499999999999
+  },
+  {
+    "archivo": "cap04_datos_ejemplo_caso.xlsx",
+    "ventana": 13,
+    "minimo": 5.2,
+    "maximo": 93.6,
+    "promedio": 49.867307692307691,
+    "ampEst": 22.70000000000001,
+    "ampCentral": 16.892307692307693,
+    "pendiente": -0.4002535925612849,
+    "tend1": 78.928571428571431,
+    "tendFin": 58.528571428571418,
+    "mesPico": 11,
+    "mesValle": 6,
+    "cambioReciente": 16.874999999999986,
+    "cambioAnterior": 2.5750000000000011
+  },
+  {
+    "archivo": "cap04_datos_ejemplo_caso.xlsx",
+    "ventana": 4,
+    "minimo": 5.2,
+    "maximo": 93.6,
+    "promedio": 49.867307692307691,
+    "ampEst": 15.5,
+    "ampCentral": 15.5,
+    "pendiente": -0.14823232323232335,
+    "tend1": 70.3,
+    "tendFin": 67.86666666666666,
+    "mesPico": 10,
+    "mesValle": 3,
+    "cambioReciente": 16.874999999999986,
+    "cambioAnterior": 20.1
+  },
+  {
+    "archivo": "terminos",
+    "nComentarios": 20,
+    "distintos": 71,
+    "top": [
+      {
+        "palabra": "precio",
+        "n": 6
+      },
+      {
+        "palabra": "producto",
+        "n": 5
+      },
+      {
+        "palabra": "envio",
+        "n": 4
+      },
+      {
+        "palabra": "llego",
+        "n": 4
+      },
+      {
+        "palabra": "excelente",
+        "n": 4
+      },
+      {
+        "palabra": "soporte",
+        "n": 4
+      },
+      {
+        "palabra": "cliente",
+        "n": 4
+      },
+      {
+        "palabra": "app",
+        "n": 4
+      },
+      {
+        "palabra": "calidad",
+        "n": 4
+      },
+      {
+        "palabra": "rapido",
+        "n": 3
+      }
+    ]
+  }
+]
