@@ -65,3 +65,13 @@ Assael 1987, Dixon/Freeman/Toman 2010).
 | 26 | Orden exacto de autoría del artículo de HBR 2010 sobre CES: Dixon, Freeman y Toman | V |
 | 27 | Orden de autoría de Delgado Soriano et al. (2015), *El Cubo NORISO*: Delgado Soriano primero | I, II |
 | 28 | Año exacto de la 8.ª ed. de Hoyer/MacInnis/Pieters: 2024 | I, II, IV |
+
+## Pendientes de Fase 3 — Parte II (2026-10-15)
+
+| # | Descripción | Bloqueante |
+|---|---|---|
+| 31 | Referencias por capítulo (§5.4 del prompt: ≥ 12 y ≥ 5 primarias/arbitradas): Cap. 6 = 15; Cap. 7 = 12; Cap. 8 = 13; Cap. 9 = 12. Todos cumplen ≥ 12. **Cap. 9 tiene 4 fuentes primarias/arbitradas** (Saaty 1977, Hwang y Yoon 1981, Anderl et al. 2016, Verhoef et al. 2015): falta una para el mínimo de 5 (cerrar con una fuente arbitrada sobre analítica de recorridos o consentimiento). | No |
+| 32 | `Comercio social (81 → 688 mil millones USD)` y `engagement nano/macro`: confirmadas por el Dr. Barsekh-Onji, pero sin informe primario localizado. Se presentan como órdenes de magnitud en el Cap. 8. Localizar el informe original (eMarketer/Statista u otro) antes del cierre editorial. | No |
+| 33 | Fechas de entrega de los decks 6–9 («en la fecha acordada en clase»): sustituir por las reales al impartir (D3.4). | No |
+| 34 | Verificar vigencia de Gartner (2026) y de los protocolos de comercio agéntico al día de impartir las sesiones 7 y 9 (recuadros «Vigente a…»). | No |
+| 35 | ~~Apps «datos propios» de los Cap. 6–9~~ — resueltas el 2026-10-15 (D3.6). | — |

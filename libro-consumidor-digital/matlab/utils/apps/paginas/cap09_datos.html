@@ -1,0 +1,109 @@
+<!-- BLOQUE:PARAMETROS_EXTRA -->
+    <div id="zonaArchivo">
+      <h3 style="margin-top:4px">1. Su decisión (Excel)</h3>
+      <label class="subir" for="archivo">
+        <input type="file" id="archivo" accept=".xlsx,.xls,.ods,.csv">
+        <span class="subir-caja"><b>Subir archivo</b><br><span class="nota">Excel (.xlsx, .xls), .ods o .csv — o arrástrenlo aquí</span></span>
+      </label>
+      <div class="botones">
+        <button id="btnEjemplo1" class="btn sec peq" type="button" title="Los cinco tipos de herramienta del laboratorio del libro">Ejemplo 1: el del libro</button>
+        <button id="btnEjemplo2" class="btn sec peq" type="button" title="Seis agencias ficticias con juicios algo contradictorios">Ejemplo 2: agencias</button>
+        <button id="btnDescargarEjemplo" class="btn sec peq" type="button">Descargar Excel de ejemplo</button>
+        <a class="btn sec peq" href="#panelFormato" style="text-decoration:none">¿Cómo ordenar mis datos?</a>
+      </div>
+      <div id="estadoArchivo" class="nota-caja" style="margin-top:10px"></div>
+      <h3>2. Tipo de cada criterio</h3>
+      <p class="nota" style="margin:0 0 4px">En <b>costo</b>, menos es mejor (precio, tiempo de respuesta).</p>
+      <div id="tablaTipos" class="tabla-scroll"></div>
+      <h3>3. Juicios por pares (AHP)</h3>
+      <p class="nota" style="margin:0 0 4px">Cuántas veces es más importante el criterio de la <b>fila</b> que el de la <b>columna</b> (escala de Saaty: 1 igual, 3, 5, 7, 9; menores que 1 invierten: 0.333 = 1/3). Solo se editan las celdas sobre la diagonal.</p>
+      <div id="matrizJuicios" class="tabla-scroll"></div>
+      <label class="campo"><span class="ayuda"><b>Barrido</b>: criterio cuyo peso se mueve de 0 a 1</span><select id="selBarrido"></select></label>
+    </div>
+<!-- BLOQUE:FIGURAS -->
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">1</span>Su matriz de decisión</h3>
+          <div id="kpisDatos" class="kpis"></div>
+          <div class="explica"><p>Filas: las <b>alternativas</b> que comparan. Columnas: los <b>criterios</b>. TOPSIS normaliza cada columna (dividiéndola entre su norma) para poder comparar unidades distintas; en los criterios de <b>costo</b> la «mejor» alternativa es la de valor más bajo.</p></div>
+          <div id="avisosDatos"></div>
+          <div id="tablaDecision" class="tabla-scroll"></div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">2</span>AHP: de los juicios por pares a los pesos</h3>
+          <div class="explica"><p>En lugar de pedir pesos directamente, AHP pide <b>comparaciones por pares</b> y de ellas obtiene los pesos (el vector propio principal de la matriz). La <b>razón de consistencia</b> (CR) mide si los juicios se contradicen: si A &gt; B, B &gt; C pero C &gt; A, el CR sube. Menor que <b>0.10</b> se considera aceptable.</p></div>
+          <div id="kpisAHP" class="kpis"></div>
+          <div class="explica" id="textoConsistencia"></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figPesos" style="height:380px"></div><div class="pie">Pesos AHP de los criterios (suman 1).</div></div>
+            <div class="figura"><div class="grafica" id="figMatriz" style="height:380px"></div><div class="pie">Matriz de comparaciones por pares completa (fila frente a columna).</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">3</span>TOPSIS: ordenar las alternativas</h3>
+          <div class="explica"><p>TOPSIS mide qué tan <b>cerca</b> está cada alternativa de la «solución ideal» (lo mejor en cada criterio) y qué tan <b>lejos</b> de la «peor». La cercanía va de 0 a 1; más alto es mejor. Aquí se compara con los pesos de AHP y con <b>pesos iguales</b> para ver si sus juicios cambian la elección.</p></div>
+          <div class="paso-graficas">
+            <div class="figura ancha"><div class="grafica" id="figTopsis" style="height:400px"></div><div class="pie">Cercanía TOPSIS de cada alternativa con los pesos AHP y con pesos iguales.</div></div>
+          </div>
+          <div id="tablaRanking" class="tabla-scroll"></div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">4</span>¿Qué tan frágil es la elección? Sensibilidad al peso de un criterio</h3>
+          <div class="explica"><p>Se mueve el peso de <b id="nomBarrido">un criterio</b> de 0 a 1 (los demás conservan sus proporciones) para ver <b>en qué punto cambia la alternativa elegida</b>. La decisión correcta no es «un ganador» sino un <b>intervalo de pesos</b> en que cada alternativa gana.</p></div>
+          <div class="paso-graficas">
+            <div class="figura ancha"><div class="grafica" id="figBarrido" style="height:400px"></div><div class="pie">Cercanía TOPSIS al variar el peso del criterio elegido; la línea punteada es su peso AHP.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">5</span>Lectura de negocio: ¿qué decisión sostienen sus datos?</h3>
+          <div class="explica" id="conclusion"></div>
+          <div class="botones no-imprimir"><button id="btnDescargarResultados" class="btn" type="button">Descargar resultados (Excel)</button></div>
+          <p class="nota">El Excel incluye los pesos, la matriz de juicios, la cercanía de cada alternativa, el barrido y las reglas aplicadas.</p>
+        </div>
+<!-- BLOQUE:NOTA_COMPARAR -->
+Guarden una corrida por escenario. Los <b>Casos de práctica</b> de la izquierda son: <b>Caso A</b> (juicios del archivo), <b>Caso B</b> (todos los criterios igual de importantes) y
+<b>Caso C</b> (el primer criterio extremadamente más importante: 9). Comparen los pesos, la razón de consistencia y la alternativa elegida.
+<!-- BLOQUE:FIGURAS_COMPARACION -->
+        <div class="figura"><div class="grafica" id="comp1" style="height:360px"></div><div class="pie">Pesos AHP de los criterios en cada caso guardado.</div></div>
+        <div class="figura"><div class="grafica" id="comp2" style="height:360px"></div><div class="pie">Cercanía TOPSIS de cada alternativa en cada caso guardado.</div></div>
+<!-- BLOQUE:SECCIONES_EXTRA -->
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>AHP</b>Convierte comparaciones «este criterio importa X veces más que aquel» en pesos que suman 1.</div>
+        <div class="concepto"><b>Razón de consistencia</b>Mide si los juicios se contradicen. Menor que 0.10: aceptable. Mayor: revisen las comparaciones.</div>
+        <div class="concepto"><b>TOPSIS</b>Prefiere la alternativa más cercana a la solución ideal y más lejana de la peor.</div>
+        <div class="concepto"><b>Criterio de costo</b>Aquí menos es mejor; TOPSIS lo invierte al buscar la solución ideal.</div>
+        <div class="concepto"><b>Subjetividad visible</b>AHP no elimina la subjetividad: deja escritos los juicios para compararlos, discutirlos y medir si se contradicen.</div>
+      </div>
+    </section>
+    <section class="panel" id="panelDatos">
+      <h2>Datos cargados</h2>
+      <div id="resumenDatos" class="nota"></div>
+      <div id="vistaDatos" class="tabla-scroll" style="margin-top:8px"></div>
+    </section>
+    <section class="panel" id="panelFormato">
+      <h2>¿Cómo deben venir sus datos?</h2>
+      <p class="nota">Lo más fácil: descarguen el <b>Excel de ejemplo</b>, borren las filas 2 en adelante de cada hoja y escriban lo suyo. Hoja «Alternativas»:</p>
+      <div class="tabla-scroll">
+        <table class="tabla ejemplo-formato">
+          <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+          <tbody>
+            <tr class="cab"><td>1</td><td>Herramienta</td><td>Cobertura</td><td>Privacidad</td><td>Costo_miles_MXN</td></tr>
+            <tr><td>2</td><td>Analítica web básica</td><td>6</td><td>5</td><td>20</td></tr>
+            <tr><td>3</td><td>Analítica de embudo</td><td>8</td><td>6</td><td>180</td></tr>
+            <tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="reglas">
+        <li><b>Hoja «Alternativas»</b> (si no existe, la primera hoja): <b>encabezados en la fila 1</b>; la primera columna de texto son los <b>nombres</b> y cada columna numérica es un <b>criterio</b> (de 2 a 8), con una fila por alternativa (de 3 a 30). Sin celdas vacías.</li>
+        <li><b>Hoja «Criterios» (opcional)</b>: <code>Criterio</code> (igual al encabezado) y <code>Tipo</code> (<code>beneficio</code> o <code>costo</code>). Si falta, todo es «beneficio» y lo editan a la izquierda.</li>
+        <li><b>Hoja «Juicios» (opcional)</b>: en formato <b>lista</b> (<code>Criterio_A</code>, <code>Criterio_B</code>, <code>Juicio</code>) o en formato <b>matriz</b> (fila y columna con los nombres de los criterios; solo cuenta el triángulo superior). Valores entre 1/9 y 9. Si falta, todo vale 1 y los editan a la izquierda.</li>
+        <li><b>Sin datos personales</b>: usen nombres de herramientas, proveedores o planes, no de personas.</li>
+        <li><b>Formatos</b>: .xlsx, .xls, .ods o .csv (en CSV solo hay una tabla: las alternativas).</li>
+      </ol>
+    </section>

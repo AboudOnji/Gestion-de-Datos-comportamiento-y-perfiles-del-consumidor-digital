@@ -1,6 +1,6 @@
 # Matriz de cobertura del programa oficial
 
-Actualizada al cierre de Fase 2 (Parte I completa). La columna «Label
+Actualizada al cierre de Fase 3 · Parte II (Cap. 6–9 completos; 31 de 66 subtemas cubiertos). La columna «Label
 verificado» se marca ✅ solo cuando `\progtag{X.Y.Z}` aparece efectivamente
 en el `.tex` del capítulo correspondiente — verificable con `make cobertura`
 (`scripts/verificar_cobertura.sh`, implementado en Fase 2).
@@ -29,58 +29,58 @@ Corregido aquí; ver `docs/decisiones-editoriales.md`, D2.1.
 | 1.3.4 | Importancia de la recolección y gestión de datos | 3 | ✅ `prog:1.3.4` | Completo |
 | 1.3.5 | Toma de decisiones basadas en la gestión de datos digitales | 3 | ✅ `prog:1.3.5` | Completo |
 | 1.4.1 | Temas selectos de buscadores/plataformas/redes/e-commerce | 4 | ✅ `prog:1.4.1` | Completo |
-| 2.1.1 | Reconocimiento de necesidades y/o deseos | 5 | — | Pendiente |
-| 2.1.2 | Búsqueda de información | 5 | — | Pendiente |
-| 2.1.3 | Evaluación de alternativas | 5 | — | Pendiente |
-| 2.1.4 | Decisión de compra-consumo | 5 | — | Pendiente |
-| 2.1.5 | Evaluación post-compra-satisfacción | 5 | — | Pendiente |
-| 2.2.1 | Atención | 6 | — | Pendiente |
-| 2.2.2 | Interés | 6 | — | Pendiente |
-| 2.2.3 | Deseo | 6 | — | Pendiente |
-| 2.2.4 | Acción | 6 | — | Pendiente |
-| 2.2.5 | Satisfacción | 6 | — | Pendiente |
-| 2.2.6 | Mapeo del customer journey | 6 | — | Pendiente |
-| 2.3.1 | Consumidor / Usuario / Buyer persona / Prosumidor | 7 | — | Pendiente |
-| 2.3.2 | Influenciador / Influencer | 7 | — | Pendiente |
-| 2.3.3 | Decisor | 7 | — | Pendiente |
-| 2.3.4 | Comprador | 7 | — | Pendiente |
-| 2.3.5 | Evaluador | 7 | — | Pendiente |
-| 2.4.1 | Temas selectos de buscadores/plataformas/redes/e-commerce | 8 | — | Pendiente |
-| 3.1.1 | Complejo | 9 | — | Pendiente |
-| 3.1.2 | Reductor de disonancia | 9 | — | Pendiente |
-| 3.1.3 | Habitual | 9 | — | Pendiente |
-| 3.1.4 | Variado | 9 | — | Pendiente |
-| 3.2.1 | Económico de Marshall | 10 | — | Pendiente |
-| 3.2.2 | Estímulo-respuesta de Pavlov | 10 | — | Pendiente |
-| 3.2.3 | Sociológico de Veblen | 10 | — | Pendiente |
-| 3.2.4 | Psicoanalítico de Freud | 10 | — | Pendiente |
-| 3.2.5 | Acción razonada de Fishbein y Ajzen | 11 | — | Pendiente |
-| 3.2.6 | Funcional de O'Shaughnessy | 11 | — | Pendiente |
-| 3.2.7 | Motivacional — Pirámide de necesidades de Maslow | 11 | — | Pendiente |
-| 3.2.8 | Integrador entrada-proceso-salida de Howard-Sheth (programa: «Howarth-Sheth», corregido — Anexo B.2) | 11 | — | Pendiente |
-| 3.2.9 | Antropológico-etnográfico de consumo digital | 11 | — | Pendiente |
-| 3.3.1 | Digitalización y tecnología en el proceso de compra | 12 | — | Pendiente |
-| 3.3.2 | Temas selectos de buscadores/plataformas/redes/e-commerce | 12 | — | Pendiente |
-| 4.1.1 | Cultura y subcultura | 13 | — | Pendiente |
-| 4.1.2 | Brechas generacionales y digitales | 13 | — | Pendiente |
-| 4.1.3 | Demografía | 13 | — | Pendiente |
-| 4.1.4 | Niveles socioeconómicos | 13 | — | Pendiente |
-| 4.1.5 | Familia | 13 | — | Pendiente |
-| 4.1.6 | Grupos de referencia | 13 | — | Pendiente |
-| 4.1.7 | Líderes de opinión | 13 | — | Pendiente |
-| 4.1.8 | Influencer marketing | 13 | — | Pendiente |
-| 4.1.9 | Ciclo de vida del consumidor | 13 | — | Pendiente |
-| 4.2.1 | Personalidad | 14 | — | Pendiente |
-| 4.2.2 | Percepción | 14 | — | Pendiente |
-| 4.2.3 | Motivación | 14 | — | Pendiente |
-| 4.2.5 | Aprendizaje y memoria (programa salta 4.2.4 — Anexo B.1; se renumera consecutivo en el libro conservando la equivalencia aquí) | 14 | — | Pendiente |
-| 4.2.6 | Actitudes | 14 | — | Pendiente |
-| 4.3.1 | Aplicaciones del neuromarketing en el análisis de la conducta del consumidor digital | 15 | — | Pendiente |
-| 4.4.1 | Temas selectos de buscadores/plataformas/redes/e-commerce | 16 | — | Pendiente |
-| 5.1.1 | Análisis integral en internet y medios digitales | 17 | — | Pendiente |
-| 5.1.2 | Análisis integral en redes sociales | 17 | — | Pendiente |
-| 5.1.3 | Experiencia y satisfacción del cliente digital — medición de satisfacción | 18 | — | Pendiente |
-| 5.1.4 | Relación con clientes en medios digitales | 18 | — | Pendiente |
+| 2.1.1 | Reconocimiento de necesidades y/o deseos | 6 | ✅ `prog:2.1.1` | Completo |
+| 2.1.2 | Búsqueda de información | 6 | ✅ `prog:2.1.2` | Completo |
+| 2.1.3 | Evaluación de alternativas | 6 | ✅ `prog:2.1.3` | Completo |
+| 2.1.4 | Decisión de compra-consumo | 6 | ✅ `prog:2.1.4` | Completo |
+| 2.1.5 | Evaluación post-compra-satisfacción | 6 | ✅ `prog:2.1.5` | Completo |
+| 2.2.1 | Atención | 7 | ✅ `prog:2.2.1` | Completo |
+| 2.2.2 | Interés | 7 | ✅ `prog:2.2.2` | Completo |
+| 2.2.3 | Deseo | 7 | ✅ `prog:2.2.3` | Completo |
+| 2.2.4 | Acción | 7 | ✅ `prog:2.2.4` | Completo |
+| 2.2.5 | Satisfacción | 7 | ✅ `prog:2.2.5` | Completo |
+| 2.2.6 | Mapeo del customer journey | 7 | ✅ `prog:2.2.6` | Completo |
+| 2.3.1 | Consumidor / Usuario / Buyer persona / Prosumidor | 8 | ✅ `prog:2.3.1` | Completo |
+| 2.3.2 | Influenciador / Influencer | 8 | ✅ `prog:2.3.2` | Completo |
+| 2.3.3 | Decisor | 8 | ✅ `prog:2.3.3` | Completo |
+| 2.3.4 | Comprador | 8 | ✅ `prog:2.3.4` | Completo |
+| 2.3.5 | Evaluador | 8 | ✅ `prog:2.3.5` | Completo |
+| 2.4.1 | Temas selectos de buscadores/plataformas/redes/e-commerce | 9 | ✅ `prog:2.4.1` | Completo |
+| 3.1.1 | Complejo | 10 | — | Pendiente |
+| 3.1.2 | Reductor de disonancia | 10 | — | Pendiente |
+| 3.1.3 | Habitual | 10 | — | Pendiente |
+| 3.1.4 | Variado | 10 | — | Pendiente |
+| 3.2.1 | Económico de Marshall | 11 | — | Pendiente |
+| 3.2.2 | Estímulo-respuesta de Pavlov | 11 | — | Pendiente |
+| 3.2.3 | Sociológico de Veblen | 11 | — | Pendiente |
+| 3.2.4 | Psicoanalítico de Freud | 11 | — | Pendiente |
+| 3.2.5 | Acción razonada de Fishbein y Ajzen | 12 | — | Pendiente |
+| 3.2.6 | Funcional de O'Shaughnessy | 12 | — | Pendiente |
+| 3.2.7 | Motivacional — Pirámide de necesidades de Maslow | 12 | — | Pendiente |
+| 3.2.8 | Integrador entrada-proceso-salida de Howard-Sheth (programa: «Howarth-Sheth», corregido — Anexo B.2) | 12 | — | Pendiente |
+| 3.2.9 | Antropológico-etnográfico de consumo digital | 12 | — | Pendiente |
+| 3.3.1 | Digitalización y tecnología en el proceso de compra | 13 | — | Pendiente |
+| 3.3.2 | Temas selectos de buscadores/plataformas/redes/e-commerce | 13 | — | Pendiente |
+| 4.1.1 | Cultura y subcultura | 14 | — | Pendiente |
+| 4.1.2 | Brechas generacionales y digitales | 14 | — | Pendiente |
+| 4.1.3 | Demografía | 14 | — | Pendiente |
+| 4.1.4 | Niveles socioeconómicos | 14 | — | Pendiente |
+| 4.1.5 | Familia | 14 | — | Pendiente |
+| 4.1.6 | Grupos de referencia | 14 | — | Pendiente |
+| 4.1.7 | Líderes de opinión | 14 | — | Pendiente |
+| 4.1.8 | Influencer marketing | 14 | — | Pendiente |
+| 4.1.9 | Ciclo de vida del consumidor | 14 | — | Pendiente |
+| 4.2.1 | Personalidad | 15 | — | Pendiente |
+| 4.2.2 | Percepción | 15 | — | Pendiente |
+| 4.2.3 | Motivación | 15 | — | Pendiente |
+| 4.2.5 | Aprendizaje y memoria (programa salta 4.2.4 — Anexo B.1; se renumera consecutivo en el libro conservando la equivalencia aquí) | 15 | — | Pendiente |
+| 4.2.6 | Actitudes | 15 | — | Pendiente |
+| 4.3.1 | Aplicaciones del neuromarketing en el análisis de la conducta del consumidor digital | 16 | — | Pendiente |
+| 4.4.1 | Temas selectos de buscadores/plataformas/redes/e-commerce | 17 | — | Pendiente |
+| 5.1.1 | Análisis integral en internet y medios digitales | 18 | — | Pendiente |
+| 5.1.2 | Análisis integral en redes sociales | 18 | — | Pendiente |
+| 5.1.3 | Experiencia y satisfacción del cliente digital — medición de satisfacción | 19 | — | Pendiente |
+| 5.1.4 | Relación con clientes en medios digitales | 19 | — | Pendiente |
 
 **Total de subtemas oficiales: 66.** Cobertura actual: **14/66 (21.2 %)** —
 Parte I (Cap. 1–4) completa; Partes II–V pendientes.
@@ -90,3 +90,5 @@ Parte I (Cap. 1–4) completa; Partes II–V pendientes.
 `make cobertura` ejecuta `scripts/verificar_cobertura.sh`: extrae todos los
 `\progtag{X.Y.Z}` de `partes/**/*.tex`, los compara contra la lista de 66
 subtemas oficiales y reporta faltantes. Implementado en Fase 2.
+
+> **Nota de numeración (D3.1, revisada el 2026-10-15):** el capítulo de Google Analytics 4 es el **Cap. 5**; por eso la columna «Cap. planeado» de las Unidades II–V está desplazada un capítulo respecto del §7 del prompt (Parte II = Cap. 6–9; Parte III = 10–13; Parte IV = 14–17; Parte V = 18–19).

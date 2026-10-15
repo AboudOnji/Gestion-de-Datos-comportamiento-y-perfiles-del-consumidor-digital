@@ -269,3 +269,78 @@ explícitamente que ya revisó todos los pendientes de la lista.
 restantes (`grep -c datoPendiente` = 0); recompilación exitosa.
 **Impacto en horas:** ninguno. Estos datos y atribuciones ya se pueden citar
 sin cobertura adicional en las Partes II–V cuando corresponda.
+
+---
+
+## Fase 3 — Parte II (Cap. 6–9)
+
+### D3.1 — El capítulo de Google Analytics 4 se numera como Cap. 5; la Parte II es Cap. 6–9
+**Qué cambió:** `partes/parte1/cap05.tex` (GA4) se queda como **Capítulo 5**, numerado, al cierre de la
+Parte I. Los capítulos de la Parte II pasan a ser el 6 (proceso de decisión), 7 (*customer journey*),
+8 (figuras participantes) y 9 (base tecnológica), y todo lo que dependía del número se renombró:
+`partes/parte2/cap06–cap09.tex`, figuras (`cap06_*` … `cap09_*`, `cap06-*` … `cap09-*`), scripts
+(`matlab/cap06/cap06_alternativas.m`, `cap07_journey_markov.m`, `cap08_red_influencia.m`,
+`cap09_seleccion_plataforma.m`), apps, modelos JS, presentaciones (`sesion06`–`sesion09`) y las
+referencias cruzadas («Cap.~N», «Sesión N»). Las Partes III–V del plan se desplazan un capítulo
+(III = 10–13, IV = 14–17, V = 18–19); el libro tendrá 19 capítulos.
+**Por qué:** decisión del Dr. Barsekh-Onji (2026-10-15): el capítulo de GA4 es parte del libro y debe
+tener número. Una versión anterior de esta decisión (capítulo sin numerar) quedó descartada.
+**Impacto en horas:** ninguno; el Cap. 5 conserva su carácter de sesión adicional (60–90 min, ya
+cubierta por `presentaciones/adicional-google-analytics`). Las sesiones 6–9 corresponden a los
+capítulos 6–9.
+
+### D3.2 — Laboratorios de la Parte II: deterministas donde es posible
+**Qué cambió:** los cuatro laboratorios se diseñaron para que su cálculo sea
+exacto y reproducible entre MATLAB y la app HTML. Cap. 6 (reglas de
+decisión), Cap. 7 (cadena de Markov) y Cap. 9 (AHP + TOPSIS) no usan números
+aleatorios; Cap. 8 (red con comunidades) usa el flujo de `rand` tras
+`rng(42)` exportado en `datos/rand42.json` (20 000 valores).
+**Por qué:** la verificación contra MATLAB de las apps es obligatoria
+(`CLAUDE.md`) y un cálculo exacto la hace trivial de auditar (241
+comprobaciones coinciden). Las diferencias respecto al catálogo del §9.2:
+Cap. 6 y 8 conservan el método (compensatorias/no compensatorias; AHP/TOPSIS);
+Cap. 7 incluye además la atribución por efecto de remoción (Anderl et al.,
+2016); Cap. 8 sustituye la red de crecimiento preferencial por una red con
+comunidades y puentes, porque la primera hacía coincidir los rankings de
+grado e intermediación y ocultaba la lección «seguidores no es influencia».
+**Impacto en horas:** ninguno.
+
+### D3.3 — Hallazgo del Cap. 8 que se presenta tal cual
+**Qué cambió:** con los parámetros por defecto, elegir semillas por
+intermediación (43.3 %) rinde menos que el promedio al azar (51.5 %) en la
+cascada por umbral. Se conserva y se explica (contagio complejo exige
+varios contactos que adopten; las personas-puente tienen pocos dentro de
+cada grupo) y se marca como *explicación probable*, con la advertencia de que
+es una sola red sintética.
+**Por qué:** el resultado es honesto y didáctico; ocultarlo o ajustar los
+parámetros hasta que «salga» lo esperado sería manipular el ejemplo.
+
+### D3.4 — Fechas de entrega en las presentaciones
+**Qué cambió:** en los decks de las sesiones 5–8, la fecha de entrega del
+aprendizaje autónomo dice «en la fecha acordada en clase» en vez de un día
+concreto. Los decks previos usaban fechas escritas a mano por el Dr.
+Barsekh-Onji (2, 6, 15 y 23 de octubre) sin un patrón regular.
+**Por qué:** no existe un calendario de sesiones 5–8 en el material; inventar
+fechas sería un error silencioso. Se sustituye por la fecha real al impartir.
+
+### D3.5 — Frontera añadida en la Parte II
+**Qué cambió:** se incorporaron cuatro recuadros «Frontera»: economía
+conductual y patrones oscuros (Cap. 6), recorrido no lineal y comercio
+agéntico (Cap. 7), personas sintéticas con LLM y comercio social/*live
+commerce* (Cap. 8) y rutas de las CDP «vigente a octubre de 2026» (Cap. 9).
+**Por qué:** §6 del prompt (temas 1, 2, 5, 6, 7 y 12 de la lista).
+**Impacto en horas:** ≤ 3 páginas por tema, sin cambio de horas.
+
+### D3.6 — Apps «datos propios» para los Cap. 6–9 (2026-10-15)
+**Qué cambió:** se construyeron las cuatro extensiones con Excel/CSV propio (`capNN_*_datos_propios.html`),
+con el mismo patrón que los Cap. 2–4: recorrido guiado, casos A/B/C, comparación y descarga en Excel.
+Verificación contra MATLAB: 236 comprobaciones (49 + 77 + 67 + 43) más pruebas de humo en Chrome sin interfaz
+(carga, casos B/C, guardado de corridas y subida de un Excel).
+**Decisiones de diseño:** (a) Cap. 7: los recorridos estiman una cadena de Markov de primer orden (la
+conversión estimada coincide con la observada por construcción), y el efecto de remoción se reporta como
+medida del modelo, no como causalidad; (b) Cap. 8: se piden **seudónimos**, las redes están limitadas a 150
+personas (los 100 sorteos al azar usan los números exportados de MATLAB) y la cercanía se define dentro de
+cada componente conexa; (c) Cap. 9: se admiten juicios en formato lista o matriz y se señala el par más
+contradictorio cuando la razón de consistencia pasa de 0.10; (d) Cap. 6: un atributo constante recibe
+puntaje 5 (no discrimina) en lugar de producir NaN.
+**Impacto en horas:** ninguno; son extensiones opcionales (tarea autónoma, marcada «opcional»).

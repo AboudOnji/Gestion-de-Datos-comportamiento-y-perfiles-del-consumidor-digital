@@ -14,6 +14,8 @@ el dossier de la Parte correspondiente (`docs/investigacion/parteN.md`); al
 usarlos, añadir su fila aquí siguiendo el mismo formato que las tablas de
 abajo (dato · cifra · año · fuente · URL/DOI · fecha de consulta · capítulo).
 
+> **Nota de numeración (2026-10-15, D3.1):** los encabezados y la columna «Capítulo» de las tablas de Fase 1 usan la numeración original del plan (18 capítulos, sin el capítulo de GA4). Desde la Parte II, el libro numera GA4 como Cap. 5: Parte II = Cap. 6–9 (plan: 5–8), Parte III = 10–13, Parte IV = 14–17, Parte V = 18–19. La sección «Parte II — Cap. 6–9» del final usa la numeración vigente.
+
 ## Parte I — Comportamiento, perfil y gestión de datos (Cap. 1–4)
 
 | Dato | Cifra | Año | Fuente | URL/DOI | Fecha de consulta | Capítulo |
@@ -102,3 +104,29 @@ abajo (dato · cifra · año · fuente · URL/DOI · fecha de consulta · capít
 `docs/pendientes.md` para las cifras que los agentes de investigación buscaron
 pero **no** pudieron verificar en fuente primaria (no deben citarse en el libro
 hasta confirmarse).
+
+---
+
+## Parte II — Cap. 6–9 (Fase 3, 2026-10-15)
+
+Las cifras de los dossiers de Fase 1 (ENDUTIH 2025, AMVO 2026) ya están
+registradas arriba. Filas **nuevas** al redactar la Parte II:
+
+| Dato | Cifra | Año | Fuente | URL/DOI | Fecha de consulta | Capítulo |
+|---|---|---|---|---|---|---|
+| Patrones oscuros leves vs. agresivos: efecto sobre conservar un servicio no pedido | más del doble (leves) y casi cuatro veces (agresivos) la probabilidad de permanecer inscrito | 2021 | Luguri y Strahilevitz, *Journal of Legal Analysis* 13(1), 43–109 | https://doi.org/10.1093/jla/laab003 | 2026-10-15 | Cap. 6 |
+| Atribución histórica de AIDA | Sin evidencia primaria de que Lewis lo formulara en 1898; acrónimo AIDA: C. P. Russell, 1921 | 2024 | Iwamoto, *Japan Marketing History Review* 3(2), 150–166 | https://www.jstage.jst.go.jp/article/jmhr/3/2/3_150/_article/-char/en | 2026-09-18 (dossier) | Cap. 7 |
+| Estudio del *consumer decision journey* | ≈20 000 consumidores, 5 industrias, 3 países (dato del dossier de Fase 1) | 2009 | Court et al., *McKinsey Quarterly* | https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-new-consumer-decision-journey | 2026-09-18 (dossier) | Cap. 7 |
+| Base del *messy middle* | 310 000 escenarios simulados (Ipsos) | 2020 | Think with Google | https://www.thinkwithgoogle.com/consumer-insights/consumer-journey/navigating-purchase-behavior-and-decision-making/ | 2026-09-18 (dossier) | Cap. 7 |
+| Tipología de puntos de contacto y fases del recorrido | 3 fases (precompra, compra, poscompra); 4 categorías de punto de contacto | 2016 | Lemon y Verhoef, *Journal of Marketing* 80(6), 69–96 | https://doi.org/10.1509/jm.15.0420 | 2026-10-15 (resumen reproducido y reseña del premio Sheth/JM 2021; no se leyó la página oficial de JM) | Cap. 7 |
+| Atribución por cadenas de Markov | Caminatas de Markov de primer y mayor orden; 4 bases, ≥ 7 canales; difiere de último clic | 2016 | Anderl et al., *IJRM* 33(3), 457–474 | https://doi.org/10.1016/j.ijresmar.2016.03.001 | 2026-10-15 | Cap. 7, 8 |
+| Muestras sintéticas con LLM | «Fidelidad algorítmica»; promedios similares, menor variación y coeficientes distintos; sensibles a la instrucción y al tiempo | 2023–2024 | Argyle et al., *Political Analysis* (doi 10.1017/pan.2023.2); Bisbee et al., *Political Analysis* 32, 401–416 | https://doi.org/10.1017/pan.2024.5 | 2026-10-15 | Cap. 8 |
+| Comercio social global | ≈81 → ≈688 mil millones USD (2018–2024) | 2018–2024 | Fuentes secundarias de industria; **fuente primaria no localizada**; confirmado por el Dr. Barsekh-Onji el 2026-09-18 | — | 2026-09-18 | Cap. 8 (se presenta como orden de magnitud) |
+| Engagement por tamaño de influenciador | ≈2.7 % (nano) vs. < 1 % (macro), Instagram | s/a | Fuentes secundarias de industria; **fuente primaria no localizada**; confirmado por el Dr. Barsekh-Onji el 2026-09-18 | — | 2026-09-18 | Cap. 8 (orden de magnitud) |
+| Definición de CDP y bifurcación del mercado (*platformization* / *agentification*) | — | 2026 | Gartner, *Magic Quadrant for Customer Data Platforms* | https://www.gartner.com/en/documents/6296015 | 2026-09-18 (dossier) | Cap. 9 (lectura de analistas, rotulada) |
+| Transición UA → GA4 | UA dejó de procesar datos el 1-jul-2023; acceso a interfaz y API perdido el 1-jul-2024 | 2023–2024 | Google, Analytics Help | https://support.google.com/analytics/answer/9973999 | 2026-10-12 | Cap. 9 (caso de apertura) |
+| Fuentes de métodos | AHP (Saaty 1977, *J. Math. Psychol.* 15(3), 234–281); TOPSIS (Hwang y Yoon 1981, Springer LNEMS 186); betweenness (Brandes 2001, *J. Math. Sociol.* 25(2), 163–177); umbral (Granovetter 1978, *AJS* 83(6), 1420–1443) | — | ver `bib/referencias.bib` | — | 2026-10-15 | Cap. 8, 8 |
+
+**Calificaciones y datos sintéticos de laboratorio** (Cap. 6, 6, 7, 8): son
+ficticios, rotulados como tales en texto, script y figura, y no figuran como
+evidencia empírica.

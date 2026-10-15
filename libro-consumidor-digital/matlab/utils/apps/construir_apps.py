@@ -114,6 +114,118 @@ CAPITULOS = [
         "vendor": ["xlsx.full.min.js"],
         "datos": [("EJEMPLO_CAP04", "cap04_ejemplo.json")],
     },
+    {
+        "id": "cap06",
+        "script": "cap06/cap06_alternativas.m",
+        "titulo": "Evaluación de alternativas: tres reglas de decisión",
+        "titulo_corto": "Alternativas · Cap. 5",
+        "subtitulo": "Laboratorio del Capítulo 5 · Práctica «Recorrido del consumidor digital»",
+        "datos": [],
+    },
+    {
+        "id": "cap07",
+        "script": "cap07/cap07_journey_markov.m",
+        "titulo": "El recorrido del consumidor como cadena de Markov",
+        "titulo_corto": "Journey de Markov · Cap. 6",
+        "subtitulo": "Laboratorio del Capítulo 6 · Práctica «Recorrido del consumidor digital»",
+        "datos": [],
+    },
+    {
+        "id": "cap08",
+        "script": "cap08/cap08_red_influencia.m",
+        "titulo": "Influenciadores en una red social simulada",
+        "titulo_corto": "Red social · Cap. 7",
+        "subtitulo": "Laboratorio del Capítulo 7 · Práctica «Recorrido del consumidor digital»",
+        "datos": [("RAND42", "rand42.json")],
+    },
+    {
+        "id": "cap09",
+        "script": "cap09/cap09_seleccion_plataforma.m",
+        "titulo": "Selección de una herramienta de análisis: AHP y TOPSIS",
+        "titulo_corto": "AHP y TOPSIS · Cap. 8",
+        "subtitulo": "Laboratorio del Capítulo 8 · Práctica «Recorrido del consumidor digital»",
+        "datos": [],
+    },
+    {
+        # App para evaluar alternativas propias (Excel/CSV) con las reglas del Cap. 6
+        "id": "cap06_datos",
+        "modelos": ["cap02_datos", "cap06", "cap06_datos"],
+        "script": "cap06/cap06_alternativas.m",
+        "salida": "cap06_alternativas_datos_propios.html",
+        "titulo": "Evaluación de alternativas propias: tres reglas de decisión",
+        "titulo_corto": "Datos propios · Cap. 6",
+        "subtitulo": "Extensión del laboratorio del Capítulo 6 · reglas aditiva, conjuntiva y lexicográfica",
+        "insignia": "Datos propios",
+        "pie": ("Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Aplica a sus alternativas el mismo "
+                "análisis de <code>cap06_alternativas.m</code> (normalización 0-10, regla aditiva, conjuntiva y lexicográfica, y barrido de pesos). "
+                "<b>Sus datos no salen de esta computadora</b>: se procesan en el navegador y no se envían a ningún lado. "
+                "Lectura de Excel con SheetJS (Apache-2.0)."),
+        "nota_parametros": ("Suban el Excel con sus alternativas y atributos (o prueben los ejemplos), definan el tipo y el peso de cada atributo y ajusten las reglas. "
+                            "Al cambiar cualquier valor, los resultados se recalculan solos."),
+        "vendor": ["xlsx.full.min.js"],
+        "datos": [("EJEMPLO_CAP06", "cap06_ejemplo.json")],
+        "ui": ["datos_comun"],
+    },
+    {
+        # App para atribuir con recorridos propios (Excel/CSV): cadena de Markov estimada del Cap. 7
+        "id": "cap07_datos",
+        "modelos": ["cap02_datos", "cap07", "cap07_datos"],
+        "script": "cap07/cap07_journey_markov.m",
+        "salida": "cap07_journey_datos_propios.html",
+        "titulo": "Atribución con recorridos propios: cadena de Markov estimada",
+        "titulo_corto": "Datos propios · Cap. 7",
+        "subtitulo": "Extensión del laboratorio del Capítulo 7 · último clic, primer clic, lineal y efecto de remoción",
+        "insignia": "Datos propios",
+        "pie": ("Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Estima a partir de sus recorridos la cadena de Markov de "
+                "<code>cap07_journey_markov.m</code> y reparte las compras con cuatro modelos de atribución. "
+                "<b>Sus datos no salen de esta computadora</b>: se procesan en el navegador y no se envían a ningún lado. "
+                "Lectura de Excel con SheetJS (Apache-2.0)."),
+        "nota_parametros": ("Suban el Excel con sus recorridos (o prueben los ejemplos) y ajusten cómo se tratan. "
+                            "Al cambiar cualquier valor, los resultados se recalculan solos."),
+        "vendor": ["xlsx.full.min.js"],
+        "datos": [("EJEMPLO_CAP07", "cap07_ejemplo.json")],
+        "ui": ["datos_comun"],
+    },
+    {
+        # App para analizar una red propia (lista de conexiones en Excel/CSV): centralidad y cascada del Cap. 8
+        "id": "cap08_datos",
+        "modelos": ["cap02_datos", "cap08", "cap08_datos"],
+        "script": "cap08/cap08_red_influencia.m",
+        "salida": "cap08_red_datos_propios.html",
+        "titulo": "Red social propia: centralidad y cascada de adopción",
+        "titulo_corto": "Datos propios · Cap. 8",
+        "subtitulo": "Extensión del laboratorio del Capítulo 8 · grado, intermediación, cercanía y cascada por umbral",
+        "insignia": "Datos propios",
+        "pie": ("Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Aplica a su red las mismas medidas y la misma cascada de "
+                "<code>cap08_red_influencia.m</code>. "
+                "<b>Sus datos no salen de esta computadora</b>: se procesan en el navegador y no se envían a ningún lado. "
+                "Lectura de Excel con SheetJS (Apache-2.0)."),
+        "nota_parametros": ("Suban el Excel con las conexiones de su red (o prueben los ejemplos) y ajusten la cascada. "
+                            "Al cambiar cualquier valor, los resultados se recalculan solos."),
+        "vendor": ["xlsx.full.min.js"],
+        "datos": [("RAND42", "rand42.json"), ("EJEMPLO_CAP08", "cap08_ejemplo.json")],
+        "ui": ["datos_comun"],
+    },
+    {
+        # App para decidir con una matriz propia (Excel/CSV): AHP + TOPSIS del Cap. 9
+        "id": "cap09_datos",
+        "modelos": ["cap02_datos", "cap09", "cap09_datos"],
+        "script": "cap09/cap09_seleccion_plataforma.m",
+        "salida": "cap09_seleccion_datos_propios.html",
+        "titulo": "Selección multicriterio con datos propios: AHP y TOPSIS",
+        "titulo_corto": "Datos propios · Cap. 9",
+        "subtitulo": "Extensión del laboratorio del Capítulo 9 · pesos con AHP, ranking con TOPSIS y sensibilidad",
+        "insignia": "Datos propios",
+        "pie": ("Esta página funciona en cualquier navegador, sin conexión y sin MATLAB. Aplica a su matriz de decisión el mismo "
+                "análisis de <code>cap09_seleccion_plataforma.m</code> (AHP con razón de consistencia, TOPSIS y barrido del peso de un criterio). "
+                "<b>Sus datos no salen de esta computadora</b>: se procesan en el navegador y no se envían a ningún lado. "
+                "Lectura de Excel con SheetJS (Apache-2.0)."),
+        "nota_parametros": ("Suban el Excel con sus alternativas y criterios (o prueben los ejemplos), definan el tipo de cada criterio y escriban sus juicios por pares. "
+                            "Al cambiar cualquier valor, los resultados se recalculan solos."),
+        "vendor": ["xlsx.full.min.js"],
+        "datos": [("EJEMPLO_CAP09", "cap09_ejemplo.json")],
+        "ui": ["datos_comun"],
+    },
 ]
 
 NOTA_PARAMETROS_POR_DEFECTO = (

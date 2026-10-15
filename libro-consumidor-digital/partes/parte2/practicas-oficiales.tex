@@ -1,0 +1,58 @@
+% partes/parte2/practicas-oficiales.tex
+\chapter*{Prácticas oficiales de la unidad — Parte II}
+\addcontentsline{toc}{chapter}{Prácticas oficiales de la unidad — Parte II}
+
+La Unidad II tiene una sola práctica oficial, de 15 horas. A diferencia de las
+demás unidades, no se divide en dos: se hace en cuatro sesiones (una por
+capítulo, Cap.~6 a 9) y produce un \textbf{solo entregable}. Por eso no
+conviene tratarla como cuatro tareas independientes. Es una práctica
+integradora que crece sobre un mismo \emph{caso real} de compra digital que
+cada equipo elige en el Cap.~6.
+
+\textbf{Metodología común.} Como en la Parte I, cada laboratorio usa
+\textbf{el mismo script} que el estudiante entrega en su práctica
+(\texttt{matlab/capNN/*.m}), y solo se modifica el bloque de parámetros. La
+tarea es correr el mismo script para tres casos, registrar los resultados,
+compararlos y redactar una conclusión propia. Ningún entregable requiere
+escribir código. Para quienes no tienen MATLAB, cada script tiene una app
+interactiva equivalente (\texttt{capNN\_*\_interactivo.html}) cuyos
+resultados se verificaron contra la ejecución real del script.
+
+\section*{Práctica — Recorrido del consumidor digital (15 h)}
+
+\begin{description}
+  \item[Capítulos que la integran] 6, 7, 8 y 9.
+  \item[Lugar de realización] Aula / laboratorio.
+  \item[Objetivo] Examinar el proceso de toma de decisiones de compra de un
+  caso real de compra digital a partir de su recorrido y de las figuras que
+  participan en él, apoyando cada etapa del análisis en el modelo de
+  laboratorio correspondiente.
+  \item[Insumos por sesión] 
+  \begin{itemize}
+    \item \textbf{Cap.~6.} Caso real elegido y descrito en las cinco etapas del
+    proceso, con el canal de cada una; cuadro de los tres casos de
+    \texttt{cap06\_alternativas.m} (reglas de decisión).
+    \item \textbf{Cap.~7.} Recorrido AIDAS y mapa del recorrido del caso;
+    cuadro de los tres casos de \texttt{cap07\_journey\_markov.m} (cadena de
+    Markov y atribución).
+    \item \textbf{Cap.~8.} Siete figuras participantes del caso y su
+    \textit{buyer persona} con limitaciones; cuadro de los tres casos de
+    \texttt{cap08\_red\_influencia.m} (centralidad y cascada).
+    \item \textbf{Cap.~9.} Aplicación de los criterios durables a dos
+    herramientas reales; cuadro de los tres casos de
+    \texttt{cap09\_seleccion\_plataforma.m} (AHP y TOPSIS).
+  \end{itemize}
+  \item[Entregable único] Reporte de práctica que integre: (a) el caso real y
+  su descripción por etapas (Cap.~6); (b) el mapa de recorrido y la infografía
+  de figuras participantes (Cap.~7 y 8); (c) los cuatro cuadros de casos A, B
+  y C, con las preguntas de comparación respondidas en cada laboratorio; (d)
+  una conclusión propia de una cuartilla que responda: \emph{¿qué decisión de
+  mercadotecnia cambiaría el análisis del caso, y con qué límites?}, usando al
+  menos un resultado de cada laboratorio.
+  \item[Criterios de evaluación] Los cuatro scripts se ejecutan sin modificar
+  nada fuera del bloque de parámetros; los tres casos de cada laboratorio
+  están completos, no solo el caso por defecto; la conclusión se apoya en
+  resultados propios, no copiados del libro; el análisis declara los límites de
+  cada modelo (datos sintéticos, red de una sola semilla, juicios subjetivos);
+  las fuentes tienen fecha de consulta.
+\end{description}

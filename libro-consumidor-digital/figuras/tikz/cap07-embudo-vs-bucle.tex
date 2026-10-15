@@ -1,0 +1,33 @@
+% figuras/tikz/cap07-embudo-vs-bucle.tex
+% Embudo lineal (AIDA) frente a recorrido en bucle (consumer decision journey / messy middle).
+\begin{tikzpicture}[
+    et/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+               minimum width=1.9cm, minimum height=0.8cm, align=center, font=\scriptsize},
+    flecha/.style={-{Stealth[length=2.2mm]}, thick, draw=doradoIPN},
+    retro/.style={-{Stealth[length=2.2mm]}, thick, draw=terracotaIPN, dashed},
+    tit/.style={font=\small\bfseries, align=center}
+  ]
+  % --- Izquierda: embudo lineal
+  \node[tit] at (0,3.7) {Embudo lineal};
+  \node[et, minimum width=4.6cm] (a1) at (0,2.8) {Atención};
+  \node[et, minimum width=3.7cm] (a2) at (0,1.7) {Interés};
+  \node[et, minimum width=2.8cm] (a3) at (0,0.6) {Deseo};
+  \node[et, minimum width=1.9cm] (a4) at (0,-0.5) {Acción};
+  \foreach \a/\b in {a1/a2,a2/a3,a3/a4} { \draw[flecha] (\a) -- (\b); }
+  \node[font=\tiny, text=grisIPN, align=center] at (0,-1.4) {una sola dirección;\\ el consumidor solo \enquote{baja}};
+
+  % --- Derecha: bucle
+  \node[tit] at (7.2,3.7) {Recorrido en bucle};
+  \node[et] (b0) at (7.2,2.8) {Disparador};
+  \node[et] (b1) at (5.4,1.1) {Exploración\\ (suma opciones)};
+  \node[et] (b2) at (9.0,1.1) {Evaluación\\ (reduce opciones)};
+  \node[et] (b3) at (7.2,-0.5) {Compra};
+  \node[et] (b4) at (10.6,-0.5) {Uso y\\ reseña};
+  \draw[flecha] (b0) -- (b1);
+  \draw[retro] (b1.east) to[bend left=25] (b2.west);
+  \draw[retro] (b2.west) to[bend left=25] (b1.east);
+  \draw[flecha] (b2) -- (b3);
+  \draw[flecha] (b3) -- (b4);
+  \draw[flecha, draw=bronceIPN, dashed] (b4.north) to[bend right=35] (b1.north);
+  \node[font=\tiny, text=grisIPN, align=center] at (7.2,-1.4) {se explora y se evalúa varias veces;\\ la reseña alimenta el recorrido de otros};
+\end{tikzpicture}

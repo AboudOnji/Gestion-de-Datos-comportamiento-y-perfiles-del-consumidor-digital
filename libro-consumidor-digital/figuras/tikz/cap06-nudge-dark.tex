@@ -1,0 +1,18 @@
+% figuras/tikz/cap06-nudge-dark.tex
+% Del \textit{nudge} al patrón oscuro: la misma heurística, dos arquitecturas de elección.
+\begin{tikzpicture}[
+    caja/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                 minimum width=4.4cm, minimum height=1.6cm, align=center, font=\scriptsize},
+    cajaA/.style={rectangle, rounded corners, draw=terracotaIPN, thick, fill=terracotaIPNClara,
+                  minimum width=4.4cm, minimum height=1.6cm, align=center, font=\scriptsize},
+    flecha/.style={-{Stealth[length=2.5mm]}, thick, draw=doradoIPN}
+  ]
+  \node[caja,  anchor=east] (n) at (-0.6,0) {\textbf{Nudge}\\ preserva la libertad\\ de elección informada};
+  \node[cajaA, anchor=west] (d) at (0.6,0)  {\textbf{Patrón oscuro}\\ erosiona la elección\\ informada a propósito};
+  \node[font=\small\bfseries, align=center] (h) at (0,3.0) {Heurística:\\ urgencia, escasez, prueba social};
+  \draw[flecha] (h) -- ++(0,-0.9) -| (n.north);
+  \draw[flecha, draw=terracotaIPN] (h) -- ++(0,-0.9) -| (d.north);
+  \draw[-{Stealth[length=2.5mm]}, thick, draw=grisIPN] (-5.2,-1.6) -- (5.2,-1.6);
+  \node[font=\tiny, text=grisIPN, anchor=east] at (-4.9,-2.0) {información veraz, salida fácil};
+  \node[font=\tiny, text=grisIPN, anchor=west] at (4.9,-2.0) {falsa urgencia, salida difícil};
+\end{tikzpicture}

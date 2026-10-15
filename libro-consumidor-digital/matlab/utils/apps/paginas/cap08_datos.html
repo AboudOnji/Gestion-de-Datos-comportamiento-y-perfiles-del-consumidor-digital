@@ -1,0 +1,97 @@
+<!-- BLOQUE:PARAMETROS_EXTRA -->
+    <div id="zonaArchivo">
+      <h3 style="margin-top:4px">1. Su red (Excel)</h3>
+      <label class="subir" for="archivo">
+        <input type="file" id="archivo" accept=".xlsx,.xls,.ods,.csv">
+        <span class="subir-caja"><b>Subir archivo</b><br><span class="nota">Excel (.xlsx, .xls), .ods o .csv — o arrástrenlo aquí</span></span>
+      </label>
+      <div class="botones">
+        <button id="btnEjemplo1" class="btn sec peq" type="button" title="La red sintética de 60 personas del laboratorio del libro">Ejemplo 1: la del libro</button>
+        <button id="btnEjemplo2" class="btn sec peq" type="button" title="Un club ficticio de 36 aficionados con una creadora muy conectada">Ejemplo 2: club de aficionados</button>
+        <button id="btnDescargarEjemplo" class="btn sec peq" type="button">Descargar Excel de ejemplo</button>
+        <a class="btn sec peq" href="#panelFormato" style="text-decoration:none">¿Cómo ordenar mis datos?</a>
+      </div>
+      <div id="estadoArchivo" class="nota-caja" style="margin-top:10px"></div>
+      <h3>2. Cascada de adopción</h3>
+    </div>
+<!-- BLOQUE:FIGURAS -->
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">1</span>Su red: ¿qué tan conectada está?</h3>
+          <div id="kpisRed" class="kpis"></div>
+          <div class="explica"><p>Una <b>red</b> son personas (nodos) y relaciones (conexiones). Aquí la red <b>no es dirigida</b>: si A conoce a B, B conoce a A. Una red puede tener <b>componentes</b> separadas: una cascada nunca cruza de una a otra. Si su Excel trae la hoja «Personas» con un <b>grupo</b>, los nodos se colorean por grupo.</p></div>
+          <div id="avisosRed"></div>
+          <div class="paso-graficas">
+            <div class="figura ancha"><div class="grafica" id="figRed" style="height:520px"></div><div class="pie">Su red. Tamaño del nodo = intermediación; guinda = semillas elegidas; verde azulado = adoptó; gris = no adoptó.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">2</span>Centralidad: ¿quién es importante, y para qué?</h3>
+          <div class="explica"><p><b>Grado:</b> número de conexiones (lo más parecido a «seguidores»). <b>Intermediación:</b> en cuántos caminos más cortos entre otras personas está ella: mide quién es <i>puente</i>. <b>Cercanía:</b> qué tan pocos pasos necesita para llegar a las demás personas. Las listas de «más conectados» y «más puente» suelen coincidir poco.</p></div>
+          <div id="textoCoinciden" class="nota-caja"></div>
+          <div id="tablaTop" class="tabla-scroll" style="margin-top:8px"></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figDispersion" style="height:400px"></div><div class="pie">Conexiones frente a intermediación. Las semillas elegidas están en guinda.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">3</span>La cascada: ¿a quién conviene regalarle el producto primero?</h3>
+          <div class="explica"><p>Cada persona adopta cuando al menos la fracción <b>umbral</b> de sus contactos ya adoptó. Se compara elegir las <b>semillas</b> entre las personas más centrales, las menos centrales y <b>al azar</b> (promedio de 100 sorteos). Una sola muestra al azar no demuestra nada: el histograma muestra cuánto varía.</p></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figAdopcion" style="height:400px"></div><div class="pie">Adopción final según cómo se eligen las semillas (centrales, periféricas y promedio al azar).</div></div>
+            <div class="figura"><div class="grafica" id="figRondas" style="height:400px"></div><div class="pie">% de la red que ha adoptado en cada ronda, con el criterio elegido.</div></div>
+            <div class="figura"><div class="grafica" id="figAzar" style="height:360px"></div><div class="pie">Los 100 sorteos de semillas al azar y su promedio (línea punteada).</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">4</span>Lectura de negocio: ¿qué decisión sostienen sus datos?</h3>
+          <div class="explica" id="conclusion"></div>
+          <div class="botones no-imprimir"><button id="btnDescargarResultados" class="btn" type="button">Descargar resultados (Excel)</button></div>
+          <p class="nota">El Excel incluye las medidas de centralidad de cada persona, la adopción por criterio y las reglas aplicadas.</p>
+        </div>
+<!-- BLOQUE:NOTA_COMPARAR -->
+Guarden una corrida por escenario. Los <b>Casos de práctica</b> de la izquierda son: <b>Caso A</b> (valores del libro: 3 semillas, umbral 0.25, por grado),
+<b>Caso B</b> (6 semillas) y <b>Caso C</b> (semillas por intermediación). También pueden comparar dos redes (por ejemplo, el Ejemplo 1 y el Ejemplo 2).
+<!-- BLOQUE:FIGURAS_COMPARACION -->
+        <div class="figura ancha"><div class="grafica" id="comp1" style="height:380px"></div><div class="pie">Adopción final por criterio de semillas en cada caso guardado (la última barra es el promedio al azar).</div></div>
+<!-- BLOQUE:SECCIONES_EXTRA -->
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>Grado</b>Número de conexiones de una persona.</div>
+        <div class="concepto"><b>Intermediación</b>Qué tanto está una persona «en medio» de los caminos entre las demás: quien une grupos.</div>
+        <div class="concepto"><b>Cercanía</b>Inverso de la distancia media a las personas que puede alcanzar.</div>
+        <div class="concepto"><b>Cascada por umbral</b>Cada persona adopta cuando una fracción de sus contactos ya lo hizo; se contagia por rondas.</div>
+        <div class="concepto"><b>Semillas</b>Las primeras personas que adoptan. Elegirlas por una medida de centralidad no garantiza el mejor resultado: depende del mecanismo de contagio.</div>
+      </div>
+    </section>
+    <section class="panel" id="panelDatos">
+      <h2>Datos cargados</h2>
+      <div id="resumenDatos" class="nota"></div>
+      <div id="vistaDatos" class="tabla-scroll" style="margin-top:8px"></div>
+    </section>
+    <section class="panel" id="panelFormato">
+      <h2>¿Cómo deben venir sus datos?</h2>
+      <p class="nota">Lo más fácil: descarguen el <b>Excel de ejemplo</b>, borren las filas 2 en adelante y escriban lo suyo. Hoja «Conexiones» (una conexión por fila):</p>
+      <div class="tabla-scroll">
+        <table class="tabla ejemplo-formato">
+          <thead><tr><th></th><th>A</th><th>B</th></tr></thead>
+          <tbody>
+            <tr class="cab"><td>1</td><td>Persona_A</td><td>Persona_B</td></tr>
+            <tr><td>2</td><td>P01</td><td>P02</td></tr>
+            <tr><td>3</td><td>P01</td><td>P05</td></tr>
+            <tr><td>…</td><td>…</td><td>…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="reglas">
+        <li><b>Hoja «Conexiones»</b> (si no existe, la primera hoja): <b>encabezados en la fila 1</b>; dos columnas, la persona A y la persona B de cada conexión (<code>Persona_A</code> y <code>Persona_B</code>, u <code>Origen</code> y <code>Destino</code>, o simplemente las dos primeras columnas).</li>
+        <li><b>Red no dirigida</b>: «A–B» y «B–A» son la misma conexión; las repetidas y las de una persona consigo misma se ignoran con un aviso.</li>
+        <li><b>Hoja «Personas» (opcional)</b>: <code>Persona</code> y, si quieren, <code>Grupo</code>. Fija el <b>orden</b> de las personas, permite incluir personas sin conexiones y colorea la red por grupo. Si existe, toda persona de «Conexiones» debe estar en ella.</li>
+        <li><b>Tamaño</b>: de 10 a 150 personas y al menos 10 conexiones.</li>
+        <li><b>Seudónimos, no nombres</b>: identifiquen a las personas con claves (P01, P02…). Una red de relaciones expone a terceros que no dieron su consentimiento; usen datos agregados o anonimizados y verifiquen la base legal (LFPDPPP). Sus datos no salen de esta computadora.</li>
+        <li><b>Formatos</b>: .xlsx, .xls, .ods o .csv (en CSV solo hay una tabla: las conexiones).</li>
+      </ol>
+    </section>

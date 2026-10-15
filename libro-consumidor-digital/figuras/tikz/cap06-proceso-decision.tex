@@ -1,0 +1,27 @@
+% figuras/tikz/cap06-proceso-decision.tex
+% Proceso de decisión de compra en cinco etapas, con las dos variantes digitales
+% que el capítulo discute: reconocimiento inducido y bucle de reseñas.
+\begin{tikzpicture}[
+    etapa/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                  minimum width=2.55cm, minimum height=1.35cm, align=center, font=\scriptsize},
+    flecha/.style={-{Stealth[length=2.5mm]}, thick, draw=doradoIPN},
+    nota/.style={font=\tiny, text=grisIPN, align=center}
+  ]
+  \node[etapa] (e1) at (0,0)    {\textbf{2.1.1}\\ Reconocimiento de\\ necesidad o deseo};
+  \node[etapa] (e2) at (3.0,0)  {\textbf{2.1.2}\\ Búsqueda de\\ información};
+  \node[etapa] (e3) at (6.0,0)  {\textbf{2.1.3}\\ Evaluación de\\ alternativas};
+  \node[etapa] (e4) at (9.0,0)  {\textbf{2.1.4}\\ Decisión de\\ compra-consumo};
+  \node[etapa] (e5) at (12.0,0) {\textbf{2.1.5}\\ Evaluación\\ post-compra};
+  \foreach \a/\b in {e1/e2,e2/e3,e3/e4,e4/e5} { \draw[flecha] (\a) -- (\b); }
+
+  % variante digital 1: el disparador puede venir del algoritmo
+  \node[nota] (ind) at (0,2.1) {notificación, recomendación\\ algorítmica, \textit{retargeting}};
+  \draw[flecha, draw=terracotaIPN, dashed] (ind) -- (e1);
+  \node[nota, text=terracotaIPN] at (0,3.0) {reconocimiento inducido};
+
+  % retroceso típico de la fase de evaluación
+  \draw[flecha, draw=bronceIPN, dashed] (e3.north) to[bend right=40] node[above, nota, text=bronceIPN] {se vuelve a buscar} (e2.north);
+
+  % variante digital 2: la reseña propia alimenta la búsqueda de otros
+  \draw[flecha, draw=bronceIPN, dashed] (e5.south) -- ++(0,-1.0) -| node[below, pos=0.25, nota, text=bronceIPN] {reseña, calificación y \textit{unboxing} alimentan la búsqueda de otros consumidores} (e2.south);
+\end{tikzpicture}

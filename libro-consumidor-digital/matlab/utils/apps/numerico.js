@@ -279,6 +279,37 @@
     return { centros: orden.map(k => C[k]), U: orden.map(k => U[k]) };
   };
 
+  /* ---------- álgebra lineal pequeña (Parte II) ---------- */
+
+  // Matrices como arreglos de filas. Equivalentes de A*B, A', inv(A) y A\b de MATLAB
+  // para matrices chicas (hasta unas decenas de filas).
+  N.matmul = function (A, B) {
+    return A.map(fila => B[0].map((_, j) => fila.reduce((s, x, k) => s + x * B[k][j], 0)));
+  };
+  N.transpuesta = A => A[0].map((_, j) => A.map(f => f[j]));
+  N.matvec = (A, v) => A.map(f => f.reduce((s, x, k) => s + x * v[k], 0));
+  N.vecmat = (v, A) => A[0].map((_, j) => v.reduce((s, x, k) => s + x * A[k][j], 0));
+  N.identidad = n => Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => (i === j ? 1 : 0)));
+  // Gauss-Jordan con pivoteo parcial
+  N.inv = function (A) {
+    const n = A.length;
+    const M = A.map((f, i) => f.slice().concat(N.identidad(n)[i]));
+    for (let c = 0; c < n; c++) {
+      let p = c;
+      for (let i = c + 1; i < n; i++) if (Math.abs(M[i][c]) > Math.abs(M[p][c])) p = i;
+      if (Math.abs(M[p][c]) < 1e-14) throw new Error('matriz singular');
+      const t = M[c]; M[c] = M[p]; M[p] = t;
+      const d = M[c][c];
+      for (let j = 0; j < 2 * n; j++) M[c][j] /= d;
+      for (let i = 0; i < n; i++) {
+        if (i === c) continue;
+        const f = M[i][c];
+        if (f !== 0) for (let j = 0; j < 2 * n; j++) M[i][j] -= f * M[c][j];
+      }
+    }
+    return M.map(f => f.slice(n));
+  };
+
   /* ---------- formato tipo fprintf ---------- */
 
   // sprintf mínimo: %d, %s, %-Ns, %Ns, %.Nf, %N.Nf, %%

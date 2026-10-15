@@ -10,6 +10,9 @@
 %                   (ruido de la serie: normrnd(0,s,n,1) = s*randn(n,1)).
 %               (2) cap03_datos.json: la base sintética de cap03 (recencia,
 %                   frecuencia, monto ensuciado) para nClientes = 100:50:1000.
+%               (3) rand42.json: los primeros 20 000 valores de rand tras
+%                   rng(42) — los usa cap07 (red social simulada y semillas
+%                   al azar de la cascada).
 %               Correr solo si se cambia la forma de generar datos en los
 %               scripts; después, volver a correr construir_apps.py.
 % Uso:          matlab -batch "run('exportar_datos_matlab.m')"
@@ -20,6 +23,12 @@ carpeta = fileparts(mfilename('fullpath'));
 rng(42); z = randn(15000,1);
 fid = fopen(fullfile(carpeta, 'randn42.json'), 'w');
 fprintf(fid, '['); fprintf(fid, '%.9g,', z(1:end-1)); fprintf(fid, '%.9g]', z(end));
+fclose(fid);
+
+%% (1b) Flujo de rand (uniforme) tras rng(42) — Cap. 7
+rng(42); u = rand(20000,1);
+fid = fopen(fullfile(carpeta, 'rand42.json'), 'w');
+fprintf(fid, '['); fprintf(fid, '%.12g,', u(1:end-1)); fprintf(fid, '%.12g]', u(end));
 fclose(fid);
 
 %% (2) Datos de cap03_rfm_clv_ab.m para varios tamaños de base

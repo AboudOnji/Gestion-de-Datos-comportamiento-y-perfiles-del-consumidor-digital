@@ -1,0 +1,17 @@
+% figuras/tikz/cap06-reglas-decision.tex
+% Reglas compensatorias y no compensatorias de evaluación de alternativas.
+\begin{tikzpicture}[
+    regla/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                  minimum width=4.6cm, minimum height=1.9cm, align=center, font=\scriptsize},
+    nocomp/.style={rectangle, rounded corners, draw=bronceIPN, thick, fill=bronceIPNClaro,
+                   minimum width=4.6cm, minimum height=1.9cm, align=center, font=\scriptsize},
+    centro/.style={rectangle, draw=grisIPN, thick, fill=white, minimum width=3.2cm, minimum height=1.2cm, align=center, font=\small\bfseries},
+    flecha/.style={-{Stealth[length=2.5mm]}, thick, draw=doradoIPN}
+  ]
+  \node[regla]  (a) at (0,3.0)  {\textbf{Aditiva ponderada}\\ \textit{compensatoria}\\ suma puntaje $\times$ peso;\\ lo bueno compensa lo malo};
+  \node[nocomp] (b) at (0,0.5)  {\textbf{Conjuntiva}\\ \textit{no compensatoria}\\ cada atributo debe superar\\ un mínimo; si no, se descarta};
+  \node[nocomp] (c) at (0,-2.0) {\textbf{Lexicográfica}\\ \textit{no compensatoria}\\ manda el atributo más importante;\\ el siguiente solo desempata};
+  \node[centro] (d) at (7.0,0.5) {Alternativa\\ elegida};
+  \foreach \n in {a,b,c} { \draw[flecha] (\n.east) -- (d.west); }
+  \node[font=\tiny, text=grisIPN, align=center] at (3.5,-3.6) {Los mismos datos pueden producir tres elecciones distintas.};
+\end{tikzpicture}

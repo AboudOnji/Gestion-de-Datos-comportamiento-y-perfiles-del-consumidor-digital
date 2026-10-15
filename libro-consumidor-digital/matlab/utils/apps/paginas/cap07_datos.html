@@ -1,0 +1,103 @@
+<!-- BLOQUE:PARAMETROS_EXTRA -->
+    <div id="zonaArchivo">
+      <h3 style="margin-top:4px">1. Sus recorridos (Excel)</h3>
+      <label class="subir" for="archivo">
+        <input type="file" id="archivo" accept=".xlsx,.xls,.ods,.csv">
+        <span class="subir-caja"><b>Subir archivo</b><br><span class="nota">Excel (.xlsx, .xls), .ods o .csv — o arrástrenlo aquí</span></span>
+      </label>
+      <div class="botones">
+        <button id="btnEjemplo1" class="btn sec peq" type="button" title="3 000 recorridos sintéticos simulados con la cadena del libro">Ejemplo 1: el del libro</button>
+        <button id="btnEjemplo2" class="btn sec peq" type="button" title="Una tienda ficticia de ropa con recorridos agrupados">Ejemplo 2: tienda de ropa</button>
+        <button id="btnDescargarEjemplo" class="btn sec peq" type="button">Descargar Excel de ejemplo</button>
+        <a class="btn sec peq" href="#panelFormato" style="text-decoration:none">¿Cómo ordenar mis datos?</a>
+      </div>
+      <div id="estadoArchivo" class="nota-caja" style="margin-top:10px"></div>
+      <h3>2. Cómo se tratan los recorridos</h3>
+      <label style="display:block;margin:3px 0;font-size:.85rem"><input type="checkbox" id="opColapsar"> Juntar toques consecutivos del mismo canal («Redes&gt;Redes&gt;Directo» = «Redes&gt;Directo»)</label>
+    </div>
+<!-- BLOQUE:FIGURAS -->
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">1</span>Sus recorridos: ¿qué tan completos son?</h3>
+          <div id="kpisRutas" class="kpis"></div>
+          <div class="explica"><p>Un <b>recorrido</b> es la secuencia de canales con los que una persona tuvo contacto, y si terminó en compra. Antes de atribuir nada hay que revisar cuántos hay, cuántos compran y qué tan largos son: con muy pocas compras los porcentajes de atribución son inestables. Las <b>rutas más frecuentes</b> dicen cómo compra la mayoría.</p></div>
+          <div id="avisosRutas"></div>
+          <div id="tablaTop" class="tabla-scroll"></div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">2</span>La cadena de Markov que sus datos estiman</h3>
+          <div class="explica"><p>Contando cuántas veces la gente pasó de un canal a otro se estima una <b>matriz de transición</b>: «desde un contacto de <i>Redes</i>, el siguiente fue <i>Búsqueda</i> el 30 % de las veces». También se estima cuánto convierte o abandona cada canal. Es el mismo modelo del laboratorio, pero con <b>sus</b> recorridos.</p></div>
+          <div class="paso-graficas">
+            <div class="figura"><div class="grafica" id="figMatriz" style="height:420px"></div><div class="pie">Matriz de transición estimada (filas: canal de origen; columnas: destino). «Compra» y «Sin compra» son los estados finales.</div></div>
+            <div class="figura"><div class="grafica" id="figInicio" style="height:420px"></div><div class="pie">Dónde empiezan los recorridos y cuántas veces aparece cada canal en total.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">3</span>¿Qué canal se lleva el crédito? Cuatro formas de repartirlo</h3>
+          <div class="explica"><p><b>Último clic:</b> todo el crédito al canal final. <b>Primer clic:</b> al inicial. <b>Lineal:</b> el mismo crédito a cada toque del recorrido. <b>Efecto de remoción</b> (Markov): cuánto cae la probabilidad de convertir si se «apaga» el canal; premia a los que ayudan aunque no cierren la venta. Cada columna suma 100 %.</p></div>
+          <div class="explica" id="conclusionCanal"></div>
+          <div class="paso-graficas">
+            <div class="figura ancha"><div class="grafica" id="figAtrib" style="height:400px"></div><div class="pie">Porcentaje de las compras atribuido a cada canal según cada modelo.</div></div>
+          </div>
+          <div id="tablaAtrib" class="tabla-scroll"></div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">4</span>¿Qué pasaría si se apaga un canal?</h3>
+          <div class="explica"><p>Para cada canal se calcula la probabilidad de convertir <i>sin él</i> (los recorridos que lo tocan se pierden). Cuanto más cae, más depende el negocio de ese canal. Es una medida <b>del modelo</b>, no un experimento: para confirmarla hay que apagar el canal de verdad en una prueba controlada.</p></div>
+          <div class="paso-graficas">
+            <div class="figura ancha"><div class="grafica" id="figRemocion" style="height:360px"></div><div class="pie">Probabilidad de convertir según el modelo, con todos los canales y sin cada uno.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">5</span>Lectura de negocio: ¿qué decisión sostienen sus datos?</h3>
+          <div class="explica" id="conclusion"></div>
+          <div class="botones no-imprimir"><button id="btnDescargarResultados" class="btn" type="button">Descargar resultados (Excel)</button></div>
+          <p class="nota">El Excel incluye la atribución por modelo, la matriz de transición estimada, las rutas más frecuentes y las reglas aplicadas.</p>
+        </div>
+<!-- BLOQUE:NOTA_COMPARAR -->
+Guarden una corrida por escenario. Los <b>Casos de práctica</b> de la izquierda son: <b>Caso A</b> (recorridos tal como vienen), <b>Caso B</b> (juntando toques consecutivos del mismo canal) y
+<b>Caso C</b> (solo recorridos de al menos 2 toques). Comparen cuánto crédito recibe cada canal con el último clic y con el efecto de remoción.
+<!-- BLOQUE:FIGURAS_COMPARACION -->
+        <div class="figura ancha"><div class="grafica" id="comp1" style="height:380px"></div><div class="pie">Efecto de remoción por canal en cada caso guardado (los canales que no aparezcan en un caso valen 0).</div></div>
+<!-- BLOQUE:SECCIONES_EXTRA -->
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>Recorrido</b>La secuencia de canales que toca una persona antes de comprar (o de irse sin comprar).</div>
+        <div class="concepto"><b>Cadena de Markov</b>Modelo en que el siguiente canal depende solo del actual. La matriz de transición cuenta cuántas veces se pasó de uno a otro.</div>
+        <div class="concepto"><b>Último / primer clic</b>Reglas simples: todo el crédito a un solo toque del recorrido.</div>
+        <div class="concepto"><b>Efecto de remoción</b>Cuánto cae la probabilidad de convertir al eliminar un canal. Mide el papel de apoyo.</div>
+        <div class="concepto"><b>Atribución no es causalidad</b>Ningún modelo de atribución prueba que apagar un canal haga caer las ventas: para eso hace falta un experimento.</div>
+      </div>
+    </section>
+    <section class="panel" id="panelDatos">
+      <h2>Datos cargados</h2>
+      <div id="resumenDatos" class="nota"></div>
+      <div id="vistaDatos" class="tabla-scroll" style="margin-top:8px"></div>
+    </section>
+    <section class="panel" id="panelFormato">
+      <h2>¿Cómo deben venir sus datos?</h2>
+      <p class="nota">Lo más fácil: descarguen el <b>Excel de ejemplo</b>, borren las filas 2 en adelante y escriban lo suyo. Hoja «Recorridos» (un recorrido por fila):</p>
+      <div class="tabla-scroll">
+        <table class="tabla ejemplo-formato">
+          <thead><tr><th></th><th>A</th><th>B</th><th>C</th></tr></thead>
+          <tbody>
+            <tr class="cab"><td>1</td><td>ID</td><td>Canales</td><td>Convirtio</td></tr>
+            <tr><td>2</td><td>1</td><td>Redes sociales&gt;Búsqueda&gt;Directo</td><td>1</td></tr>
+            <tr><td>3</td><td>2</td><td>Correo&gt;Directo</td><td>0</td></tr>
+            <tr><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="reglas">
+        <li><b>Hoja «Recorridos»</b> (si no existe, la primera hoja): <b>encabezados en la fila 1</b>. Una columna con la <b>ruta</b> (<code>Canales</code> o <code>Ruta</code>), con los canales en orden separados por <code>&gt;</code> (también sirven <code>-&gt;</code>, <code>|</code>, <code>;</code> y coma), <b>o bien</b> columnas <code>Paso1</code>, <code>Paso2</code>… una por toque.</li>
+        <li>Una columna <code>Convirtio</code> con <b>1/0</b>, <b>Sí/No</b> o verdadero/falso, que dice si el recorrido terminó en compra.</li>
+        <li>Opcional: <code>Cantidad</code> (cuántos recorridos iguales representa la fila) para datos ya agrupados. Si no está, cada fila vale 1.</li>
+        <li><b>Tamaño</b>: de 20 a 20,000 recorridos (contando <code>Cantidad</code>), de 2 a 12 canales distintos y hasta 60 toques por recorrido. Con al menos una compra.</li>
+        <li><b>Mismo nombre, mismo canal</b>: «Redes» y «redes» se unen, «Redes» y «Redes sociales» no. Unifiquen los nombres antes de subir.</li>
+        <li><b>Privacidad</b>: los recorridos deben ir <b>sin identificadores personales</b> (nada de correos ni nombres; el ID puede ser un consecutivo). Unir rastros de una persona reduce su anonimato y requiere base legal (LFPDPPP). Sus datos no salen de esta computadora.</li>
+      </ol>
+    </section>

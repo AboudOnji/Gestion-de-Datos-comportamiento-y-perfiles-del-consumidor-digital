@@ -1,0 +1,519 @@
+[
+  {
+    "params": {
+      "pesoPrecio": 0.4,
+      "pesoCalidad": 0.3,
+      "pesoEntrega": 0.15,
+      "pesoResenas": 0.15,
+      "umbralMinimo": 3.5,
+      "atributoPrioritario": 2,
+      "toleranciaLex": 0.5
+    },
+    "esperado": {
+      "ganadorAditiva": "Alfa",
+      "utilGanador": 6.3977272727272734,
+      "nAceptables": 1,
+      "ganadorConj": "Gama",
+      "ganadorLex": "Épsilon",
+      "coinciden": "no",
+      "nCambios": 3
+    },
+    "cap": "cap06",
+    "caso": "A"
+  },
+  {
+    "params": {
+      "pesoPrecio": 0.8,
+      "pesoCalidad": 0.1,
+      "pesoEntrega": 0.05,
+      "pesoResenas": 0.05,
+      "umbralMinimo": 3.5,
+      "atributoPrioritario": 2,
+      "toleranciaLex": 0.5
+    },
+    "esperado": {
+      "ganadorAditiva": "Delta",
+      "utilGanador": 8,
+      "nAceptables": 1,
+      "ganadorConj": "Gama",
+      "ganadorLex": "Épsilon",
+      "coinciden": "no",
+      "nCambios": 3
+    },
+    "cap": "cap06",
+    "caso": "B"
+  },
+  {
+    "params": {
+      "pesoPrecio": 0.4,
+      "pesoCalidad": 0.3,
+      "pesoEntrega": 0.15,
+      "pesoResenas": 0.15,
+      "umbralMinimo": 6,
+      "atributoPrioritario": 3,
+      "toleranciaLex": 0.5
+    },
+    "esperado": {
+      "ganadorAditiva": "Alfa",
+      "utilGanador": 6.3977272727272734,
+      "nAceptables": 0,
+      "ganadorConj": "ninguna",
+      "ganadorLex": "Alfa",
+      "coinciden": "no",
+      "nCambios": 3
+    },
+    "cap": "cap06",
+    "caso": "C"
+  },
+  {
+    "params": {
+      "pesoPrecio": 0.1,
+      "pesoCalidad": 0.1,
+      "pesoEntrega": 0.15,
+      "pesoResenas": 0.15,
+      "umbralMinimo": 1,
+      "atributoPrioritario": 4,
+      "toleranciaLex": 1.5
+    },
+    "esperado": {
+      "ganadorAditiva": "Épsilon",
+      "utilGanador": 6.8,
+      "nAceptables": 4,
+      "ganadorConj": "Gama",
+      "ganadorLex": "Épsilon",
+      "coinciden": "no",
+      "nCambios": 2
+    },
+    "cap": "cap06",
+    "caso": "extra"
+  },
+  {
+    "params": {
+      "pAvanzar": 0.3,
+      "pRetroceder": 0.1,
+      "pAbandonar": 0.15,
+      "inicioRedes": 0.4,
+      "convBusqueda": 0.3,
+      "convDirecto": 0.35
+    },
+    "esperado": {
+      "pConv": 25.44169611307419,
+      "pConvLineal": 29.629629629629612,
+      "pasos": 4.9705535924617186,
+      "pasosConv": 6.9493521790341566,
+      "kMediana": 6,
+      "pConv10": 21.963058782187492,
+      "pConv10Lineal": 26.679714010312495,
+      "pConvCanales": 34.304358995437553,
+      "ultimoBusqueda": 54.057931986425665,
+      "ultimoRedes": 3.0298682318249992,
+      "ultimoCorreo": 6.3129743529987614,
+      "ultimoDirecto": 36.599225428750543,
+      "remocionBusqueda": 44.901063493174185,
+      "remocionRedes": 18.344226880640228,
+      "remocionCorreo": 11.23219909277749,
+      "remocionDirecto": 25.522510533408106,
+      "canalSubestimado": "Redes sociales"
+    },
+    "cap": "cap07",
+    "caso": "A"
+  },
+  {
+    "params": {
+      "pAvanzar": 0.3,
+      "pRetroceder": 0.25,
+      "pAbandonar": 0.15,
+      "inicioRedes": 0.4,
+      "convBusqueda": 0.3,
+      "convDirecto": 0.35
+    },
+    "esperado": {
+      "pConv": 20.111731843575402,
+      "pConvLineal": 29.629629629629612,
+      "pasos": 5.325884543761636,
+      "pasosConv": 7.2253258845437607,
+      "kMediana": 6,
+      "pConv10": 16.691596722421867,
+      "pConv10Lineal": 26.679714010312495,
+      "pConvCanales": 34.304358995437553,
+      "ultimoBusqueda": 54.057931986425665,
+      "ultimoRedes": 3.0298682318249992,
+      "ultimoCorreo": 6.3129743529987614,
+      "ultimoDirecto": 36.599225428750543,
+      "remocionBusqueda": 44.901063493174185,
+      "remocionRedes": 18.344226880640228,
+      "remocionCorreo": 11.23219909277749,
+      "remocionDirecto": 25.522510533408106,
+      "canalSubestimado": "Redes sociales"
+    },
+    "cap": "cap07",
+    "caso": "B"
+  },
+  {
+    "params": {
+      "pAvanzar": 0.3,
+      "pRetroceder": 0.1,
+      "pAbandonar": 0.15,
+      "inicioRedes": 0.7,
+      "convBusqueda": 0.3,
+      "convDirecto": 0.6
+    },
+    "esperado": {
+      "pConv": 25.44169611307419,
+      "pConvLineal": 29.629629629629612,
+      "pasos": 4.9705535924617186,
+      "pasosConv": 6.9493521790341566,
+      "kMediana": 6,
+      "pConv10": 21.963058782187492,
+      "pConv10Lineal": 26.679714010312495,
+      "pConvCanales": 35.079370298820344,
+      "ultimoBusqueda": 44.912771282541605,
+      "ultimoRedes": 4.92749394806467,
+      "ultimoCorreo": 4.77109858151541,
+      "ultimoDirecto": 45.388636187878312,
+      "remocionBusqueda": 35.375044386461248,
+      "remocionRedes": 29.741020205704675,
+      "remocionCorreo": 9.1571811441758353,
+      "remocionDirecto": 25.726754263658229,
+      "canalSubestimado": "Redes sociales"
+    },
+    "cap": "cap07",
+    "caso": "C"
+  },
+  {
+    "params": {
+      "pAvanzar": 0.5,
+      "pRetroceder": 0,
+      "pAbandonar": 0.2,
+      "inicioRedes": 0,
+      "convBusqueda": 0.55,
+      "convDirecto": 0.05
+    },
+    "esperado": {
+      "pConv": 36.443148688046648,
+      "pConvLineal": 36.443148688046648,
+      "pasos": 3.1778425655976679,
+      "pasosConv": 4.2857142857142856,
+      "kMediana": 4,
+      "pConv10": 36.38519,
+      "pConv10Lineal": 36.38519,
+      "pConvCanales": 46.173565155438659,
+      "ultimoBusqueda": 88.395975454515749,
+      "ultimoRedes": 0.2609738076657161,
+      "ultimoCorreo": 6.1107781144011852,
+      "ultimoDirecto": 5.232272623417316,
+      "remocionBusqueda": 77.34341733486815,
+      "remocionRedes": 2.5573099967991113,
+      "remocionCorreo": 11.8769446591397,
+      "remocionDirecto": 8.2223280091930278,
+      "canalSubestimado": "Correo"
+    },
+    "cap": "cap07",
+    "caso": "extra"
+  },
+  {
+    "params": {
+      "nNodos": 60,
+      "nComunidades": 3,
+      "pDentro": 0.2,
+      "pEntre": 0.01,
+      "nSemillas": 3,
+      "umbral": 0.25,
+      "criterio": 1
+    },
+    "esperado": {
+      "nConexiones": 182,
+      "gradoMax": 10,
+      "gradoProm": 6.0666666666666664,
+      "coinciden": 1,
+      "adopGrado": 66.666666666666657,
+      "adopInter": 43.333333333333336,
+      "adopCerc": 68.333333333333329,
+      "perifGrado": 33.333333333333329,
+      "perifInter": 5,
+      "perifCerc": 6.666666666666667,
+      "promedioAzar": 51.55,
+      "adopFinal": 66.666666666666657,
+      "rondas": 8,
+      "mejorCriterio": "cercanía",
+      "maxInter": 341.342284652
+    },
+    "cap": "cap08",
+    "caso": "A"
+  },
+  {
+    "params": {
+      "nNodos": 60,
+      "nComunidades": 3,
+      "pDentro": 0.2,
+      "pEntre": 0.06,
+      "nSemillas": 3,
+      "umbral": 0.25,
+      "criterio": 1
+    },
+    "esperado": {
+      "nConexiones": 250,
+      "gradoMax": 12,
+      "gradoProm": 8.3333333333333339,
+      "coinciden": 3,
+      "adopGrado": 100,
+      "adopInter": 100,
+      "adopCerc": 100,
+      "perifGrado": 100,
+      "perifInter": 100,
+      "perifCerc": 100,
+      "promedioAzar": 51.36666666666666,
+      "adopFinal": 100,
+      "rondas": 6,
+      "mejorCriterio": "grado",
+      "maxInter": 73.402042177
+    },
+    "cap": "cap08",
+    "caso": "B"
+  },
+  {
+    "params": {
+      "nNodos": 60,
+      "nComunidades": 3,
+      "pDentro": 0.35,
+      "pEntre": 0.01,
+      "nSemillas": 3,
+      "umbral": 0.25,
+      "criterio": 1
+    },
+    "esperado": {
+      "nConexiones": 261,
+      "gradoMax": 13,
+      "gradoProm": 8.7,
+      "coinciden": 1,
+      "adopGrado": 8.3333333333333321,
+      "adopInter": 5,
+      "adopCerc": 5,
+      "perifGrado": 5,
+      "perifInter": 6.666666666666667,
+      "perifCerc": 6.666666666666667,
+      "promedioAzar": 22.35,
+      "adopFinal": 8.3333333333333321,
+      "rondas": 1,
+      "mejorCriterio": "grado",
+      "maxInter": 375.689856971
+    },
+    "cap": "cap08",
+    "caso": "C"
+  },
+  {
+    "params": {
+      "nNodos": 60,
+      "nComunidades": 3,
+      "pDentro": 0.2,
+      "pEntre": 0.01,
+      "nSemillas": 6,
+      "umbral": 0.3,
+      "criterio": 2
+    },
+    "esperado": {
+      "nConexiones": 182,
+      "gradoMax": 10,
+      "gradoProm": 6.0666666666666664,
+      "coinciden": 1,
+      "adopGrado": 71.666666666666671,
+      "adopInter": 70,
+      "adopCerc": 36.666666666666664,
+      "perifGrado": 66.666666666666657,
+      "perifInter": 36.666666666666664,
+      "perifCerc": 11.666666666666666,
+      "promedioAzar": 57.783333333333339,
+      "adopFinal": 70,
+      "rondas": 7,
+      "mejorCriterio": "grado",
+      "maxInter": 341.342284652
+    },
+    "cap": "cap08",
+    "caso": "extra criterio 2"
+  },
+  {
+    "params": {
+      "nNodos": 90,
+      "nComunidades": 4,
+      "pDentro": 0.2,
+      "pEntre": 0.01,
+      "nSemillas": 3,
+      "umbral": 0.25,
+      "criterio": 3
+    },
+    "esperado": {
+      "nConexiones": 308,
+      "gradoMax": 12,
+      "gradoProm": 6.8444444444444441,
+      "coinciden": 2,
+      "adopGrado": 100,
+      "adopInter": 100,
+      "adopCerc": 100,
+      "perifGrado": 3.3333333333333335,
+      "perifInter": 3.3333333333333335,
+      "perifCerc": 24.444444444444443,
+      "promedioAzar": 45.2,
+      "adopFinal": 100,
+      "rondas": 12,
+      "mejorCriterio": "grado",
+      "maxInter": 349.580813518
+    },
+    "cap": "cap08",
+    "caso": "extra n=90"
+  },
+  {
+    "params": {
+      "nNodos": 100,
+      "nComunidades": 5,
+      "pDentro": 0.15,
+      "pEntre": 0.03,
+      "nSemillas": 8,
+      "umbral": 0.15,
+      "criterio": 2
+    },
+    "esperado": {
+      "nConexiones": 364,
+      "gradoMax": 12,
+      "gradoProm": 7.28,
+      "coinciden": 3,
+      "adopGrado": 100,
+      "adopInter": 100,
+      "adopCerc": 100,
+      "perifGrado": 100,
+      "perifInter": 100,
+      "perifCerc": 100,
+      "promedioAzar": 100,
+      "adopFinal": 100,
+      "rondas": 3,
+      "mejorCriterio": "grado",
+      "maxInter": 214.879596062
+    },
+    "cap": "cap08",
+    "caso": "extra n=100"
+  },
+  {
+    "params": {
+      "cobVsPriv": 2,
+      "cobVsInterop": 3,
+      "cobVsCosto": 3,
+      "privVsInterop": 2,
+      "privVsCosto": 2,
+      "interopVsCosto": 1
+    },
+    "esperado": {
+      "pesoCobertura": 0.45540796386934024,
+      "pesoPrivacidad": 0.26283286857465105,
+      "pesoInterop": 0.14087958377800427,
+      "pesoCosto": 0.14087958377800427,
+      "lambdaMax": 4.0103629022409031,
+      "cr": 0.003838111941075216,
+      "consistente": "sí",
+      "ganadorAHP": "Analítica de embudo",
+      "cercaniaGanador": 0.68063257994101145,
+      "ganadorIguales": "Analítica web básica",
+      "nCambios": 2
+    },
+    "cap": "cap09",
+    "caso": "A"
+  },
+  {
+    "params": {
+      "cobVsPriv": 0.333,
+      "cobVsInterop": 0.5,
+      "cobVsCosto": 0.2,
+      "privVsInterop": 1,
+      "privVsCosto": 0.5,
+      "interopVsCosto": 0.333
+    },
+    "esperado": {
+      "pesoCobertura": 0.0892228846713884,
+      "pesoPrivacidad": 0.23209189330682256,
+      "pesoInterop": 0.18956337108105031,
+      "pesoCosto": 0.48912185094073873,
+      "lambdaMax": 4.0249263649552551,
+      "cr": 0.0092319870204648647,
+      "consistente": "sí",
+      "ganadorAHP": "Analítica web básica",
+      "cercaniaGanador": 0.87910437485596549,
+      "ganadorIguales": "Analítica web básica",
+      "nCambios": 2
+    },
+    "cap": "cap09",
+    "caso": "B"
+  },
+  {
+    "params": {
+      "cobVsPriv": 5,
+      "cobVsInterop": 0.333,
+      "cobVsCosto": 3,
+      "privVsInterop": 0.2,
+      "privVsCosto": 3,
+      "interopVsCosto": 7
+    },
+    "esperado": {
+      "pesoCobertura": 0.27744424824119079,
+      "pesoPrivacidad": 0.10791952595731791,
+      "pesoInterop": 0.55161068773701682,
+      "pesoCosto": 0.063025538064474543,
+      "lambdaMax": 4.2884466294767005,
+      "cr": 0.10683208499137056,
+      "consistente": "no",
+      "ganadorAHP": "Plataforma de datos de clientes",
+      "cercaniaGanador": 0.7938354126217736,
+      "ganadorIguales": "Analítica web básica",
+      "nCambios": 1
+    },
+    "cap": "cap09",
+    "caso": "C"
+  },
+  {
+    "params": {
+      "cobVsPriv": 1,
+      "cobVsInterop": 1,
+      "cobVsCosto": 1,
+      "privVsInterop": 1,
+      "privVsCosto": 1,
+      "interopVsCosto": 1
+    },
+    "esperado": {
+      "pesoCobertura": 0.25000000000000006,
+      "pesoPrivacidad": 0.25000000000000006,
+      "pesoInterop": 0.24999999999999994,
+      "pesoCosto": 0.25000000000000006,
+      "lambdaMax": 3.9999999999999996,
+      "cr": -1.6447748512965281E-16,
+      "consistente": "sí",
+      "ganadorAHP": "Analítica web básica",
+      "cercaniaGanador": 0.742880281269938,
+      "ganadorIguales": "Analítica web básica",
+      "nCambios": 2
+    },
+    "cap": "cap09",
+    "caso": "extra"
+  },
+  {
+    "params": {
+      "cobVsPriv": 9,
+      "cobVsInterop": 7,
+      "cobVsCosto": 0.2,
+      "privVsInterop": 0.5,
+      "privVsCosto": 4,
+      "interopVsCosto": 6
+    },
+    "esperado": {
+      "pesoCobertura": 0.3762206953153735,
+      "pesoPrivacidad": 0.1450953147873762,
+      "pesoInterop": 0.23127577135314278,
+      "pesoCosto": 0.24740821854410738,
+      "lambdaMax": 8.9056519572214814,
+      "cr": 1.8169081323042522,
+      "consistente": "no",
+      "ganadorAHP": "Analítica web básica",
+      "cercaniaGanador": 0.72672387882184863,
+      "ganadorIguales": "Analítica web básica",
+      "nCambios": 2
+    },
+    "cap": "cap09",
+    "caso": "extra 2"
+  }
+]

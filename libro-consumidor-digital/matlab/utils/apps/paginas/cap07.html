@@ -1,0 +1,24 @@
+<!-- BLOQUE:FIGURAS -->
+        <div class="figura"><div class="grafica" id="fig1a" style="height:400px"></div><div class="pie">Figura 1 (izq.) — Matriz de transición por contacto (filas: de dónde; columnas: a dónde). Conversión y Abandono son absorbentes.</div></div>
+        <div class="figura"><div class="grafica" id="fig1b" style="height:400px"></div><div class="pie">Figura 1 (der.) — Tiempo a conversión: % acumulado de recorridos convertidos, con retrocesos y como embudo lineal.</div></div>
+        <div class="figura ancha"><div class="grafica" id="fig2" style="height:380px"></div><div class="pie">Figura 2 — Tres modelos de atribución para los mismos recorridos.</div></div>
+        <div class="figura"><div class="grafica" id="fig3" style="height:360px"></div><div class="pie"><b>Complemento de la app</b> (no está en el .m): probabilidad de convertir al variar <code>pRetroceder</code>, con los demás parámetros fijos. La marca ● es el valor actual.</div></div>
+        <div class="figura"><div class="grafica" id="fig4" style="height:360px"></div><div class="pie"><b>Complemento de la app</b> (no está en el .m): probabilidad de convertir si se «apaga» cada canal (efecto de remoción). Cuanto más cae, más depende el recorrido de ese canal.</div></div>
+<!-- BLOQUE:NOTA_COMPARAR -->
+El ejercicio pide tres corridas: <b>Caso A</b> (valores del script), <b>Caso B</b> (<code>pRetroceder</code> = 0.25: recorrido más «desordenado») y
+<b>Caso C</b> (<code>inicioRedes</code> = 0.70 y <code>convDirecto</code> = 0.60). Registren la probabilidad de convertir, los contactos hasta convertir y
+cuánto crédito recibe Redes sociales con el último clic y con la remoción.
+<!-- BLOQUE:FIGURAS_COMPARACION -->
+        <div class="figura"><div class="grafica" id="comp1" style="height:340px"></div><div class="pie">Curvas de tiempo a conversión de los casos guardados.</div></div>
+        <div class="figura"><div class="grafica" id="comp2" style="height:340px"></div><div class="pie">Crédito de Redes sociales según el modelo de atribución, por caso.</div></div>
+<!-- BLOQUE:SECCIONES_EXTRA -->
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>Cadena de Markov</b>El siguiente paso depende solo de dónde está la persona ahora, no de cómo llegó. La matriz de transición da esas probabilidades.</div>
+        <div class="concepto"><b>Estado absorbente</b>Un estado del que ya no se sale: Conversión o Abandono. Todo recorrido termina en uno de los dos.</div>
+        <div class="concepto"><b>Messy middle</b>El ir y venir entre explorar y evaluar. Aquí es <code>pRetroceder</code>: la probabilidad de volver a la etapa anterior.</div>
+        <div class="concepto"><b>Último clic / primer clic</b>Reglas simples: todo el crédito al último (o al primer) canal del recorrido.</div>
+        <div class="concepto"><b>Efecto de remoción</b>Cuánto cae la probabilidad de convertir si se elimina un canal. Premia a los canales que ayudan aunque no cierren la venta.</div>
+      </div>
+    </section>

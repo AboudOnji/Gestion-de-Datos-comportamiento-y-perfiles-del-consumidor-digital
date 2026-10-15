@@ -91,6 +91,53 @@ matlab -batch "run('pruebas/referencias_cap04_datos.m')"                        
 node pruebas/verificar_cap04_datos.js                                               # 74 comprobaciones
 ```
 
+
+## Apps de la Parte II (Cap. 6–9)
+Mismo patrón que los Cap. 1–4 (script + app + casos A/B/C + verificación contra MATLAB). Los cuatro modelos son
+**deterministas** salvo el Cap. 8, que usa el flujo de `rand` tras `rng(42)` (`datos/rand42.json`, 20 000 valores).
+
+| App | Modelo | Qué calcula |
+|---|---|---|
+| `cap06/cap06_alternativas_interactivo.html` | `modelos/cap06.js` | reglas aditiva, conjuntiva y lexicográfica; barrido del peso del precio |
+| `cap07/cap07_journey_markov_interactivo.html` | `modelos/cap07.js` | cadena de Markov por etapas (P(convertir), contactos hasta convertir) y atribución: último clic, primer clic y efecto de remoción |
+| `cap08/cap08_red_influencia_interactivo.html` | `modelos/cap08.js` | red con comunidades; grado, intermediación (Brandes) y cercanía; cascada por umbral; 100 sorteos al azar |
+| `cap09/cap09_seleccion_plataforma_interactivo.html` | `modelos/cap09.js` | AHP (vector propio por iteración de potencias, razón de consistencia) y TOPSIS; barrido del peso del costo |
+
+```bash
+cd matlab/utils/apps
+matlab -batch "run('pruebas/referencias_parte2.m')"   # corre los scripts REALES con los casos A/B/C (+ extras)
+node pruebas/verificar_parte2.js                       # debe decir: 241 de 241 comprobaciones coinciden
+bash pruebas/probar_app.sh ../../cap06/cap06_alternativas_interactivo.html   # abre la app en Chrome sin interfaz y revisa errores de consola
+```
+`numerico.js` ganó `matmul`, `matvec`, `vecmat`, `transpuesta`, `identidad` e `inv` (Gauss-Jordan) para Cap. 7 y 8.
+Para agregar un caso nuevo: una fila en `corridas` de `referencias_parte2.m`, las métricas en `metricas.capNN` y el
+modelo en `verificar_parte2.js`.
+
+## Apps «datos propios» de la Parte II (Cap. 6–9)
+Como en los Cap. 2–4, cada laboratorio tiene una extensión que aplica el mismo análisis a un Excel/CSV del estudiante
+(SheetJS dentro del HTML; los datos no salen del navegador). Cada una es un recorrido guiado de 4–5 pasos, con los
+Casos A/B/C de práctica, comparación de corridas y descarga de resultados en Excel. Piezas comunes: `paginas/datos_comun.js`
+(lectura de archivos, arrastrar y soltar, vista previa, descarga) y `modelos/cap02_datos.js` (`procesarTabla`).
+
+| App | Hojas del Excel | Qué hace |
+|---|---|---|
+| `cap06/cap06_alternativas_datos_propios.html` | `Alternativas`; `Criterios` (Tipo, Peso) opcional | Tres reglas de decisión sobre N alternativas y 2–10 atributos; tipos y pesos editables; barrido del peso de un atributo |
+| `cap07/cap07_journey_datos_propios.html` | `Recorridos` (`Canales` o `Paso1…`, `Convirtio`, `Cantidad` opcional) | Estima la cadena de Markov entre canales; último clic, primer clic, lineal y efecto de remoción; rutas frecuentes |
+| `cap08/cap08_red_datos_propios.html` | `Conexiones` (Persona_A, Persona_B); `Personas` (Persona, Grupo) opcional | Grado, intermediación y cercanía; cascada por umbral con semillas centrales, periféricas y 100 sorteos al azar (rand de MATLAB tras `rng(42)`) |
+| `cap09/cap09_seleccion_datos_propios.html` | `Alternativas`; `Criterios`; `Juicios` (lista o matriz) | AHP (razón de consistencia con el RI de Saaty según n, par más contradictorio) y TOPSIS; barrido del peso de un criterio |
+
+```bash
+cd matlab/utils/apps
+conda run -n research python datos/crear_excel_ejemplo_cap06.py   # y cap07, cap08, cap09: Excel y JSON de ejemplo
+matlab -batch "run('pruebas/referencias_cap06_datos.m')"          # referencia MATLAB (y cap07, cap08, cap09)
+node pruebas/verificar_cap06_datos.js                              # 49 comprobaciones (cap07: 77; cap08: 67; cap09: 43)
+bash pruebas/probar_interaccion.sh ../../cap06/cap06_alternativas_datos_propios.html   # Casos B y C + guardar corridas
+bash pruebas/probar_subida.sh ../../cap06/cap06_alternativas_datos_propios.html ../../cap06/cap06_datos_ejemplo_servicio.xlsx   # sube un Excel
+```
+Con los datos del libro, cada app reproduce el resultado del laboratorio (excepto los 100 sorteos al azar del Cap. 8: usan el
+inicio del flujo de `rand`, el script lo usa después de generar la red; los promedios son parecidos, no idénticos).
+Los Excel de ejemplo están junto a cada script (`capNN_datos_ejemplo*.xlsx`).
+
 ## Fidelidad con MATLAB
 Los datos sintéticos son **los mismos** que genera MATLAB con `rng(42)`: los
 números aleatorios se exportan desde MATLAB (`datos/exportar_datos_matlab.m`)

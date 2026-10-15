@@ -1,0 +1,21 @@
+% figuras/tikz/cap09-pila-analitica.tex
+% Cuatro capas de la base tecnológica para analizar el recorrido y las
+% categorías de herramienta que operan en cada una. Criterios, no marcas.
+\begin{tikzpicture}[
+    capa/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                 minimum width=11.5cm, minimum height=1.25cm, align=left, font=\scriptsize, text width=11.0cm},
+    cat/.style={rectangle, rounded corners, draw=bronceIPN, thick, fill=bronceIPNClaro,
+                minimum width=3.9cm, minimum height=1.25cm, align=center, font=\scriptsize},
+    flecha/.style={-{Stealth[length=2.3mm]}, thick, draw=doradoIPN}
+  ]
+  \node[capa] (c1) at (0,3.9)  {\textbf{1. Captura} — qué se registra del recorrido: eventos, clics, sesiones.\\ \textit{Pregunta durable:} ¿captura la etapa del recorrido o solo la página?};
+  \node[capa] (c2) at (0,2.3)  {\textbf{2. Identidad y consentimiento} — a quién se atribuye lo capturado.\\ \textit{Pregunta durable:} ¿identidad real o probabilística? ¿con qué base legal?};
+  \node[capa] (c3) at (0,0.7)  {\textbf{3. Análisis} — embudo, atribución, segmentos.\\ \textit{Pregunta durable:} ¿las etapas reflejan intención o solo eventos técnicos?};
+  \node[capa] (c4) at (0,-0.9) {\textbf{4. Activación} — usar el análisis para decidir en canales.\\ \textit{Pregunta durable:} ¿en tiempo real o solo reporte histórico?};
+  \foreach \a/\b in {c1/c2,c2/c3,c3/c4} { \draw[flecha] (\a.south) -- (\b.north); }
+  \node[cat] at (8.2,3.9)  {Mapas de calor y\\ grabación de sesiones};
+  \node[cat] at (8.2,2.3)  {Plataforma de datos\\ de clientes (CDP)};
+  \node[cat] at (8.2,0.7)  {Analítica de embudo\\ y de atribución};
+  \node[cat] at (8.2,-0.9) {Suites de redes sociales\\ y comercio electrónico};
+  \foreach \y in {3.9,2.3,0.7,-0.9} { \draw[draw=bronceIPN, dashed] (6.0,\y) -- (6.25,\y); }
+\end{tikzpicture}

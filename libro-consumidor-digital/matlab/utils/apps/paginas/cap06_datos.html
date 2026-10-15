@@ -1,0 +1,104 @@
+<!-- BLOQUE:PARAMETROS_EXTRA -->
+    <div id="zonaArchivo">
+      <h3 style="margin-top:4px">1. Sus datos (Excel)</h3>
+      <label class="subir" for="archivo">
+        <input type="file" id="archivo" accept=".xlsx,.xls,.ods,.csv">
+        <span class="subir-caja"><b>Subir archivo</b><br><span class="nota">Excel (.xlsx, .xls), .ods o .csv — o arrástrenlo aquí</span></span>
+      </label>
+      <div class="botones">
+        <button id="btnEjemplo1" class="btn sec peq" type="button" title="Las seis alternativas ficticias del laboratorio del libro">Ejemplo 1: el del libro</button>
+        <button id="btnEjemplo2" class="btn sec peq" type="button" title="Ocho servicios de entrega ficticios, cinco atributos">Ejemplo 2: servicios de entrega</button>
+        <button id="btnDescargarEjemplo" class="btn sec peq" type="button">Descargar Excel de ejemplo</button>
+        <a class="btn sec peq" href="#panelFormato" style="text-decoration:none">¿Cómo ordenar mis datos?</a>
+      </div>
+      <div id="estadoArchivo" class="nota-caja" style="margin-top:10px"></div>
+      <h3>2. Criterios: tipo y peso de cada atributo</h3>
+      <p class="nota" style="margin:0 0 4px">En <b>costo</b>, menos es mejor (precio, días de entrega). Los pesos no tienen que sumar 1.</p>
+      <div id="tablaCriterios" class="tabla-scroll"></div>
+      <label class="campo"><span class="ayuda"><b>Regla lexicográfica</b>: atributo con el que se empieza</span><select id="selPrioritario"></select></label>
+      <label class="campo"><span class="ayuda"><b>Barrido</b>: atributo cuyo peso se mueve de 0 a 1</span><select id="selBarrido"></select></label>
+      <h3>3. Reglas no compensatorias</h3>
+    </div>
+<!-- BLOQUE:FIGURAS -->
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">1</span>Sus alternativas en una escala común</h3>
+          <div id="kpisDatos" class="kpis"></div>
+          <div class="explica"><p>Cada atributo tiene unidades distintas (pesos, días, estrellas). Para compararlos se lleva cada columna a una escala de <b>0 a 10</b> (mínimo → 0, máximo → 10) y en los atributos de <b>costo</b> se invierte, de modo que 10 siempre sea «lo mejor». Si un atributo vale lo mismo en todas las alternativas no discrimina y recibe 5.</p></div>
+          <div id="avisosDatos"></div>
+          <div class="paso-graficas">
+            <div class="figura ancha"><div class="grafica" id="figPuntajes" style="height:380px"></div><div class="pie">Puntajes normalizados (0 a 10). Las celdas por debajo del umbral mínimo (sección 3) son las que la regla conjuntiva no perdona.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">2</span>Regla aditiva ponderada (compensatoria)</h3>
+          <div class="explica"><p>Multiplica el puntaje de cada atributo por su peso y suma: <b>un atributo excelente puede tapar uno malo</b>. Es la regla que usa un comparador que «promedia».</p></div>
+          <div class="paso-graficas">
+            <div class="figura ancha"><div class="grafica" id="figUtilidad" style="height:380px"></div><div class="pie">Utilidad aditiva de cada alternativa y alternativa elegida por cada regla (● aditiva, ▼ conjuntiva, ■ lexicográfica).</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">3</span>Reglas no compensatorias: descartar o priorizar</h3>
+          <div class="explica"><p><b>Conjuntiva:</b> si una alternativa falla en <i>un solo</i> atributo (puntaje menor que el umbral), queda fuera aunque sea excelente en lo demás. <b>Lexicográfica:</b> manda el atributo prioritario; el siguiente solo desempata si la diferencia cae dentro de la tolerancia.</p></div>
+          <div id="kpisReglas" class="kpis"></div>
+          <div class="explica" id="textoReglas"></div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">4</span>¿Qué tan frágil es la elección? Sensibilidad al peso</h3>
+          <div class="explica"><p>Los pesos son juicios, no constantes. Aquí se mueve el peso de <b id="nomBarrido">un atributo</b> de 0 a 1 (los demás conservan sus proporciones) y se ve <b>en qué punto cambia la alternativa elegida</b>. Si su peso actual está cerca de un cambio, la recomendación es frágil: díganlo.</p></div>
+          <div class="paso-graficas">
+            <div class="figura ancha"><div class="grafica" id="figBarrido" style="height:400px"></div><div class="pie">Utilidad aditiva de cada alternativa al variar el peso del atributo elegido; la línea punteada es su peso actual.</div></div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <h3 class="paso-titulo"><span class="num">5</span>Lectura de negocio: ¿qué decisión sostienen sus datos?</h3>
+          <div class="explica" id="conclusion"></div>
+          <div class="botones no-imprimir"><button id="btnDescargarResultados" class="btn" type="button">Descargar resultados (Excel)</button></div>
+          <p class="nota">El Excel incluye los puntajes, la utilidad, la elección de cada regla, el barrido y las reglas aplicadas.</p>
+        </div>
+<!-- BLOQUE:NOTA_COMPARAR -->
+Guarden una corrida por escenario. Los <b>Casos de práctica</b> de la izquierda cambian lo mismo que el ejercicio del libro: <b>Caso A</b> (pesos y reglas del archivo),
+<b>Caso B</b> (pesos iguales) y <b>Caso C</b> (umbral mínimo de 6 puntos). Comparen qué alternativa elige cada regla y si coinciden.
+<!-- BLOQUE:FIGURAS_COMPARACION -->
+        <div class="figura ancha"><div class="grafica" id="comp1" style="height:380px"></div><div class="pie">Utilidad aditiva de cada alternativa en cada caso guardado.</div></div>
+<!-- BLOQUE:SECCIONES_EXTRA -->
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>Regla compensatoria</b>Todo se suma: un atributo bueno puede compensar uno malo.</div>
+        <div class="concepto"><b>Regla conjuntiva</b>Filtro de mínimos: fallar en un solo atributo basta para quedar fuera.</div>
+        <div class="concepto"><b>Regla lexicográfica</b>Como ordenar palabras en un diccionario: el atributo más importante decide; el siguiente solo desempata.</div>
+        <div class="concepto"><b>Normalización 0–10</b>Lleva atributos con unidades distintas a una escala común; en los de costo se invierte.</div>
+        <div class="concepto"><b>Análisis de sensibilidad</b>Mover un peso para ver cuándo cambia la elección: mide qué tan frágil es la recomendación.</div>
+      </div>
+    </section>
+    <section class="panel" id="panelDatos">
+      <h2>Datos cargados</h2>
+      <div id="resumenDatos" class="nota"></div>
+      <div id="vistaDatos" class="tabla-scroll" style="margin-top:8px"></div>
+    </section>
+    <section class="panel" id="panelFormato">
+      <h2>¿Cómo deben venir sus datos?</h2>
+      <p class="nota">Lo más fácil: descarguen el <b>Excel de ejemplo</b>, borren las filas 2 en adelante de cada hoja y escriban lo suyo. Hoja «Alternativas» del ejemplo:</p>
+      <div class="tabla-scroll">
+        <table class="tabla ejemplo-formato">
+          <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr></thead>
+          <tbody>
+            <tr class="cab"><td>1</td><td>Alternativa</td><td>Precio_MXN</td><td>Calidad_1a10</td><td>Entrega_dias</td><td>Resenas_1a5</td></tr>
+            <tr><td>2</td><td>Alfa</td><td>899</td><td>6</td><td>2</td><td>4.1</td></tr>
+            <tr><td>3</td><td>Beta</td><td>1499</td><td>8.5</td><td>5</td><td>4.6</td></tr>
+            <tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="reglas">
+        <li><b>Hoja «Alternativas»</b> (si no existe, la primera hoja): <b>encabezados en la fila 1</b>. La primera columna de texto son los <b>nombres</b>; cada columna numérica es un <b>atributo</b> (de 2 a 10), con una fila por alternativa (de 3 a 50).</li>
+        <li><b>Sin celdas vacías</b> en los atributos ni números escritos como texto con símbolos (p. ej. «916 pesos»).</li>
+        <li><b>Hoja «Criterios» (opcional)</b>: columnas <code>Criterio</code> (igual al encabezado del atributo), <code>Tipo</code> (<code>beneficio</code> o <code>costo</code>) y <code>Peso</code> (≥ 0). Si falta, todo es «beneficio» con peso 1 y lo editan a la izquierda.</li>
+        <li><b>Nombres sin datos personales</b>: usen nombres de productos, planes o servicios, no de personas.</li>
+        <li><b>Formatos</b>: .xlsx, .xls, .ods o .csv (en CSV solo hay una tabla: las alternativas).</li>
+      </ol>
+    </section>

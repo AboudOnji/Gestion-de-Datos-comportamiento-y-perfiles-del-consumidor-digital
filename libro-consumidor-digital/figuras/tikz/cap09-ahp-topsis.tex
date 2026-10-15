@@ -1,0 +1,21 @@
+% figuras/tikz/cap09-ahp-topsis.tex
+% Flujo de decisión multicriterio del laboratorio: AHP para los pesos, TOPSIS
+% para ordenar las alternativas y barrido de sensibilidad.
+\begin{tikzpicture}[
+    paso/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                 minimum width=2.9cm, minimum height=1.35cm, align=center, font=\scriptsize},
+    ent/.style={rectangle, rounded corners, draw=bronceIPN, thick, fill=bronceIPNClaro,
+                minimum width=2.9cm, minimum height=1.0cm, align=center, font=\scriptsize},
+    flecha/.style={-{Stealth[length=2.3mm]}, thick, draw=doradoIPN}
+  ]
+  \node[ent]  (e1) at (0,2.1)  {Juicios por pares\\ (escala de Saaty)};
+  \node[paso] (p1) at (0,0)    {\textbf{AHP}\\ pesos de los criterios\\ + razón de consistencia};
+  \node[ent]  (e2) at (4.3,2.1) {Matriz de decisión\\ (herramientas $\times$ criterios)};
+  \node[paso] (p2) at (4.3,0)  {\textbf{TOPSIS}\\ cercanía a la\\ solución ideal};
+  \node[paso] (p3) at (8.6,0)  {\textbf{Ranking}\\ y elección};
+  \node[paso] (p4) at (8.6,-2.1) {\textbf{Sensibilidad}\\ ¿en qué peso cambia\\ la elección?};
+  \draw[flecha] (e1) -- (p1); \draw[flecha] (e2) -- (p2);
+  \draw[flecha] (p1) -- node[above, font=\tiny] {pesos} (p2);
+  \draw[flecha] (p2) -- (p3); \draw[flecha] (p3) -- (p4);
+  \node[font=\tiny, text=terracotaIPN, align=center] at (0,-1.5) {si la razón $\ge 0.10$,\\ revisar los juicios};
+\end{tikzpicture}

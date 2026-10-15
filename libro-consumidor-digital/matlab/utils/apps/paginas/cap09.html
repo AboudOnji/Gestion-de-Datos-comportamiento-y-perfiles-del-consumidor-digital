@@ -1,0 +1,26 @@
+<!-- BLOQUE:FIGURAS -->
+        <div class="figura"><div class="grafica" id="fig1a" style="height:380px"></div><div class="pie">Figura 1 (izq.) — Pesos de los cuatro criterios obtenidos con AHP a partir de los juicios por pares.</div></div>
+        <div class="figura"><div class="grafica" id="fig1b" style="height:380px"></div><div class="pie">Figura 1 (der.) — Cercanía TOPSIS de cada herramienta con los pesos AHP y con pesos iguales.</div></div>
+        <div class="figura ancha"><div class="grafica" id="fig2" style="height:400px"></div><div class="pie">Figura 2 — Sensibilidad al peso del costo: la línea punteada marca el peso AHP del costo.</div></div>
+        <div class="figura"><div class="grafica" id="fig3" style="height:380px"></div><div class="pie"><b>Complemento de la app</b> (no está en el .m): la matriz de comparaciones por pares que construyen sus juicios (fila frente a columna).</div></div>
+<!-- BLOQUE:NOTA_COMPARAR -->
+El ejercicio pide tres corridas: <b>Caso A</b> (juicios del script), <b>Caso B</b> (el costo manda: 0.333 / 0.5 / 0.2 / 1 / 0.5 / 0.333) y
+<b>Caso C</b> (juicios contradictorios: 5 / 0.333 / 3 / 0.2 / 3 / 7). Registren los pesos, la razón de consistencia y la herramienta elegida.
+<!-- BLOQUE:FIGURAS_COMPARACION -->
+        <div class="figura"><div class="grafica" id="comp1" style="height:360px"></div><div class="pie">Pesos AHP de los criterios en cada caso guardado.</div></div>
+        <div class="figura"><div class="grafica" id="comp2" style="height:360px"></div><div class="pie">Cercanía TOPSIS de cada herramienta en cada caso guardado.</div></div>
+<!-- BLOQUE:SECCIONES_EXTRA -->
+    <section class="panel" id="panelConceptos">
+      <h2>Conceptos clave en un minuto</h2>
+      <div class="conceptos">
+        <div class="concepto"><b>AHP (Proceso Analítico Jerárquico)</b>Convierte comparaciones «este criterio importa X veces más que aquel» en pesos que suman 1.</div>
+        <div class="concepto"><b>Razón de consistencia</b>Mide si los juicios se contradicen (A &gt; B, B &gt; C, pero C &gt; A). Menor que 0.10 se considera aceptable.</div>
+        <div class="concepto"><b>TOPSIS</b>Prefiere la alternativa más cercana a la «solución ideal» (lo mejor en cada criterio) y más lejana de la «peor».</div>
+        <div class="concepto"><b>Criterio de costo</b>Aquí menos es mejor (el costo anual). TOPSIS lo invierte al buscar la solución ideal.</div>
+        <div class="concepto"><b>Datos sintéticos</b>Las cinco herramientas son tipos genéricos con calificaciones inventadas: sirven para practicar el método, no para elegir un producto real.</div>
+      </div>
+    </section>
+    <section class="panel" id="panelDatos">
+      <h2>La matriz de decisión (sintética)</h2>
+      <div id="tablaDatos" class="tabla-scroll"></div>
+    </section>

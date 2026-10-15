@@ -10,7 +10,10 @@ datos, comportamiento y perfiles del consumidor digital** (Lic. en Mercadotecnia
 Digital, 3.er semestre, ESCA Unidad Santo Tomás, IPN). 18 capítulos = 18 semanas,
 en 5 Partes. Servirá luego de insumo para slides Beamer IPN (no construir aún).
 
-Estado: Parte I completa (Cap. 1–4, Fase 2). Partes II–V pendientes (Fase 3).
+Estado: Parte I completa (Cap. 1–5, con GA4 como Cap. 5) y Parte II completa (Cap. 6–9, Fase 3; ver
+`docs/informes/fase3-parte2.md`). Partes III–V pendientes. El capítulo de Google Analytics 4
+(`partes/parte1/cap05.tex`) es el Cap. 5 (D3.1, revisada): Partes III–V = Cap. 10–19 (el plan del prompt §7
+quedó desplazado un capítulo; el libro tendrá 19).
 
 ## No negociable
 1. **Fidelidad al programa oficial** (Anexo A del prompt) — cobertura 100 %,
@@ -93,7 +96,8 @@ en cada capítulo:
   Politécnico Nacional - Dr. Aboud Barsekh Onji». Fuente, construcción y
   verificación contra MATLAB en `matlab/utils/apps/README.md`; nunca editar
   el HTML generado a mano. Todo script nuevo debe tener su app y sus casos en
-  `pruebas/referencias_matlab.m` (verificación N de N antes de entregar).
+  `pruebas/referencias_matlab.m` (Cap. 1–4) o `pruebas/referencias_parte2.m` (Cap. 5 en adelante;
+  verificación con `node pruebas/verificar_parte2.js`, N de N antes de entregar).
 - La carpeta real del proyecto termina en un **espacio**
   (`…consumidor digital /`); las rutas absolutas deben incluirlo.
 

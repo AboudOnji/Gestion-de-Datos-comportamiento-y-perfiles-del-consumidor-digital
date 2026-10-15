@@ -1,0 +1,25 @@
+% figuras/tikz/cap08-figuras-participantes.tex
+% Figuras que participan en una decisión de compra digital. Una misma persona
+% puede jugar varios roles; un rol puede repartirse entre varias personas.
+\begin{tikzpicture}[
+    rol/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara,
+                minimum width=3.0cm, minimum height=1.15cm, align=center, font=\scriptsize},
+    rolD/.style={rectangle, rounded corners, draw=bronceIPN, thick, fill=bronceIPNClaro,
+                 minimum width=3.0cm, minimum height=1.15cm, align=center, font=\scriptsize},
+    centro/.style={ellipse, draw=guindaIPN, very thick, fill=white, minimum width=3.2cm, minimum height=1.6cm, align=center, font=\small\bfseries},
+    flecha/.style={-{Stealth[length=2.3mm]}, thick, draw=doradoIPN},
+    nota/.style={font=\tiny, text=grisIPN, align=center}
+  ]
+  \node[centro] (c) at (0,0) {Decisión\\ de compra};
+  \node[rol]  (u)  at (-5.2,2.6)  {\textbf{Usuario}\\ usa el producto};
+  \node[rol]  (co) at (-5.2,0)    {\textbf{Consumidor}\\ consume y se beneficia};
+  \node[rolD] (pr) at (-5.2,-2.6) {\textbf{Prosumidor}\\ también produce contenido};
+  \node[rol]  (i)  at (0,3.6)     {\textbf{Influenciador}\\ orienta a otros};
+  \node[rol]  (e)  at (0,-3.6)    {\textbf{Evaluador}\\ compara y pondera (persona o IA)};
+  \node[rol]  (d)  at (5.2,2.6)   {\textbf{Decisor}\\ elige qué y cuándo};
+  \node[rol]  (cm) at (5.2,-2.6)  {\textbf{Comprador}\\ paga y ejecuta la compra};
+  \foreach \n in {u,co,pr,i,e,d,cm} { \draw[flecha] (\n) -- (c); }
+  \node[rolD, dashed] (bp) at (5.2,0) {\textbf{\textit{Buyer persona}}\\ arquetipo de la organización};
+  \draw[-{Stealth[length=2.3mm]}, thick, dashed, draw=bronceIPN] (bp) -- (c);
+  \node[nota] at (0,-5.0) {Una misma persona puede ser usuaria, decisora y compradora; en otras compras estos roles se reparten.};
+\end{tikzpicture}

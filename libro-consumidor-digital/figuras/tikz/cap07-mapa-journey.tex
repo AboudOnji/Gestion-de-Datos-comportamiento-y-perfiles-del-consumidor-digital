@@ -1,0 +1,48 @@
+% figuras/tikz/cap07-mapa-journey.tex
+% Mapa del customer journey (caso ilustrativo ficticio): etapas AIDAS, puntos de
+% contacto, emoción, dato que deja y oportunidad/dolor. Pieza de Parte II (§10).
+\begin{tikzpicture}[
+    cab/.style={rectangle, draw=guindaIPN, thick, fill=guindaIPN, text=white, minimum width=2.75cm, minimum height=0.7cm, align=center, font=\scriptsize\bfseries},
+    cel/.style={rectangle, draw=grisIPN!50, fill=guindaIPNClara, minimum width=2.75cm, minimum height=1.25cm, align=center, font=\tiny, text width=2.55cm},
+    celD/.style={rectangle, draw=grisIPN!50, fill=bronceIPNClaro, minimum width=2.75cm, minimum height=1.25cm, align=center, font=\tiny, text width=2.55cm},
+    celO/.style={rectangle, draw=grisIPN!50, fill=terracotaIPNClara, minimum width=2.75cm, minimum height=1.25cm, align=center, font=\tiny, text width=2.55cm},
+    fila/.style={font=\scriptsize\bfseries, text=guindaIPN, anchor=east, align=right, text width=1.7cm},
+    punto/.style={circle, fill=guindaIPN, inner sep=1.6pt}
+  ]
+  \foreach \i/\t in {0/Atención,1/Interés,2/Deseo,3/Acción,4/Satisfacción} {
+    \node[cab] at (\i*2.85,0) {\t};
+  }
+  % filas
+  \node[fila] at (-1.5,-1.15) {Punto de contacto};
+  \node[fila] at (-1.5,-2.55) {Qué hace la persona};
+  \node[fila] at (-1.5,-4.35) {Emoción};
+  \node[fila] at (-1.5,-6.2) {Dato que deja};
+  \node[fila] at (-1.5,-7.6) {Oportunidad o dolor};
+
+  \foreach \i/\t in {0/{video corto en red social},1/{búsqueda de reseñas y comparadores},2/{sitio de la marca, carrito},3/{\textit{checkout}, pago},4/{entrega, correo de seguimiento}} {
+    \node[cel] at (\i*2.85,-1.15) {\t};
+  }
+  \foreach \i/\t in {0/{ve el anuncio y se detiene},1/{compara tres opciones},2/{guarda el producto y duda},3/{paga con tarjeta o a meses},4/{usa el producto y opina}} {
+    \node[cel] at (\i*2.85,-2.55) {\t};
+  }
+  % curva de emoción: banda de 1.5 cm de alto
+  \draw[grisIPN!40] (-1.4,-3.65) rectangle (12.7,-5.05);
+  \draw[grisIPN!60, dashed] (-1.4,-4.35) -- (12.7,-4.35);
+  \node[font=\tiny, text=grisIPN, anchor=west] at (12.75,-3.8) {+};
+  \node[font=\tiny, text=grisIPN, anchor=west] at (12.75,-4.9) {$-$};
+  \node[punto] (e0) at (0,-3.95) {};
+  \node[punto] (e1) at (2.85,-4.2) {};
+  \node[punto] (e2) at (5.7,-4.7) {};
+  \node[punto] (e3) at (8.55,-4.45) {};
+  \node[punto] (e4) at (11.4,-3.85) {};
+  \draw[guindaIPN, thick] (e0) to[out=-20,in=160] (e1) to[out=-20,in=160] (e2) to[out=20,in=200] (e3) to[out=20,in=200] (e4);
+  \foreach \i/\t in {0/{curiosidad},1/{cautela},2/{duda: ¿es el mejor?},3/{ansiedad por el costo},4/{alivio o frustración}} {
+    \node[font=\tiny, text=guindaIPN, text width=2.6cm, align=center] at (\i*2.85,-5.3) {\t};
+  }
+  \foreach \i/\t in {0/{impresión, tiempo de visualización},1/{búsquedas, clics, reseñas leídas},2/{producto guardado, abandono de carrito},3/{transacción, medio de pago},4/{calificación, devolución, recompra}} {
+    \node[celD] at (\i*2.85,-6.2) {\t};
+  }
+  \foreach \i/\t in {0/{recordar la marca en 3 s},1/{reseñas verificables y precio claro},2/{recordatorio sin presión falsa},3/{menos pasos; costo de envío visible},4/{pedir opinión; resolver rápido}} {
+    \node[celO] at (\i*2.85,-7.6) {\t};
+  }
+\end{tikzpicture}

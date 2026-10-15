@@ -1,0 +1,30 @@
+% figuras/tikz/cap08-puente-comunidades.tex
+% Seguidores no es influencia: el nodo con más conexiones no es el único camino
+% entre grupos. El puente tiene pocas conexiones y mucha intermediación.
+\begin{tikzpicture}[
+    n/.style={circle, draw=grisIPN, fill=guindaIPNClara, minimum size=0.55cm, inner sep=0pt},
+    hub/.style={circle, draw=guindaIPN, very thick, fill=guindaIPN!35, minimum size=0.95cm, inner sep=0pt, font=\scriptsize\bfseries},
+    puente/.style={circle, draw=bronceIPN, very thick, fill=bronceIPNClaro, minimum size=0.75cm, inner sep=0pt, font=\scriptsize\bfseries},
+    arista/.style={draw=grisIPN!70, thick}
+  ]
+  % grupo A
+  \node[hub] (a0) at (-3.4,0.2) {H};
+  \foreach \i/\x/\y in {1/-4.8/1.2,2/-4.9/-0.7,3/-3.2/1.6,4/-2.6/-1.0,5/-4.0/-1.6,6/-5.4/0.3} {
+    \node[n] (a\i) at (\x,\y) {};
+    \draw[arista] (a0) -- (a\i);
+  }
+  \draw[arista] (a1) -- (a6) (a2) -- (a6) (a3) -- (a1);
+  % grupo B
+  \node[n] (b0) at (3.4,0.2) {};
+  \foreach \i/\x/\y in {1/4.8/1.2,2/4.9/-0.7,3/3.2/1.6,4/2.6/-1.0,5/4.0/-1.6} {
+    \node[n] (b\i) at (\x,\y) {};
+    \draw[arista] (b0) -- (b\i);
+  }
+  \draw[arista] (b1) -- (b3) (b2) -- (b5) (b4) -- (b5);
+  % puente
+  \node[puente] (p) at (0,0.2) {P};
+  \draw[arista] (a4) -- (p) (a3) -- (p) (p) -- (b4) (p) -- (b3);
+  \node[font=\tiny, text=guindaIPN, align=center, text width=3.3cm] at (-4.1,-2.6) {\textbf{H}: más conexiones\\ (grado alto)};
+  \node[font=\tiny, text=bronceIPN, align=center, text width=3.3cm] at (0,-2.6) {\textbf{P}: pocas conexiones;\\ todo camino entre grupos pasa por ella\\ (intermediación alta)};
+  \node[font=\tiny, text=grisIPN, align=center, text width=3.3cm] at (4.1,-2.6) {Otro grupo};
+\end{tikzpicture}
