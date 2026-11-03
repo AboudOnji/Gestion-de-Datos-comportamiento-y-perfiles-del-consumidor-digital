@@ -1,0 +1,513 @@
+% presentaciones/adicional-influencers/influencers.tex
+% Sesión adicional — Tipos de influencers y su realidad
+% Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital
+% Lic. en Mercadotecnia Digital · ESCA Unidad Santo Tomás · IPN (3.er semestre)
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usetheme{Berlin}
+%   PALETA INSTITUCIONAL IPN (Manual de Identidad Gráfica, Pantone 222C)
+%----------------------------------------------------------------------------------------
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\definecolor{IPNguinda}{HTML}{6F1D46}       % Pantone 222C oficial — color primario
+\definecolor{IPNguindaOsc}{HTML}{45102C}    % sombra / paleta secundaria
+\definecolor{IPNguindaClara}{HTML}{F4E9EF}  % fondo de bloques normales
+\definecolor{IPNdorado}{HTML}{B8975A}       % dorado — SOLO enlaces y detalles del cierre
+\definecolor{IPNterracota}{HTML}{9C5B44}    % alertblock
+\definecolor{IPNterracotaClara}{HTML}{F6ECE6}
+\definecolor{IPNbronce}{HTML}{8C6B3F}       % exampleblock
+\definecolor{IPNbronceClaro}{HTML}{F5F0E3}
+\definecolor{IPNgris}{HTML}{58595B}         % texto secundario / notas
+
+% Alias con los nombres de config/colores.tex del libro, para que las figuras
+% TikZ del libro se puedan \input sin modificarlas
+\colorlet{guindaIPN}{IPNguinda}
+\colorlet{guindaIPNOsc}{IPNguindaOsc}
+\colorlet{guindaIPNClara}{IPNguindaClara}
+\colorlet{doradoIPN}{IPNdorado}
+\colorlet{bronceIPN}{IPNbronce}
+\colorlet{bronceIPNClaro}{IPNbronceClaro}
+\colorlet{grisIPN}{IPNgris}
+\colorlet{terracotaIPN}{IPNterracota}
+\colorlet{terracotaIPNClara}{IPNterracotaClara}
+\definecolor{colorLaboratorio}{HTML}{1B6E7A}
+
+\setbeamercolor{palette primary}{bg=IPNguinda,fg=white}
+\setbeamercolor{palette secondary}{bg=IPNguindaOsc,fg=white}
+\setbeamercolor{palette tertiary}{bg=IPNguindaOsc,fg=white}
+\setbeamercolor{palette quaternary}{bg=IPNguinda,fg=white}
+\setbeamercolor{structure}{fg=IPNguinda}
+\setbeamercolor{title}{bg=IPNguinda,fg=white}
+\setbeamercolor{frametitle}{bg=IPNguinda,fg=white}
+\setbeamercolor{block title}{bg=IPNguinda,fg=white}
+\setbeamercolor{block body}{bg=IPNguindaClara,fg=black}
+\setbeamercolor{block title alerted}{bg=IPNterracota,fg=white}
+\setbeamercolor{block body alerted}{bg=IPNterracotaClara,fg=black}
+\setbeamercolor{block title example}{bg=IPNbronce,fg=white}
+\setbeamercolor{block body example}{bg=IPNbronceClaro,fg=black}
+\setbeamercolor{alerted text}{fg=IPNterracota}
+\setbeamercolor{item}{fg=IPNguinda}
+\setbeamercolor{section in toc}{fg=IPNguinda}
+\setbeamercolor{footline}{bg=IPNguindaOsc,fg=white}
+
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{xurl}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\newcommand{\fuente}[1]{{\tiny\color{IPNgris}Fuente: #1}}
+\hypersetup{colorlinks=true,linkcolor=IPNdorado,urlcolor=IPNguinda,pdftitle={Tipos de influencers y su realidad},pdfauthor={Dr. Aboud Barsekh-Onji}}
+\logo{\includegraphics[height=0.75cm]{ipn-escudo.png}}
+\title[Tipos de influencers]{Tipos de influencers: lo que se ve y lo que no}
+\subtitle{Sesión adicional · Unidad I — Comportamiento y perfiles del consumidor digital}
+\author{Dr. Aboud Barsekh-Onji}
+\institute[IPN]{
+    Instituto Politécnico Nacional \\
+    \small ESCA Unidad Santo Tomás · Lic. en Mercadotecnia Digital \\
+    \footnotesize Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital
+}
+\date{\today}
+\AtBeginSection[]{\begin{frame}{Agenda}\tableofcontents[currentsection]\end{frame}}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \vspace{-4pt}
+    \begin{center}{\tiny\color{IPNgris} ORCID: \href{https://orcid.org/0009-0004-5440-8092}{0009-0004-5440-8092}}\end{center}
+\end{frame}
+
+%------------------------------------------------
+\section{Enganche}
+%------------------------------------------------
+
+\begin{frame}{Antes de empezar: tres preguntas, mano arriba}
+\begin{center}
+\begin{tikzpicture}[q/.style={rectangle, rounded corners=6pt, thick, draw=IPNguinda, fill=IPNguindaClara, text width=10.5cm, minimum height=1.1cm, align=center, font=\small}]
+  \node[q] (a) at (0,1.5)  {¿Compraste algo \textbf{este mes} porque alguien en redes lo recomendó?};
+  \node[q] (b) at (0,0)    {¿Sigues a alguien con \textbf{menos de 10\,000 seguidores} que sientes más cercano que a una celebridad?};
+  \node[q, fill=IPNterracotaClara, draw=IPNterracota] (c) at (0,-1.5) {¿Alguna vez te preguntaste \textbf{cuánto cobra} esa persona por esa publicación?};
+\end{tikzpicture}
+\end{center}
+\vspace{2pt}
+\centering\small Hoy ponemos nombre, números y reglas a lo que ya vives como usuario, ahora \textbf{desde el lado de la marca}.
+\end{frame}
+
+\begin{frame}{Al terminar la sesión podrás\ldots}
+\begin{enumerate}
+  \item \textbf{Clasificar} a un creador por tamaño (nano, micro, macro, mega), por rol y por plataforma.
+  \vspace{4pt}
+  \item \textbf{Explicar} cómo se paga y qué hay detrás de una publicación patrocinada, más allá del feed.
+  \vspace{4pt}
+  \item \textbf{Calcular} engagement rate y costo por interacción para comparar creadores con datos.
+  \vspace{4pt}
+  \item \textbf{Identificar} señales de alerta (seguidores falsos) y obligaciones de transparencia en México.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{¿Qué hace que alguien sea \enquote{influencer}?}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Definición de trabajo}
+    \small Persona que, por su \textbf{credibilidad en un nicho} y su \textbf{comunidad}, puede modificar las decisiones de otros. \emph{No es lo mismo ser famoso que influir.}
+  \end{block}
+  \begin{exampleblock}{Las tres palancas}
+    \small
+    \begin{enumerate}
+      \item \textbf{Alcance:} cuántos te ven.
+      \item \textbf{Resonancia:} cuánto interactúan.
+      \item \textbf{Confianza:} cuánto te creen.
+    \end{enumerate}
+  \end{exampleblock}
+  \column{0.44\textwidth}
+  \begin{alertblock}{La clave psicológica}
+    \small La audiencia siente una relación \textbf{parasocial}: cercanía de un solo sentido, como con un amigo que no sabe que existes. Por eso una recomendación se siente \enquote{de confianza} y por eso debe ser \textbf{transparente}.
+  \end{alertblock}
+  \small Conecta con la Unidad I: es una \textbf{señal social} que alimenta el perfil del consumidor.
+\end{columns}
+\end{frame}
+
+%------------------------------------------------
+\section[Por tamaño]{Tipos por tamaño}
+%------------------------------------------------
+
+\begin{frame}{La pirámide: cuanto más grande, menos cercano}
+\begin{center}
+\begin{tikzpicture}[scale=0.92,
+  nivel/.style={trapezium, trapezium stretches=true, draw=white, thick, text=white, align=center, font=\small\bfseries, minimum height=1.05cm}]
+  % pirámide hecha con polígonos
+  \fill[IPNguindaOsc] (3.6,4.4) -- (4.4,4.4) -- (4.9,3.4) -- (3.1,3.4) -- cycle;
+  \fill[IPNguinda]    (3.1,3.4) -- (4.9,3.4) -- (5.7,2.3) -- (2.3,2.3) -- cycle;
+  \fill[IPNterracota] (2.3,2.3) -- (5.7,2.3) -- (6.6,1.2) -- (1.4,1.2) -- cycle;
+  \fill[IPNbronce]    (1.4,1.2) -- (6.6,1.2) -- (7.6,0.0) -- (0.4,0.0) -- cycle;
+  \node[white,font=\scriptsize\bfseries] at (4,3.9) {MEGA};
+  \node[white,font=\small\bfseries] at (4,2.85) {MACRO};
+  \node[white,font=\small\bfseries] at (4,1.75) {MICRO};
+  \node[white,font=\small\bfseries] at (4,0.6) {NANO};
+  \node[right,font=\scriptsize,align=left] at (8.0,3.9) {\textbf{> 1 M} seguidores\\ \color{IPNgris}masa, fama};
+  \node[right,font=\scriptsize,align=left] at (8.0,2.85) {\textbf{100 mil – 1 M}\\ \color{IPNgris}alcance regional};
+  \node[right,font=\scriptsize,align=left] at (8.0,1.75) {\textbf{10 mil – 100 mil}\\ \color{IPNgris}autoridad de nicho};
+  \node[right,font=\scriptsize,align=left] at (8.0,0.6) {\textbf{< 10 mil}\\ \color{IPNgris}comunidad cercana};
+  \draw[-{Stealth},thick,IPNdorado] (-0.3,0.2) -- (-0.3,4.3) node[midway,left,rotate=90,anchor=south,font=\scriptsize,IPNgris]{más alcance};
+  \draw[-{Stealth},thick,IPNdorado] (10.9,4.3) -- (10.9,0.2) node[midway,right,rotate=-90,anchor=south,font=\scriptsize,IPNgris]{más cercanía};
+\end{tikzpicture}
+\end{center}
+\fuente{cortes de Influencer Marketing Hub. No son universales: otras fuentes ubican el macro desde 250 mil.}
+\end{frame}
+
+\begin{frame}{Cada nivel sirve para algo distinto}
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}p{1.6cm}p{3.3cm}p{3.4cm}p{4.6cm}@{}}
+\toprule
+\rowcolor{IPNguindaClara}\textbf{Nivel} & \textbf{Fortaleza} & \textbf{Limitación} & \textbf{Úsalo para\ldots}\\
+\midrule
+\textbf{Nano} & Confianza, conversación, costo bajo & Alcance mínimo, difícil de escalar & Lanzar un producto local, probar mensajes, reseñas auténticas\\
+\textbf{Micro} & Nicho fiel, buen engagement & Hay que coordinar a varios & Convertir en un segmento específico (moda, gaming, fitness)\\
+\textbf{Macro} & Alcance amplio, profesional & Engagement más diluido, más caro & Notoriedad regional y campañas con calendario\\
+\textbf{Mega} & Masa y prestigio & Costo alto, audiencia heterogénea, percibido como anuncio & Lanzamientos masivos y reconocimiento de marca\\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\begin{frame}{El engagement baja al crecer\ldots{} pero cuidado con el dato}
+\begin{columns}[T]
+  \column{0.5\textwidth}
+  \begin{center}
+  \begin{tikzpicture}
+  \begin{axis}[ybar, width=6.3cm, height=5.3cm, bar width=18pt, ymin=0, ymax=7, symbolic x coords={Nano,Micro,Macro}, xtick=data, ylabel={\scriptsize Engagement (\%)}, nodes near coords, nodes near coords style={font=\scriptsize}, tick label style={font=\scriptsize}, title={\scriptsize Instagram (una fuente)}, enlarge x limits=0.3]
+  \addplot[fill=IPNguinda, draw=IPNguindaOsc] coordinates {(Nano,5.6) (Micro,2.15) (Macro,2.05)};
+  \end{axis}
+  \end{tikzpicture}
+  \end{center}
+  \column{0.48\textwidth}
+  \begin{block}{Lo que dicen los estudios}
+    \scriptsize
+    \begin{itemize}
+      \item Instagram: nano $\approx 5.6\%$, micro $\approx 2.15\%$, macro $\approx 2.05\%$ (IMH).
+      \item TikTok (muestra de 1\,500 creadores): nano 7.0\%, micro 3.1\%, macro 3.9\%, mega 6.5\%: \textbf{no cae de forma constante}.
+      \item Otro estudio de 140 cuentas halló nano $\approx 2.4\%$ y micro $\approx 0.35\%$ en mediana.
+    \end{itemize}
+  \end{block}
+  \begin{alertblock}{Lección de datos}
+    \scriptsize Casi todos los benchmarks vienen de \textbf{empresas del sector} y de muestras distintas. Compara siempre dentro de la \textbf{misma plataforma, nicho y mercado}.
+  \end{alertblock}
+\end{columns}
+\fuente{Influencer Marketing Hub; TokFluence; Instapect (2026), vía búsqueda web, nov-2026.}
+\end{frame}
+
+%------------------------------------------------
+\section[Por rol]{Tipos por rol y plataforma}
+%------------------------------------------------
+
+\begin{frame}{El tamaño no lo dice todo: seis perfiles}
+\centering\scriptsize Un mismo creador puede ser \textbf{micro por tamaño, experto por rol y afiliado por modelo de pago}.\par\vspace{3pt}
+\raggedright
+\begin{columns}[T]
+  \column{0.32\textwidth}
+  \begin{block}{Creador de contenido}\scriptsize Vive de producir formatos propios (video, podcast, serie). La marca \textbf{paga por su audiencia y su estilo}.\end{block}
+  \begin{block}{Experto / líder de opinión}\scriptsize Médicos, contadores, chefs, ingenieros. Menos seguidores, \textbf{mucha credibilidad}.\end{block}
+  \column{0.32\textwidth}
+  \begin{block}{Celebridad}\scriptsize Famosa por otro medio (música, deporte, TV). Alcance enorme, \textbf{nicho difuso}.\end{block}
+  \begin{exampleblock}{Creador UGC\footnotemark}\scriptsize Produce videos \enquote{estilo usuario} \textbf{para la cuenta de la marca}; no necesita audiencia propia.\end{exampleblock}
+  \column{0.32\textwidth}
+  \begin{block}{Embajador / afiliado}\scriptsize Relación larga con una marca; cobra comisión por venta con código o enlace.\end{block}
+  \begin{alertblock}{Virtual y B2B}\scriptsize Personajes digitales creados por una marca; y el \enquote{LinkedInfluencer} que posiciona a profesionales y empresas.\end{alertblock}
+\end{columns}
+\footnotetext{\tiny\textbf{UGC} = \emph{User-Generated Content} (contenido generado por usuarios): reseñas, unboxings o videos hechos por personas comunes, con look espontáneo. El \emph{creador UGC} los produce por encargo y la marca los publica en sus propios canales o anuncios; se le paga por el contenido, no por su audiencia.}
+\vspace{2pt}
+\end{frame}
+
+\begin{frame}{Cada plataforma tiene su cultura}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}p{2.2cm}p{5.2cm}p{6.2cm}@{}}
+\toprule
+\rowcolor{IPNguindaClara}\textbf{Plataforma} & \textbf{Qué premia} & \textbf{Qué suele funcionar}\\
+\midrule
+\textbf{TikTok} & Descubrimiento por algoritmo, tendencias, humor & Video corto, demostración, \emph{social commerce} (TikTok Shop)\\
+\textbf{Instagram} & Estética, comunidad, historias & Reels, colaboraciones, moda, belleza, estilo de vida\\
+\textbf{YouTube} & Profundidad y recomendación duradera & Reseñas, tutoriales, comparativas que siguen vendiendo meses\\
+\textbf{Twitch} & Transmisión en vivo, comunidad en tiempo real & Gaming, patrocinios integrados, interacción directa\\
+\textbf{LinkedIn} & Autoridad profesional & B2B, marca personal, empleados como voceros\\
+\bottomrule
+\end{tabular}
+\vspace{4pt}
+\begin{center}\scriptsize La misma persona puede rendir muy distinto según la plataforma: \textbf{mide por canal}, no por nombre.\end{center}
+\end{frame}
+
+%------------------------------------------------
+\section[La realidad]{La realidad detrás del feed}
+%------------------------------------------------
+
+\begin{frame}{Lo que ves vs.\ lo que ocurre}
+\begin{columns}[T]
+  \column{0.46\textwidth}
+  \begin{block}{En pantalla}
+    \small
+    \begin{itemize}
+      \item 30 segundos de video natural.
+      \item Un producto \enquote{descubierto} hoy.
+      \item Éxito aparente y constante.
+    \end{itemize}
+  \end{block}
+  \column{0.5\textwidth}
+  \begin{alertblock}{Detrás}
+    \small
+    \begin{itemize}
+      \item Ideación, guion, grabación, edición, \emph{thumbnails}.
+      \item Negociación, contrato, revisión de la marca.
+      \item Responder comunidad y medir resultados.
+      \item Ingresos \textbf{irregulares} y dependientes del algoritmo.
+    \end{itemize}
+  \end{alertblock}
+\end{columns}
+\vspace{4pt}
+\begin{center}
+\begin{tikzpicture}[scale=0.82, transform shape, paso/.style={rectangle, rounded corners, draw=IPNguinda, fill=IPNguindaClara, font=\tiny, align=center, minimum height=0.8cm, minimum width=1.9cm}, f/.style={-{Stealth}, thick, draw=IPNdorado}]
+  \node[paso] (a) at (0,0) {Briefing\\ de marca};
+  \node[paso] (b) at (2.3,0) {Propuesta\\ y tarifa};
+  \node[paso] (c) at (4.6,0) {Contrato y\\ entregables};
+  \node[paso] (d) at (6.9,0) {Producción\\ y revisión};
+  \node[paso] (e) at (9.2,0) {Publicación\\ con \enquote{publicidad}};
+  \node[paso, fill=IPNbronceClaro, draw=IPNbronce] (f) at (11.5,0) {Reporte\\ de métricas};
+  \foreach \i/\j in {a/b,b/c,c/d,d/e,e/f} \draw[f] (\i) -- (\j);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{¿Cómo se les paga?}
+\begin{columns}[T]
+  \column{0.5\textwidth}
+  \begin{block}{Cinco modelos comunes}
+    \small
+    \begin{enumerate}
+      \item \textbf{Canje:} producto o experiencia a cambio de contenido.
+      \item \textbf{Tarifa fija} por publicación o paquete.
+      \item \textbf{Comisión / afiliado:} porcentaje por venta con código o enlace.
+      \item \textbf{Embajador:} contrato largo, exclusividad.
+      \item \textbf{Ingresos de plataforma:} suscripciones, regalos, monetización.
+    \end{enumerate}
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{Tarifas por publicación en México (estimación de blog, 2026)}
+    \small
+    \begin{tabular}{@{}ll@{}}
+      Nano  & \$300 – \$2\,000 MXN\\
+      Micro & \$2\,000 – \$15\,000\\
+      Macro & \$15\,000 – \$120\,000\\
+    \end{tabular}\\[3pt]
+    \scriptsize Sube entre 20 y 35\% según la misma fuente. Son \textbf{referencias}, no tarifario oficial.
+  \end{exampleblock}
+\end{columns}
+\fuente{Armando Planes (2026), blog; no es una cifra oficial.}
+\end{frame}
+
+\begin{frame}{El mercado mexicano: lo que sí y lo que no sabemos}
+\begin{columns}[T]
+  \column{0.5\textwidth}
+  \begin{block}{Señales de crecimiento}
+    \small
+    \begin{itemize}
+      \item IAB México: \textbf{3.3 millones} de creadores de contenido, con 87\% de crecimiento en 2023.
+      \item Encuesta global SAMY (vía IAB): \textbf{48\%} de marketers aumentará su inversión; \textbf{45\%} planea más colaboraciones con micro.
+    \end{itemize}
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{alertblock}{Lo que NO existe todavía}
+    \small No hay una \textbf{cifra oficial} de inversión en influencers en México. El estudio de Valor Total Media agrupa creadores con clasificados y otros formatos; AVE, CiM e IAB prevén separar el dato durante 2027.
+  \end{alertblock}
+\end{columns}
+\vspace{4pt}
+\begin{center}\small \textbf{Ejercicio de criterio:} ¿por qué un número sin metodología ni fecha es riesgoso para una decisión de inversión?\end{center}
+\fuente{Expansión (13-oct-2026); IAB México; Marketing4eCommerce. Consultados en nov-2026.}
+\end{frame}
+
+\begin{frame}{Cuatro riesgos que debes saber ver}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{alertblock}{1. Audiencia inflada}
+    \small Seguidores comprados, bots y \emph{pods} de comentarios. Señal: engagement \textbf{muy superior a 10\%} en Instagram o comentarios genéricos repetidos.
+  \end{alertblock}
+  \begin{block}{2. Audiencia equivocada}
+    \small Muchos seguidores, pero de otro país o edad. Pide \textbf{demografía real} de la cuenta.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{block}{3. Riesgo reputacional}
+    \small Una polémica del creador se contagia a la marca (\emph{brand safety}).
+  \end{block}
+  \begin{alertblock}{4. Publicidad no declarada}
+    \small Puede ser una infracción y, además, destruye la confianza que se pagó por tener.
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Transparencia en México: ¿qué dice la autoridad?}
+\begin{columns}[T]
+  \column{0.55\textwidth}
+  \begin{block}{Guía de Profeco (DOF, agosto 2023)}
+    \small
+    \begin{itemize}
+      \item La publicidad debe ser \textbf{clara, veraz, comprobable} y no inducir a error (art.\,32, Ley Federal de Protección al Consumidor).
+      \item El contenido pagado debe \textbf{identificarse} como publicidad.
+      \item El creador puede responder junto con la marca si engaña.
+    \end{itemize}
+  \end{block}
+  \column{0.41\textwidth}
+  \begin{alertblock}{Matices}
+    \small Es una \textbf{guía}: su fuerza vinculante y quién cuenta como influencer siguen en discusión. Hubo denuncias de asociaciones civiles y casos virales de supuestas multas. Verifica siempre la norma vigente.
+  \end{alertblock}
+\end{columns}
+\vspace{4pt}
+\begin{center}\small \textbf{Buena práctica:} etiqueta visible (\enquote{publicidad}), al inicio, en el idioma de la audiencia.\end{center}
+\fuente{Profeco / DOF (2023); Expansión; Xataka México. La regulación puede haber cambiado.}
+\end{frame}
+
+%------------------------------------------------
+\section[Con datos]{Elegir con datos}
+%------------------------------------------------
+
+\begin{frame}{Tres métricas para comparar creadores}
+\begin{columns}[T]
+  \column{0.55\textwidth}
+  \begin{block}{Fórmulas}
+    \small
+    \[ \scriptsize ER = \frac{\text{likes}+\text{comentarios}+\text{guardados}+\text{compartidos}}{\text{seguidores}}\times 100 \]
+    \[ \scriptsize CPE = \frac{\text{costo de la publicación}}{\text{interacciones totales}} \]
+    \[ \scriptsize CPM_{seg} = \frac{\text{costo}}{\text{seguidores}}\times 1000 \]
+  \end{block}
+  \column{0.41\textwidth}
+  \begin{exampleblock}{Interpretación}
+    \small
+    \begin{itemize}
+      \item \textbf{ER:} qué tan activa es la audiencia.
+      \item \textbf{CPE:} cuánto pagas por una interacción.
+      \item \textbf{CPM:} cuánto pagas por cada mil personas de alcance potencial.
+    \end{itemize}
+  \end{exampleblock}
+\end{columns}
+\vspace{2pt}
+\centering\scriptsize Usa el promedio de las \textbf{últimas 10–12 publicaciones}, no la mejor.
+\end{frame}
+
+\begin{frame}{Ejemplo numérico: ¿cuál conviene?}
+\centering
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\rowcolor{IPNguindaClara} & \textbf{Micro (A)} & \textbf{Macro (B)}\\
+\midrule
+Seguidores & 30\,000 & 400\,000\\
+Engagement rate & 3\% & 1\%\\
+Interacciones por publicación & 900 & 4\,000\\
+Tarifa & \$5\,000 & \$60\,000\\
+\midrule
+\textbf{Costo por interacción} & \textbf{\$5.56} & \$15.00\\
+\textbf{Costo por mil seguidores} & \$166.7 & \textbf{\$150.0}\\
+\bottomrule
+\end{tabular}
+\vspace{6pt}
+\begin{alertblock}{La respuesta depende del objetivo}
+  \small A sale más barato por \emph{interacción}; B por \emph{alcance potencial}. ¿Notoriedad o conversión? Primero el objetivo, luego el creador.
+\end{alertblock}
+\fuente{datos \textbf{hipotéticos} elaborados para clase.}
+\end{frame}
+
+\begin{frame}{Actividad en clase (15 min)}
+\begin{columns}[T]
+  \column{0.55\textwidth}
+  \begin{block}{Auditoría express de un creador}
+    \small
+    \begin{enumerate}
+      \item Elige a un creador real de tu interés (no una celebridad).
+      \item \textbf{Clasifícalo:} nivel, rol, plataforma.
+      \item Toma sus \textbf{últimas 10 publicaciones} y calcula su ER promedio.
+      \item Busca \textbf{3 señales de alerta} o de calidad en los comentarios.
+      \item Propón para qué tipo de marca y objetivo sería ideal.
+    \end{enumerate}
+  \end{block}
+  \column{0.41\textwidth}
+  \begin{exampleblock}{Entrega}
+    \small Una lámina o un PDF de una cuartilla, en tu carpeta del \textbf{portafolio de evidencias} en Drive, dentro del tiempo límite indicado en clase.
+  \end{exampleblock}
+  \begin{alertblock}{Ética}
+    \small Usa solo \textbf{datos públicos} y no hagas juicios personales sobre el creador.
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------
+\section{Cierre}
+%------------------------------------------------
+
+\begin{frame}{Tendencias que conviene observar}
+\begin{columns}[T]
+  \column{0.5\textwidth}
+  \begin{block}{Con respaldo en las fuentes consultadas}
+    \small
+    \begin{itemize}
+      \item \textbf{Giro a micro y nano:} confianza y mejor engagement a menor costo.
+      \item \textbf{Social commerce:} el creador vende dentro de la plataforma (TikTok Shop).
+      \item \textbf{Intermediación:} agencias y plataformas entre marca y creador.
+    \end{itemize}
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{Para seguir investigando}
+    \small
+    \begin{itemize}
+      \item Creadores UGC y virtuales: ¿sustituyen o complementan?
+      \item Medición de audiencias falsas.
+      \item Regulación específica en México.
+    \end{itemize}
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Cinco ideas para llevarte}
+\begin{enumerate}
+  \item \textbf{Influir no es ser famoso:} es credibilidad en un nicho.
+  \vspace{3pt}
+  \item El \textbf{tamaño} (nano a mega) cambia alcance, cercanía y costo; el \textbf{rol} y la \textbf{plataforma} importan igual.
+  \vspace{3pt}
+  \item Detrás de una publicación hay \textbf{trabajo, contrato y negocio}.
+  \vspace{3pt}
+  \item Elige con datos: \textbf{ER, CPE y CPM}, según tu objetivo.
+  \vspace{3pt}
+  \item Sin \textbf{transparencia} no hay confianza, y sin confianza no hay influencia.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Referencias (consultadas en noviembre de 2026)}
+\tiny
+\begin{itemize}
+  \item[] ContentGrip. (s.\,f.). \textit{Types of influencers: nano, micro, macro, mega and the B2B LinkedInfluencer tier}. \url{https://www.contentgrip.com/types-of-influencers-b2b/}
+  \item[] Influencer Marketing Hub; TokFluence; Instapect; Qolab (2026). Benchmarks de engagement por nivel, según blogs: \url{https://tokfluence.com/blog/influencer-tiers-nano-micro-macro} · \url{https://instapect.com/blog/micro-vs-nano-influencers} · \url{https://qolab.in/blog/types-of-influencers-nano-to-mega-india}
+  \item[] Expansión. (13 oct. 2026). \textit{¿Cuánto dinero llega a los influencers? La intermediación complica el cálculo}. \url{https://expansion.mx/mercadotecnia/2026/10/13/cuanto-dinero-llega-influencers-intermediacion-calculo}
+  \item[] IAB México. \textit{La relevancia será el ROI del Marketing en 2026}. \url{https://www.iabmexico.com/notas-de-industria/la-relevancia-sera-el-roi-del-marketing-en-2026/}
+  \item[] Marketing4eCommerce México. \textit{El influencer marketing tuvo un crecimiento del 87\% en México (IAB)}. \url{https://marketing4ecommerce.mx/el-influencer-marketing-tuvo-un-crecimiento-del-87-en-mexico-iab/}
+  \item[] Armando Planes. (2026). \textit{¿Cuánto puede llegar a ganar un influencer en México en 2026?} \url{https://www.armandoplanes.mx/experiencias/cuanto-gana-influencer-mexico/}
+  \item[] Expansión. (22 ago. 2023). \textit{Profeco publica en el DOF guía de publicidad para influencers}. \url{https://expansion.mx/mercadotecnia/2023/08/22/profeco-publica-dof-guia-de-publicidad-para-influencers}
+  \item[] Xataka México. \textit{Profeco lanza guía de publicidad para influencers}. \url{https://www.xataka.com.mx/legislacion-y-derechos/profeco-lanza-guia-publicidad-para-influencers-mexico-posts-redes-que-comerciales-deben-tener-leyenda-publicidadpagada}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+        {\Large \textcolor{IPNguinda}{\textbf{Gracias}}}\\[6pt]
+        {\color{IPNdorado}\rule{0.4\linewidth}{1.2pt}}\\[6pt]
+        Dr. Aboud Barsekh-Onji \\
+        \small Instituto Politécnico Nacional · ESCA Unidad Santo Tomás \\
+        \small \texttt{ORCID: \href{https://orcid.org/0009-0004-5440-8092}{0009-0004-5440-8092}}
+    \end{center}
+\end{frame}
+
+\end{document}
