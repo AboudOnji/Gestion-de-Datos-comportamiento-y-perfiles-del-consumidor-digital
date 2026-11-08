@@ -1,0 +1,221 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}\usepackage{lmodern}
+\usepackage[spanish,es-noshorthands]{babel}\usepackage{csquotes}
+\usepackage[top=1.55cm,bottom=0.9cm,left=1.0cm,right=1.0cm,headheight=0.5cm,headsep=0.25cm,nofoot]{geometry}
+\usepackage{needspace,multicol,amsmath,amssymb,graphicx,xcolor,array,enumitem,booktabs,fancyhdr,lastpage}
+\usepackage{pgfplots}\pgfplotsset{compat=1.17}\usetikzlibrary{arrows.meta}
+\definecolor{guinda}{HTML}{6F1D46}\definecolor{tinta}{HTML}{000000}
+\newcommand{\cas}{\framebox[1.0em]{\rule{0pt}{1.05ex}}}
+\fancypagestyle{cont}{\fancyhf{}\renewcommand{\headrulewidth}{0.3pt}%
+ \fancyhead[L]{\footnotesize\textbf{Nombre:} \rule{7.2cm}{0.3pt}\quad\textbf{Boleta:} \rule{2.4cm}{0.3pt}}%
+ \fancyhead[R]{\footnotesize\textbf{Versión B} · hoja \thepage\ de \pageref{LastPage}}}
+\pagestyle{cont}
+\setlength{\parindent}{0pt}\setlength{\columnsep}{0.55cm}\setlength{\columnseprule}{0.3pt}
+
+\begin{document}\fontsize{8.7}{10.0}\selectfont\color{tinta}\thispagestyle{empty}\vspace*{-0.7cm}
+\begin{minipage}{0.09\textwidth}\includegraphics[height=1.15cm]{ipn-escudo.png}\end{minipage}%
+\begin{minipage}{0.70\textwidth}\centering
+{\color{guinda}\textbf{\large Instituto Politécnico Nacional · ESCA Unidad Santo Tomás}}\\[-1pt]
+{\small Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital}\\[1pt]
+{\normalsize\textbf{Examen del 2.º parcial (Sesiones 4 a 8 e Influencers)}} \hfill {\small \textbf{Dr. Aboud Barsekh-Onji}}
+\end{minipage}%
+\begin{minipage}{0.19\textwidth}\centering
+{\color{guinda}\fbox{\parbox[c][1.0cm][c]{1.3cm}{\centering\textbf{\scriptsize VERSIÓN}\\[-2pt]{\Huge\textbf{B}}}}}
+\end{minipage}
+\vspace{2pt}\hrule\vspace{3pt}
+{\small\textbf{Nombre:} \rule{7.2cm}{0.3pt} \hfill \textbf{Boleta:} \rule{2.4cm}{0.3pt} \hfill \textbf{Fecha:} \rule{2.2cm}{0.3pt} \hfill \textbf{Calif.:} \rule{1.5cm}{0.3pt}}\\[3pt]
+{\footnotesize\textbf{Duración: 50 min.} Contesta \textbf{en esta misma hoja}, con lápiz. Cada reactivo tiene cuatro opciones (a--d) y \textbf{puede haber de una a tres correctas}: marca con una \textbf{X} el cuadro de \textbf{todas} las que consideres correctas y deja \textbf{vacío} el de las demás. Si te equivocas, borra por completo la marca. Cada opción correcta marcada suma $1/k$ y cada incorrecta marcada resta $1/k$ ($k$ = número de correctas del reactivo); el mínimo por reactivo es 0, así que marcar todas las opciones no conviene. Cada reactivo vale $10/24$ de punto. \textbf{Escribe tu nombre en cada hoja.} Algunos reactivos piden leer figuras o tablas; los datos \enquote{hipotéticos} son casos construidos para el examen. Lee con atención cada enunciado.}
+\vspace{2pt}\hrule\vspace{4pt}
+{\footnotesize\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\textbf{Ecuaciones de apoyo} (para los reactivos que las requieran). \textit{Regla aditiva:} $U_i=\sum_j w_j\,s_{ij}$; \textit{conjuntiva:} se exige $s_{ij}\geq u$ en todos los atributos; \textit{lexicográfica:} gana la mejor alternativa en el atributo prioritario y se considera empatada la que quede a $\tau$ o menos de ella. \textit{Creadores:} $ER=100\times\text{interacciones}/\text{seguidores}$;\ \ $CPE=\text{costo}/\text{interacciones}$;\ \ $CPM_{seg}=1000\times\text{costo}/\text{seguidores}$.}}}\vspace{3pt}
+\begin{multicols}{2}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{1.} Una persona con poco tiempo debe elegir entre 40 modelos de celular en una tienda en línea. Según Simon (1955), Payne et al. (1988) y Tversky y Kahneman (1974), ¿qué comportamientos son esperables?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Descartará primero con una regla no compensatoria (p. ej., un mínimo por atributo) y comparará después las sobrevivientes con una compensatoria.
+\item Las heurísticas de representatividad, disponibilidad y anclaje no se ven afectadas por cómo la interfaz ordena y presenta las opciones.
+\item Buscará una opción suficientemente buena en lugar de la óptima (racionalidad limitada).
+\item Ponderará todos los atributos de las 40 alternativas con una regla aditiva, porque la interfaz digital lo facilita.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{2.} Se reportan las siguientes cifras: 86.1\,\% de la población de 6 años o más usa internet y 37.3\,\% de las personas usuarias compró en línea (ENDUTIH 2025); el comercio electrónico minorista fue 17.7\,\% de las ventas minoristas y hubo 77.2 millones de compradores digitales (AMVO, 2026). ¿Qué lecturas son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Que 37.3\,\% haya comprado en línea no implica que 62.7\,\% decida fuera de internet (puede haber \textit{webrooming}), y las dos fuentes miden cosas distintas, por lo que sus cifras no se suman.
+\item Como 37.3\,\% compró en línea, 62.7\,\% decide su compra fuera de internet.
+\item El \textit{webrooming} es probar en tienda y comprar en línea; por eso la cifra de ENDUTIH subestima a quienes compran en tienda.
+\item El 17.7\,\% indica que casi una de cada cinco personas usuarias de internet compra en línea.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{3.} La tabla da los puntajes ya normalizados de 0 a 10 (10 = lo mejor; precio y entrega ya están invertidos) de cuatro alternativas ficticias. Pesos: precio 0.4, calidad 0.3, entrega 0.3. Reglas: aditiva; conjuntiva con umbral 4 en cada atributo; lexicográfica con prioridad en entrega (tolerancia 0.5). ¿Qué afirmaciones son correctas?
+\begin{center}{\scriptsize\renewcommand{\arraystretch}{1.05}\begin{tabular}{@{}lccc@{}}\toprule
+Alternativa & Precio & Calidad & Entrega\\\midrule
+A & 5 & 9 & 4\\ B & 9 & 8 & 3\\ C & 7 & 5 & 5\\ D & 9 & 3 & 7\\\bottomrule\end{tabular}}\\[1pt]{\tiny\textbf{Tabla 1.} Puntajes normalizados 0--10 (10 = lo mejor).}\end{center}
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item La regla lexicográfica con prioridad en entrega elige A, porque su calidad es la mejor.
+\item La regla aditiva elige B (6.9), aunque tenga el puntaje de entrega más bajo.
+\item La regla conjuntiva con umbral 4 deja pasar solo a A y a C.
+\item B gana con la aditiva y queda fuera con la conjuntiva porque la primera deja que un atributo compense a otro y la segunda exige un mínimo en cada uno.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{4.} Una tienda en línea revisa sus elementos de urgencia, escasez y prueba social. Según el criterio visto en clase (información veraz y salida tan fácil como la entrada), ¿qué afirmaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Un aviso \enquote{quedan 2 piezas} que muestra siempre el mismo número, sin relación con el inventario, es un patrón oscuro.
+\item Un nudge se distingue de un patrón oscuro por el tamaño de su efecto en la conversión, no por la veracidad ni por la facilidad de salida.
+\item Según Luguri y Strahilevitz (2021), los patrones leves casi cuadruplicaron la probabilidad de conservar un servicio no pedido y los agresivos más que la duplicaron.
+\item Un temporizador de oferta es siempre un patrón oscuro, aunque informe la fecha real en que termina la promoción.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{5.} Una marca reporta con el modelo de último clic: redes sociales 3\,\%, búsqueda 55\,\%, directo 36\,\%, correo 6\,\%. Un modelo de efecto de remoción estima que apagar redes sociales reduciría cerca de 25\,\% la probabilidad global de convertir. La dirección propone pasar el presupuesto de redes a búsqueda de pago. ¿Qué interpretaciones son válidas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Redes sociales suele abrir recorridos que otros canales cierran; el último clic no ve ese papel.
+\item Trasladar el presupuesto a búsqueda es la decisión más segura, porque la acción es la etapa mejor medida y la más cercana a la causa de la compra.
+\item El efecto de remoción es una medida del modelo, no una prueba causal; para confirmarlo convendría un experimento (p. ej., apagar el canal en una región).
+\item Si los cálculos del modelo de último clic son aritméticamente correctos, no puede llevar a una mala decisión.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{6.} Un equipo usa un modelo de recorrido tipo cadena de Markov, que calcula la probabilidad de pasar de cada etapa a la siguiente, para comparar tres escenarios (resultados hipotéticos en la tabla). ¿Qué afirmaciones son correctas?
+\begin{center}\resizebox{\columnwidth}{!}{\scriptsize\renewcommand{\arraystretch}{1.05}\begin{tabular}{@{}lccc@{}}\toprule
+Escenario & \% que convierte & Contactos hasta salir & Redes: último clic / remoción\\\midrule
+A: base & 28 & 4.2 & 5\,\% / 22\,\%\\ B: más retrocesos & 21 & 5.6 & 4\,\% / 18\,\%\\ C: más redes, mejor directo & 35 & 3.9 & 8\,\% / 33\,\%\\\bottomrule\end{tabular}}\\[1pt]{\tiny\textbf{Tabla 2.} Resultados hipotéticos de un modelo de recorrido.}\end{center}
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Como el modelo supone que el siguiente paso depende de todo el historial de la persona, los resultados de los escenarios son exactos.
+\item El escenario B convierte menos y tarda más que el A: volver atrás a evaluar baja la conversión y la retrasa; un embudo lineal que lo ignora sobreestimaría la conversión.
+\item En el escenario C el crédito de redes sociales sube con ambos modelos de atribución, por lo que el último clic y el efecto de remoción miden lo mismo.
+\item Comparar escenarios permite estimar el efecto de cambiar un supuesto (p. ej., más retrocesos) sin gastar presupuesto, pero depende de que las probabilidades de transición reflejen el comportamiento real.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{7.} Con la lectura digital de las etapas de AIDAS (atención, interés, deseo, acción, satisfacción), ¿qué pares de etapa, dato y métrica son correctos?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Atención: el clic y el tiempo en página son el dato; la métrica asociada es la tasa de clics.
+\item Acción: el \textit{checkout} deja la transacción; la métrica es la tasa de conversión, que por ser la mejor medida suele sobrevalorarse.
+\item Satisfacción: la calificación y la devolución son el dato; las métricas asociadas son la recompra y la recomendación.
+\item Deseo: guardar o agregar al carrito deja el evento «agregar al carrito»; la métrica asociada es el abandono de carrito.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{8.} Sobre el origen y el respaldo de los marcos del recorrido del cliente, ¿qué afirmaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item La atribución de AIDA a Lewis (1898) circula desde 1925 y, según Iwamoto (2024), carece de evidencia primaria.
+\item La crítica al embudo lineal solo la sostienen consultoras y plataformas; no tiene respaldo académico independiente.
+\item El \textit{consumer decision journey} (Court et al., 2009) es investigación de una consultora y no fue arbitrado: es un marco útil, no un experimento neutral.
+\item El acrónimo AIDA fue acuñado por Strong en 1925, al sistematizar la secuencia que Lewis formuló en 1898.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{9.} Sobre los datos que deja cada figura participante y su lectura, ¿qué afirmaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Si el evaluador es un asistente de IA, deja de importar con qué regla pondera, porque la configura el usuario.
+\item Los datos de uso describen al usuario y los de compra al comprador; del decisor, a menudo no hay ningún dato visible.
+\item El decisor es la figura mejor medida, porque su elección siempre queda registrada como transacción.
+\item El 97.6\,\% de uso de internet de los jóvenes de 15 a 24 años (ENDUTIH 2025) indica a quién debe dirigirse el anuncio.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{10.} Sobre la influencia de los creadores en la decisión de compra, ¿qué afirmaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Los metaanálisis de Leung et al. (2022) y de Barari et al. (2025) convergen en que el efecto opera por credibilidad y atractivo percibidos.
+\item Un influenciador pequeño puede ser un buen punto de contacto de confianza, pero es una hipótesis que cada marca debe contrastar con sus datos.
+\item La Guía de Publicidad para Influencers de PROFECO (2023) es una ley específica con régimen sancionador propio.
+\item Las cifras de interacción por tamaño de audiencia (${\sim}$2.7\,\% nano; $<$1\,\% macro) provienen de un informe primario ya verificado.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{11.} Diego (16 años) quiere unos audífonos para videojuegos tras ver las reseñas de un \textit{streamer} al que sigue. Su madre fija el presupuesto y compara tres reseñas; su abuelo los compra con su tarjeta. Diego los usa y publica un \textit{unboxing}. Según los siete papeles de la decisión de compra, ¿qué afirmaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item La madre es la decisora y, al comparar reseñas, también ejerce el papel de evaluadora.
+\item El \textit{streamer} es el decisor, porque su reseña fue lo que más pesó en la compra.
+\item Diego es usuario y consumidor, y al publicar el \textit{unboxing} también es prosumidor.
+\item El abuelo es el comprador, y sus datos de transacción describen al usuario del producto.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{12.} Una marca compara tres creadores de Instagram (datos hipotéticos de la tabla). ¿Qué afirmaciones son correctas?
+\begin{center}{\scriptsize\renewcommand{\arraystretch}{1.05}\begin{tabular}{@{}lrrr@{}}\toprule
+Creador & Seguidores & Interacciones & Tarifa (MXN)\\\midrule
+X & 20\,000 & 900 & \$4\,500\\ Y & 250\,000 & 2\,500 & \$25\,000\\ Z & 60\,000 & 7\,500 & \$15\,000\\\bottomrule\end{tabular}}\\[1pt]{\tiny\textbf{Tabla 3.} Cotizaciones por publicación (hipotéticas).}\end{center}
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Y tiene un \textit{engagement rate} mayor que X porque suma más interacciones totales (2\,500 frente a 900).
+\item Si el objetivo es notoriedad, Y es más eficiente que X por su menor costo por mil seguidores; si el objetivo es interacción, X es más eficiente que Y por su menor costo por interacción.
+\item Un \textit{engagement rate} mayor siempre indica una audiencia de mejor calidad, por lo que Z debe elegirse.
+\item Z tiene el \textit{engagement rate} más alto (12.5\,\%) y el menor costo por interacción (\$2.00), pero un engagement tan alto justifica auditar su audiencia antes de elegirlo.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{13.} Sobre los riesgos de contratar creadores y la transparencia publicitaria en México, ¿qué afirmaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item La cifra de IAB México de 3.3 millones de creadores equivale a la inversión publicitaria oficial en influencers.
+\item Según la guía de PROFECO (2023), el contenido pagado debe identificarse como publicidad; es una guía de recomendaciones y su fuerza vinculante sigue en discusión.
+\item Un engagement muy superior a 10\,\% en Instagram y comentarios genéricos repetidos son señales de audiencia inflada (bots, \textit{pods}).
+\item La publicidad no declarada puede ser una infracción y, además, destruye la confianza que se pagó por tener.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{14.} Tres creadores cotizan una publicación (datos hipotéticos). ¿Qué afirmaciones son correctas?
+\begin{center}{\scriptsize\renewcommand{\arraystretch}{1.05}\begin{tabular}{@{}lrrr@{}}\toprule
+Creador & Seguidores & Interacciones & Tarifa (MXN)\\\midrule
+A & 60\,000 & 2\,100 & \$10\,500\\ B & 800\,000 & 6\,400 & \$80\,000\\ C & 250\,000 & 6\,250 & \$31\,250\\\bottomrule\end{tabular}}\\[1pt]{\tiny\textbf{Tabla 4.} Cotizaciones por publicación (hipotéticas).}\end{center}
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item B es el más barato por cada mil seguidores (\$100.00), pero tiene el \textit{engagement rate} más bajo de los tres (0.8\,\%).
+\item C tiene el \textit{engagement rate} más alto (3\,\%).
+\item A y C tienen el mismo costo por interacción (\$5.00), aunque A tiene mayor \textit{engagement rate}.
+\item C tiene el \textit{engagement rate} más alto (2.5\,\%).
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{15.} Sobre los datos de engagement y de pago a creadores, ¿qué afirmaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item En el modelo de comisión o afiliado se paga una tarifa fija por publicación, independiente de las ventas.
+\item Las tarifas por publicación en México (p. ej., \$300--\$2\,000 para nano) forman un tarifario oficial.
+\item En TikTok, una muestra de 1\,500 creadores mostró que el engagement no cae de forma constante con el tamaño (nano 7.0\,\%, micro 3.1\,\%, macro 3.9\,\%, mega 6.5\,\%).
+\item Casi todos los \textit{benchmarks} vienen de empresas del sector y de muestras distintas, por lo que se compara dentro de la misma plataforma, nicho y mercado.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{16.} Sobre cómo clasificar y entender a un creador de contenido, ¿qué afirmaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Un mismo creador puede ser micro por tamaño, experto por rol y afiliado por modelo de pago.
+\item Una médica con 8\,000 seguidores que explica temas de salud es nano por tamaño y experta (líder de opinión) por rol.
+\item Los cortes por seguidores (nano $<$10 mil; micro 10--100 mil; macro 100 mil--1 M; mega $>$1 M) son universales.
+\item La relación parasocial es de ida y vuelta: el creador conoce a cada seguidor, y por eso la recomendación se siente de confianza.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{17.} Un equipo descarga 5\,000 comentarios públicos de una red social sobre su marca, extrae los 10 términos más frecuentes y presenta una nube de palabras como \enquote{análisis de sentimiento}. ¿Qué observaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Como el análisis es agregado y no publica nombres, la LFPDPPP deja de aplicar al corpus.
+\item Una palabra como \textit{precio} puede ser positiva (\enquote{precio justo}) o de fricción (\enquote{subió mucho}): la frecuencia sola no lo distingue.
+\item Que los comentarios sean públicos no basta para justificar cualquier uso analítico posterior; hay que verificar la LFPDPPP vigente.
+\item La nube sirve para explorar; para interpretar hace falta clasificar los términos (positivo, fricción, neutro) con un trabajo adicional.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{18.} La Figura 1 muestra, durante 104 semanas, el índice de interés de búsqueda de una marca (datos sintéticos). El equipo observa el alza de las semanas 98--101 (zona sombreada), coincidente con una campaña de \textit{influencer marketing}, y quiere duplicar el presupuesto. ¿Qué afirmaciones son válidas?
+\begin{center}
+\begin{tikzpicture}\begin{axis}[width=8.0cm,height=3.3cm,xmin=1,xmax=104,ymin=0,ymax=100,xlabel={semana},ylabel={índice de interés},
+ axis lines*=left,ymajorgrids,grid style={black!15},tick label style={font=\tiny},label style={font=\tiny},xtick={1,13,26,39,52,65,78,91,104},ytick={0,50,100},xlabel style={yshift=3pt},ylabel style={yshift=-3pt}]
+\fill[black!22] (axis cs:98,0) rectangle (axis cs:101,100);
+\addplot[black,line width=0.7pt,mark=none] coordinates {(1,72.5) (2,77.3) (3,80.3) (4,82.0) (5,84.8) (6,81.7) (7,83.7) (8,81.9) (9,79.3) (10,79.5) (11,79.5) (12,75.5) (13,74.4) (14,74.0) (15,69.8) (16,66.4) (17,62.4) (18,57.6) (19,50.6) (20,51.8) (21,43.3) (22,42.5) (23,38.0) (24,34.8) (25,31.6) (26,27.5) (27,26.9) (28,20.5) (29,22.2) (30,16.2) (31,20.2) (32,16.5) (33,18.0) (34,20.4) (35,14.6) (36,19.2) (37,22.6) (38,25.4) (39,28.9) (40,30.5) (41,33.7) (42,36.6) (43,40.7) (44,44.4) (45,50.2) (46,52.9) (47,58.0) (48,63.8) (49,67.1) (50,68.2) (51,72.2) (52,77.1) (53,77.6) (54,78.1) (55,81.8) (56,86.4) (57,86.3) (58,86.9) (59,89.2) (60,85.9) (61,91.2) (62,86.0) (63,83.8) (64,86.0) (65,78.0) (66,76.3) (67,73.9) (68,68.9) (69,66.3) (70,64.2) (71,59.5) (72,55.1) (73,53.0) (74,50.7) (75,46.3) (76,36.0) (77,38.9) (78,34.7) (79,31.2) (80,26.2) (81,25.2) (82,24.0) (83,20.8) (84,24.9) (85,24.1) (86,22.8) (87,22.0) (88,27.4) (89,27.9) (90,30.9) (91,30.9) (92,39.0) (93,37.7) (94,45.1) (95,41.8) (96,50.0) (97,53.8) (98,53.3) (99,60.8) (100,63.9) (101,67.6) (102,72.6) (103,75.5) (104,81.5)};
+\end{axis}\end{tikzpicture}\\[-1pt]{\tiny\textbf{Figura 1.} Interés de búsqueda de la marca, 2 años (sintético). Sombreado: semanas 98--101.}
+\end{center}
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item El alza equivalente de las semanas 46--49, sin campaña, sugiere un patrón anual que podría explicar el salto.
+\item El alza de unos 14 puntos en las semanas 98--101 es evidencia suficiente de que la campaña funciona.
+\item Un promedio móvil de 52 semanas estima la tendencia porque, al abarcar un ciclo anual completo, la temporada se cancela.
+\item La tendencia y la estacionalidad estimadas en las últimas semanas son tan confiables como las del centro de la serie.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{19.} Un asistente de compras con IA gana una comisión por cada venta que cierra para el comercio. Al evaluarlo con una matriz de criterios durables y con la advertencia de Mathur et al. (2019), ¿qué afirmaciones son válidas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Una capa con suficiente control sobre la interfaz puede pasar de facilitar la decisión a sesgarla, sin cambiar de tecnología.
+\item Por ser un asistente de IA y no una plataforma, el criterio de modelo de negocio deja de aplicar y solo importa su exposición regulatoria.
+\item Intermediación de datos: la pregunta durable es quién controla la capa entre el consumidor y el punto de venta, y quién es dueño del dato de comportamiento.
+\item Modelo de negocio: la comisión alinea sus incentivos con cerrar la venta, no necesariamente con el mejor interés del consumidor.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{20.} Se contrastan dos predicciones razonables: el fin de las cookies de terceros en Chrome y una caída de 25\,\% de la búsqueda tradicional para 2026 (Gartner, 2024). ¿Qué lecturas son correctas a septiembre de 2026?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Como la caída de 25\,\% se anunció en un informe de industria de prestigio, debe reportarse como dato duro.
+\item Las cookies de terceros siguen activas por defecto en Chrome, porque Google revirtió su plan.
+\item Las predicciones fallaron porque Gartner es una fuente de menor jerarquía que la literatura arbitrada; el caso es una crítica a esa firma.
+\item Las fuentes de industria se contradicen sobre si la búsqueda cayó; por eso lo no confirmable en fuente primaria no se reporta como dato duro.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{21.} La tabla muestra una Exploración de embudo de Google Analytics (usuarios que alcanzan cada paso), separada por tipo de dispositivo (datos hipotéticos). ¿Qué afirmaciones son correctas?
+\begin{center}{\scriptsize\renewcommand{\arraystretch}{1.05}\begin{tabular}{@{}lrr@{}}\toprule
+Paso (evento) & Móvil & Escritorio\\\midrule
+\texttt{view\_item} & 15\,000 & 10\,000\\ \texttt{add\_to\_cart} & 4\,500 & 4\,000\\ \texttt{begin\_checkout} & 2\,250 & 3\,000\\ \texttt{purchase} & 1\,350 & 2\,400\\\bottomrule\end{tabular}}\\[1pt]{\tiny\textbf{Tabla 5.} Embudo de Google Analytics por dispositivo (usuarios).}\end{center}
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item En ambos dispositivos el mayor abandono ocurre entre \texttt{view\_item} y \texttt{add\_to\_cart} (70\,\% en móvil; 60\,\% en escritorio).
+\item La conversión de punta a punta es 9\,\% en móvil y 24\,\% en escritorio.
+\item El paso \texttt{begin\_checkout}$\to$\texttt{purchase} avanza más en escritorio (80\,\%) que en móvil (60\,\%).
+\item Como el mayor abandono es el del pago, conviene rediseñar primero el \textit{checkout} en ambos dispositivos.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{22.} Una analista consulta una propiedad estándar de Google Analytics con retención de 14 meses. Hace una Exploración que abarca 20 meses, la compara con un informe estándar del mismo periodo y quiere exportar la tabla; sus compañeros practican con la cuenta de demostración. ¿Qué afirmaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item En la cuenta de demostración no se puede exportar porque es de solo consulta; es una restricción de esa cuenta, no un error del usuario.
+\item El archivo exportado trae una fila por persona, por lo que sirve para identificar a cada cliente.
+\item La retención de 14 meses borra los informes estándar anteriores a ese límite.
+\item La Exploración se corta en torno a los 14 meses, aunque el informe estándar agregado muestre todo el periodo.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{23.} Respecto de lo que es Google Analytics y lo que se puede esperar de él, ¿qué afirmaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Como es una plataforma gratuita y consolidada, sus menús y nombres son estables y un tutorial de hace varios años sigue siendo una guía confiable.
+\item Es una fuente de datos de primera parte y de señal conductual: registra lo que las personas hacen en un sitio web o una app propios.
+\item Permite saber por qué las personas actúan como lo hacen, por lo que puede sustituir a las encuestas y a la escucha social.
+\item Complementa, y no sustituye, a las encuestas, la escucha social y el CRM.
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\begin{minipage}[t]{\columnwidth}\noindent\textbf{24.} Una clienta entra a una tienda desde su celular y desde su laptop, sin iniciar sesión, y después lo hace desde una tablet. Respecto de cómo Google Analytics la reconoce, ¿qué afirmaciones son correctas?
+\vspace{1pt}\begin{enumerate}[label=\cas\ \alph*),leftmargin=2.3em,itemsep=1.2pt,topsep=1pt,parsep=0pt,partopsep=0pt]
+\item Aparece como tres usuarios, porque el \texttt{client\_id} (cookie \texttt{\_ga}) reconoce navegadores, no personas.
+\item La cookie \texttt{\_ga} caduca por defecto a las 24 horas, por lo que cada visita se cuenta como un usuario nuevo.
+\item Si inicia sesión y la organización implementa User-ID, Google Analytics puede unir sus dispositivos en un solo usuario.
+\item El caso ilustra el problema de la identidad única que separa lo multicanal de lo omnicanal (Verhoef et al., 2015).
+\end{enumerate}\end{minipage}\par\vspace{3pt}
+\end{multicols}\end{document}

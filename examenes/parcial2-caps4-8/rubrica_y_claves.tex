@@ -1,0 +1,118 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}\usepackage{lmodern}
+\usepackage[spanish,es-noshorthands]{babel}\usepackage{csquotes}
+\usepackage[margin=1.6cm]{geometry}\usepackage{amsmath,amssymb,xcolor,array,booktabs,enumitem,longtable}
+\definecolor{guinda}{HTML}{6F1D46}
+\setlength{\parindent}{0pt}\setlength{\parskip}{3pt}
+
+\begin{document}
+{\color{guinda}\large\textbf{Rúbrica de calificación y claves de respuesta — 2.º parcial}}\\
+{\small Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital · Sesiones 4 a 8 e Influencers · \textbf{documento del profesor}}
+\vspace{3pt}\hrule\vspace{3pt}
+\subsection*{1. Criterio de puntuación}
+El examen tiene 24 reactivos de cuatro opciones con \textbf{una a tres correctas} ($k$). En cada reactivo se cuenta: $A$ = opciones correctas marcadas; $E$ = opciones incorrectas marcadas.
+\[ \text{puntaje del reactivo}=\max\left\{0,\ \frac{A-E}{k}\right\}\in[0,1],\qquad \text{calificación}=\frac{10}{24}\sum_{n=1}^{24}\text{puntaje}_n \]
+Marcar todas las opciones da 0 siempre; no marcar nada da 0; marcar solo las correctas da 1. El puntaje de un reactivo con $k=2$ se otorga en pasos de 0.5; con $k=3$, en pasos de $1/3$.
+\subsection*{2. Resultados posibles por reactivo}
+\begin{center}\footnotesize\begin{tabular}{@{}ccc@{\hspace{2em}}ccc@{\hspace{2em}}ccc@{}}\toprule
+\multicolumn{3}{c}{$k=1$} & \multicolumn{3}{c}{$k=2$} & \multicolumn{3}{c}{$k=3$}\\ $A$ & $E$ & Punt. & $A$ & $E$ & Punt. & $A$ & $E$ & Punt.\\\midrule
+0 & 1 & 0.00 & 0 & 1 & 0.00 & 0 & 1 & 0.00\\
+0 & 2 & 0.00 & 0 & 2 & 0.00 & 1 & 0 & 0.33\\
+0 & 3 & 0.00 & 1 & 0 & 0.50 & 1 & 1 & 0.00\\
+1 & 0 & 1.00 & 1 & 1 & 0.00 & 2 & 0 & 0.67\\
+1 & 1 & 0.00 & 1 & 2 & 0.00 & 2 & 1 & 0.33\\
+1 & 2 & 0.00 & 2 & 0 & 1.00 & 3 & 0 & 1.00\\
+1 & 3 & 0.00 & 2 & 1 & 0.50 & 3 & 1 & 0.67\\
+&& & 2 & 2 & 0.00 & &&\\
+\bottomrule\end{tabular}\end{center}
+\textbf{Ejemplos.} $k=3$ (correctas a, b, d): marca a, b y c $\Rightarrow A=2,E=1\Rightarrow(2-1)/3=0.33$. $k=2$ (correctas b, c): marca b, c y d $\Rightarrow(2-1)/2=0.50$. $k=1$ (correcta c): marca c y d $\Rightarrow(1-1)/1=0$.
+\subsection*{3. Lectura de las hojas escaneadas}
+\begin{itemize}[leftmargin=1.2em,itemsep=1pt,topsep=1pt]
+\item Opción \textbf{marcada}: casilla con una X, tache o relleno visible dentro del cuadro. Casilla vacía: no marcada.
+\item Marca borrada: si queda residuo tenue y no se distingue de la marca, se revisa a mano; el criterio es la intención clara del alumno.
+\item Marca fuera del cuadro o ambigua: se marca para revisión y no se califica de forma automática.
+\item Reactivo sin ninguna casilla marcada: 0 puntos (no se penaliza).
+\item La versión (A, B o C) está impresa en el encabezado de \textbf{cada hoja} y el nombre se escribe en cada una; se califica con la clave de la versión impresa. Si falta el nombre en una hoja, se asocia con las otras hojas del mismo examen por el número de hoja y la versión.
+\item Calificación final con dos decimales; el redondeo lo decide el profesor.
+\end{itemize}
+\subsection*{4. Estrategia de versiones}
+Las tres versiones contienen los mismos 24 reactivos, con el mismo número de correctas por reactivo (mismo puntaje máximo). Difieren en: (a) el orden de los reactivos (los seis bloques temáticos rotan y cambia el orden dentro de cada bloque); (b) el orden de las opciones, con letras correctas distintas para un mismo reactivo; y (c) las cifras de los reactivos con cálculo (3, 8, 10, 15, 16, 18 y 23), con la misma estructura y verificadas por programa.
+\subsection*{5. Claves de respuesta}
+\begin{center}\footnotesize\begin{tabular}{@{}rl|rl|rl@{}}\toprule \multicolumn{2}{c|}{Versión A} & \multicolumn{2}{c|}{Versión B} & \multicolumn{2}{c}{Versión C}\\ N.º & Correctas & N.º & Correctas & N.º & Correctas\\\midrule
+1 & \textbf{a, b, c} & 1 & \textbf{a, c} & 1 & \textbf{a, d}\\
+2 & \textbf{a, c} & 2 & \textbf{a} & 2 & \textbf{b, d}\\
+3 & \textbf{b, d} & 3 & \textbf{b, c, d} & 3 & \textbf{a}\\
+4 & \textbf{a, b, c} & 4 & \textbf{a} & 4 & \textbf{c, d}\\
+5 & \textbf{a, c} & 5 & \textbf{a, c} & 5 & \textbf{a, b}\\
+6 & \textbf{a, b, c} & 6 & \textbf{b, d} & 6 & \textbf{b, c}\\
+7 & \textbf{b, d} & 7 & \textbf{b, c, d} & 7 & \textbf{a, c, d}\\
+8 & \textbf{a, c, d} & 8 & \textbf{a, c} & 8 & \textbf{a, c}\\
+9 & \textbf{b} & 9 & \textbf{b} & 9 & \textbf{a, b, d}\\
+10 & \textbf{a, b, d} & 10 & \textbf{a, b} & 10 & \textbf{b, c}\\
+11 & \textbf{a, d} & 11 & \textbf{a, c} & 11 & \textbf{a, b, d}\\
+12 & \textbf{b} & 12 & \textbf{b, d} & 12 & \textbf{c, d}\\
+13 & \textbf{b, c} & 13 & \textbf{b, c, d} & 13 & \textbf{a, b, d}\\
+14 & \textbf{a, c, d} & 14 & \textbf{a, c} & 14 & \textbf{a, c}\\
+15 & \textbf{b, c} & 15 & \textbf{c, d} & 15 & \textbf{a, b}\\
+16 & \textbf{a, d} & 16 & \textbf{a, b} & 16 & \textbf{b, c, d}\\
+17 & \textbf{c, d} & 17 & \textbf{b, c, d} & 17 & \textbf{a, b, c}\\
+18 & \textbf{a, b} & 18 & \textbf{a, c} & 18 & \textbf{d}\\
+19 & \textbf{c, d} & 19 & \textbf{a, c, d} & 19 & \textbf{c}\\
+20 & \textbf{d} & 20 & \textbf{b, d} & 20 & \textbf{c, d}\\
+21 & \textbf{c, d} & 21 & \textbf{a, b, c} & 21 & \textbf{b, c}\\
+22 & \textbf{a, c} & 22 & \textbf{a, d} & 22 & \textbf{b, d}\\
+23 & \textbf{b, d} & 23 & \textbf{b, d} & 23 & \textbf{a, b, c}\\
+24 & \textbf{a, b, d} & 24 & \textbf{a, c, d} & 24 & \textbf{a, d}\\
+\bottomrule\end{tabular}\end{center}
+\subsection*{6. Equivalencia de reactivos y bloques (para retroalimentación por tema)}
+\begin{center}\footnotesize\begin{longtable}{@{}rllrrrc@{}}\toprule Base & Bloque & Tema (versión A) & A & B & C & $k$\\\midrule\endhead
+1 & Sesión 4 & Matriz de criterios: asistente de compras con IA (comercio agéntico) & 1 & 19 & 11 & 3\\
+2 & Sesión 4 & Predicciones frente a lo verificable (cookies, Gartner) & 2 & 20 & 12 & 2\\
+3 & Sesión 4 & Tendencia o estacionalidad en una serie (Figura 1) & 3 & 18 & 10 & 2\\
+4 & Sesión 4 & Escucha social: nube de palabras y base legal & 4 & 17 & 9 & 3\\
+5 & Sesión 5 (Google Analytics) & Qué es y qué no es Google Analytics & 5 & 23 & 15 & 2\\
+6 & Sesión 5 (Google Analytics) & Identidad en Google Analytics: \texttt{client\_id} y User-ID & 6 & 24 & 16 & 3\\
+7 & Sesión 5 (Google Analytics) & Retención de datos y exportación en Google Analytics & 7 & 22 & 14 & 2\\
+8 & Sesión 5 (Google Analytics) & Lectura de un embudo por dispositivo (tabla) & 8 & 21 & 13 & 3\\
+9 & Sesión 6 & Nudge frente a patrón oscuro & 9 & 4 & 19 & 1\\
+10 & Sesión 6 & Reglas de decisión: aditiva, conjuntiva y lexicográfica (tabla) & 10 & 3 & 17 & 3\\
+11 & Sesión 6 & Racionalidad limitada, estrategias adaptativas y heurísticas & 11 & 1 & 20 & 2\\
+12 & Sesión 6 & Lectura cuidadosa de cifras del comercio digital en México & 12 & 2 & 18 & 1\\
+13 & Sesión 7 & Genealogía de AIDA y respaldo de los marcos & 13 & 8 & 22 & 2\\
+14 & Sesión 7 & AIDAS: etapa, dato y métrica & 14 & 7 & 23 & 3\\
+15 & Sesión 7 & Comparación de escenarios con un modelo de recorrido (tabla) & 15 & 6 & 24 & 2\\
+16 & Sesión 7 & Atribución: último clic frente a efecto de remoción & 16 & 5 & 21 & 2\\
+17 & Sesión 8 (teoría) & Siete papeles en una misma compra (caso) & 17 & 11 & 2 & 2\\
+18 & Sesión 8 (teoría) & Elegir creador con datos: costo por interacción, por alcance y señales de alerta (tabla) & 18 & 12 & 4 & 2\\
+19 & Sesión 8 (teoría) & Evidencia sobre influenciadores y la guía de PROFECO & 19 & 10 & 1 & 2\\
+20 & Sesión 8 (teoría) & Qué dato deja cada figura participante & 20 & 9 & 3 & 1\\
+21 & Influencers & Clasificar a un creador: tamaño, rol y plataforma & 21 & 16 & 8 & 2\\
+22 & Influencers & Benchmarks de engagement y modelos de pago & 22 & 15 & 5 & 2\\
+23 & Influencers & Comparar creadores: ER, CPE y CPM (tabla) & 23 & 14 & 6 & 2\\
+24 & Influencers & Riesgos y transparencia en México & 24 & 13 & 7 & 3\\
+\bottomrule\end{longtable}\end{center}
+\subsection*{7. Qué cambia en los reactivos con cálculo}
+\begin{itemize}[leftmargin=1.2em,itemsep=1pt,topsep=1pt]\footnotesize
+\item \textbf{Base 3} --- A: versión aprobada.
+\\ \hspace{1em}B: alza 98--101 (equivalente 46--49); alzas 14.2 y 14.3 pts; semilla 16
+\\ \hspace{1em}C: alza 95--98 (equivalente 43--46); alzas 14.9 y 14.4 pts; semilla 4
+\item \textbf{Base 8} --- A: versión aprobada.
+\\ \hspace{1em}B: móvil [15000, 4500, 2250, 1350]; escritorio [10000, 4000, 3000, 2400]; conversión 9 \% y 24 \%
+\\ \hspace{1em}C: móvil [20000, 4000, 2400, 1440]; escritorio [12000, 3600, 2520, 1890]; conversión 7.2 \% y 15.75 \%
+\item \textbf{Base 10} --- A: versión aprobada.
+\\ \hspace{1em}B: pesos [0.4, 0.3, 0.3]; umbral 4; prioridad entrega; aditiva B; conjuntiva [A, C]; lexicográfica D; tabla (A: (5, 9, 4), B: (9, 8, 3), C: (7, 5, 5), D: (9, 3, 7))
+\\ \hspace{1em}C: pesos [0.3, 0.5, 0.2]; umbral 4; prioridad precio; aditiva D; conjuntiva [A, B]; lexicográfica C; tabla (A: (6, 4, 6), B: (8, 4, 8), C: (9, 2, 2), D: (2, 9, 6))
+\item \textbf{Base 15} --- A: versión aprobada.
+\\ \hspace{1em}B: escenarios (conv, contactos, UC, remoción) = [(28, 4.2, 5, 22), (21, 5.6, 4, 18), (35, 3.9, 8, 33)]
+\\ \hspace{1em}C: escenarios (conv, contactos, UC, remoción) = [(33, 3.8, 6, 24), (25, 5.1, 5, 20), (40, 3.4, 9, 36)]
+\item \textbf{Base 16} --- A: versión aprobada.
+\\ \hspace{1em}B: último clic [3, 55, 36, 6]; remoción de redes ~25 \%
+\\ \hspace{1em}C: último clic [6, 49, 39, 6]; remoción de redes ~15 \%
+\item \textbf{Base 18} --- A: versión aprobada.
+\\ \hspace{1em}B: X=(20000, 900, 4500), Y=(250000, 2500, 25000), Z=(60000, 7500, 15000)
+\\ \hspace{1em}C: X=(50000, 1750, 8750), Y=(400000, 3200, 32000), Z=(80000, 10400, 20800)
+\item \textbf{Base 23} --- A: versión aprobada.
+\\ \hspace{1em}B: A=(60000, 2100, 10500), B=(800000, 6400, 80000), C=(250000, 6250, 31250)
+\\ \hspace{1em}C: A=(30000, 1500, 7500), B=(400000, 3200, 40000), C=(150000, 5250, 26250)
+\end{itemize}
+\end{document}

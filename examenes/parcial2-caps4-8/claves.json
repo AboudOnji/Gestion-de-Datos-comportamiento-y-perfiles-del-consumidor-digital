@@ -1,0 +1,671 @@
+{
+ "puntaje": "max(0, (aciertos - errores)/k) por reactivo; calificación = 10/24 * suma",
+ "versiones": {
+  "A": {
+   "1": {
+    "base": 1,
+    "bloque": "Sesión 4",
+    "k": 3,
+    "correctas": [
+     "a",
+     "b",
+     "c"
+    ]
+   },
+   "2": {
+    "base": 2,
+    "bloque": "Sesión 4",
+    "k": 2,
+    "correctas": [
+     "a",
+     "c"
+    ]
+   },
+   "3": {
+    "base": 3,
+    "bloque": "Sesión 4",
+    "k": 2,
+    "correctas": [
+     "b",
+     "d"
+    ]
+   },
+   "4": {
+    "base": 4,
+    "bloque": "Sesión 4",
+    "k": 3,
+    "correctas": [
+     "a",
+     "b",
+     "c"
+    ]
+   },
+   "5": {
+    "base": 5,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 2,
+    "correctas": [
+     "a",
+     "c"
+    ]
+   },
+   "6": {
+    "base": 6,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 3,
+    "correctas": [
+     "a",
+     "b",
+     "c"
+    ]
+   },
+   "7": {
+    "base": 7,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 2,
+    "correctas": [
+     "b",
+     "d"
+    ]
+   },
+   "8": {
+    "base": 8,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 3,
+    "correctas": [
+     "a",
+     "c",
+     "d"
+    ]
+   },
+   "9": {
+    "base": 9,
+    "bloque": "Sesión 6",
+    "k": 1,
+    "correctas": [
+     "b"
+    ]
+   },
+   "10": {
+    "base": 10,
+    "bloque": "Sesión 6",
+    "k": 3,
+    "correctas": [
+     "a",
+     "b",
+     "d"
+    ]
+   },
+   "11": {
+    "base": 11,
+    "bloque": "Sesión 6",
+    "k": 2,
+    "correctas": [
+     "a",
+     "d"
+    ]
+   },
+   "12": {
+    "base": 12,
+    "bloque": "Sesión 6",
+    "k": 1,
+    "correctas": [
+     "b"
+    ]
+   },
+   "13": {
+    "base": 13,
+    "bloque": "Sesión 7",
+    "k": 2,
+    "correctas": [
+     "b",
+     "c"
+    ]
+   },
+   "14": {
+    "base": 14,
+    "bloque": "Sesión 7",
+    "k": 3,
+    "correctas": [
+     "a",
+     "c",
+     "d"
+    ]
+   },
+   "15": {
+    "base": 15,
+    "bloque": "Sesión 7",
+    "k": 2,
+    "correctas": [
+     "b",
+     "c"
+    ]
+   },
+   "16": {
+    "base": 16,
+    "bloque": "Sesión 7",
+    "k": 2,
+    "correctas": [
+     "a",
+     "d"
+    ]
+   },
+   "17": {
+    "base": 17,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 2,
+    "correctas": [
+     "c",
+     "d"
+    ]
+   },
+   "18": {
+    "base": 18,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 2,
+    "correctas": [
+     "a",
+     "b"
+    ]
+   },
+   "19": {
+    "base": 19,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 2,
+    "correctas": [
+     "c",
+     "d"
+    ]
+   },
+   "20": {
+    "base": 20,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 1,
+    "correctas": [
+     "d"
+    ]
+   },
+   "21": {
+    "base": 21,
+    "bloque": "Influencers",
+    "k": 2,
+    "correctas": [
+     "c",
+     "d"
+    ]
+   },
+   "22": {
+    "base": 22,
+    "bloque": "Influencers",
+    "k": 2,
+    "correctas": [
+     "a",
+     "c"
+    ]
+   },
+   "23": {
+    "base": 23,
+    "bloque": "Influencers",
+    "k": 2,
+    "correctas": [
+     "b",
+     "d"
+    ]
+   },
+   "24": {
+    "base": 24,
+    "bloque": "Influencers",
+    "k": 3,
+    "correctas": [
+     "a",
+     "b",
+     "d"
+    ]
+   }
+  },
+  "B": {
+   "1": {
+    "base": 11,
+    "bloque": "Sesión 6",
+    "k": 2,
+    "correctas": [
+     "a",
+     "c"
+    ]
+   },
+   "2": {
+    "base": 12,
+    "bloque": "Sesión 6",
+    "k": 1,
+    "correctas": [
+     "a"
+    ]
+   },
+   "3": {
+    "base": 10,
+    "bloque": "Sesión 6",
+    "k": 3,
+    "correctas": [
+     "b",
+     "c",
+     "d"
+    ]
+   },
+   "4": {
+    "base": 9,
+    "bloque": "Sesión 6",
+    "k": 1,
+    "correctas": [
+     "a"
+    ]
+   },
+   "5": {
+    "base": 16,
+    "bloque": "Sesión 7",
+    "k": 2,
+    "correctas": [
+     "a",
+     "c"
+    ]
+   },
+   "6": {
+    "base": 15,
+    "bloque": "Sesión 7",
+    "k": 2,
+    "correctas": [
+     "b",
+     "d"
+    ]
+   },
+   "7": {
+    "base": 14,
+    "bloque": "Sesión 7",
+    "k": 3,
+    "correctas": [
+     "b",
+     "c",
+     "d"
+    ]
+   },
+   "8": {
+    "base": 13,
+    "bloque": "Sesión 7",
+    "k": 2,
+    "correctas": [
+     "a",
+     "c"
+    ]
+   },
+   "9": {
+    "base": 20,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 1,
+    "correctas": [
+     "b"
+    ]
+   },
+   "10": {
+    "base": 19,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 2,
+    "correctas": [
+     "a",
+     "b"
+    ]
+   },
+   "11": {
+    "base": 17,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 2,
+    "correctas": [
+     "a",
+     "c"
+    ]
+   },
+   "12": {
+    "base": 18,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 2,
+    "correctas": [
+     "b",
+     "d"
+    ]
+   },
+   "13": {
+    "base": 24,
+    "bloque": "Influencers",
+    "k": 3,
+    "correctas": [
+     "b",
+     "c",
+     "d"
+    ]
+   },
+   "14": {
+    "base": 23,
+    "bloque": "Influencers",
+    "k": 2,
+    "correctas": [
+     "a",
+     "c"
+    ]
+   },
+   "15": {
+    "base": 22,
+    "bloque": "Influencers",
+    "k": 2,
+    "correctas": [
+     "c",
+     "d"
+    ]
+   },
+   "16": {
+    "base": 21,
+    "bloque": "Influencers",
+    "k": 2,
+    "correctas": [
+     "a",
+     "b"
+    ]
+   },
+   "17": {
+    "base": 4,
+    "bloque": "Sesión 4",
+    "k": 3,
+    "correctas": [
+     "b",
+     "c",
+     "d"
+    ]
+   },
+   "18": {
+    "base": 3,
+    "bloque": "Sesión 4",
+    "k": 2,
+    "correctas": [
+     "a",
+     "c"
+    ]
+   },
+   "19": {
+    "base": 1,
+    "bloque": "Sesión 4",
+    "k": 3,
+    "correctas": [
+     "a",
+     "c",
+     "d"
+    ]
+   },
+   "20": {
+    "base": 2,
+    "bloque": "Sesión 4",
+    "k": 2,
+    "correctas": [
+     "b",
+     "d"
+    ]
+   },
+   "21": {
+    "base": 8,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 3,
+    "correctas": [
+     "a",
+     "b",
+     "c"
+    ]
+   },
+   "22": {
+    "base": 7,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 2,
+    "correctas": [
+     "a",
+     "d"
+    ]
+   },
+   "23": {
+    "base": 5,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 2,
+    "correctas": [
+     "b",
+     "d"
+    ]
+   },
+   "24": {
+    "base": 6,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 3,
+    "correctas": [
+     "a",
+     "c",
+     "d"
+    ]
+   }
+  },
+  "C": {
+   "1": {
+    "base": 19,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 2,
+    "correctas": [
+     "a",
+     "d"
+    ]
+   },
+   "2": {
+    "base": 17,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 2,
+    "correctas": [
+     "b",
+     "d"
+    ]
+   },
+   "3": {
+    "base": 20,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 1,
+    "correctas": [
+     "a"
+    ]
+   },
+   "4": {
+    "base": 18,
+    "bloque": "Sesión 8 (teoría)",
+    "k": 2,
+    "correctas": [
+     "c",
+     "d"
+    ]
+   },
+   "5": {
+    "base": 22,
+    "bloque": "Influencers",
+    "k": 2,
+    "correctas": [
+     "a",
+     "b"
+    ]
+   },
+   "6": {
+    "base": 23,
+    "bloque": "Influencers",
+    "k": 2,
+    "correctas": [
+     "b",
+     "c"
+    ]
+   },
+   "7": {
+    "base": 24,
+    "bloque": "Influencers",
+    "k": 3,
+    "correctas": [
+     "a",
+     "c",
+     "d"
+    ]
+   },
+   "8": {
+    "base": 21,
+    "bloque": "Influencers",
+    "k": 2,
+    "correctas": [
+     "a",
+     "c"
+    ]
+   },
+   "9": {
+    "base": 4,
+    "bloque": "Sesión 4",
+    "k": 3,
+    "correctas": [
+     "a",
+     "b",
+     "d"
+    ]
+   },
+   "10": {
+    "base": 3,
+    "bloque": "Sesión 4",
+    "k": 2,
+    "correctas": [
+     "b",
+     "c"
+    ]
+   },
+   "11": {
+    "base": 1,
+    "bloque": "Sesión 4",
+    "k": 3,
+    "correctas": [
+     "a",
+     "b",
+     "d"
+    ]
+   },
+   "12": {
+    "base": 2,
+    "bloque": "Sesión 4",
+    "k": 2,
+    "correctas": [
+     "c",
+     "d"
+    ]
+   },
+   "13": {
+    "base": 8,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 3,
+    "correctas": [
+     "a",
+     "b",
+     "d"
+    ]
+   },
+   "14": {
+    "base": 7,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 2,
+    "correctas": [
+     "a",
+     "c"
+    ]
+   },
+   "15": {
+    "base": 5,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 2,
+    "correctas": [
+     "a",
+     "b"
+    ]
+   },
+   "16": {
+    "base": 6,
+    "bloque": "Sesión 5 (Google Analytics)",
+    "k": 3,
+    "correctas": [
+     "b",
+     "c",
+     "d"
+    ]
+   },
+   "17": {
+    "base": 10,
+    "bloque": "Sesión 6",
+    "k": 3,
+    "correctas": [
+     "a",
+     "b",
+     "c"
+    ]
+   },
+   "18": {
+    "base": 12,
+    "bloque": "Sesión 6",
+    "k": 1,
+    "correctas": [
+     "d"
+    ]
+   },
+   "19": {
+    "base": 9,
+    "bloque": "Sesión 6",
+    "k": 1,
+    "correctas": [
+     "c"
+    ]
+   },
+   "20": {
+    "base": 11,
+    "bloque": "Sesión 6",
+    "k": 2,
+    "correctas": [
+     "c",
+     "d"
+    ]
+   },
+   "21": {
+    "base": 16,
+    "bloque": "Sesión 7",
+    "k": 2,
+    "correctas": [
+     "b",
+     "c"
+    ]
+   },
+   "22": {
+    "base": 13,
+    "bloque": "Sesión 7",
+    "k": 2,
+    "correctas": [
+     "b",
+     "d"
+    ]
+   },
+   "23": {
+    "base": 14,
+    "bloque": "Sesión 7",
+    "k": 3,
+    "correctas": [
+     "a",
+     "b",
+     "c"
+    ]
+   },
+   "24": {
+    "base": 15,
+    "bloque": "Sesión 7",
+    "k": 2,
+    "correctas": [
+     "a",
+     "d"
+    ]
+   }
+  }
+ }
+}
