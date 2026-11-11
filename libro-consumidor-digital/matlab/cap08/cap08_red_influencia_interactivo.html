@@ -234,10 +234,7 @@ ul.conclusion li { margin: 4px 0; }
       <p class="nota no-imprimir">Pasen el cursor sobre las curvas para leer valores exactos. Para descargar una figura en PNG usen el ícono de cámara 📷 de su esquina superior derecha.</p>
       <div class="figuras">
         <div class="figura ancha"><div class="grafica" id="fig1" style="height:520px"></div><div class="pie">Figura 1 — La red sintética: tamaño = intermediación; guinda = semillas; verde azulado = adoptó; gris = no adoptó. Los grupos se dibujan separados.</div></div>
-        <div class="figura"><div class="grafica" id="fig2a" style="height:400px"></div><div class="pie">Figura 2 (izq.) — Conexiones frente a intermediación. Las semillas elegidas están en guinda.</div></div>
-        <div class="figura"><div class="grafica" id="fig2b" style="height:400px"></div><div class="pie">Figura 2 (der.) — Adopción final según cómo se eligen las semillas (centrales, periféricas y promedio al azar).</div></div>
         <div class="figura"><div class="grafica" id="fig3" style="height:340px"></div><div class="pie"><b>Complemento de la app</b> (no está en el .m): % de la red que ha adoptado en cada ronda de la cascada con el criterio elegido.</div></div>
-        <div class="figura"><div class="grafica" id="fig4" style="height:340px"></div><div class="pie"><b>Complemento de la app</b> (no está en el .m): los 100 sorteos de semillas al azar. La dispersión muestra por qué «una sola» muestra aleatoria no demuestra nada.</div></div>
       </div>
     </section>
 
@@ -5085,24 +5082,9 @@ window.RAND42 = [0.374540118847,0.95071430641,0.731993941811,0.598658484197,0.15
       xaxis: { visible: false, showgrid: false, zeroline: false, scaleanchor: 'y' }, yaxis: { visible: false, showgrid: false, zeroline: false },
       legend: { orientation: 'h', y: -0.02 }, hovermode: 'closest' }, { archivo: 'cap08_red' });
 
-    const es = new Set(r.semillasC[crit]);
-    UI.graficar('fig2a', [
-      { x: r.grado.filter((_, i) => !es.has(i)), y: r.inter.filter((_, i) => !es.has(i)), type: 'scatter', mode: 'markers', name: 'Personas', marker: { size: 9, color: oscuro ? '#9a9a9a' : '#B8B8B8', line: { color: '#555', width: 1 } } },
-      { x: r.semillasC[crit].map(i => r.grado[i]), y: r.semillasC[crit].map(i => r.inter[i]), type: 'scatter', mode: 'markers', name: 'Semillas elegidas', marker: { size: 13, color: UI.color.guinda } }],
-    { title: 'Conexiones frente a intermediación', xaxis: { title: { text: 'Conexiones (grado)' } }, yaxis: { title: { text: 'Intermediación' } }, legend: { x: 0.02, y: 0.98 } }, { archivo: 'cap08_grado_vs_interm' });
-
-    UI.graficar('fig2b', [
-      { x: MED.concat(['al azar']), y: r.adopCentral.concat([r.promAzar]), type: 'bar', name: 'Centrales (y azar)',
-        marker: { color: [UI.color.guinda, UI.color.guinda, UI.color.guinda, oscuro ? '#7d7d7d' : '#B8B8B8'] }, text: r.adopCentral.concat([r.promAzar]).map(a => a.toFixed(1) + ' %'), textposition: 'outside', cliponaxis: false },
-      { x: MED, y: r.adopPerif, type: 'bar', name: 'Periféricas', marker: { color: UI.color.dorado } }],
-    { title: 'Adopción final con ' + v.nSemillas + ' semillas', barmode: 'group', yaxis: { title: { text: '% de la red que adopta' }, range: [0, 112] }, legend: { orientation: 'h', y: -0.2 } }, { archivo: 'cap08_adopcion' });
-
     const rondas = r.elegida.porRonda;
     UI.graficar('fig3', [{ x: rondas.map((_, i) => i), y: rondas.map(a => 100 * a), type: 'scatter', mode: 'lines+markers', line: { color: UI.color.teal, width: 2.4 }, marker: { size: 7 } }],
       { title: 'Adopción por ronda (criterio: ' + MED[crit] + ')', xaxis: { title: { text: 'Ronda' }, dtick: 1 }, yaxis: { title: { text: '% de la red' }, range: [0, 105] }, showlegend: false }, { archivo: 'cap08_rondas' });
-    UI.graficar('fig4', [{ x: r.azar, type: 'histogram', nbinsx: 12, marker: { color: oscuro ? '#7d7d7d' : '#B8B8B8', line: { color: '#555', width: 1 } } }],
-      { title: 'Adopción con semillas al azar (100 sorteos)', xaxis: { title: { text: '% de la red que adopta' } }, yaxis: { title: { text: 'Sorteos' } }, showlegend: false,
-        shapes: [{ type: 'line', x0: r.promAzar, x1: r.promAzar, yref: 'paper', y0: 0, y1: 1, line: { color: UI.color.guinda, width: 2, dash: 'dot' } }] }, { archivo: 'cap08_sorteos_azar' });
   }
 
   function caso(r) { return { valores: r.metricas, extra: { adop: r.adopCentral.map(a => +a.toFixed(2)).concat([+r.promAzar.toFixed(2)]) } }; }
