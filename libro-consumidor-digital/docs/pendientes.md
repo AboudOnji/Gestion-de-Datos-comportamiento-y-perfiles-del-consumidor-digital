@@ -75,3 +75,11 @@ Assael 1987, Dixon/Freeman/Toman 2010).
 | 33 | Fechas de entrega de los decks 6–9 («en la fecha acordada en clase»): sustituir por las reales al impartir (D3.4). | No |
 | 34 | Verificar vigencia de Gartner (2026) y de los protocolos de comercio agéntico al día de impartir las sesiones 7 y 9 (recuadros «Vigente a…»). | No |
 | 35 | ~~Apps «datos propios» de los Cap. 6–9~~ — resueltas el 2026-10-15 (D3.6). | — |
+
+## Pendientes del Cap. 9 reescrito (2026-11-11)
+
+| # | Descripción | Bloqueante |
+|---|---|---|
+| 36 | Subtema 2.4.1 sin capítulo tras D4.1: decidir dónde reubicar (p. ej., en la base tecnológica 3.3 o como capítulo propio). Texto previo en `archivo/cap09-base-tecnologica-2.4.1.tex`. | Cobertura 100 % |
+| 37 | App HTML + casos en `referencias_parte2.m` + verificación para `cap09_tipos_y_modelos.m`; presentación Beamer de la sesión 9 (la actual trata AHP/TOPSIS). Retirar o archivar los archivos del Cap. 9 anterior. | No |
+| 38 | Contrastar la tipología de Assael contra el texto íntegro (#14) y contra Solomon 2017 (#15); el capítulo ya lo marca con `\datoPendiente`. Falta fuente primaria de TAM (Davis) si se quiere citar. | No |

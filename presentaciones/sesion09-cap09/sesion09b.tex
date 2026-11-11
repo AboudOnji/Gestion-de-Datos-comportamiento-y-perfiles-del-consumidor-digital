@@ -1,0 +1,890 @@
+% presentaciones/sesion09-cap09/sesion09b.tex
+% Sesión 9B — Capítulo 9, segunda parte: Modelos de estudio del consumidor digital (programa 3.2)
+% Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital
+% Lic. en Mercadotecnia Digital · ESCA Unidad Santo Tomás · IPN
+% Fuente de contenido: libro-consumidor-digital/partes/parte3/cap09.tex (sin la sección de laboratorio)
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usetheme{Berlin}
+\input{preambulo09}
+\hypersetup{pdftitle={Sesion 9B - Modelos de estudio del consumidor digital},pdfauthor={Dr. Aboud Barsekh-Onji}}
+
+\logo{\includegraphics[height=0.75cm]{ipn-escudo.png}}
+\title[Sesión 9B · Modelos de estudio]{Modelos de estudio del comportamiento del consumidor digital}
+\subtitle{Sesión 9B · Unidad III — Capítulo 9 (parte 2: tema 3.2)}
+\author{Dr. Aboud Barsekh-Onji}
+\institute[IPN]{
+    Instituto Politécnico Nacional \\
+    \small ESCA Unidad Santo Tomás · Lic. en Mercadotecnia Digital \\
+    \footnotesize Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital
+}
+\date{\today}
+
+\AtBeginSection[]{
+  \begin{frame}{Agenda}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \vspace{-4pt}
+    \begin{center}
+        {\tiny\color{IPNgris} ORCID: \href{https://orcid.org/0009-0004-5440-8092}{0009-0004-5440-8092}}
+    \end{center}
+\end{frame}
+
+%------------------------------------------------
+\section{Encuadre}
+%------------------------------------------------
+
+\begin{frame}{Ficha de la sesión}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Unidad III}
+    \small Modelos de comportamiento del consumidor digital
+  \end{block}
+  \begin{block}{Tema del programa (3.2 Modelos de estudio)}
+    \tiny
+    \begin{itemize}
+      \item[3.2.1] Económico de Marshall \quad [3.2.2] Estímulo-respuesta de Pavlov
+      \item[3.2.3] Sociológico de Veblen \quad [3.2.4] Psicoanalítico de Freud
+      \item[3.2.5] Acción razonada de Fishbein y Ajzen
+      \item[3.2.6] Funcional de O'Shaughnessy
+      \item[3.2.7] Motivacional de Maslow
+      \item[3.2.8] Integrador de Howard y Sheth
+      \item[3.2.9] Antropológico-etnográfico (netnografía)
+    \end{itemize}
+  \end{block}
+  \column{0.44\textwidth}
+  \begin{block}{Carga horaria}
+    \small Teoría 3.0 h · Práctica 2.0 h\\ Aprendizaje autónomo 1.0 h
+  \end{block}
+  \begin{exampleblock}{Competencia de la unidad}
+    \small Distingue los modelos de estudio del comportamiento del consumidor digital con base en sus tipos y el análisis de los modelos de decisión de compra.
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Al terminar la sesión podrás\ldots}
+\begin{enumerate}
+  \item \textbf{Explicar}, para cada uno de los nueve modelos, su \textbf{supuesto central}, su \textbf{variable clave}, un \textbf{ejemplo digital} y su \textbf{límite}.
+    \item \textbf{Distinguir} lo que el autor dijo de lo que los manuales le atribuyen (Freud/Dichter y Maslow).
+    \item \textbf{Calcular} una actitud multiatributo, una norma subjetiva y una intención de compra a mano.
+    \item \textbf{Elegir} qué modelo (o combinación) sirve para una pregunta concreta de mercadotecnia digital.
+\end{enumerate}
+\begin{alertblock}{Recordatorio}
+  Aprendizaje autónomo de la Sesión 9A: entrega en la fecha acordada en clase, en su carpeta del portafolio.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Arranque: ¿por qué compraste eso?}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{exampleblock}{Pregunta de arranque}
+    Piensen en un objeto que compraron y \textbf{usan mucho}: audífonos, tenis, un celular.\\[4pt]
+    Escriban \textbf{tres razones} por las que lo compraron, \textbf{sin pensarlo demasiado}.
+  \end{exampleblock}
+  \column{0.44\textwidth}
+  \begin{block}{Dinámica (10 min)}
+    \small
+    \begin{enumerate}
+      \item Individual: tres razones (2 min).
+      \item Parejas: ¿alguna razón es \textbf{precio}? ¿alguna es \textbf{qué dirían los demás}? ¿alguna es \textbf{hábito}?
+      \item Pizarrón: ¿todas las razones caben en \textbf{una sola} teoría?
+    \end{enumerate}
+  \end{block}
+\end{columns}
+\vspace{2pt}
+{\small\color{IPNgris} Hoy veremos nueve teorías; casi nunca basta una.}
+\end{frame}
+
+\begin{frame}{Qué es un modelo y por qué hay nueve}
+\begin{block}{Modelo}
+  \small Representación simplificada que destaca \textbf{algunas} causas de un fenómeno y deja las demás fuera. Ninguno es \enquote{el correcto}: cada uno ilumina una parte de la decisión y oscurece otra.
+\end{block}
+\begin{alertblock}{Tres cosas que hay que saber desde el inicio}
+  \small
+  \begin{enumerate}
+    \item \textbf{La mayoría no nació como teoría del consumidor}: Marshall escribió economía; Pavlov, fisiología; Veblen, sociología; Freud, psicología clínica. La lectura \enquote{de mercadotecnia} es una \textbf{reconstrucción posterior de los manuales}.
+    \item \textbf{No son del mismo tipo}: unos explican \textit{por qué}, otros \textit{cómo se aprende}, otros \textit{predicen}, otro integra variables y uno es un \textbf{método}.
+    \item \textbf{Se complementan}: cada uno responde bien una pregunta y mal otras.
+  \end{enumerate}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Los nueve modelos en el tiempo}
+\begin{center}
+  \adjustbox{max width=0.95\linewidth,max height=0.60\textheight}{\input{\figtikz{cap09-linea-modelos}}}
+\end{center}
+\vspace{-2pt}
+{\scriptsize El año de Pavlov es el de la edición inglesa de sus lecciones (1927), no el de sus primeros experimentos; el de Dichter es aproximado (años cincuenta).}
+\fuente{elaboración propia con base en las obras de referencia de cada autor.}
+\end{frame}
+
+%------------------------------------------------
+\section[Caso]{El caso que recorre los nueve modelos}
+%------------------------------------------------
+
+\begin{frame}{Camila quiere unos audífonos inalámbricos}
+\begin{exampleblock}{Un solo hecho, nueve lentes}
+  \small Camila, estudiante de tercer semestre, va a comprar \textbf{audífonos inalámbricos}. Cada modelo mirará \textbf{ese mismo hecho} con una lente distinta.
+\end{exampleblock}
+\begin{block}{Cómo trabajar cada modelo}
+  \small
+  \begin{enumerate}
+    \item \textbf{Idea}: qué supone el modelo.
+    \item \textbf{Ejemplo digital}: cómo se ve en una plataforma.
+    \item \textbf{Lente sobre Camila}: qué dice de su compra.
+    \item \textbf{Dónde falla}: su límite.
+  \end{enumerate}
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+\section[Clásicos]{3.2.1--3.2.4 Modelos clásicos}
+%------------------------------------------------
+
+\begin{frame}{3.2.1 Marshall (1890): el modelo económico}
+\begin{columns}[T]
+  \column{0.50\textwidth}
+  \begin{block}{Idea}
+    \small La persona busca la mayor \textbf{satisfacción} (utilidad) con un presupuesto \textbf{limitado}. Cada unidad adicional da menos que la anterior: \textbf{utilidad marginal decreciente}. Reparte su gasto hasta que el último peso rinde lo mismo en todos los usos.
+  \end{block}
+  \begin{exampleblock}{Excedente del consumidor}
+    \small Diferencia entre lo que estaría dispuesta a pagar y lo que paga.
+  \end{exampleblock}
+  \column{0.46\textwidth}
+  \begin{alertblock}{Lente sobre Camila}
+    \small Compara tres pares por \textbf{precio y batería} y elige la mejor relación calidad-precio.\\
+    \textit{Dato:} uso de comparadores y filtros de precio.
+  \end{alertblock}
+  \begin{block}{Dónde falla}
+    \footnotesize Racionalidad limitada (Simon, 1955); heurísticas y sesgos (Tversky y Kahneman, 1974); no incluye variables sociales ni emocionales. Su lectura digital es \textbf{extrapolación de manuales}.
+  \end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Marshall: dos ejemplos con números}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{exampleblock}{La tercera taza}
+    \footnotesize Satisfacción por taza: 10, 6 y 2. Cada taza cuesta 5 (misma escala).\\[2pt]
+    Compra la 1.ª ($10>5$) y la 2.ª ($6>5$), \textbf{no la 3.ª} ($2<5$).\\[2pt]
+    \textbf{Excedente} $=(10-5)+(6-5)=6$.\\[2pt]
+    Un cupón \enquote{2 por 1} funciona porque la 2.ª unidad aún tiene utilidad por encima del precio.
+  \end{exampleblock}
+  \column{0.48\textwidth}
+  \begin{block}{Elasticidad de una suscripción (ficticia)}
+    \footnotesize Precio: 149 $\to$ 179 pesos ($+20.1$\,\%). Suscriptores: 10\,000 $\to$ 9\,000 ($-10$\,\%).
+    \[ \varepsilon=\frac{-0.100}{+0.201}\approx-0.50 \]
+    $|\varepsilon|<1$: demanda \textbf{inelástica}. El ingreso \textbf{sube}: 1\,490\,000 $\to$ 1\,611\,000 pesos al mes.\\[2pt]
+    Con $|\varepsilon|>1$ habría bajado.
+  \end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{3.2.2 Pavlov (ed. inglesa 1927): estímulo-respuesta}
+\begin{columns}[T]
+  \column{0.46\textwidth}
+  \begin{block}{Idea}
+    \footnotesize \textbf{Aprendizaje por asociación}: si un estímulo neutro (EC) se presenta junto a otro que ya provoca una respuesta (EI), termina provocándola solo (RC). Si deja de acompañarse, la respuesta se apaga: \textbf{extinción}.
+  \end{block}
+  \begin{alertblock}{Lente sobre Camila}
+    \footnotesize Los audífonos de cada video de su creadora favorita (música y ambiente que le gustan) acumulan \textbf{afecto por repetición}, antes de evaluarlos.
+  \end{alertblock}
+  \column{0.50\textwidth}
+  \begin{exampleblock}{Ejemplo: sonido de la app de ofertas}
+    \scriptsize Sonido (EC) + oferta real (EI) $\to$ emoción (RI). Con el tiempo, el sonido solo (RC) provoca \textbf{anticipación}. Si manda el sonido \textbf{sin oferta}, la asociación se debilita. Si lo asocia con \textbf{urgencia falsa} (\enquote{¡solo quedan 2!}), usa el mismo mecanismo para empujar compras: la diferencia es \textbf{ética}, no técnica.
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Pavlov: dónde falla}
+\begin{block}{Límites}
+  \small
+  \begin{itemize}
+    \item Subestima \textbf{cognición, atención y contexto}.
+    \item Resultados con consumidores \textbf{mixtos}; el efecto se extingue si la asociación no se refuerza.
+    \item Es la base conceptual del \textit{retargeting}, pero su eficacia digital está \textbf{menos probada} que la retórica de la industria.
+    \item 1927 es la edición inglesa, \textbf{no} el año del descubrimiento.
+  \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{3.2.3 Veblen (1899): el modelo sociológico}
+\begin{columns}[T]
+  \column{0.46\textwidth}
+  \begin{block}{Idea}
+    \small Consumir \textbf{comunica posición social}. \textbf{Consumo conspicuo}: gasto visible cuyo propósito es mostrar estatus. \textbf{Emulación pecuniaria}: cada grupo imita al de arriba.
+  \end{block}
+  \begin{alertblock}{Lente sobre Camila}
+    \small Los audífonos de la marca que usan las personas que admira son más atractivos \textbf{porque son visibles}.
+  \end{alertblock}
+  \column{0.50\textwidth}
+  \begin{exampleblock}{Ejemplo: la edición limitada}
+    \footnotesize Tenis de 4\,800 pesos frente a 1\,900 del modelo básico, con poca diferencia funcional. Quien los compra los publica con la etiqueta de la tienda, un \textit{unboxing} y la fila. La publicación es \textbf{parte del producto}. Su demanda puede \textbf{no bajar} cuando sube el precio: el precio alto es parte del mensaje.\\[2pt]
+    \textit{Datos:} compras compartidas, interacciones por \enquote{lo más caro}, búsqueda de réplicas.
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Veblen: dónde falla}
+\begin{block}{Límites}
+  \small
+  \begin{itemize}
+    \item Es un \textbf{ensayo} sobre la clase alta estadounidense de fines del siglo XIX, no un estudio empírico de compra individual.
+    \item \enquote{Veblen predijo Instagram} es una \textbf{lectura retrospectiva}; su texto no lo afirma.
+    \item No todo el consumo de estatus es visible: existe el consumo de estatus \textbf{silencioso}.
+  \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{3.2.4 Freud (vía Dichter): corrección conceptual}
+\begin{alertblock}{Freud \textbf{no} escribió sobre comportamiento del consumidor}
+  \small El modelo llega a la mercadotecnia por \textbf{Ernest Dichter}, que trasladó ideas psicoanalíticas (motivos inconscientes, simbolismo del producto) a la \textbf{investigación motivacional}, popularizada en los años cincuenta (Instituto fundado en 1946).\\[3pt]
+  \textbf{Cadena:} psicoanálisis clínico $\rightarrow$ Dichter $\rightarrow$ investigación motivacional.\\[3pt]
+  La historiografía es cautelosa con presentar a Dichter como \textbf{único} origen.
+\end{alertblock}
+\begin{block}{Idea}
+  \small Parte de las compras responde a motivos que la persona \textbf{no reconoce o no puede decir} en una encuesta directa. Los productos funcionan como \textbf{símbolos}.
+\end{block}
+\end{frame}
+
+\begin{frame}{Freud/Dichter: ejemplo, lente y límite}
+\begin{columns}[T]
+  \column{0.50\textwidth}
+  \begin{exampleblock}{Ejemplo: la app de pagos}
+    \footnotesize Encuesta: \enquote{la uso porque es \textbf{rápida}}. Entrevista en profundidad con técnica proyectiva (\enquote{la persona que gasta sin controlar es\ldots}): aparece el \textbf{miedo a perder el control} del dinero. La app que muestra un resumen semanal del gasto responde a ese motivo, que ningún cuestionario cerrado recogió.
+  \end{exampleblock}
+  \begin{alertblock}{Lente sobre Camila}
+    \small La cancelación de ruido puede significar \enquote{\textbf{mi espacio}}: un refugio, algo que no diría en un formulario.
+  \end{alertblock}
+  \column{0.46\textwidth}
+  \begin{block}{Dónde falla}
+    \footnotesize Difícil de replicar y validar estadísticamente; su vínculo con el psicoanálisis se ha criticado como \textbf{oportunismo comercial}.
+  \end{block}
+  \begin{block}{Legado vigente}
+    \footnotesize Técnicas cualitativas: entrevistas en profundidad de UX, \textit{insight} de marca. Es una \textbf{continuidad metodológica}, no una cita de Dichter sobre medios digitales.
+  \end{block}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------
+\section[Cognitivos]{3.2.5--3.2.8 Modelos cognitivos e integradores}
+%------------------------------------------------
+
+\begin{frame}{3.2.5 Fishbein y Ajzen (1975, 1991): acción razonada}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Idea}
+    \footnotesize La mejor predicción de una conducta es la \textbf{intención}, que depende de dos factores: la \textbf{actitud} y la \textbf{norma subjetiva} (presión social percibida).
+  \end{block}
+  \begin{block}{Ampliación (Ajzen, 1991)}
+    \footnotesize Agrega el \textbf{control conductual percibido}: la facilidad o dificultad que la persona ve en la conducta. Es la \textbf{teoría de la conducta planeada}; predice mejor cuando la persona no controla del todo la conducta (Madden et al., 1992).
+  \end{block}
+  \column{0.44\textwidth}
+  \begin{alertblock}{Cadena del modelo}
+    \footnotesize
+    Creencias y evaluaciones $\to$ \textbf{actitud}\\
+    Creencias normativas y motivación $\to$ \textbf{norma}\\
+    Actitud + norma (+ control) $\to$ \textbf{intención} $\to$ conducta
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Fishbein y Ajzen: las fórmulas}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Actitud multiatributo}
+    \small $A=\sum_i b_i\,e_i$\\[2pt]
+    $b_i$: \textbf{creencia} (qué tan probable es que la marca tenga el atributo).\\
+    $e_i$: \textbf{evaluación} (qué tan bueno es ese atributo para la persona).
+  \end{block}
+  \begin{block}{Norma subjetiva}
+    \small $SN=\sum_k nb_k\,mc_k$\\[2pt]
+    $nb_k$: cuánto aprueba el referente $k$ la conducta.\\
+    $mc_k$: motivación para complacerlo.
+  \end{block}
+  \column{0.44\textwidth}
+  \begin{exampleblock}{Intención}
+    \small $BI=w_A\,A+w_N\,SN$\\[2pt]
+    Los pesos $w_A, w_N$ se \textbf{estiman con datos}. Para poder sumar, $A$ y $SN$ se reescalan a $[-1,1]$.
+  \end{exampleblock}
+  \begin{alertblock}{Nota}
+    \footnotesize Es de los pocos modelos con programa de investigación empírico extenso y activo; el modelo de aceptación de tecnología (TAM) se deriva de la acción razonada.
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Fishbein y Ajzen: los audífonos de Camila, con números}
+\scriptsize
+\begin{center}
+\begin{tabular}{@{}lcccc|c@{}}
+\toprule
+ & Precio & Batería & Sonido & Reseñas & $A=\sum b\,e$ \\
+\midrule
+$e$ (evaluación) & $+3$ & $+2$ & $+2$ & $+1$ & \\
+Marca A (económica) & 9 & 5 & 3 & 5 & $27+10+6+5=\mathbf{48}$ \\
+Marca B (equilibrada) & 6 & 7 & 6 & 7 & $18+14+12+7=\mathbf{51}$ \\
+Marca C (premium) & 2 & 8 & 9 & 8 & $6+16+18+8=\mathbf{48}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{2pt}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{exampleblock}{Solo por actitud}
+    \small Gana la \textbf{B} (51 frente a 48).
+  \end{exampleblock}
+  \column{0.48\textwidth}
+  \begin{alertblock}{Se suman los referentes}
+    \footnotesize Amistades, creadora y familia (motivación 6, 8 y 4). La creadora recomienda la C y a la familia le gusta la A. Norma subjetiva: \textbf{A 20, B 18, C 22}.
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Fishbein y Ajzen: la lección del resultado}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Con $w_A=0.6$ y $w_N=0.4$}
+    \small
+    \begin{center}
+    \begin{tabular}{@{}lccc@{}}
+    \toprule
+     & Actitud & Norma & Intención \\
+    \midrule
+    A & 0.600 & 0.370 & 0.508 \\
+    B & 0.637 & 0.333 & 0.516 \\
+    C & 0.600 & 0.407 & \textbf{0.523} \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \footnotesize Gana la \textbf{C}, por un margen mínimo.
+  \end{block}
+  \column{0.44\textwidth}
+  \begin{alertblock}{Lecciones}
+    \small
+    \begin{itemize}
+      \item Una elección clara por actitud puede \textbf{cambiar por presión social}.
+      \item Los márgenes pueden ser de \textbf{milésimas}.
+      \item Hay un \textbf{peso de la norma} ($\approx0.34$) en que la elección pasa de B a C: reportarlo es más honesto que un ganador único.
+    \end{itemize}
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Fishbein y Ajzen: lente y límite}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{alertblock}{Lente sobre Camila}
+    \small Pregunta qué piensan sus amistades (\textbf{norma}), evalúa atributos (\textbf{actitud}) y se sabe capaz de pagar (\textbf{control percibido}).
+  \end{alertblock}
+  \column{0.48\textwidth}
+  \begin{block}{Dónde falla}
+    \small Supone \textbf{procesamiento deliberado}: subestima hábitos, emociones y procesos automáticos. La \textbf{brecha intención-conducta}: la intención declarada en una encuesta no siempre llega al carrito, y el carrito no siempre llega al pago.
+  \end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{3.2.6 O'Shaughnessy (1987): el modelo funcional}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Idea}
+    \footnotesize Crítica de los modelos \enquote{mecanicistas} y de la elección racional. La razón declarada suele ser una \textbf{justificación posterior} de una decisión tomada por vía emocional; \textbf{deseos} y \textbf{necesidades} son cosas distintas; a veces no sabemos qué deseamos hasta que un estímulo nos lo recuerda.
+  \end{block}
+  \begin{exampleblock}{Ejemplo: el reloj inteligente}
+    \scriptsize Dice que lo compró \enquote{para monitorear mi salud}; en entrevista cuenta que su \textbf{grupo de corredores} lo usa y se sentía fuera. \textit{Datos:} reseñas que hablan de comunidad; devoluciones de quienes lo compraron \enquote{por la función}; uso real contra lo dicho.
+  \end{exampleblock}
+  \column{0.44\textwidth}
+  \begin{center}
+  \footnotesize
+  \begin{tabular}{@{}lll@{}}
+  \toprule
+   & \textbf{Necesita} & \textbf{No necesita} \\
+  \midrule
+  \textbf{Desea} & Laptop & 5.ª bocina \\
+  \textbf{No desea} & Seguro médico & 4.º cargador \\
+  \bottomrule
+  \end{tabular}
+  \end{center}
+  \vspace{2pt}
+  \begin{alertblock}{Lente sobre Camila}
+    \footnotesize Dirá que compra los audífonos \enquote{para la biblioteca}. Quizá busca dejar de oír el ruido de casa.
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{O'Shaughnessy: dónde falla}
+\begin{block}{Límites}
+  \small
+  \begin{itemize}
+    \item Es más \textbf{filosófico e interpretativo} que predictivo; difícil de contrastar empíricamente.
+    \item No se localizó literatura que lo aplique de forma nombrada a entornos digitales.
+    \item Su relevancia aquí es una \textbf{advertencia conceptual}: un clic o una conversión no revelan la motivación detrás. Es una extrapolación pedagógica, no un hallazgo empírico.
+  \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{3.2.7 Maslow (1943): corrección conceptual}
+\begin{alertblock}{La pirámide \textbf{no está} en el artículo original}
+  \small El texto de 1943 no contiene ningún diagrama. La pirámide es una \textbf{simplificación posterior}, atribuida de forma habitual a un gráfico de 1960 hecho por otra persona.\\[3pt]
+  Además, Maslow \textbf{no} planteó que cada nivel se satisfaga \textbf{completo} antes de pasar al siguiente: una persona puede tener \textbf{parcialmente} satisfechas necesidades de varios niveles a la vez.
+\end{alertblock}
+\begin{block}{Idea (artículo de 1943)}
+  \small Cinco grupos de necesidades: \textbf{fisiológicas, seguridad, pertenencia y amor, estima y autorrealización}. Las de un nivel inferior tienden a predominar mientras estén poco satisfechas, pero la satisfacción es \textbf{gradual y coexiste} entre niveles.
+\end{block}
+\end{frame}
+
+\begin{frame}{Maslow: necesidades y conducta digital}
+\scriptsize
+\begin{center}
+\adjustbox{max width=\linewidth}{%
+\begin{tabular}{@{}>{\raggedright}p{2.7cm}>{\raggedright}p{6.4cm}>{\raggedright\arraybackslash}p{5.0cm}@{}}
+\toprule
+Necesidad & Compra o uso digital & Mensaje que le corresponde \\
+\midrule
+Fisiológica & Pedido de comida a domicilio, farmacia en línea & Rapidez, disponibilidad \\
+Seguridad & Banca móvil, seguros, copias de seguridad, pago protegido & Confianza, garantías, privacidad \\
+Pertenencia & Grupos de mensajería, comunidades, regalos entre amistades & \enquote{Eres parte de\ldots} \\
+Estima & Insignias, nivel en programa de lealtad, reconocimiento de seguidores & Estatus, logro \\
+Autorrealización & Cursos en línea, creación de contenido, herramientas creativas & Crecimiento, propósito \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\vspace{-2pt}
+{\tiny \textbf{Lente sobre Camila:} los audífonos le sirven para varias cosas a la vez: concentrarse (logro), llamar a su grupo (pertenencia), sentir control de su entorno (seguridad). \textbf{Límites:} base empírica débil (observación clínica), secuencia estricta difícil de validar entre culturas; útil como \textbf{heurística} para segmentar mensajes. La correspondencia con compras digitales es una traslación conceptual.}
+\end{frame}
+
+\begin{frame}{3.2.8 Howard y Sheth (1969): el modelo integrador}
+\begin{center}
+  \adjustbox{max width=0.88\linewidth,max height=0.52\textheight}{\input{\figtikz{cap09-howard-sheth}}}
+\end{center}
+\vspace{-4pt}
+{\scriptsize Primer intento serio de integrar influencias cognitivas, sociales y de mercadotecnia en un solo esquema. (El programa escribe \enquote{Howarth-Sheth}; la grafía correcta es \textbf{Howard}.)}
+\fuente{elaboración propia con base en Howard y Sheth (1969), simplificado.}
+\end{frame}
+
+\begin{frame}{Howard y Sheth: ejemplo, lente y límite}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{exampleblock}{La consola de Valeria (Cap. 8), como sistema}
+    \footnotesize \textbf{Entradas:} precio y características (producto); videos de la creadora y anuncios (simbólicos); opinión del padre y la tía (sociales). \textbf{Proceso:} presta atención, compara y aprende criterios. \textbf{Salidas:} reconoce la marca, actitud favorable, intención y compra. \textbf{Exógenas:} presupuesto del hogar, fecha de su cumpleaños. Su experiencia \textbf{vuelve} al aprendizaje.
+  \end{exampleblock}
+  \column{0.44\textwidth}
+  \begin{alertblock}{Lente sobre Camila}
+    \footnotesize Los \textit{touchpoints} son \textbf{entradas}; la navegación y comparación, \textbf{proceso}; la conversión, \textbf{salida}. Se relaciona con el recorrido (Cap.~7), aunque Howard y Sheth escribieron en 1969, sin comercio electrónico.
+  \end{alertblock}
+  \begin{block}{Dónde falla}
+    \footnotesize Complejo; \textbf{constructos difíciles de medir}; capacidad predictiva cuestionada frente a modelos más simples (acción razonada). Se cita más como marco conceptual que como modelo aplicado.
+  \end{block}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------
+\section[Netnografía]{3.2.9 Netnografía}
+%------------------------------------------------
+
+\begin{frame}{3.2.9 Modelo antropológico-etnográfico: la netnografía}
+\begin{alertblock}{Una categoría distinta}
+  \footnotesize La netnografía es un \textbf{método} de investigación cualitativa, no un modelo teórico como el de Marshall o el de Maslow. El programa la incluye bajo \enquote{modelos de estudio}; aquí se presenta como lo que es.
+\end{alertblock}
+\begin{columns}[T]
+  \column{0.50\textwidth}
+  \begin{block}{Idea (Kozinets, 2002)}
+    \footnotesize Las comunidades y culturas de consumo en línea se estudian con técnicas \textbf{etnográficas adaptadas}: observar foros, redes y comunidades de marca para entender sus \textbf{narrativas, símbolos y significados} compartidos. Es el único de los nueve que \textbf{nació para lo digital}.
+  \end{block}
+  \column{0.46\textwidth}
+  \begin{block}{Dónde falla}
+    \footnotesize No generaliza estadísticamente; la interpretación depende del investigador; la comunidad no representa a toda la población; \textbf{dilemas éticos} (consentimiento en datos públicos, anonimato, menores de edad).
+  \end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Netnografía: una comunidad de corredores}
+\begin{columns}[T]
+  \column{0.55\textwidth}
+  \begin{exampleblock}{Ejemplo (ficticio)}
+    \footnotesize Una marca de calzado deportivo quiere entender por qué su producto se discute con pasión en un \textbf{foro público} de corredores. Un investigador \textbf{lee durante semanas} los hilos sin intervenir y registra tres temas que no aparecían en la encuesta: el \textbf{ritual} de estrenar tenis antes de una carrera, la \textbf{desconfianza} hacia reseñas pagadas y un \textbf{lenguaje propio} para las lesiones. Quienes más influyen no son los de más seguidores, sino los que \textbf{responden dudas con experiencia propia} (coincide con el Cap.~8). Se rediseñan el contenido y el servicio posventa.
+  \end{exampleblock}
+  \column{0.41\textwidth}
+  \begin{alertblock}{Lente sobre Camila}
+    \small Para entender cómo se \textbf{habla} de audífonos entre personas de su edad, la fuente son los \textbf{comentarios y las comunidades}, más que el formulario.
+  \end{alertblock}
+  \begin{block}{Precaución ética}
+    \footnotesize Que una publicación sea pública \textbf{no significa} que la persona haya consentido ser analizada.
+  \end{block}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------
+\section[Integración]{Integrar los nueve modelos}
+%------------------------------------------------
+
+\begin{frame}{Matriz integradora (1/2): origen y supuestos}
+\scriptsize
+\begin{center}
+\adjustbox{max width=\linewidth,max height=0.60\textheight}{%
+\begin{tabular}{@{}>{\raggedright}p{2.2cm}>{\raggedright}p{1.7cm}>{\raggedright}p{2.6cm}>{\raggedright}p{4.6cm}>{\raggedright\arraybackslash}p{3.4cm}@{}}
+\toprule
+Modelo & Obra y año & Disciplina base & Supuesto central & Variable clave \\
+\midrule
+Marshall & 1890 & Economía neoclásica & Maximiza utilidad con presupuesto limitado & Precio, ingreso, elasticidad \\
+Pavlov & 1927 (ed. inglesa) & Fisiología, conductismo & Aprende por asociación entre estímulos & EC, EI, repetición, extinción \\
+Veblen & 1899 & Sociología institucional & Se consume para mostrar estatus & Visibilidad, estatus, emulación \\
+Freud (Dichter) & c. 1950 & Psicoanálisis, investigación motivacional & Hay motivos inconscientes y simbólicos & Simbolismo, motivos no declarados \\
+Fishbein-Ajzen & 1975 y 1991 & Psicología social & La intención predice la conducta; depende de actitud y norma & Actitud, norma, control percibido \\
+O'Shaughnessy & 1987 & Filosofía, interpretativismo & La razón declarada suele ser justificación posterior & Deseo, necesidad, motivos \\
+Maslow & 1943 & Psicología humanista & Las necesidades se organizan y coexisten & Satisfacción relativa por necesidad \\
+Howard-Sheth & 1969 & Teoría de la conducta de compra & Sistema de procesamiento de información & Entradas, constructos, salidas \\
+Netnografía & 2002 & Antropología & Las comunidades en línea se estudian etnográficamente & Narrativas, símbolos, comunidad \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{frame}
+
+\begin{frame}{Matriz integradora (2/2): uso digital, límites y analítica}
+\scriptsize
+\begin{center}
+\adjustbox{max width=\linewidth}{%
+\begin{tabular}{@{}>{\raggedright}p{2.2cm}>{\raggedright}p{4.2cm}>{\raggedright}p{4.4cm}>{\raggedright\arraybackslash}p{3.6cm}@{}}
+\toprule
+Modelo & Aplicación digital & Límite principal & Ejemplo de analítica \\
+\midrule
+Marshall & Comparadores, sensibilidad al precio, cupones & Racionalidad limitada; sin variables sociales & Elasticidad de una suscripción \\
+Pavlov & \textit{Retargeting}, sonidos y señales de marca & Subestima cognición; la respuesta se extingue & Apertura tras una notificación \\
+Veblen & Compartir compras, ediciones limitadas & Ensayo, no estudio empírico; hay consumo silencioso & Publicaciones con la etiqueta de la compra \\
+Freud (Dichter) & Entrevistas en profundidad, \textit{insight} de marca & Difícil de replicar y validar & Brecha entre razón declarada y uso \\
+Fishbein-Ajzen & Intención de compra, aceptación de tecnología & Supone deliberación; brecha intención-conducta & Encuesta de intención frente a conversión \\
+O'Shaughnessy & Advertir contra el reduccionismo funcional & Poco predictivo; sin literatura digital propia & Reseñas frente a razón declarada \\
+Maslow & Segmentación de mensajes por necesidad & Base empírica débil; mala lectura de la pirámide & Mensajes por tipo de necesidad \\
+Howard-Sheth & Recorrido y embudo & Constructos difíciles de medir & \textit{Touchpoints} $\rightarrow$ conversión \\
+Netnografía & Escucha en comunidades y foros & No generaliza; ética del dato público & Narrativas de una comunidad \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\vspace{-4pt}
+{\tiny La columna de aplicación digital es una \textbf{traslación conceptual} de los manuales, no tesis de los autores originales.}
+\end{frame}
+
+\begin{frame}{El mismo hecho, nueve lentes}
+\footnotesize
+\begin{center}
+\adjustbox{max width=\linewidth}{%
+\begin{tabular}{@{}>{\raggedright}p{2.4cm}>{\raggedright}p{7.2cm}>{\raggedright\arraybackslash}p{4.6cm}@{}}
+\toprule
+Modelo & Qué dice de la compra de los audífonos de Camila & Qué dato lo confirmaría \\
+\midrule
+Marshall & Elige la mejor relación calidad-precio & Uso de filtros de precio \\
+Pavlov & Sus audífonos favoritos se asocian a música y ambientes que le gustan & Visitas tras ver contenido de la creadora \\
+Veblen & Los usan personas que admira, y son visibles & Compartirá la compra \\
+Freud (Dichter) & Significan \enquote{mi espacio} & Entrevista en profundidad \\
+Fishbein-Ajzen & Evalúa atributos, consulta amistades, se sabe capaz de pagar & Escala de actitud y norma \\
+O'Shaughnessy & Dice \enquote{para la biblioteca}; busca silencio & Contraste razón declarada y uso \\
+Maslow & Concentración (logro), llamadas (pertenencia), control (seguridad) & Mensajes que le resuenan \\
+Howard-Sheth & Entradas $\rightarrow$ aprendizaje $\rightarrow$ intención $\rightarrow$ compra & Mapa del recorrido \\
+Netnografía & Cómo se habla de audífonos en sus comunidades & Hilos y comentarios \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{frame}
+
+\begin{frame}{Lo que enseña la tabla}
+\begin{alertblock}{Los datos de comportamiento no distinguen entre modelos}
+  \small La misma conversión en la analítica es compatible con casi todas las filas: \textbf{qué se hizo} no dice \textbf{por qué se hizo}.
+\end{alertblock}
+\begin{block}{Consecuencias}
+  \small
+  \begin{itemize}
+    \item Hay que \textbf{combinar} métodos cuantitativos y cualitativos.
+    \item Un número sin interpretación \textbf{no es una explicación} (la misma precaución del Cap.~8 sobre seguidores).
+    \item Ninguna fila está \enquote{mal}: son \textbf{preguntas distintas}.
+  \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Cómo elegir un modelo}
+\scriptsize
+\begin{center}
+\adjustbox{max width=\linewidth}{%
+\begin{tabular}{@{}>{\raggedright}p{6.4cm}>{\raggedright}p{3.4cm}>{\raggedright\arraybackslash}p{4.0cm}@{}}
+\toprule
+Pregunta de mercadotecnia & Modelo(s) & Tipo de compra donde rinde más \\
+\midrule
+¿Cuánto cambia la demanda si cambio el precio? & Marshall & Complejo y habitual \\
+¿Qué señales de marca mantengo para que se asocien con algo positivo? & Pavlov & Habitual y variado \\
+¿Por qué compran lo visible y caro? & Veblen & Complejo (bienes de estatus) \\
+¿Qué motivos no dicen en la encuesta? & Dichter, O'Shaughnessy, netnografía & Complejo y disonancia \\
+¿Qué tan probable es que compren y por qué? & Fishbein-Ajzen & Complejo \\
+¿A qué necesidad le hablo? & Maslow & Todos \\
+¿Cómo se conectan las influencias en un recorrido? & Howard-Sheth & Complejo \\
+¿Cómo habla esta comunidad de mi marca? & Netnografía & Variado y habitual \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\vspace{-4pt}
+\fuente{elaboración propia con base en la tipología de la Sesión 9A; es una guía de trabajo, no una regla.}
+\end{frame}
+
+\begin{frame}{Tres reglas para elegir}
+\begin{enumerate}
+  \item \textbf{Empiecen por la pregunta, no por el modelo.}
+  \vspace{4pt}
+  \item Un modelo que \textbf{predice} (Fishbein y Ajzen) sirve para \textbf{estimar}; uno que \textbf{interpreta} (Dichter, O'Shaughnessy, netnografía) sirve para \textbf{entender}. No pidan predicciones a una interpretación ni significados a una regresión.
+  \vspace{4pt}
+  \item \textbf{Combinen al menos dos} y dejen por escrito \textbf{qué no puede explicar cada uno}.
+\end{enumerate}
+\vspace{6pt}
+\begin{exampleblock}{Conexión con la Sesión 9A}
+  \small El \textbf{tipo de compra} orienta qué modelo conviene: la compra \textbf{compleja} se presta a Fishbein-Ajzen y Howard-Sheth; la \textbf{habitual}, a Pavlov y al hábito; la \textbf{variada}, a la cultura (netnografía).
+\end{exampleblock}
+\end{frame}
+
+%------------------------------------------------
+\section[Evidencia y ética]{Evidencia y ética}
+%------------------------------------------------
+
+\begin{frame}{Evidencia de México y del mundo}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{México}
+    \small
+    \begin{itemize}
+      \item \textbf{104.9 millones} de personas de 6 años o más usaron internet en 2025 (INEGI, ENDUTIH).
+      \item Comercio electrónico minorista: \textbf{941 mil millones de pesos} en 2025 (AMVO).
+    \end{itemize}
+    \footnotesize Con tantos episodios, describirlos con un promedio sería un error.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{alertblock}{Lo que sí se puede decir}
+    \small La evidencia más sólida es sobre los \textbf{límites} de los modelos: la conducta planeada predice mejor que la acción razonada cuando no hay control total (Madden et al., 1992), y la economía conductual muestra que el consumidor real se aleja de Marshall (Simon; Tversky y Kahneman).
+  \end{alertblock}
+\end{columns}
+\vspace{2pt}
+{\scriptsize No se reporta la proporción de compras de cada tipo en México: no se localizó una cifra primaria que la mida.}
+\end{frame}
+
+\begin{frame}{Ética y responsabilidad con los datos}
+\begin{columns}[T]
+  \column{0.50\textwidth}
+  \begin{alertblock}{Cuatro cuidados}
+    \footnotesize
+    \begin{enumerate}
+      \item \textbf{No explotar la compra habitual} (renovaciones automáticas, casillas premarcadas).
+      \item \textbf{No inferir motivos sensibles} sin necesidad: deducir un nivel de necesidad puede llevar a dirigir crédito caro a quien está en apuros.
+      \item \textbf{No fabricar urgencia falsa} con la psicología de la asociación (Pavlov).
+      \item \textbf{Netnografía con criterio}: público no es lo mismo que consentido.
+    \end{enumerate}
+  \end{alertblock}
+  \column{0.46\textwidth}
+  \begin{block}{Para discutir}
+    \footnotesize
+    \begin{itemize}
+      \item Entender cómo decide una persona \textbf{da poder}: ¿para qué lo usamos?
+      \item Un perfil que \enquote{acierta} puede estar exponiendo algo que la persona \textbf{no eligió mostrar}.
+      \item Base legal para el tratamiento de datos (LFPDPPP vigente).
+    \end{itemize}
+  \end{block}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------
+\section[Práctica y caso]{Práctica y caso}
+%------------------------------------------------
+
+\begin{frame}{Actividad: nueve lentes sobre una compra propia (25 min)}
+\begin{columns}[T]
+  \column{0.55\textwidth}
+  \begin{block}{Instrucciones}
+    \small
+    \begin{enumerate}
+      \item En equipos, elijan \textbf{una compra digital} de alguien del equipo.
+      \item Reparto: cada integrante toma \textbf{dos o tres modelos}.
+      \item Cada quien escribe \textbf{una frase} por modelo: qué diría de esa compra y \textbf{qué dato lo confirmaría}.
+      \item Pongan en común: ¿qué modelos \textbf{coinciden}? ¿cuáles se \textbf{contradicen}?
+    \end{enumerate}
+  \end{block}
+  \column{0.41\textwidth}
+  \begin{exampleblock}{Para discutir}
+    \small
+    \begin{itemize}
+      \item ¿Qué modelo \textbf{explica menos} esta compra y por qué?
+      \item ¿Con qué \textbf{dos} modelos la explicarían mejor?
+      \item ¿Qué \textbf{no puede decir} ninguno de los nueve?
+    \end{itemize}
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Caso: Tienda Brisa (continuación de la Sesión 9A)}
+\begin{exampleblock}{Recordatorio del caso}
+  \small Tienda en línea de audífonos, detergente, botanas y colchones, con el mismo flujo de correos para todos: oferta del 10\,\% por \enquote{terminar tu compra}. Funciona con \textbf{audífonos}, no con \textbf{detergente}. El equipo de datos propone \textbf{\enquote{un modelo de actitud para todo}}.
+\end{exampleblock}
+\begin{enumerate}
+  \small
+  \item Con el modelo de \textbf{Marshall} y la tipología, ¿por qué la oferta de \enquote{terminar tu compra} \textbf{no funciona} con el detergente?
+  \vspace{2pt}
+  \item Comenten la propuesta del equipo: ¿en \textbf{qué categoría} tendría sentido un modelo de actitud (Fishbein y Ajzen) y en \textbf{cuál no}?
+  \vspace{2pt}
+  \item ¿Qué modelo usarían para entender el \textbf{comportamiento en olas} de las botanas?
+\end{enumerate}
+\begin{alertblock}{Entregable}
+  \small Se integra a la solución escrita del caso entregada en la Sesión 9A.
+\end{alertblock}
+\end{frame}
+
+%------------------------------------------------
+\section{Cierre}
+%------------------------------------------------
+
+\begin{frame}{Síntesis: nueve lentes, ninguna completa}
+\begin{itemize}
+  \footnotesize
+  \item \textbf{Nueve modelos de orígenes diversos}: Marshall (utilidad), Pavlov (asociación), Veblen (estatus), Freud vía Dichter (motivos inconscientes), Fishbein y Ajzen (actitud y norma), O'Shaughnessy (razones y deseos), Maslow (necesidades), Howard y Sheth (sistema) y la netnografía (método).
+  \item \textbf{Dos exigen corrección} sobre lo que dicen los manuales (Freud y Maslow); \textbf{uno es método} y no teoría; y \textbf{todos son extrapolaciones} cuando se aplican a lo digital.
+  \item Los datos de comportamiento \textbf{no distinguen} entre modelos: qué se hizo no dice por qué.
+  \item \textbf{La pregunta de mercadotecnia decide el modelo}; combinar al menos dos y declarar sus límites es la práctica honesta.
+\end{itemize}
+\vspace{2pt}
+\begin{alertblock}{La regla de la sesión}
+  \small Antes de citar un modelo, pregunten: \textbf{¿qué dijo realmente el autor y qué le atribuyen los manuales?}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Autoevaluación rápida}
+\footnotesize
+\begin{enumerate}
+  \item Si el precio sube 20\,\% y la cantidad baja 10\,\%, la demanda es:
+  \begin{itemize}
+    \item[a)] elástica; \item[b)] \alt<2->{\textcolor{IPNguinda}{\textbf{inelástica ($\varepsilon=-0.5$)}}}{inelástica ($\varepsilon=-0.5$)}; \item[c)] perfectamente elástica.
+  \end{itemize}
+  \item La pirámide de Maslow, como aparece en los manuales:
+  \begin{itemize}
+    \item[a)] está dibujada en el artículo de 1943;
+    \item[b)] \alt<2->{\textcolor{IPNguinda}{\textbf{es una representación posterior que no aparece en el artículo original}}}{es una representación posterior que no aparece en el artículo original};
+    \item[c)] fue autorizada por Maslow.
+  \end{itemize}
+  \item En $A=\sum b_i e_i$, la creencia $b_i$ es:
+  \begin{itemize}
+    \item[a)] qué tan bueno es el atributo;
+    \item[b)] \alt<2->{\textcolor{IPNguinda}{\textbf{qué tan probable es que la marca tenga el atributo}}}{qué tan probable es que la marca tenga el atributo};
+    \item[c)] la presión de los amigos.
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Autoevaluación rápida (2)}
+\footnotesize
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item La netnografía es, en rigor:
+  \begin{itemize}
+    \item[a)] un modelo teórico de utilidad;
+    \item[b)] \alt<2->{\textcolor{IPNguinda}{\textbf{un método de investigación cualitativa}}}{un método de investigación cualitativa};
+    \item[c)] una prueba A/B.
+  \end{itemize}
+  \item Freud, en sentido estricto, no es el autor del modelo psicoanalítico de consumo porque:
+  \begin{itemize}
+    \item[a)] \alt<2->{\textcolor{IPNguinda}{\textbf{no escribió sobre consumo; Dichter trasladó el psicoanálisis a la investigación motivacional}}}{no escribió sobre consumo; Dichter trasladó el psicoanálisis a la investigación motivacional};
+    \item[b)] lo escribió su hija;
+    \item[c)] es un modelo de condicionamiento.
+  \end{itemize}
+  \item En la Parte B de la actividad, el modelo que \textbf{predice} una conducta es el de:
+  \begin{itemize}
+    \item[a)] Veblen; \item[b)] \alt<2->{\textcolor{IPNguinda}{\textbf{Fishbein y Ajzen}}}{Fishbein y Ajzen}; \item[c)] O'Shaughnessy.
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Evidencias del portafolio}
+\begin{block}{Pasos para subir los trabajos al portafolio}
+    \begin{itemize}
+    \item Accede a esta carpeta de evidencia: \url{https://drive.google.com/drive/folders/1sr_SAVkl_Mjil6ZRWz3O2mveMoZVW6cp?usp=sharing}
+    \item Crea una carpeta con tu nombre y organiza en ella todos tus entregables del semestre.
+    \item Considera los tiempos límite establecidos para cada actividad.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Evidencias del portafolio de esta sesión}
+\small
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Organizadores gráficos}
+    \scriptsize Uno por modelo (nueve): una lámina con idea, variable clave, ejemplo digital propio y límite.
+  \end{block}
+  \begin{block}{Matriz integradora}
+    \scriptsize Completar las dos matrices con un \textbf{ejemplo propio del equipo} en la columna de analítica, con la fuente de cada dato.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{block}{Socialización en plenaria}
+    \scriptsize Cada equipo expone un modelo con un caso propio, sin repetir el de Camila.
+  \end{block}
+  \begin{block}{Solución de casos}
+    \scriptsize \textit{Tienda Brisa}, preguntas de la Sesión 9B, integradas a las de la 9A.
+  \end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Aprendizaje autónomo (1 h)}
+\footnotesize
+\begin{enumerate}
+  \item \textbf{Un modelo con su corrección.} Elegir Freud/Dichter o Maslow y escribir \textbf{media cuartilla} que distinga lo que el autor dijo de lo que los manuales le atribuyen.
+  \vspace{2pt}
+  \item \textbf{Fishbein y Ajzen con datos propios.} Con cuatro atributos y tres marcas reales de un producto que usen, estimar creencias y evaluaciones y \textbf{calcular la actitud a mano}; comparar con la marca que realmente compran.
+  \vspace{2pt}
+  \item \textbf{Netnografía de media hora.} Leer una conversación pública de una comunidad sobre un producto, anotar \textbf{tres temas} que no se verían en una encuesta y escribir un párrafo sobre qué precauciones éticas tomó.
+\end{enumerate}
+\vspace{2pt}
+\begin{alertblock}{Fecha de entrega}
+  En la fecha acordada en clase, en su carpeta del portafolio.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Glosario de la sesión}
+\tiny
+\begin{description}
+  \item[Actitud multiatributo] Suma de creencia por evaluación sobre los atributos de una marca.
+  \item[Norma subjetiva] Presión social percibida: suma de creencia normativa por motivación para complacer.
+  \item[Intención] Disposición a realizar una conducta; en Fishbein y Ajzen, combinación ponderada de actitud y norma.
+  \item[Control conductual percibido] Facilidad o dificultad que la persona ve en realizar la conducta.
+  \item[Utilidad marginal] Satisfacción que aporta la última unidad consumida.
+  \item[Elasticidad precio] Cambio porcentual de la cantidad demandada entre el cambio porcentual del precio.
+  \item[Extinción] Pérdida de una respuesta condicionada cuando el estímulo condicionado deja de acompañarse del incondicionado.
+  \item[Consumo conspicuo] Gasto visible cuyo propósito es mostrar estatus (Veblen).
+  \item[Netnografía] Método cualitativo para estudiar comunidades y culturas de consumo en línea.
+\end{description}
+\end{frame}
+
+\begin{frame}{Referencias}
+\tiny
+\begin{itemize}
+  \item[] Ajzen, I. (1991). The theory of planned behavior. \textit{Organizational Behavior and Human Decision Processes, 50}(2), 179--211.
+  \item[] Dichter, E. (1960). \textit{The strategy of desire}. Doubleday.
+  \item[] Fishbein, M. y Ajzen, I. (1975). \textit{Belief, attitude, intention, and behavior}. Addison-Wesley.
+  \item[] Howard, J. A. y Sheth, J. N. (1969). \textit{The theory of buyer behavior}. John Wiley \& Sons.
+  \item[] Kozinets, R. V. (2002). The field behind the screen: Using netnography for marketing research in online communities. \textit{Journal of Marketing Research, 39}(1), 61--72. \url{https://doi.org/10.1509/jmkr.39.1.61.18935}
+  \item[] Madden, T. J., Ellen, P. S. y Ajzen, I. (1992). A comparison of the theory of planned behavior and the theory of reasoned action. \textit{Personality and Social Psychology Bulletin, 18}(1), 3--9. \url{https://doi.org/10.1177/0146167292181001}
+  \item[] Marshall, A. (1890). \textit{Principles of economics}. Macmillan.
+  \item[] Maslow, A. H. (1943). A theory of human motivation. \textit{Psychological Review, 50}(4), 370--396.
+  \item[] O'Shaughnessy, J. (1987). \textit{Why people buy}. Oxford University Press.
+  \item[] Pavlov, I. P. (1927). \textit{Conditioned reflexes} (G. V. Anrep, trad.). Oxford University Press.
+  \item[] Schwarzkopf, S. (2015). Ernest Dichter and consumer behaviour: Intellectual primacy and interpretive consumer research. \textit{Journal of Historical Research in Marketing}.
+  \item[] Simon, H. A. (1955). A behavioral model of rational choice. \textit{The Quarterly Journal of Economics, 69}(1), 99--118.
+  \item[] Tversky, A. y Kahneman, D. (1974). Judgment under uncertainty: Heuristics and biases. \textit{Science, 185}(4157), 1124--1131.
+  \item[] Veblen, T. (1899). \textit{The theory of the leisure class}. Macmillan.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+        {\Large \textcolor{IPNguinda}{\textbf{Gracias}}}\\[6pt]
+        {\color{IPNdorado}\rule{0.4\linewidth}{1.2pt}}\\[6pt]
+        Dr. Aboud Barsekh-Onji \\
+        \small Instituto Politécnico Nacional · ESCA Unidad Santo Tomás \\
+        \small \texttt{ORCID: \href{https://orcid.org/0009-0004-5440-8092}{0009-0004-5440-8092}}
+    \end{center}
+\end{frame}
+
+\end{document}

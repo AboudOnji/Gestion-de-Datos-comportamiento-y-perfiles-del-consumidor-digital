@@ -1,0 +1,641 @@
+% presentaciones/sesion09-cap09/sesion09a.tex
+% Sesión 9A — Capítulo 9, primera parte: Tipos de comportamiento de compra (programa 3.1)
+% Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital
+% Lic. en Mercadotecnia Digital · ESCA Unidad Santo Tomás · IPN
+% Fuente de contenido: libro-consumidor-digital/partes/parte3/cap09.tex (sin la sección de laboratorio)
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usetheme{Berlin}
+\input{preambulo09}
+\hypersetup{pdftitle={Sesion 9A - Tipos de comportamiento de compra},pdfauthor={Dr. Aboud Barsekh-Onji}}
+
+\logo{\includegraphics[height=0.75cm]{ipn-escudo.png}}
+\title[Sesión 9A · Tipos de compra]{Tipos de comportamiento de compra}
+\subtitle{Sesión 9A · Unidad III — Capítulo 9 (parte 1: tema 3.1)}
+\author{Dr. Aboud Barsekh-Onji}
+\institute[IPN]{
+    Instituto Politécnico Nacional \\
+    \small ESCA Unidad Santo Tomás · Lic. en Mercadotecnia Digital \\
+    \footnotesize Laboratorio: Gestión de datos, comportamiento y perfiles del consumidor digital
+}
+\date{\today}
+
+\AtBeginSection[]{
+  \begin{frame}{Agenda}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \vspace{-4pt}
+    \begin{center}
+        {\tiny\color{IPNgris} ORCID: \href{https://orcid.org/0009-0004-5440-8092}{0009-0004-5440-8092}}
+    \end{center}
+\end{frame}
+
+%------------------------------------------------
+\section{Encuadre}
+%------------------------------------------------
+
+\begin{frame}{Ficha de la sesión}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{block}{Unidad III}
+    \small Modelos de comportamiento del consumidor digital
+  \end{block}
+  \begin{block}{Tema del programa (3.1 Tipos de comportamiento)}
+    \scriptsize
+    \begin{itemize}
+      \item[3.1.1] Complejo
+      \item[3.1.2] Reductor de disonancia
+      \item[3.1.3] Habitual
+      \item[3.1.4] Variado
+    \end{itemize}
+  \end{block}
+  \column{0.44\textwidth}
+  \begin{block}{Carga horaria}
+    \small Teoría 3.0 h · Práctica 2.0 h\\ Aprendizaje autónomo 1.0 h
+  \end{block}
+  \begin{exampleblock}{Competencia de la unidad}
+    \small Distingue los modelos de estudio del comportamiento del consumidor digital con base en sus tipos y el análisis de los modelos de decisión de compra.
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Al terminar la sesión podrás\ldots}
+\begin{enumerate}
+  \item \textbf{Clasificar} un episodio de compra en uno de los cuatro tipos según el \textbf{involucramiento} y las \textbf{diferencias percibidas} entre marcas.
+  \vspace{4pt}
+  \item \textbf{Explicar} por qué el tipo pertenece al \textbf{episodio} y no al producto.
+  \vspace{4pt}
+  \item \textbf{Reconocer} la \textbf{firma en los datos} de cada tipo y proponer la táctica que le corresponde.
+  \vspace{4pt}
+  \item \textbf{Identificar} cómo una interfaz digital puede \textbf{mover} una compra de un tipo a otro, y qué riesgos éticos implica.
+\end{enumerate}
+\vspace{6pt}
+\begin{alertblock}{Recordatorio}
+  Aprendizaje autónomo de la Sesión 8: entrega en la fecha acordada en clase, en su carpeta del portafolio.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Ruta de las dos sesiones del Capítulo 9}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Sesión 9A (hoy): \textbf{cómo} se compra}
+    \small Los cuatro tipos de comportamiento de compra: qué los distingue, cómo se ven en los datos y qué hacer con cada uno.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{Sesión 9B: \textbf{por qué} se compra}
+    \small Los nueve modelos de estudio (Marshall, Pavlov, Veblen, Freud, Fishbein-Ajzen, O'Shaughnessy, Maslow, Howard-Sheth y netnografía) y cómo elegir entre ellos.
+  \end{exampleblock}
+\end{columns}
+\vspace{6pt}
+{\small\color{IPNgris} La tipología sirve para decidir \textbf{qué modelo conviene} aplicar a cada episodio: por eso va primero.}
+\end{frame}
+
+\begin{frame}{Arranque: tus últimas cuatro compras}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{exampleblock}{Pregunta de arranque}
+    Piensen en \textbf{cuatro compras digitales recientes}: una cara, una de uso diario, una pequeña y una que repiten cada mes.\\[4pt]
+    ¿Cuánto \textbf{tardaron} en decidir cada una? ¿Compararon marcas? ¿Dudaron \textbf{después} de pagar?
+  \end{exampleblock}
+  \column{0.44\textwidth}
+  \begin{block}{Dinámica (10 min)}
+    \small
+    \begin{enumerate}
+      \item Individual: anoten tiempo y número de opciones comparadas (3 min).
+      \item Parejas: ¿cuál compra fue \textbf{la más distinta} de las otras y por qué?
+      \item Pizarrón: ¿alguien usó el mismo método de decisión para las cuatro?
+    \end{enumerate}
+  \end{block}
+\end{columns}
+\vspace{2pt}
+{\small\color{IPNgris} Guarden sus notas: las retomaremos en la actividad de clasificación.}
+\end{frame}
+
+%------------------------------------------------
+\section[Apertura]{Caso de apertura}
+%------------------------------------------------
+
+\begin{frame}{Camila: cuatro compras en una semana (caso ficticio)}
+\begin{exampleblock}{Caso ilustrativo (ficticio)}
+  \footnotesize
+  \textbf{Lunes, laptop.} Seis noches de reseñas en video, doce pestañas de comparadores, consulta con su primo y una hoja de cálculo con cuatro candidatas. \textbf{Nueve días}.\\[2pt]
+  \textbf{Miércoles, colchón.} Todas las marcas le parecen \enquote{más o menos lo mismo}, pero el gasto es grande. Elige por entrega gratis y financiamiento. Esa noche busca: \enquote{colchón [marca] opiniones}.\\[2pt]
+  \textbf{Viernes, detergente.} \enquote{Volver a pedir}. \textbf{Cuarenta segundos}; nunca mira la marca.\\[2pt]
+  \textbf{Sábado, papas fritas.} Prueba un sabor nuevo de edición limitada. No estaba insatisfecha con las de siempre.
+\end{exampleblock}
+\begin{alertblock}{Una persona, un presupuesto, cuatro formas de decidir}
+  \small Una analítica que la describe como \enquote{compradora en línea con ticket promedio de tanto} \textbf{borra lo que importa}.
+\end{alertblock}
+\end{frame}
+
+%------------------------------------------------
+\section[Dos ejes]{3.1 Los dos ejes de la tipología}
+%------------------------------------------------
+
+\begin{frame}{Una tipología con dos preguntas}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{¿Cuánto le importa la compra?}
+    \small \textbf{Involucramiento} alto o bajo.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{block}{¿Cuánto se distinguen las marcas?}
+    \small \textbf{Diferencias percibidas} grandes o pequeñas.
+  \end{block}
+\end{columns}
+\vspace{6pt}
+\begin{itemize}
+  \small
+  \item Dos ejes $\times$ dos niveles $=$ \textbf{cuatro tipos}.
+  \item La tipología se atribuye a \textbf{Henry Assael} (1987) y los manuales de mercadotecnia la reproducen como matriz $2\times2$.
+  \item Describe \textbf{cómo} se compra (mucha o poca deliberación). Para el \textbf{por qué} están los modelos de la Sesión 9B.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Involucramiento}
+\begin{columns}[T]
+  \column{0.50\textwidth}
+  \begin{block}{Definición}
+    \small Importancia que una persona le da a una \textbf{compra concreta}, medida por cuánto \textbf{esfuerzo} está dispuesta a invertir en decidir.
+  \end{block}
+  \column{0.46\textwidth}
+  \begin{alertblock}{Sube con\ldots}
+    \small
+    \begin{itemize}
+      \item El \textbf{riesgo percibido}: financiero, social, de desempeño.
+      \item La \textbf{baja frecuencia} de la compra.
+      \item Su relación con la \textbf{identidad} de la persona.
+      \item El \textbf{costo de equivocarse}.
+    \end{itemize}
+  \end{alertblock}
+\end{columns}
+\begin{exampleblock}{Pregunta de control}
+  \footnotesize ¿Qué dos factores suben en la compra de una laptop? ¿Y en la de un detergente?
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Diferencias percibidas entre marcas}
+\begin{block}{Definición}
+  \small Cuánto distingue la persona unas opciones de otras \textbf{desde su propia mirada}, no desde la ficha técnica.
+\end{block}
+\begin{exampleblock}{Ejemplo}
+  \small Dos colchones con construcción distinta pueden ser \enquote{lo mismo} para quien no sabe qué comparar. Para esa persona, la diferencia \textbf{no existe}, aunque exista en el laboratorio.
+\end{exampleblock}
+\begin{alertblock}{Consecuencia para la mercadotecnia}
+  \small Una campaña puede \textbf{mover este eje}: enseñar a comparar (subir la diferencia percibida) o simplificar la elección (bajarla). Es parte del trabajo de posicionamiento.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{La matriz de los cuatro tipos}
+\begin{center}
+  \adjustbox{max width=0.84\linewidth,max height=0.68\textheight}{\input{\figtikz{cap09-matriz-assael}}}
+\end{center}
+\vspace{-2pt}
+\fuente{elaboración propia con base en la tipología de Assael (1987).}
+\end{frame}
+
+%------------------------------------------------
+\section[Cuatro tipos]{3.1.1--3.1.4 Los cuatro tipos}
+%------------------------------------------------
+
+\begin{frame}{3.1.1 Complejo: alto involucramiento, diferencias grandes}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Cómo decide}
+    \small Siente que hay \textbf{mucho en juego} y que las opciones \textbf{sí son distintas}. Sigue el proceso de cinco etapas del Cap.~6 en su versión completa: forma \textbf{creencias} $\to$ \textbf{actitudes} $\to$ \textbf{elige}.
+  \end{block}
+  \begin{block}{Otros ejemplos}
+    \small Seguro de gastos médicos, posgrado en línea, sistema de punto de venta, un teléfono que cuesta dos quincenas.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{La laptop de Camila}
+    \small Doce sesiones en nueve días, tres dispositivos, comparadores, tablas de especificaciones, reseñas en video, \enquote{marca \textit{vs}}, y compra en la \textbf{tercera visita} al mismo producto.
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{3.1.1 Complejo: qué hacer}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Qué busca la persona}
+    \footnotesize \textbf{Información comparable y confiable}: fichas claras, reseñas verificadas, comparar dos modelos lado a lado.
+  \end{block}
+  \begin{block}{Táctica}
+    \footnotesize
+    \begin{itemize}
+      \item Guías de compra y comparadores honestos.
+      \item Chat o atención humana en el momento de duda.
+      \item Reseñas visibles \textbf{con sus límites}.
+      \item Devolución sencilla que baje el riesgo.
+    \end{itemize}
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{alertblock}{Error típico de la marca}
+    \footnotesize Tratar a esta persona con un anuncio emocional de cinco segundos. Ella está \textbf{buscando razones}, y un anuncio sin información no se las da.
+  \end{alertblock}
+  \begin{exampleblock}{Firma en los datos}
+    \footnotesize Muchas sesiones y dispositivos; páginas de comparación; ciclo largo (días o semanas); búsquedas de marca con \enquote{vs}.
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{3.1.2 Reductor de disonancia: alto involucramiento, diferencias pequeñas}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Cómo decide}
+    \small La compra importa, pero las marcas \textbf{parecen similares}. Decide con rapidez (precio, comodidad) y \textbf{después} puede dudar: la \textbf{disonancia posterior a la compra}. Para reducirla busca información que \textbf{confirme} su decisión.
+  \end{block}
+  \begin{block}{Otros ejemplos}
+    \small Sofá, seguro de auto con precios casi iguales, crédito personal, matrícula entre universidades parecidas.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{El colchón de Camila}
+    \small Sesión corta y decidida; compra el miércoles por la tarde; \textbf{esa misma noche} regresa a buscar \enquote{opiniones} de la marca que acaba de comprar y abre el correo de confirmación varias veces.
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{3.1.2 Reductor de disonancia: qué hacer}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Qué busca la persona}
+    \footnotesize \textbf{Confirmación y tranquilidad}: que otras personas hayan elegido lo mismo y estén contentas; garantías; atención si algo sale mal.
+  \end{block}
+  \begin{block}{Táctica}
+    \footnotesize
+    \begin{itemize}
+      \item Correos \textbf{posteriores} a la compra: qué esperar, cómo cuidar el producto.
+      \item Reseñas de personas compradoras; garantía visible.
+      \item Contacto humano ante cualquier duda.
+    \end{itemize}
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{Firma en los datos}
+    \footnotesize Sesión corta; \textbf{regreso tras la compra}; búsqueda de opiniones \textbf{posterior}; devoluciones dentro del plazo de arrepentimiento (indicador de disonancia no resuelta).
+  \end{exampleblock}
+  \begin{alertblock}{Reducir disonancia no es manipular}
+    \footnotesize Confirmar con \textbf{información veraz} ayuda. Ocultar reseñas negativas o inflar las positivas para que no dude, \textbf{no}.
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{3.1.3 Habitual: bajo involucramiento, diferencias pequeñas}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Cómo decide}
+    \small No busca, no compara y no forma una actitud profunda: compra lo que conoce \textbf{porque está a mano}. Lo que parece \enquote{lealtad} puede ser \textbf{inercia}: nadie la eligió, nadie la defendería si cambiara el estante.
+  \end{block}
+  \begin{block}{Otros ejemplos}
+    \small Recarga de saldo, papel higiénico, leche, la app de transporte que siempre abre primero, la suscripción que se renueva sola.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{El detergente de Camila}
+    \small \textbf{Cuarenta segundos} entre abrir la tienda y pagar; una sola página; entrada desde \enquote{volver a pedir}; cero búsquedas de marca; una recompra cada cinco o seis semanas con regularidad casi mecánica.
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{3.1.3 Habitual: qué hacer}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Qué busca la persona}
+    \small Que \textbf{no cambie nada}: el mismo producto, en el mismo lugar, con el menor esfuerzo.
+  \end{block}
+  \begin{block}{Táctica}
+    \small
+    \begin{itemize}
+      \item Reducir fricción: \textbf{recompra de un toque}, suscripción con aviso.
+      \item El \enquote{predeterminado} y la disponibilidad.
+    \end{itemize}
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{alertblock}{Cuidado con la \enquote{lealtad}}
+    \small El \enquote{cliente fiel} de la analítica puede desaparecer si un competidor \textbf{aparece primero} en la lista del asistente de compra.
+  \end{alertblock}
+  \begin{exampleblock}{Firma en los datos}
+    \small Una página; entrada directa; recompra regular; cero búsqueda de marca.
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{3.1.4 Variado: bajo involucramiento, diferencias grandes}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Cómo decide}
+    \small No le importa mucho el producto, pero las marcas \textbf{sí son distintas}. Cambia de marca con frecuencia, \textbf{no por insatisfacción} sino por variedad: probar, curiosidad, aburrimiento. Es el tipo más difícil de \enquote{fidelizar}.
+  \end{block}
+  \begin{block}{Otros ejemplos}
+    \small Refresco o bebida energética, música que se descubre en una plataforma, una serie elegida por la portada, un videojuego móvil gratuito.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{Las papas de Camila}
+    \small Compras frecuentes de ticket bajo con una marca distinta cada vez; clic en promociones de \textbf{edición limitada}; casi no lee reseñas; \textbf{cambio de marca sin queja previa}.
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{3.1.4 Variado: qué hacer}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Qué busca la persona}
+    \small \textbf{Algo nuevo}, sin complicaciones.
+  \end{block}
+  \begin{block}{Táctica según la posición de la marca}
+    \small
+    \begin{itemize}
+      \item \textbf{Líder de categoría:} ocupar el estante digital con variedad propia (sabores, ediciones limitadas, paquetes mixtos), no con descuentos.
+      \item \textbf{Retadora:} muestras, tamaños de prueba y novedad en las primeras posiciones.
+    \end{itemize}
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{Firma en los datos}
+    \small Cambio de marca \textbf{sin queja previa}; clic en novedades; ticket bajo; poca lectura de reseñas.
+  \end{exampleblock}
+  \begin{alertblock}{Atención}
+    \small Un descuento \textbf{no} compra lealtad aquí: la persona se va con la siguiente novedad.
+  \end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Los cuatro tipos en la analítica}
+\footnotesize
+\begin{center}
+\adjustbox{max width=\linewidth}{%
+\begin{tabular}{@{}>{\raggedright}p{2.3cm}>{\raggedright}p{4.6cm}>{\raggedright}p{3.4cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+Tipo & Firma en los datos & Qué busca & Táctica principal \\
+\midrule
+Complejo & Muchas sesiones y dispositivos; comparadores y reseñas; ciclo largo & Información comparable y confiable & Contenido educativo, comparadores, chat, devolución sencilla \\
+Reductor de disonancia & Sesión corta; regreso tras la compra; opiniones posteriores; devoluciones & Confirmación y tranquilidad & Mensajes posteriores, garantía, soporte \\
+Habitual & Una página, entrada directa, recompra regular & Que no cambie nada & Recompra de un toque, suscripción, disponibilidad \\
+Variado & Cambio de marca sin queja; clic en novedades; ticket bajo & Probar algo distinto & Variedad, ediciones limitadas, muestras \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\vspace{-4pt}
+{\scriptsize Son \textbf{indicios}, no pruebas: se observa el comportamiento; el involucramiento y las diferencias percibidas son estados mentales que se \textbf{infieren}.}
+\fuente{elaboración propia con base en Assael (1987).}
+\end{frame}
+
+%------------------------------------------------
+\section[Matices]{Lo que la matriz no dice}
+%------------------------------------------------
+
+\begin{frame}{Tres aclaraciones para usar bien la matriz}
+\begin{enumerate}
+  \small
+  \item \textbf{El tipo no es del producto: es del episodio.} El detergente es habitual para Camila y puede ser complejo para quien tiene piel alérgica y revisa ingredientes. La primera laptop fue compleja; la segunda, de la misma marca tres años después, será habitual.
+  \vspace{3pt}
+  \item \textbf{Es una tipología, no una ley.} Las personas se reparten en un \textbf{continuo}; los umbrales entre \enquote{alto} y \enquote{bajo} son una convención del analista y cambian los porcentajes cuando se mueven.
+  \vspace{3pt}
+  \item \textbf{Hay otra manera de cortar el mismo fenómeno.} Solomon (2017) trata la complejidad de la decisión como un continuo de habitual a extensa, con la decisión limitada en medio. No es contradicción: es otro corte.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Mismo producto, dos episodios}
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Audífonos, primera compra}
+    \small Alto involucramiento, diferencias percibidas grandes: \textbf{complejo}. Reseñas, comparadores, consulta con amistades.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{exampleblock}{Audífonos, reposición idéntica}
+    \small Se perdió uno: la misma marca, mismo modelo, un clic. Bajo involucramiento, diferencias pequeñas: \textbf{habitual}.
+  \end{exampleblock}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Para la analítica}
+  \small Una campaña pensada para \enquote{el comprador de audífonos} le habla a \textbf{una persona que no existe}. Se segmenta por \textbf{episodio}, no por categoría.
+\end{alertblock}
+\end{frame}
+
+%------------------------------------------------
+\section[Digital]{El entorno digital mueve el tipo}
+%------------------------------------------------
+
+\begin{frame}{La interfaz puede mover una compra de cuadrante}
+\footnotesize
+\begin{itemize}
+  \item Un \textbf{comparador} que ordena por precio y vuelve comparables las opciones \textbf{baja la diferencia percibida}: empuja compras complejas hacia la disonancia (se elige por precio; la duda llega después).
+    \item El \textbf{pago de un toque} y la recompra automática \textbf{bajan el involucramiento}: lo que antes se pensaba pasa a ser habitual.
+    \item Un asistente que recomienda \textbf{una sola opción} hace lo mismo y concentra la elección en quien programó la recomendación.
+    \item El lanzamiento constante de novedades \textbf{sube la diferencia percibida}: lo habitual se vuelve variado.
+\end{itemize}
+\begin{alertblock}{Idea central}
+  \small El tipo no es solo algo que la persona \enquote{trae}: es también algo que el \textbf{diseño de la plataforma produce}.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Frontera (vigente a noviembre de 2026): cuando compra un agente}
+\begin{block}{¿Quién tiene el involucramiento?}
+  \small Asistentes basados en modelos de lenguaje buscan, comparan y, en algunos casos, \textbf{ejecutan compras} en nombre de la persona (Cap.~4). Si la persona delega una compra de bajo involucramiento, el comportamiento que se observa en los datos es el del \textbf{agente}, no el de la persona.
+\end{block}
+\begin{alertblock}{Pregunta metodológica estable}
+  \small Antes de clasificar a alguien en un cuadrante: ¿se sabe \textbf{quién (o qué)} hizo la compra?
+\end{alertblock}
+{\scriptsize Las cifras de adopción de estos asistentes provienen de blogs de la industria y no se reportan como dato verificado.}
+\end{frame}
+
+\begin{frame}{Ética: lo habitual es terreno fértil para los patrones oscuros}
+\begin{columns}[T]
+  \column{0.52\textwidth}
+  \begin{alertblock}{Por qué importa}
+    \small En la compra habitual \textbf{no hay deliberación}: no hay oportunidad de que la persona se detenga a evaluar. Ahí se concentran las renovaciones automáticas difíciles de cancelar, las casillas premarcadas y los cobros recurrentes que ya nadie recuerda.
+  \end{alertblock}
+  \column{0.44\textwidth}
+  \begin{block}{Cuidados mínimos}
+    \small
+    \begin{itemize}
+      \item \textbf{Consentimiento} claro para cobros recurrentes.
+      \item \textbf{Facilidad de salida}: cancelar tan fácil como contratar.
+      \item \textbf{Recordatorio} antes de renovar.
+      \item Base legal para el tratamiento de datos (LFPDPPP vigente).
+    \end{itemize}
+  \end{block}
+\end{columns}
+\vspace{4pt}
+{\small\color{IPNgris} Un perfil que \enquote{acierta} sobre una persona también puede exponer algo que ella no eligió mostrar.}
+\end{frame}
+
+%------------------------------------------------
+\section[Práctica]{Práctica y caso}
+%------------------------------------------------
+
+\begin{frame}{Actividad: clasifica tus compras (20 min)}
+\begin{columns}[T]
+  \column{0.55\textwidth}
+  \begin{block}{Instrucciones}
+    \small
+    \begin{enumerate}
+      \item Retomen las \textbf{cuatro compras} del arranque.
+      \item Ubíquenlas en la matriz: ¿involucramiento alto o bajo? ¿diferencias grandes o pequeñas?
+      \item Escriban \textbf{un indicio} (tiempo, búsquedas, regreso al sitio) que sostenga cada clasificación.
+      \item En parejas: intercambien y \textbf{discutan un desacuerdo}.
+    \end{enumerate}
+  \end{block}
+  \column{0.41\textwidth}
+  \begin{exampleblock}{Para discutir}
+    \small
+    \begin{itemize}
+      \item ¿Qué compra \textbf{no cabe} bien en ninguna casilla?
+      \item ¿Qué dato \textbf{no tendría} una tienda para clasificarla?
+      \item ¿Alguna de sus compras cambió de tipo con el tiempo?
+    \end{itemize}
+  \end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Caso: Tienda Brisa}
+\begin{exampleblock}{Caso ficticio}
+  \small Tienda en línea que vende \textbf{audífonos, detergente, botanas y colchones}. A \textbf{todas} las personas clientes les envía el mismo flujo de correos: (1) oferta del 10\,\% por \enquote{terminar tu compra}; (2) cuestionario de satisfacción; (3) \enquote{Productos que te pueden gustar}.
+\end{exampleblock}
+\begin{alertblock}{Resultados del trimestre}
+  \footnotesize La oferta funciona bien con los \textbf{audífonos}, mal con el \textbf{detergente} (la gente no lo había dejado en el carrito: lo compra cada mes). Los \textbf{colchones} tienen la mayor tasa de devolución. Las \textbf{botanas} se venden en olas: lo que gana un mes pierde el siguiente.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Preguntas guía}
+\small
+\begin{enumerate}
+  \item \textbf{Clasifiquen} cada categoría (audífonos, detergente, botanas, colchones) en uno de los cuatro tipos y justifiquen con las \textbf{firmas de datos}.
+  \vspace{3pt}
+  \item Para cada una, \textbf{rediseñen el flujo de correos}. ¿Qué cambia entre el del colchón y el del detergente?
+  \vspace{3pt}
+  \item ¿Por qué la oferta de \enquote{terminar tu compra} \textbf{no funciona} con el detergente? Respondan con la tipología.
+  \vspace{3pt}
+  \item ¿Qué \textbf{riesgo ético} tiene un flujo de recompra automática sin recordatorio para el detergente?
+\end{enumerate}
+\begin{alertblock}{Nota}
+  \small Las preguntas sobre \textbf{modelos de actitud y de precio} del mismo caso se resuelven en la Sesión 9B.
+\end{alertblock}
+\end{frame}
+
+%------------------------------------------------
+\section{Cierre}
+%------------------------------------------------
+
+\begin{frame}{Síntesis: el tipo es del episodio}
+\begin{itemize}
+  \small
+  \item Dos ejes (\textbf{involucramiento} y \textbf{diferencias percibidas}) producen cuatro tipos: \textbf{complejo, reductor de disonancia, habitual y variado}.
+  \item El tipo pertenece al \textbf{episodio}, no al producto, y el \textbf{entorno digital} puede moverlo.
+  \item Cada tipo deja una \textbf{firma distinta} en los datos y pide una \textbf{táctica distinta}.
+  \item Los umbrales entre alto y bajo son \textbf{convención del analista}; las firmas son \textbf{indicios}, no pruebas.
+  \item Lo habitual exige especial cuidado ético: \textbf{consentimiento y facilidad de salida}.
+\end{itemize}
+\vspace{4pt}
+\begin{alertblock}{La regla de la sesión}
+  \small Antes de elegir una táctica, pregunten: \textbf{¿qué tipo de compra es esta, y qué dato me lo dice?}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Autoevaluación rápida}
+\footnotesize
+\begin{enumerate}
+  \item Compra un sofá caro; todas las marcas le parecen similares y esa noche busca opiniones de la marca elegida. Es comportamiento:
+  \begin{itemize}
+    \item[a)] complejo; \item[b)] \alt<2->{\textcolor{IPNguinda}{\textbf{reductor de disonancia}}}{reductor de disonancia}; \item[c)] habitual; \item[d)] variado.
+  \end{itemize}
+  \item Quien cambia de botana en cada compra, sin queja alguna, muestra comportamiento:
+  \begin{itemize}
+    \item[a)] \alt<2->{\textcolor{IPNguinda}{\textbf{variado}}}{variado}; \item[b)] habitual; \item[c)] complejo; \item[d)] reductor de disonancia.
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Autoevaluación rápida (2)}
+\footnotesize
+\begin{enumerate}
+\setcounter{enumi}{2}
+  \item El tipo de comportamiento de compra es, sobre todo, propiedad de:
+  \begin{itemize}
+    \item[a)] el producto; \item[b)] \alt<2->{\textcolor{IPNguinda}{\textbf{el episodio de compra}}}{el episodio de compra}; \item[c)] la marca; \item[d)] el canal.
+  \end{itemize}
+  \item El pago de un toque tiende a mover una compra hacia:
+  \begin{itemize}
+    \item[a)] lo complejo; \item[b)] \alt<2->{\textcolor{IPNguinda}{\textbf{lo habitual (baja el involucramiento)}}}{lo habitual (baja el involucramiento)}; \item[c)] lo variado; \item[d)] ninguno.
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Evidencias del portafolio}
+\begin{block}{Pasos para subir los trabajos al portafolio}
+    \begin{itemize}
+    \item Accede a esta carpeta de evidencia: \url{https://drive.google.com/drive/folders/1sr_SAVkl_Mjil6ZRWz3O2mveMoZVW6cp?usp=sharing}
+    \item Crea una carpeta con tu nombre y organiza en ella todos tus entregables del semestre.
+    \item Considera los tiempos límite establecidos para cada actividad.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Evidencias del portafolio de esta sesión}
+\small
+\begin{columns}[T]
+  \column{0.48\textwidth}
+  \begin{block}{Organizadores gráficos}
+    \scriptsize Uno por tipo de comportamiento (cuatro): una lámina con definición, ejemplo digital propio, firma en los datos y táctica. Pueden hacerse en un lienzo digital colaborativo.
+  \end{block}
+  \column{0.48\textwidth}
+  \begin{block}{Solución de casos}
+    \scriptsize Caso \textit{Tienda Brisa}, preguntas 1 a 4 por escrito.
+  \end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Aprendizaje autónomo (1 h)}
+\footnotesize
+\begin{enumerate}
+  \item \textbf{Clasificar cinco compras propias.} Describir cinco compras digitales de los últimos tres meses, clasificar cada una en uno de los cuatro tipos y anotar qué \textbf{indicio} (tiempo, búsquedas, regreso al sitio) la sostiene.
+  \vspace{2pt}
+  \item \textbf{Un mismo producto, dos episodios.} Encontrar un producto que una persona haya comprado una vez como compra compleja y otra como habitual, y explicar \textbf{qué cambió}.
+  \vspace{2pt}
+  \item \textbf{Una interfaz que mueve el tipo.} Dar un ejemplo propio de una interfaz que mueva una compra de un tipo a otro y valorar si es legítimo.
+\end{enumerate}
+\vspace{2pt}
+\begin{alertblock}{Fecha de entrega}
+  En la fecha acordada en clase, en su carpeta del portafolio.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Glosario de la sesión}
+\scriptsize
+\begin{description}
+  \item[Involucramiento] Importancia que la persona da a una compra, medida por el esfuerzo que invierte en decidir.
+  \item[Diferencias percibidas] Cuánto distingue la persona las marcas entre sí, desde su mirada.
+  \item[Riesgo percibido] Probabilidad y costo que la persona atribuye a equivocarse: financiero, social o de desempeño.
+  \item[Disonancia posterior a la compra] Incomodidad de haber elegido entre opciones poco distintas.
+  \item[Inercia] Compra repetida sin elección deliberada; se confunde con lealtad.
+  \item[Búsqueda de variedad] Cambio de marca por probar, no por insatisfacción.
+  \item[Episodio de compra] Unidad de análisis de la tipología: una compra concreta, de una persona, en un momento.
+  \item[Firma en los datos] Patrón observable (tiempo, sesiones, regreso, cambio de marca) que sugiere un tipo.
+\end{description}
+\end{frame}
+
+\begin{frame}{Referencias}
+\tiny
+\begin{itemize}
+  \item[] Assael, H. (1987). \textit{Consumer behavior and marketing action} (3.ª ed.). Kent Publishing Co.
+  \item[] Instituto Nacional de Estadística y Geografía. (2026). \textit{ENDUTIH 2025} (Comunicado de prensa 32/26). INEGI.
+  \item[] Solomon, M. R. (2017). \textit{Comportamiento del consumidor} (11.ª ed.). Pearson.
+  \item[] Cámara de Diputados. (2025). \textit{Ley Federal de Protección de Datos Personales en Posesión de los Particulares}. DOF.
+\end{itemize}
+\vspace{4pt}
+{\scriptsize Nota de rigor: la tipología de Assael se contrastó con fuentes secundarias consistentes; falta contrastarla con el texto íntegro y con la 11.ª ed. de Solomon.}
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+        {\Large \textcolor{IPNguinda}{\textbf{Gracias}}}\\[6pt]
+        {\color{IPNdorado}\rule{0.4\linewidth}{1.2pt}}\\[6pt]
+        Dr. Aboud Barsekh-Onji \\
+        \small Instituto Politécnico Nacional · ESCA Unidad Santo Tomás \\
+        \small \texttt{ORCID: \href{https://orcid.org/0009-0004-5440-8092}{0009-0004-5440-8092}}
+    \end{center}
+\end{frame}
+
+\end{document}

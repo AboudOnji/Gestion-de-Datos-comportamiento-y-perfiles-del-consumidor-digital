@@ -1,0 +1,97 @@
+% presentaciones/sesion09-cap09/preambulo09.tex — preámbulo común de las sesiones 9A y 9B
+% (tema Berlin + paleta IPN; copiado del preámbulo de sesion08 sin cambios de diseño)
+\usetheme{Berlin}
+
+%----------------------------------------------------------------------------------------
+%   PALETA INSTITUCIONAL IPN (Manual de Identidad Gráfica, Pantone 222C)
+%----------------------------------------------------------------------------------------
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\definecolor{IPNguinda}{HTML}{6F1D46}       % Pantone 222C oficial — color primario
+\definecolor{IPNguindaOsc}{HTML}{45102C}    % sombra / paleta secundaria
+\definecolor{IPNguindaClara}{HTML}{F4E9EF}  % fondo de bloques normales
+\definecolor{IPNdorado}{HTML}{B8975A}       % dorado — SOLO enlaces y detalles del cierre
+\definecolor{IPNterracota}{HTML}{9C5B44}    % alertblock
+\definecolor{IPNterracotaClara}{HTML}{F6ECE6}
+\definecolor{IPNbronce}{HTML}{8C6B3F}       % exampleblock
+\definecolor{IPNbronceClaro}{HTML}{F5F0E3}
+\definecolor{IPNgris}{HTML}{58595B}         % texto secundario / notas
+
+% Alias con los nombres de config/colores.tex del libro, para que las figuras
+% TikZ del libro se puedan \input sin modificarlas
+\colorlet{guindaIPN}{IPNguinda}
+\colorlet{guindaIPNOsc}{IPNguindaOsc}
+\colorlet{guindaIPNClara}{IPNguindaClara}
+\colorlet{doradoIPN}{IPNdorado}
+\colorlet{bronceIPN}{IPNbronce}
+\colorlet{bronceIPNClaro}{IPNbronceClaro}
+\colorlet{grisIPN}{IPNgris}
+\colorlet{terracotaIPN}{IPNterracota}
+\colorlet{terracotaIPNClara}{IPNterracotaClara}
+\definecolor{colorLaboratorio}{HTML}{1B6E7A}
+
+\setbeamercolor{palette primary}{bg=IPNguinda,fg=white}
+\setbeamercolor{palette secondary}{bg=IPNguindaOsc,fg=white}
+\setbeamercolor{palette tertiary}{bg=IPNguindaOsc,fg=white}
+\setbeamercolor{palette quaternary}{bg=IPNguinda,fg=white}
+\setbeamercolor{structure}{fg=IPNguinda}
+\setbeamercolor{title}{bg=IPNguinda,fg=white}
+\setbeamercolor{frametitle}{bg=IPNguinda,fg=white}
+\setbeamercolor{block title}{bg=IPNguinda,fg=white}
+\setbeamercolor{block body}{bg=IPNguindaClara,fg=black}
+\setbeamercolor{block title alerted}{bg=IPNterracota,fg=white}
+\setbeamercolor{block body alerted}{bg=IPNterracotaClara,fg=black}
+\setbeamercolor{block title example}{bg=IPNbronce,fg=white}
+\setbeamercolor{block body example}{bg=IPNbronceClaro,fg=black}
+\setbeamercolor{alerted text}{fg=IPNterracota}
+\setbeamercolor{item}{fg=IPNguinda}
+\setbeamercolor{section in toc}{fg=IPNguinda}
+\setbeamercolor{footline}{bg=IPNguindaOsc,fg=white}
+
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+\setbeamertemplate{caption}[numbered]
+\usepackage{xurl}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\graphicspath{{Figures/}{../../libro-consumidor-digital/figuras/matlab/}}
+\newcommand{\figtikz}[1]{../../libro-consumidor-digital/figuras/tikz/#1}
+\newcommand{\fuente}[1]{{\tiny\color{IPNgris}Fuente: #1}}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=IPNdorado,
+    filecolor=IPNguinda,
+    urlcolor=IPNguinda,
+    citecolor=IPNguinda,
+}
+
+%----------------------------------------------------------------------------------------
+%   CODE LISTINGS — sintaxis ESTÁNDAR del lenguaje
+%----------------------------------------------------------------------------------------
+\usepackage{listings}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.99}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+
+\lstdefinestyle{MATLABStyle}{
+  language=Matlab,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{codegreen},
+  stringstyle=\color{violet},
+  breaklines=true,
+  numbers=left,
+  numbersep=5pt,
+  frame=lines,
+  backgroundcolor=\color{backcolour}
+}
+\lstset{style=MATLABStyle}
+

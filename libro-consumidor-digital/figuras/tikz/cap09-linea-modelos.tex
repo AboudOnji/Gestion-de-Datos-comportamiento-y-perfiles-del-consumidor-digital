@@ -1,0 +1,32 @@
+% figuras/tikz/cap09-linea-modelos.tex
+% Los nueve modelos del programa en su fecha de origen (obra de referencia) y disciplina base.
+\begin{tikzpicture}[
+    mod/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara, align=center,
+                font=\scriptsize, minimum width=2.5cm, minimum height=0.95cm},
+    met/.style={rectangle, rounded corners, draw=bronceIPN, thick, fill=bronceIPNClaro, align=center,
+                font=\scriptsize, minimum width=2.5cm, minimum height=0.95cm},
+    ano/.style={font=\scriptsize\bfseries, text=guindaIPNOsc}
+  ]
+  \draw[-{Stealth[length=2.5mm]}, thick, draw=doradoIPN] (-0.3,0) -- (15.2,0);
+  % x escalado: 1890 -> 0, 2002 -> 14.5 (aprox. lineal)
+  \foreach \x/\y/\txt/\est in {
+      0.0/1.3/{Marshall\\ económico}/mod,
+      1.2/-1.4/{Veblen\\ sociológico}/mod,
+      3.6/1.3/{Pavlov\\ estímulo-respuesta}/mod,
+      5.0/-1.4/{Maslow\\ motivacional}/mod,
+      6.2/1.3/{Dichter (Freud)\\ psicoanalítico}/mod,
+      8.4/-1.4/{Howard-Sheth\\ integrador}/mod,
+      9.5/1.3/{Fishbein-Ajzen\\ acción razonada}/mod,
+      11.6/-1.4/{O'Shaughnessy\\ funcional}/mod,
+      13.8/1.3/{Kozinets\\ netnografía (método)}/met}
+    { \node[\est] (n) at (\x,\y) {\txt}; \draw[thick, draw=grisIPN] (\x,0) -- (n); \fill[guindaIPN] (\x,0) circle (2pt); }
+  \node[ano] at (0.0,-0.35)  {1890};
+  \node[ano] at (1.2,0.35)   {1899};
+  \node[ano] at (3.6,-0.35)  {1927};
+  \node[ano] at (5.0,0.35)   {1943};
+  \node[ano] at (6.2,-0.35)  {\textasciitilde 1950};
+  \node[ano] at (8.4,0.35)   {1969};
+  \node[ano] at (9.5,-0.35)  {1975};
+  \node[ano] at (11.6,0.35)  {1987};
+  \node[ano] at (13.8,-0.35) {2002};
+\end{tikzpicture}

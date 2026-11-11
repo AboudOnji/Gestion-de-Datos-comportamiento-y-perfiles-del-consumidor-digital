@@ -344,3 +344,19 @@ cada componente conexa; (c) Cap. 9: se admiten juicios en formato lista o matriz
 contradictorio cuando la razón de consistencia pasa de 0.10; (d) Cap. 6: un atributo constante recibe
 puntaje 5 (no discrimina) en lugar de producir NaN.
 **Impacto en horas:** ninguno; son extensiones opcionales (tarea autónoma, marcada «opcional»).
+
+### D4.1 — Cap. 9 reescrito: tipos de compra y modelos de estudio (2026-11-11)
+**Qué cambió:** por indicación del Dr. Barsekh-Onji, el Cap. 9 («Base tecnológica para el análisis
+del recorrido», programa 2.4.1, laboratorio AHP + TOPSIS) se sustituyó por completo por un capítulo
+sobre **3.1 (cuatro tipos de comportamiento de compra)** y **3.2 (nueve modelos de estudio)**, con el
+caso de Camila recorrido por todos los modelos, matriz integradora, guía para elegir modelo y
+laboratorio `cap09_tipos_y_modelos.m` (cuadrantes de Assael y actitud multiatributo). El capítulo vive en
+`partes/parte3/cap09.tex` y abre la Parte III (nueva `partes/parte3/intro.tex`); la Parte II queda
+con los Cap. 6–8 y su práctica oficial se ajustó a tres sesiones.
+**Consecuencias abiertas:** (a) el subtema **2.4.1 queda sin capítulo** (texto anterior archivado en
+`archivo/`); (b) el prompt asignaba 3.1 al Cap. 9 y 3.2 a los Cap. 10–11, ahora en uno solo, y el 3.3
+(base tecnológica de la unidad) sigue pendiente; (c) faltan la app HTML, su verificación contra MATLAB y la
+presentación Beamer de la sesión 9; los archivos de la versión anterior (`matlab/cap09/cap09_seleccion_*`,
+`matlab/utils/apps/*cap09*`, `figuras/*/cap09_ahp*`, `cap09-pila-analitica`, `presentaciones/sesion09-cap09`)
+siguen en el repositorio sin usarse.
+**Impacto en horas:** el capítulo declara T 6 / P 12 / AA 5 (suma de 3.1 y 3.2 en el programa).

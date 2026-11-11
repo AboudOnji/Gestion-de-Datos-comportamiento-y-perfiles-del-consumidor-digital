@@ -1,0 +1,16 @@
+% figuras/tikz/cap09-matriz-assael.tex
+% Matriz 2x2 de los cuatro tipos de comportamiento de compra (Assael, 1987).
+\begin{tikzpicture}[
+    celda/.style={rectangle, draw=guindaIPN, thick, minimum width=5.6cm, minimum height=3.1cm,
+                  align=center, font=\scriptsize, text width=5.2cm},
+    eje/.style={font=\scriptsize\bfseries, text=guindaIPNOsc}
+  ]
+  \node[celda, fill=guindaIPNClara]    at (0,3.3)   {\textbf{\normalsize Complejo}\\[2pt] Busca, compara y aprende\\ antes de elegir.\\ \textit{Ej.: laptop, curso, seguro}};
+  \node[celda, fill=bronceIPNClaro]    at (5.8,3.3) {\textbf{\normalsize Reductor de disonancia}\\[2pt] Elige rápido, duda después\\ y busca reafirmación.\\ \textit{Ej.: colchón, sofá, crédito}};
+  \node[celda, fill=terracotaIPNClara] at (0,0)     {\textbf{\normalsize Variado}\\[2pt] Cambia de marca por probar,\\ no por insatisfacción.\\ \textit{Ej.: botana, bebida, serie}};
+  \node[celda, fill=grisIPN!8]         at (5.8,0)   {\textbf{\normalsize Habitual}\\[2pt] Compra por rutina, casi sin\\ buscar ni evaluar.\\ \textit{Ej.: detergente, recarga}};
+  \node[eje] at (0,5.3)   {Diferencias grandes entre marcas};
+  \node[eje] at (5.8,5.3) {Diferencias pequeñas entre marcas};
+  \node[eje, rotate=90] at (-3.2,3.3) {Involucramiento alto};
+  \node[eje, rotate=90] at (-3.2,0)   {Involucramiento bajo};
+\end{tikzpicture}

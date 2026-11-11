@@ -10,8 +10,9 @@ datos, comportamiento y perfiles del consumidor digital** (Lic. en Mercadotecnia
 Digital, 3.er semestre, ESCA Unidad Santo Tomás, IPN). 18 capítulos = 18 semanas,
 en 5 Partes. Servirá luego de insumo para slides Beamer IPN (no construir aún).
 
-Estado: Parte I completa (Cap. 1–5, con GA4 como Cap. 5) y Parte II completa (Cap. 6–9, Fase 3; ver
-`docs/informes/fase3-parte2.md`). Partes III–V pendientes. El capítulo de Google Analytics 4
+Estado: Parte I completa (Cap. 1–5, con GA4 como Cap. 5) y Parte II con Cap. 6–8 (Fase 3; ver
+`docs/informes/fase3-parte2.md`). **El Cap. 9 se reescribió el 2026-11-11** (`partes/parte3/cap09.tex`: tipos de compra 3.1
+y nueve modelos 3.2; ver D4.1 y pendientes #36–38): la Parte III arranca ahí y 2.4.1 quedó sin capítulo. Partes III–V pendientes. El capítulo de Google Analytics 4
 (`partes/parte1/cap05.tex`) es el Cap. 5 (D3.1, revisada): Partes III–V = Cap. 10–19 (el plan del prompt §7
 quedó desplazado un capítulo; el libro tendrá 19).
 

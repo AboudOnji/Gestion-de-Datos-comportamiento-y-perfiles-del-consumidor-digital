@@ -1,6 +1,6 @@
 # Matriz de cobertura del programa oficial
 
-Actualizada al cierre de Fase 3 · Parte II (Cap. 6–9 completos; 31 de 66 subtemas cubiertos). La columna «Label
+Actualizada el 2026-11-11 (Cap. 9 reescrito para 3.1 y 3.2; ver D4.1 en `decisiones-editoriales.md`). La columna «Label
 verificado» se marca ✅ solo cuando `\progtag{X.Y.Z}` aparece efectivamente
 en el `.tex` del capítulo correspondiente — verificable con `make cobertura`
 (`scripts/verificar_cobertura.sh`, implementado en Fase 2).
@@ -45,20 +45,20 @@ Corregido aquí; ver `docs/decisiones-editoriales.md`, D2.1.
 | 2.3.3 | Decisor | 8 | ✅ `prog:2.3.3` | Completo |
 | 2.3.4 | Comprador | 8 | ✅ `prog:2.3.4` | Completo |
 | 2.3.5 | Evaluador | 8 | ✅ `prog:2.3.5` | Completo |
-| 2.4.1 | Temas selectos de buscadores/plataformas/redes/e-commerce | 9 | ✅ `prog:2.4.1` | Completo |
-| 3.1.1 | Complejo | 10 | — | Pendiente |
-| 3.1.2 | Reductor de disonancia | 10 | — | Pendiente |
-| 3.1.3 | Habitual | 10 | — | Pendiente |
-| 3.1.4 | Variado | 10 | — | Pendiente |
-| 3.2.1 | Económico de Marshall | 11 | — | Pendiente |
-| 3.2.2 | Estímulo-respuesta de Pavlov | 11 | — | Pendiente |
-| 3.2.3 | Sociológico de Veblen | 11 | — | Pendiente |
-| 3.2.4 | Psicoanalítico de Freud | 11 | — | Pendiente |
-| 3.2.5 | Acción razonada de Fishbein y Ajzen | 12 | — | Pendiente |
-| 3.2.6 | Funcional de O'Shaughnessy | 12 | — | Pendiente |
-| 3.2.7 | Motivacional — Pirámide de necesidades de Maslow | 12 | — | Pendiente |
-| 3.2.8 | Integrador entrada-proceso-salida de Howard-Sheth (programa: «Howarth-Sheth», corregido — Anexo B.2) | 12 | — | Pendiente |
-| 3.2.9 | Antropológico-etnográfico de consumo digital | 12 | — | Pendiente |
+| 2.4.1 | Temas selectos de buscadores/plataformas/redes/e-commerce | — | — | **Sin capítulo** desde 2026-11-11 (D4.1): texto anterior archivado en `archivo/cap09-base-tecnologica-2.4.1.tex`; reubicar |
+| 3.1.1 | Complejo | 9 | ✅ `prog:3.1.1` | Completo |
+| 3.1.2 | Reductor de disonancia | 9 | ✅ `prog:3.1.2` | Completo |
+| 3.1.3 | Habitual | 9 | ✅ `prog:3.1.3` | Completo |
+| 3.1.4 | Variado | 9 | ✅ `prog:3.1.4` | Completo |
+| 3.2.1 | Económico de Marshall | 9 | ✅ `prog:3.2.1` | Completo |
+| 3.2.2 | Estímulo-respuesta de Pavlov | 9 | ✅ `prog:3.2.2` | Completo |
+| 3.2.3 | Sociológico de Veblen | 9 | ✅ `prog:3.2.3` | Completo |
+| 3.2.4 | Psicoanalítico de Freud | 9 | ✅ `prog:3.2.4` | Completo |
+| 3.2.5 | Acción razonada de Fishbein y Ajzen | 9 | ✅ `prog:3.2.5` | Completo |
+| 3.2.6 | Funcional de O'Shaughnessy | 9 | ✅ `prog:3.2.6` | Completo |
+| 3.2.7 | Motivacional — Pirámide de necesidades de Maslow | 9 | ✅ `prog:3.2.7` | Completo |
+| 3.2.8 | Integrador entrada-proceso-salida de Howard-Sheth (programa: «Howarth-Sheth», corregido — Anexo B.2) | 9 | ✅ `prog:3.2.8` | Completo |
+| 3.2.9 | Antropológico-etnográfico de consumo digital | 9 | ✅ `prog:3.2.9` | Completo |
 | 3.3.1 | Digitalización y tecnología en el proceso de compra | 13 | — | Pendiente |
 | 3.3.2 | Temas selectos de buscadores/plataformas/redes/e-commerce | 13 | — | Pendiente |
 | 4.1.1 | Cultura y subcultura | 14 | — | Pendiente |

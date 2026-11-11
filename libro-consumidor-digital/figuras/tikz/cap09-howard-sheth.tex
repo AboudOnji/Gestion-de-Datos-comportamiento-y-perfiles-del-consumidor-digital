@@ -1,0 +1,35 @@
+% figuras/tikz/cap09-howard-sheth.tex
+% Esquema entrada-proceso-salida inspirado en Howard y Sheth (1969), simplificado.
+\begin{tikzpicture}[
+    ent/.style={rectangle, rounded corners, draw=bronceIPN, thick, fill=bronceIPNClaro, align=center,
+                font=\scriptsize, minimum width=3.3cm, minimum height=1.0cm},
+    pro/.style={rectangle, rounded corners, draw=guindaIPN, thick, fill=guindaIPNClara, align=center,
+                font=\scriptsize, minimum width=3.3cm, minimum height=1.0cm},
+    sal/.style={rectangle, rounded corners, draw=colorLaboratorio, thick, fill=colorLaboratorio!8, align=center,
+                font=\scriptsize, minimum width=2.6cm, minimum height=0.8cm},
+    exo/.style={rectangle, dashed, draw=grisIPN, align=center, font=\scriptsize, minimum width=12.5cm, minimum height=0.8cm},
+    flecha/.style={-{Stealth[length=2.3mm]}, thick, draw=doradoIPN},
+    tit/.style={font=\small\bfseries, text=guindaIPNOsc}
+  ]
+  \node[tit] at (0,4.4) {Entradas};
+  \node[tit] at (5.2,4.4) {Proceso (constructos)};
+  \node[tit] at (10.6,4.4) {Salidas};
+  \node[ent] (e1) at (0,3.3) {Estímulos de producto\\ (precio, calidad, disponibilidad)};
+  \node[ent] (e2) at (0,2.0) {Estímulos simbólicos\\ (anuncio, reseña, marca)};
+  \node[ent] (e3) at (0,0.7) {Estímulos sociales\\ (familia, grupo, clase)};
+  \node[pro] (p1) at (5.2,3.1) {Percepción\\ (atención, búsqueda de información)};
+  \node[pro] (p2) at (5.2,1.3) {Aprendizaje\\ (motivos, criterios, confianza)};
+  \node[sal] (s1) at (10.6,3.3) {Atención};
+  \node[sal] (s2) at (10.6,2.45) {Comprensión de marca};
+  \node[sal] (s3) at (10.6,1.6) {Actitud};
+  \node[sal] (s4) at (10.6,0.75) {Intención};
+  \node[sal, fill=colorLaboratorio!25] (s5) at (10.6,-0.1) {Compra};
+  \draw[flecha] (e1.east) -- (p1.west); \draw[flecha] (e2.east) -- (p1.west); \draw[flecha] (e3.east) -- (p2.west);
+  \draw[flecha] (e2.east) -- (p2.west);
+  \draw[flecha] (p1.south) -- (p2.north);
+  \draw[flecha] (p2.east) -- (s3.west); \draw[flecha] (p1.east) -- (s1.west);
+  \draw[flecha] (s1) -- (s2); \draw[flecha] (s2) -- (s3); \draw[flecha] (s3) -- (s4); \draw[flecha] (s4) -- (s5);
+  \draw[flecha, dashed] (s5.south) -- ++(0,-0.45) -| (5.2,-0.45) -- (p2.south |- 0,0.3) ;
+  \node[font=\scriptsize\itshape, text=grisIPN] at (7.7,-0.75) {retroalimentación: la compra y su resultado vuelven a alimentar el aprendizaje};
+  \node[exo] at (5.2,-1.6) {\textbf{Variables exógenas:} importancia de la compra, personalidad, presión de tiempo, clase social, cultura};
+\end{tikzpicture}
